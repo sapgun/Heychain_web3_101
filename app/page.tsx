@@ -300,18 +300,38 @@ export default function HeyChainApp() {
                 </div>
                 <span className="text-2xl font-bold text-white">{t.title}</span>
               </div>
-              <p className="text-gray-400">
+              <p className="text-gray-400 mb-4">
                 {language === "ko"
                   ? "Web3를 더 쉽게, 더 빠르게 배울 수 있도록 돕는 대화형 학습 플랫폼입니다."
                   : "An interactive learning platform that helps you learn Web3 easier and faster."}
               </p>
+              {/* Social Links */}
+              <div className="flex items-center space-x-4">
+                <a
+                  href="https://x.com/caro7370"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors"
+                  aria-label="Follow on X (Twitter)"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
 
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-800">
-            <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              © 2024 HeyChain. {language === "ko" ? "Web3를 더 쉽게, 더 빠르게." : "Making Web3 easier and faster."}
-            </p>
+            <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 mb-4 md:mb-0">
+              <p className="text-gray-400 text-sm">
+                © 2025 HeyChain. {language === "ko" ? "Web3를 더 쉽게, 더 빠르게." : "Making Web3 easier and faster."}
+              </p>
+              <span className="text-gray-600 text-sm">•</span>
+              <p className="text-gray-500 text-sm">
+                powered by <span className="text-purple-400 font-semibold">SAPGUN</span>
+              </p>
+            </div>
             <div className="flex items-center space-x-4">
               <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
                 {language === "ko" ? "개인정보처리방침" : "Privacy Policy"}

@@ -1,1069 +1,1211 @@
 export const web3Data = [
   {
-    category: "1. 👛 Wallet & Identity (지갑 & 신원)",
+    category: "1. 🪙 암호화폐 기초 (Crypto Basics)",
     items: [
       {
         id: "1-1",
-        question: "메타마스크란 무엇이고 어떻게 설치하나요?",
+        question: "암호화폐란 무엇인가요?",
         answer:
-          "메타마스크는 브라우저 확장 프로그램 및 모바일 앱 형태의 암호화폐 지갑으로, 주로 이더리움 및 EVM 호환 블록체인과 상호작용하는 데 사용됩니다. 공식 웹사이트(metamask.io)에서 다운로드하여 설치하고, 안내에 따라 새 지갑을 생성하거나 기존 지갑을 복구할 수 있습니다. 설치 후 시드 구문을 안전하게 백업하는 것이 가장 중요합니다.",
+          "암호화폐는 암호화 기술을 사용하여 거래의 보안을 유지하고, 새로운 화폐 발행을 통제하는 디지털 또는 가상 화폐입니다. 중앙 은행이나 금융 기관의 통제를 받지 않고 분산된 네트워크에서 운영됩니다.",
         links: [
-          { title: "MetaMask 공식 웹사이트", url: "https://metamask.io" },
-          { title: "MetaMask 설치 가이드", url: "https://support.metamask.io/hc/en-us/articles/360015489531" },
-          { title: "MetaMask 보안 가이드", url: "https://support.metamask.io/hc/en-us/articles/360015489591" },
+          { title: "비트코인 백서", url: "https://bitcoin.org/bitcoin.pdf" },
+          { title: "이더리움 소개", url: "https://ethereum.org/ko/what-is-ethereum/" },
         ],
-        tips: "절대로 시드 구문을 온라인에 저장하거나 다른 사람과 공유하지 마세요. 피싱 사이트를 주의하고 항상 공식 웹사이트에서만 다운로드하세요.",
+        tips: "암호화폐 투자는 높은 변동성을 가지므로 신중하게 접근해야 합니다.",
       },
       {
         id: "1-2",
-        question: "프라이빗 키와 시드 구문의 차이는?",
+        question: "블록체인이란 무엇인가요?",
         answer:
-          "프라이빗 키는 특정 계정의 자산에 접근할 수 있는 비밀번호와 같은 고유한 암호 코드입니다. 시드 구문(또는 복구 구문)은 이 프라이빗 키들을 생성하고 지갑 전체를 복구하는 데 사용되는 12~24개의 단어 조합입니다. 하나의 시드 구문으로 여러 개의 프라이빗 키와 지갑 주소를 생성할 수 있어, 시드 구문이 더 상위 개념입니다.",
+          "블록체인은 거래 기록을 분산된 공개 장부에 기록하는 기술입니다. 각 블록은 이전 블록의 해시값을 포함하여 연결되어 있어, 데이터의 위변조가 어렵습니다. 이러한 특성 덕분에 높은 보안성과 투명성을 제공합니다.",
         links: [
-          { title: "BIP39 시드 구문 표준", url: "https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki" },
-          { title: "지갑 보안 모범 사례", url: "https://ethereum.org/en/wallets/" },
+          { title: "블록체인 작동 방식", url: "https://www.investopedia.com/terms/b/blockchain.asp" },
+          { title: "분산 원장 기술(DLT)", url: "https://www.ibm.com/kr-ko/topics/distributed-ledger-technology" },
         ],
-        tips: "시드 구문은 지갑 복구의 유일한 수단이므로 물리적으로 안전한 곳에 보관하세요. 디지털 형태로 저장하지 말고 종이에 적어 보관하는 것이 좋습니다.",
+        tips: "블록체인은 다양한 산업 분야에서 혁신적인 변화를 가져올 수 있습니다.",
       },
       {
         id: "1-3",
-        question: "지갑 주소는 어떻게 생성되며 몇 개까지 만들 수 있나요?",
+        question: "지갑(Wallet) 종류와 사용법",
         answer:
-          "지갑 주소는 공개키로부터 파생되며, 암호화폐를 주고받는 데 사용되는 고유 식별자입니다. 하나의 시드 구문으로 이론상 거의 무한대에 가까운 지갑 주소를 생성할 수 있습니다(정확히는 2^160개). 이는 HD(Hierarchical Deterministic) 지갑 구조 덕분으로, BIP44 표준을 따라 체계적으로 주소를 생성합니다.",
+          "암호화폐 지갑은 개인 키를 보관하고 암호화폐를 안전하게 관리할 수 있는 도구입니다. 소프트웨어 지갑(데스크톱, 모바일, 웹)과 하드웨어 지갑(콜드 월렛)이 있으며, 사용 목적과 보안 요구 사항에 따라 적절한 지갑을 선택해야 합니다.",
         links: [
-          { title: "HD 지갑 구조 설명", url: "https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki" },
-          { title: "BIP44 표준", url: "https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki" },
+          { title: "메타마스크 사용법", url: "https://metamask.io/download/" },
+          {
+            title: "콜드 월렛 비교",
+            url: "https://www.coindesk.com/tech/2021/03/29/hot-wallets-vs-cold-wallets-whats-the-difference/",
+          },
         ],
-        tips: "프라이버시 보호를 위해 거래마다 새로운 주소를 사용하는 것이 좋습니다. 대부분의 지갑은 이를 자동으로 처리해줍니다.",
-      },
-      {
-        id: "1-4",
-        question: "하드월렛(Ledger, Trezor)과 핫월렛의 보안 차이는?",
-        answer:
-          "핫월렛은 인터넷에 연결된 지갑(예: 메타마스크)으로 사용이 편리하지만 해킹 위험이 있습니다. 하드월렛은 프라이빗 키를 오프라인 장치에 보관하여 온라인 공격으로부터 훨씬 안전하지만, 사용 시 약간의 번거로움이 있을 수 있습니다. 하드월렛은 물리적 접근이 필요하므로 원격 해킹이 거의 불가능합니다.",
-        links: [
-          { title: "Ledger 공식 웹사이트", url: "https://www.ledger.com" },
-          { title: "Trezor 공식 웹사이트", url: "https://trezor.io" },
-          { title: "하드웨어 지갑 비교", url: "https://ethereum.org/en/wallets/find-wallet/" },
-        ],
-        tips: "큰 금액을 보관할 때는 하드월렛을 사용하고, 일상적인 거래에는 핫월렛을 사용하는 것이 좋습니다.",
-      },
-      {
-        id: "1-5",
-        question: "지갑을 복구하는 방법은?",
-        answer:
-          "지갑 생성 시 받은 시드 구문(복구 구문)을 사용하여 새 기기나 지갑 소프트웨어에서 지갑을 복구할 수 있습니다. 시드 구문은 지갑 복구의 유일한 수단이므로 안전하게 보관해야 합니다. 복구 시에는 정확한 단어 순서와 철자가 중요합니다.",
-        links: [
-          { title: "MetaMask 지갑 복구 가이드", url: "https://support.metamask.io/hc/en-us/articles/360015289612" },
-          { title: "지갑 복구 모범 사례", url: "https://ethereum.org/en/wallets/" },
-        ],
-        tips: "복구 구문을 입력할 때는 주변에 사람이 없는지 확인하고, 가능하면 오프라인 환경에서 진행하세요.",
+        tips: "개인 키는 절대 타인에게 공유하지 마세요. 분실 시 자산을 잃을 수 있습니다.",
       },
     ],
   },
   {
-    category: "2. 🔗 Blockchain Basics (블록체인 기초)",
+    category: "2. 💰 암호화폐 거래 (Crypto Trading)",
     items: [
       {
         id: "2-1",
-        question: "블록체인이란? 중앙 서버와의 차이",
+        question: "거래소(Exchange) 선택 시 고려 사항",
         answer:
-          "블록체인은 거래 내역을 '블록'이라는 단위로 기록하고, 이를 '체인'처럼 순차적으로 연결하여 분산된 네트워크 참여자들(노드)이 공동으로 관리하는 기술입니다. 중앙 서버 방식은 단일 주체가 데이터를 통제하지만, 블록체인은 탈중앙화되어 투명성과 보안성이 높습니다. 또한 단일 실패 지점이 없어 더 안정적입니다.",
+          "거래량, 보안, 수수료, 지원하는 암호화폐 종류, 사용자 인터페이스, 고객 지원 등 다양한 요소를 고려해야 합니다. 신뢰할 수 있는 거래소를 선택하고, 보안 설정을 강화하는 것이 중요합니다.",
         links: [
-          { title: "블록체인 기초 가이드", url: "https://ethereum.org/en/developers/docs/intro-to-ethereum/" },
-          { title: "비트코인 백서", url: "https://bitcoin.org/bitcoin.pdf" },
-          { title: "블록체인 시각화 도구", url: "https://andersbrownworth.com/blockchain/" },
+          { title: "바이낸스", url: "https://www.binance.com/ko" },
+          { title: "코인베이스", url: "https://www.coinbase.com/" },
         ],
-        tips: "블록체인의 핵심은 '신뢰 없는 시스템'입니다. 참여자들이 서로를 신뢰하지 않아도 시스템이 정상 작동합니다.",
+        tips: "분산 거래소(DEX)도 고려해 보세요. 중앙화된 거래소와 다른 장단점이 있습니다.",
       },
       {
         id: "2-2",
-        question: "블록, 트랜잭션, 노드, 체인의 관계",
+        question: "시장 분석 기초: 차트 보는 법",
         answer:
-          "트랜잭션(거래)은 블록체인에서 발생하는 모든 기록 단위입니다. 여러 트랜잭션이 모여 하나의 블록을 구성하고, 이 블록들이 시간 순서대로 암호학적으로 연결되어 체인을 이룹니다. 노드는 이 블록체인 네트워크에 참여하여 데이터를 저장하고 검증하는 컴퓨터 또는 시스템입니다. 각 블록은 이전 블록의 해시를 포함하여 체인의 무결성을 보장합니다.",
+          "캔들 차트, 이동평균선, 거래량 지표 등을 활용하여 시장의 추세를 파악할 수 있습니다. 기술적 분석 외에도, 프로젝트의 기본적 가치(백서, 팀, 로드맵)를 분석하는 것이 중요합니다.",
         links: [
-          { title: "블록 구조 설명", url: "https://ethereum.org/en/developers/docs/blocks/" },
-          { title: "트랜잭션 구조", url: "https://ethereum.org/en/developers/docs/transactions/" },
-          { title: "노드 유형별 설명", url: "https://ethereum.org/en/developers/docs/nodes-and-clients/" },
+          { title: "캔들 차트 설명", url: "https://www.investopedia.com/trading/candlestick-charting/" },
+          { title: "TradingView", url: "https://www.tradingview.com/" },
         ],
-        tips: "블록체인 탐색기(예: Etherscan)를 사용하면 실제 블록과 트랜잭션 구조를 직접 확인할 수 있습니다.",
+        tips: "과거의 데이터가 미래를 보장하지 않습니다. 항상 리스크 관리를 염두에 두세요.",
       },
       {
         id: "2-3",
-        question: "EVM이란 무엇이며 왜 중요할까요?",
+        question: "주문(Order) 종류: 지정가, 시장가",
         answer:
-          "EVM(Ethereum Virtual Machine)은 이더리움 블록체인 위에서 스마트 컨트랙트 코드를 실행하는 가상 환경입니다. 개발자들이 다양한 DApp을 만들 수 있는 기반을 제공하며, 많은 다른 블록체인들이 EVM 호환성을 채택하여 이더리움 생태계와 연결될 수 있게 합니다. EVM은 튜링 완전한 가상 머신으로, 복잡한 로직을 실행할 수 있습니다.",
+          "지정가는 원하는 가격에 주문을 내는 방식이고, 시장가는 현재 시장 가격으로 즉시 거래하는 방식입니다. 상황에 따라 적절한 주문 방식을 선택하여 거래 효율성을 높일 수 있습니다.",
         links: [
-          { title: "EVM 상세 설명", url: "https://ethereum.org/en/developers/docs/evm/" },
-          { title: "Solidity 프로그래밍 언어", url: "https://soliditylang.org/" },
-          { title: "EVM 호환 체인 목록", url: "https://chainlist.org/" },
+          { title: "주문 방식 설명", url: "https://www.binance.com/en/support/faq/360020390472" },
+          { title: "슬리피지(Slippage)", url: "https://academy.binance.com/en/articles/slippage-in-crypto-trading" },
         ],
-        tips: "EVM 호환성 덕분에 이더리움용 DApp을 다른 체인에서도 쉽게 사용할 수 있습니다.",
-      },
-      {
-        id: "2-4",
-        question: "퍼블릭 체인 vs 프라이빗 체인",
-        answer:
-          "퍼블릭 블록체인(예: 비트코인, 이더리움)은 누구나 네트워크에 참여하고 거래를 검증할 수 있는 개방형 블록체인입니다. 프라이빗 블록체인은 특정 허가된 참여자만 접근하고 사용할 수 있는 폐쇄형 블록체인으로, 주로 기업 환경에서 사용됩니다. 컨소시엄 블록체인은 이 둘의 중간 형태입니다.",
-        links: [
-          { title: "블록체인 유형 비교", url: "https://ethereum.org/en/developers/docs/networks/" },
-          { title: "엔터프라이즈 블록체인", url: "https://consensys.net/blockchain-use-cases/enterprise-ethereum/" },
-        ],
-        tips: "퍼블릭 체인은 투명성과 탈중앙화를, 프라이빗 체인은 속도와 프라이버시를 중시합니다.",
-      },
-      {
-        id: "2-5",
-        question: "트랜잭션 수수료가 발생하는 이유",
-        answer:
-          "트랜잭션 수수료(가스비)는 블록체인 네트워크에서 거래를 처리하고 블록에 기록하는 노드(채굴자 또는 검증자)에게 지불하는 보상입니다. 네트워크의 보안을 유지하고, 무분별한 트랜잭션 발생을 방지하는 역할을 합니다. 수수료는 네트워크 혼잡도에 따라 변동됩니다.",
-        links: [
-          { title: "이더리움 가스 설명", url: "https://ethereum.org/en/developers/docs/gas/" },
-          { title: "가스 추적기", url: "https://etherscan.io/gastracker" },
-          { title: "가스 최적화 팁", url: "https://ethereum.org/en/developers/docs/gas/#tips-to-reduce-gas-costs" },
-        ],
-        tips: "가스비를 절약하려면 네트워크가 덜 혼잡한 시간대를 이용하거나 Layer 2 솔루션을 사용하세요.",
+        tips: "시장 변동성이 큰 경우, 지정가 주문이 체결되지 않을 수 있습니다.",
       },
     ],
   },
   {
-    category: "3. 🪙 Token & NFT (토큰 & NFT)",
+    category: "3. 🔐 보안 (Security)",
     items: [
       {
         id: "3-1",
-        question: "ERC-20, ERC-721, ERC-1155의 차이",
+        question: "2FA(Two-Factor Authentication) 설정",
         answer:
-          "ERC-20은 대체 가능한 토큰(Fungible Token, FT)의 표준으로, 각 토큰이 동일한 가치를 지닙니다 (예: 암호화폐). ERC-721은 대체 불가능한 토큰(Non-Fungible Token, NFT)의 표준으로, 각 토큰이 고유한 가치와 정보를 가집니다 (예: 디지털 아트). ERC-1155는 FT와 NFT를 모두 한 컨트랙트에서 관리할 수 있는 다중 토큰 표준으로, 게임 아이템 등에 효율적입니다.",
+          "2FA는 계정 보안을 강화하는 추가적인 인증 단계입니다. 비밀번호 외에, 휴대폰 인증 코드나 OTP(One-Time Password)를 사용하여 로그인 보안을 강화할 수 있습니다.",
         links: [
-          { title: "ERC-20 표준 문서", url: "https://eips.ethereum.org/EIPS/eip-20" },
-          { title: "ERC-721 표준 문서", url: "https://eips.ethereum.org/EIPS/eip-721" },
-          { title: "ERC-1155 표준 문서", url: "https://eips.ethereum.org/EIPS/eip-1155" },
-          { title: "OpenZeppelin 토큰 구현", url: "https://docs.openzeppelin.com/contracts/4.x/tokens" },
+          { title: "Google Authenticator", url: "https://support.google.com/accounts/answer/185839?hl=ko" },
+          { title: "Authy", url: "https://authy.com/" },
         ],
-        tips: "ERC-1155는 가스비를 크게 절약할 수 있어 게임이나 대량의 토큰을 다루는 프로젝트에서 선호됩니다.",
+        tips: "2FA를 활성화하면 해킹 시도를 크게 줄일 수 있습니다.",
       },
       {
         id: "3-2",
-        question: "NFT는 왜 JPEG가 아닌가요?",
+        question: "피싱(Phishing) 공격 예방",
         answer:
-          "JPEG는 이미지 파일 형식일 뿐이고, NFT는 해당 이미지(또는 다른 디지털 자산)의 소유권과 진위성을 블록체인에 기록한 '디지털 증서'입니다. NFT는 이미지 자체라기보다는, 그 이미지에 대한 고유한 권리를 나타내는 토큰입니다. 블록체인에 저장되는 것은 메타데이터와 소유권 정보이며, 실제 파일은 별도로 저장됩니다.",
+          "출처가 불분명한 링크나 이메일을 클릭하지 않고, 개인 정보를 요구하는 메시지에 응답하지 않아야 합니다. 공식 웹사이트 주소를 확인하고, 의심스러운 활동을 발견하면 즉시 거래소에 신고해야 합니다.",
         links: [
-          { title: "NFT 기초 가이드", url: "https://ethereum.org/en/nft/" },
-          { title: "OpenSea NFT 마켓플레이스", url: "https://opensea.io" },
-          { title: "NFT 메타데이터 표준", url: "https://docs.opensea.io/docs/metadata-standards" },
+          {
+            title: "피싱 공격 예방 가이드",
+            url: "https://www.consumer.ftc.gov/articles/how-recognize-and-avoid-phishing-attacks",
+          },
+          { title: "보안 뉴스", url: "https://krebsonsecurity.com/" },
         ],
-        tips: "NFT를 구매할 때는 메타데이터가 어디에 저장되는지 확인하세요. IPFS나 Arweave 같은 분산 저장소가 더 안전합니다.",
+        tips: "항상 의심하고 확인하는 습관을 가지세요.",
       },
       {
         id: "3-3",
-        question: "NFT의 메타데이터는 어디에 저장되나요?",
+        question: "콜드 월렛(Cold Wallet) 사용",
         answer:
-          "NFT의 메타데이터(이름, 설명, 이미지 링크 등)는 온체인(블록체인 직접 저장, 비용 높음) 또는 오프체인(IPFS, Arweave 같은 분산 스토리지 또는 중앙 서버, 비용 낮음)에 저장될 수 있습니다. 대부분의 경우 이미지 파일 자체는 오프체인에 저장하고, 그 링크를 온체인에 기록합니다. 저장 방식에 따라 NFT의 영속성이 달라집니다.",
+          "콜드 월렛은 인터넷에 연결되지 않은 하드웨어 지갑으로, 암호화폐를 오프라인 상태로 보관하여 해킹 위험을 줄일 수 있습니다. 장기 투자자에게 적합합니다.",
         links: [
-          { title: "IPFS 분산 저장소", url: "https://ipfs.io" },
-          { title: "Arweave 영구 저장소", url: "https://arweave.org" },
-          { title: "NFT 저장소 비교", url: "https://ethereum.org/en/developers/docs/storage/" },
+          { title: "Ledger", url: "https://www.ledger.com/" },
+          { title: "Trezor", url: "https://trezor.io/" },
         ],
-        tips: "중앙 서버에 저장된 NFT는 서버가 다운되면 접근할 수 없게 될 수 있습니다. 분산 저장소를 사용하는 NFT가 더 안전합니다.",
-      },
-      {
-        id: "3-4",
-        question: "토큰 발행은 어떻게 하나요?",
-        answer:
-          "토큰 발행은 해당 블록체인(예: 이더리움, 솔라나)의 표준(예: ERC-20)에 맞춰 스마트 컨트랙트를 작성하고 배포함으로써 이루어집니다. 개발 지식이 필요하며, 최근에는 토큰 발행을 도와주는 플랫폼이나 도구도 있습니다. 토큰 이름, 심볼, 총 공급량, 소수점 자릿수 등을 정의해야 합니다.",
-        links: [
-          { title: "OpenZeppelin 토큰 생성기", url: "https://wizard.openzeppelin.com" },
-          { title: "Remix IDE", url: "https://remix.ethereum.org" },
-          { title: "토큰 발행 가이드", url: "https://ethereum.org/en/developers/tutorials/erc20-annotated-code/" },
-        ],
-        tips: "토큰을 발행하기 전에 토크노믹스(토큰 경제학)를 신중히 설계하고, 보안 감사를 받는 것이 좋습니다.",
-      },
-      {
-        id: "3-5",
-        question: "NFT 민팅과 에어드랍의 차이",
-        answer:
-          "NFT 민팅(Minting)은 디지털 자산을 블록체인 상에 NFT로 처음 생성하고 등록하는 과정을 의미하며, 보통 구매 행위가 동반됩니다. 에어드랍(Airdrop)은 특정 조건을 만족하는 사용자들에게 토큰이나 NFT를 무상으로 배포하는 마케팅 또는 보상 방식입니다. 민팅은 생성 과정이고, 에어드랍은 배포 방식입니다.",
-        links: [
-          { title: "NFT 민팅 가이드", url: "https://ethereum.org/en/developers/tutorials/how-to-mint-an-nft/" },
-          { title: "에어드랍 추적 사이트", url: "https://airdrops.io" },
-          { title: "NFT 마켓플레이스 비교", url: "https://ethereum.org/en/dapps/?category=collectibles" },
-        ],
-        tips: "에어드랍을 받을 때는 피싱 사이트를 주의하고, 지갑 권한을 과도하게 요구하는 경우 의심해보세요.",
+        tips: "콜드 월렛의 복구 구문(Seed Phrase)을 안전하게 보관하세요.",
       },
     ],
   },
   {
-    category: "4. 🌉 Bridge & Multichain (브릿지 & 멀티체인)",
+    category: "4. 💡 DeFi (Decentralized Finance)",
     items: [
       {
         id: "4-1",
-        question: "블록체인 간 자산 이동이 가능한 이유는?",
+        question: "DeFi란 무엇인가요?",
         answer:
-          "블록체인 브릿지는 서로 다른 블록체인 네트워크 간에 토큰이나 데이터를 전송할 수 있도록 연결하는 기술입니다. 일반적으로 한 체인에서 자산을 락업(Lock)하고 다른 체인에서 그에 상응하는 래핑된(Wrapped) 자산을 발행하거나, 유동성 풀을 통해 교환하는 방식으로 작동합니다. 브릿지는 멀티체인 생태계의 핵심 인프라입니다.",
+          "DeFi는 블록체인 기술을 기반으로 구축된 탈중앙화 금융 시스템입니다. 은행과 같은 중개 기관 없이 암호화폐를 통해 대출, 예금, 거래 등의 금융 서비스를 제공합니다.",
         links: [
-          { title: "브릿지 작동 원리", url: "https://ethereum.org/en/bridges/" },
-          { title: "L2Beat 브릿지 비교", url: "https://l2beat.com/bridges" },
-          {
-            title: "브릿지 보안 가이드",
-            url: "https://blog.li.fi/what-are-blockchain-bridges-and-how-can-we-classify-them-560dc6ec05fa",
-          },
+          { title: "DeFi 설명", url: "https://ethereum.org/ko/defi/" },
+          { title: "DeFi Pulse", url: "https://defipulse.com/" },
         ],
-        tips: "브릿지를 사용할 때는 항상 공식 웹사이트를 확인하고, 큰 금액은 여러 번에 나누어 전송하는 것이 안전합니다.",
+        tips: "DeFi는 높은 수익률을 제공하지만, 스마트 컨트랙트 버그, 해킹 등의 위험도 존재합니다.",
       },
       {
         id: "4-2",
-        question: "브릿지 사용법 예시 (Stargate, LayerZero 등)",
+        question: "DEX (Decentralized Exchange) 사용법",
         answer:
-          "브릿지 사용은 보통 해당 브릿지 웹사이트에 지갑을 연결하고, 보내는 체인과 자산, 받는 체인과 자산을 선택한 후 수량 입력 및 승인, 전송의 과정을 거칩니다. Stargate는 LayerZero 기술을 활용한 브릿지로, 여러 체인 간 네이티브 자산 전송을 지원합니다. 각 브릿지마다 지원하는 체인과 토큰이 다르므로 사전 확인이 필요합니다.",
+          "DEX는 중앙 기관 없이 사용자들이 직접 암호화폐를 거래할 수 있는 플랫폼입니다. Uniswap, SushiSwap 등이 대표적이며, 개인 지갑을 연결하여 거래할 수 있습니다.",
         links: [
-          { title: "Stargate Finance", url: "https://stargate.finance" },
-          { title: "LayerZero 프로토콜", url: "https://layerzero.network" },
-          { title: "브릿지 비교 사이트", url: "https://defillama.com/bridges" },
+          { title: "Uniswap", url: "https://uniswap.org/" },
+          { title: "SushiSwap", url: "https://www.sushi.com/" },
         ],
-        tips: "브릿지 사용 전에 수수료와 소요 시간을 확인하고, 테스트넷에서 먼저 연습해보는 것이 좋습니다.",
+        tips: "DEX 사용 시, 슬리피지 설정과 가스비를 고려해야 합니다.",
       },
       {
         id: "4-3",
-        question: "브릿지 해킹은 왜 자주 발생하나요?",
+        question: "유동성 공급(Liquidity Providing)",
         answer:
-          "브릿지는 여러 블록체인과 상호작용하며 복잡한 스마트 컨트랙트 로직을 가지므로 공격 표면이 넓습니다. 스마트 컨트랙트 취약점, 프라이빗 키 관리 미흡, 검증 로직 오류 등으로 인해 대규모 자금이 예치된 브릿지가 해커의 주요 타겟이 되곤 합니다. 또한 멀티시그 지갑의 키 관리나 오라클 조작 등의 위험도 존재합니다.",
+          "유동성 공급은 DEX에 암호화폐 쌍을 예치하여 거래를 활성화하는 데 기여하고, 그 대가로 수수료를 받는 것입니다. 높은 수익을 얻을 수 있지만, Impermanent Loss(비영구적 손실) 위험이 있습니다.",
         links: [
-          { title: "브릿지 해킹 사례 분석", url: "https://rekt.news/leaderboard/" },
-          { title: "브릿지 보안 모범 사례", url: "https://ethereum.org/en/bridges/#bridge-risk" },
-          {
-            title: "DeFi 보안 가이드",
-            url: "https://consensys.net/diligence/blog/2019/09/stop-using-soliditys-transfer-now/",
-          },
+          { title: "Impermanent Loss 설명", url: "https://academy.binance.com/en/articles/impermanent-loss-explained" },
+          { title: "유동성 공급 가이드", url: "https://www.gemini.com/learn/what-is-liquidity-pool" },
         ],
-        tips: "신뢰할 수 있고 감사를 받은 브릿지만 사용하고, TVL이 높고 오랫동안 운영된 브릿지를 선택하세요.",
-      },
-      {
-        id: "4-4",
-        question: "Multichain 환경에서 자산을 안전하게 관리하는 법",
-        answer:
-          "신뢰할 수 있고 감사를 받은 브릿지를 사용하며, 한 번에 너무 큰 금액을 옮기지 않습니다. 브릿지 사용 전후로 지갑 권한을 점검하고, 필요 없는 권한은 즉시 철회합니다. 자산을 여러 체인에 분산 보관하고, 각 체인의 보안 특성을 이해하는 것이 중요합니다. 또한 각 체인별로 별도의 지갑을 사용하는 것도 고려해볼 수 있습니다.",
-        links: [
-          { title: "Revoke.cash 권한 관리", url: "https://revoke.cash" },
-          { title: "멀티체인 포트폴리오 추적", url: "https://debank.com" },
-          { title: "체인별 보안 가이드", url: "https://ethereum.org/en/security/" },
-        ],
-        tips: "정기적으로 지갑 권한을 점검하고, 사용하지 않는 DApp의 권한은 즉시 철회하세요.",
+        tips: "유동성 공급 전, Impermanent Loss에 대해 충분히 이해해야 합니다.",
       },
     ],
   },
   {
-    category: "5. 💸 DeFi 101 (디파이 기초)",
+    category: "5. 🖼️ NFT (Non-Fungible Token)",
     items: [
       {
         id: "5-1",
-        question: "DeFi란 무엇인가요?",
+        question: "NFT란 무엇인가요?",
         answer:
-          "DeFi(Decentralized Finance, 탈중앙화 금융)는 은행이나 증권사 같은 중앙 중개기관 없이, 블록체인과 스마트 컨트랙트를 기반으로 금융 서비스를 제공하는 시스템입니다. 예금, 대출, 거래, 투자 등 다양한 금융 활동을 P2P 방식으로 투명하고 개방적으로 할 수 있습니다. 24/7 운영되며 전 세계 누구나 접근 가능합니다.",
+          "NFT는 대체 불가능한 토큰으로, 디지털 자산의 소유권을 증명하는 데 사용됩니다. 이미지, 비디오, 음악, 게임 아이템 등 다양한 형태의 디지털 콘텐츠를 NFT로 발행할 수 있습니다.",
         links: [
-          { title: "DeFi 기초 가이드", url: "https://ethereum.org/en/defi/" },
-          { title: "DeFi Pulse TVL 추적", url: "https://defipulse.com" },
-          { title: "DeFi 프로토콜 비교", url: "https://defillama.com" },
+          { title: "NFT 설명", url: "https://ethereum.org/ko/nft/" },
+          { title: "OpenSea", url: "https://opensea.io/" },
         ],
-        tips: "DeFi를 시작할 때는 작은 금액으로 연습하고, 각 프로토콜의 위험성을 충분히 이해한 후 참여하세요.",
+        tips: "NFT 투자는 높은 위험을 수반하므로 신중하게 접근해야 합니다.",
       },
       {
         id: "5-2",
-        question: "AMM이란? (Uniswap 작동 원리)",
+        question: "NFT 구매 및 판매 방법",
         answer:
-          "AMM(Automated Market Maker, 자동화된 시장 조성자)은 전통적인 오더북 방식 대신 수학적 공식을 사용하여 유동성 풀 내에서 토큰 가격을 결정하고 자동으로 거래를 체결하는 탈중앙화 거래소(DEX)의 핵심 메커니즘입니다. 유니스왑은 x*y=k 공식을 사용하는 대표적인 AMM 기반 DEX입니다. 사용자들이 제공한 유동성 풀에서 거래가 이루어집니다.",
+          "OpenSea, Rarible 등의 NFT 마켓플레이스에서 NFT를 구매하거나 판매할 수 있습니다. 메타마스크와 같은 암호화폐 지갑을 연결하여 거래를 진행합니다.",
         links: [
-          { title: "Uniswap 공식 문서", url: "https://docs.uniswap.org" },
-          { title: "AMM 작동 원리", url: "https://ethereum.org/en/developers/docs/dexs/" },
-          { title: "Uniswap V3 가이드", url: "https://uniswap.org/blog/uniswap-v3" },
+          { title: "Rarible", url: "https://rarible.com/" },
+          { title: "NFT 마켓플레이스 비교", url: "https://www.creativebloq.com/features/nft-marketplaces" },
         ],
-        tips: "AMM에서 거래할 때는 슬리피지를 고려하고, 큰 거래는 여러 번에 나누어 실행하는 것이 좋습니다.",
+        tips: "NFT 구매 전, 프로젝트의 신뢰성과 커뮤니티를 확인하는 것이 중요합니다.",
       },
       {
         id: "5-3",
-        question: "유동성 공급자(LP)의 수익 구조",
+        question: "NFT 활용 사례",
         answer:
-          "유동성 공급자(Liquidity Provider, LP)는 AMM 기반 DEX의 유동성 풀에 자신의 토큰 페어(예: ETH/USDC)를 예치하고, 해당 풀에서 발생하는 거래 수수료의 일부를 보상으로 받습니다. 또한, 프로젝트에 따라 추가적인 LP 토큰 보상을 받을 수도 있습니다. LP는 유동성을 제공한 비율에 따라 수수료를 분배받습니다.",
+          "디지털 아트, 게임 아이템, 멤버십 카드, 부동산 등 다양한 분야에서 NFT가 활용되고 있습니다. 특히, 메타버스와 결합하여 새로운 디지털 경제를 구축하는 데 기여하고 있습니다.",
         links: [
-          { title: "LP 수익 계산기", url: "https://apy.vision" },
-          { title: "유동성 채굴 가이드", url: "https://ethereum.org/en/developers/docs/dexs/" },
-          { title: "LP 위험 관리", url: "https://finematics.com/liquidity-mining-explained/" },
-        ],
-        tips: "LP를 시작하기 전에 임시적 손실(Impermanent Loss)에 대해 충분히 이해하고, 안정적인 페어부터 시작하세요.",
-      },
-      {
-        id: "5-4",
-        question: "impermanent loss란?",
-        answer:
-          "비영구적 손실(Impermanent Loss)은 AMM 유동성 풀에 자산을 예치했을 때, 예치한 토큰들의 가격 변동으로 인해 단순히 토큰을 보유하고 있었을 경우보다 자산 가치가 낮아지는 현상을 의미합니다. 가격이 원래 비율로 돌아오면 손실이 사라지므로 '비영구적'이라고 불리지만, 실제 손실로 이어질 수 있습니다. 가격 변동이 클수록 손실이 커집니다.",
-        links: [
-          { title: "Impermanent Loss 계산기", url: "https://dailydefi.org/tools/impermanent-loss-calculator/" },
-          { title: "IL 상세 설명", url: "https://finematics.com/impermanent-loss-explained/" },
+          { title: "NFT 게임", url: "https://playtoearn.net/" },
           {
-            title: "IL 최소화 전략",
-            url: "https://blog.bancor.network/beginners-guide-to-getting-rekt-by-impermanent-loss-7c9510cb2f22",
+            title: "메타버스 NFT",
+            url: "https://www.forbes.com/sites/cathyhackl/2021/04/04/nfts-and-the-metaverse-how-non-fungible-tokens-will-drive-the-future-of-digital-economies/?sh=6c0425a31953",
           },
         ],
-        tips: "상관관계가 높은 토큰 페어(예: ETH/stETH)를 선택하면 임시적 손실을 줄일 수 있습니다.",
-      },
-      {
-        id: "5-5",
-        question: "Lending Protocol의 원리 (Aave, Compound)",
-        answer:
-          "대출 프로토콜(Lending Protocol)은 사용자들이 암호화폐를 예치하여 이자를 받거나, 다른 암호화폐를 담보로 빌릴 수 있는 DeFi 서비스입니다. Aave와 Compound는 대표적인 대출 프로토콜로, 스마트 컨트랙트를 통해 대출 조건, 이자율, 담보 관리 등을 자동화합니다. 이자율은 공급과 수요에 따라 실시간으로 변동됩니다.",
-        links: [
-          { title: "Aave 프로토콜", url: "https://aave.com" },
-          { title: "Compound Finance", url: "https://compound.finance" },
-          { title: "대출 프로토콜 비교", url: "https://defiprime.com/decentralized_lending" },
-        ],
-        tips: "담보 비율을 충분히 유지하고, 청산 위험을 항상 모니터링하세요. 변동성이 큰 자산은 담보로 사용할 때 주의가 필요합니다.",
+        tips: "NFT는 단순한 투기 자산을 넘어, 다양한 가능성을 가진 기술입니다.",
       },
     ],
   },
   {
-    category: "6. 🧠 ZK & Layer 2 (영지식 증명 & 레이어 2)",
+    category: "6. 🌐 DAO (Decentralized Autonomous Organization)",
     items: [
       {
         id: "6-1",
-        question: "Rollup이란? 왜 필요한가요?",
+        question: "DAO란 무엇인가요?",
         answer:
-          "롤업은 이더리움과 같은 레이어 1(L1) 블록체인의 확장성 문제를 해결하기 위한 레이어 2(L2) 솔루션입니다. 여러 거래를 L2에서 처리하고, 그 결과(또는 증명)만을 L1에 기록하여 L1의 부담을 줄이고 거래 처리 속도를 높이며 수수료를 낮춥니다. 이더리움의 보안성을 상속받으면서도 확장성을 크게 개선할 수 있습니다.",
+          "DAO는 블록체인 기반의 탈중앙화된 자율 조직입니다. 스마트 컨트랙트에 의해 운영되며, 구성원들의 투표를 통해 의사 결정을 진행합니다. 투명하고 민주적인 조직 운영이 가능합니다.",
         links: [
-          { title: "롤업 기초 가이드", url: "https://ethereum.org/en/developers/docs/scaling/layer-2-rollups/" },
-          { title: "L2Beat 롤업 비교", url: "https://l2beat.com" },
-          { title: "롤업 생태계 현황", url: "https://l2fees.info" },
+          { title: "DAO 설명", url: "https://ethereum.org/ko/dao/" },
+          { title: "DAOhaus", url: "https://daohaus.club/" },
         ],
-        tips: "롤업을 사용할 때는 출금 시간과 수수료를 미리 확인하고, 각 롤업의 특성을 이해한 후 선택하세요.",
+        tips: "DAO 참여 전, 조직의 목표와 운영 방식에 대해 충분히 이해해야 합니다.",
       },
       {
         id: "6-2",
-        question: "Optimistic Rollup vs ZK Rollup",
+        question: "DAO 참여 방법",
         answer:
-          "옵티미스틱 롤업은 L2 거래가 기본적으로 유효하다고 가정하고, 사기 증명(fraud proof)을 통해 오류를 잡아냅니다. 구현이 상대적으로 쉽지만, 출금 시 분쟁 해결 기간(7일)이 필요합니다. ZK 롤업은 영지식 증명(validity proof)을 사용하여 L2 거래의 유효성을 L1에서 즉시 검증합니다. 더 빠르고 안전하지만, 기술이 복잡하고 EVM 호환성 구현이 어렵습니다.",
+          "DAO의 멤버십 토큰을 구매하거나, DAO에 기여하여 멤버가 될 수 있습니다. Snapshot과 같은 플랫폼을 통해 투표에 참여하고, DAO의 의사 결정에 영향을 미칠 수 있습니다.",
         links: [
-          { title: "Optimism 공식 문서", url: "https://docs.optimism.io" },
-          { title: "Arbitrum 가이드", url: "https://docs.arbitrum.io" },
-          { title: "ZK 롤업 비교", url: "https://ethereum.org/en/developers/docs/scaling/zk-rollups/" },
+          { title: "Snapshot", url: "https://snapshot.org/" },
+          { title: "DAO 멤버십", url: "https://consensys.net/blog/blockchain/how-to-join-a-dao/" },
         ],
-        tips: "빠른 출금이 필요하면 ZK 롤업을, EVM 호환성이 중요하면 옵티미스틱 롤업을 고려해보세요.",
+        tips: "DAO는 새로운 형태의 조직 운영 방식이므로, 적극적으로 참여하고 배우는 자세가 중요합니다.",
       },
       {
         id: "6-3",
-        question: "zkSync Era, StarkNet, Scroll 비교",
+        question: "DAO 활용 사례",
         answer:
-          "이들은 모두 ZK 롤업 기술을 사용하는 대표적인 L2 솔루션입니다. zkSync Era는 EVM 호환성을 강조하며 Solidity 개발자들이 쉽게 이전할 수 있도록 합니다. StarkNet은 자체 프로그래밍 언어인 Cairo를 사용하여 더 높은 성능과 유연성을 추구합니다. Scroll은 EVM과 바이트코드 수준에서 최대한의 호환성을 목표로 합니다. 각각 다른 접근 방식으로 확장성 문제를 해결합니다.",
+          "투자, 자선, 소셜 네트워킹 등 다양한 분야에서 DAO가 활용되고 있습니다. 특히, 프로젝트 자금 관리 및 커뮤니티 운영에 효과적입니다.",
         links: [
-          { title: "zkSync Era", url: "https://zksync.io" },
-          { title: "StarkNet", url: "https://starknet.io" },
-          { title: "Scroll", url: "https://scroll.io" },
-          { title: "ZK 롤업 생태계", url: "https://l2beat.com/scaling/zk-rollups" },
+          {
+            title: "DAO 사례",
+            url: "https://builtin.com/blockchain/decentralized-autonomous-organization-dao-examples",
+          },
+          {
+            title: "자선 DAO",
+            url: "https://www.coindesk.com/layer2/2022/12/16/crypto-winter-didnt-kill-giving-daos/",
+          },
         ],
-        tips: "각 ZK 롤업의 생태계와 지원하는 DApp을 확인한 후, 사용 목적에 맞는 플랫폼을 선택하세요.",
+        tips: "DAO는 조직 운영의 투명성과 효율성을 높이는 데 기여할 수 있습니다.",
       },
     ],
   },
   {
-    category: "7. 🚨 Safety & Scams (보안 & 사기)",
+    category: "7. ⛓️ Layer 2 Scaling Solutions",
     items: [
       {
         id: "7-1",
-        question: "피싱 링크 구별법",
+        question: "Layer 2란 무엇인가요?",
         answer:
-          "공식 웹사이트 주소와 철자가 정확히 일치하는지 확인하고, HTTPS 보안 연결인지 확인합니다. 출처가 불분명한 링크나 이메일, DM은 클릭하지 않고, 단축 URL은 원래 주소를 확인하기 전까지 주의합니다. 갑작스러운 경고나 긴급한 요청을 하는 메시지는 의심해야 합니다. 브라우저 북마크를 사용하거나 공식 소셜 미디어에서 링크를 확인하세요.",
+          "Layer 2는 메인 블록체인(Layer 1)의 확장성 문제를 해결하기 위해 구축된 솔루션입니다. 트랜잭션을 Layer 2에서 처리하고, 그 결과를 Layer 1에 기록하여 네트워크 혼잡을 줄이고, 거래 속도를 높입니다.",
         links: [
-          { title: "피싱 사이트 신고", url: "https://safebrowsing.google.com/safebrowsing/report_phish/" },
-          { title: "Web3 보안 가이드", url: "https://ethereum.org/en/security/" },
-          { title: "MetaMask 보안 팁", url: "https://support.metamask.io/hc/en-us/articles/360015489591" },
+          { title: "Layer 2 설명", url: "https://ethereum.org/ko/layer-2/" },
+          { title: "L2BEAT", url: "https://l2beat.com/" },
         ],
-        tips: "의심스러운 링크는 절대 클릭하지 말고, 항상 공식 웹사이트를 북마크해두고 사용하세요.",
+        tips: "Layer 2 솔루션은 이더리움 네트워크의 확장성을 크게 향상시킬 수 있습니다.",
       },
       {
         id: "7-2",
-        question: "지갑 권한 관리 (Revoke)",
+        question: "Optimistic Rollups vs ZK-Rollups",
         answer:
-          "DApp 사용 시 스마트 컨트랙트에 특정 토큰에 대한 지출 한도(allowance)를 부여하게 됩니다. 사용하지 않는 DApp이나 의심스러운 컨트랙트에 부여된 권한은 Revoke.cash와 같은 도구를 사용하여 정기적으로 확인하고 철회하여 자산을 보호해야 합니다. 권한을 철회하면 해당 컨트랙트는 더 이상 토큰에 접근할 수 없습니다.",
+          "Optimistic Rollups는 트랜잭션이 유효하다고 가정하고, 문제가 발견될 경우에만 검증을 수행합니다. ZK-Rollups는 영지식 증명(Zero-Knowledge Proof)을 사용하여 트랜잭션의 유효성을 검증합니다. 각각 장단점이 있으며, 사용 사례에 따라 적합한 솔루션을 선택해야 합니다.",
         links: [
-          { title: "Revoke.cash", url: "https://revoke.cash" },
-          { title: "Etherscan 토큰 승인", url: "https://etherscan.io/tokenapprovalchecker" },
-          { title: "지갑 보안 체크리스트", url: "https://ethereum.org/en/security/" },
+          {
+            title: "Optimistic Rollups 설명",
+            url: "https://ethereum.org/en/developers/docs/scaling/optimistic-rollups/",
+          },
+          { title: "ZK-Rollups 설명", url: "https://ethereum.org/en/developers/docs/scaling/zk-rollups/" },
         ],
-        tips: "매월 정기적으로 지갑 권한을 점검하고, 사용하지 않는 DApp의 권한은 즉시 철회하세요.",
+        tips: "ZK-Rollups는 Optimistic Rollups보다 높은 보안성을 제공하지만, 더 복잡한 기술을 사용합니다.",
       },
       {
         id: "7-3",
-        question: "Sybil 공격이란?",
+        question: "주요 Layer 2 프로젝트",
         answer:
-          "시빌 공격은 한 명의 공격자가 다수의 가짜 신원(계정)을 생성하여 네트워크나 시스템에 부당한 영향력을 행사하려는 공격입니다. 거버넌스 투표 조작, 에어드랍 부정 수령, 평판 시스템 조작 등에 악용될 수 있습니다. 블록체인에서는 신원 확인이 어려워 이런 공격이 특히 문제가 됩니다.",
+          "Arbitrum, Optimism, zkSync, StarkNet 등이 대표적인 Layer 2 프로젝트입니다. 각 프로젝트는 고유한 기술적 특징과 생태계를 가지고 있습니다.",
         links: [
-          {
-            title: "Sybil 저항성 설계",
-            url: "https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/attack-and-defense/",
-          },
-          { title: "Gitcoin Passport", url: "https://passport.gitcoin.co" },
-          { title: "신원 증명 솔루션", url: "https://ethereum.org/en/decentralized-identity/" },
+          { title: "Arbitrum", url: "https://arbitrum.io/" },
+          { title: "Optimism", url: "https://www.optimism.io/" },
         ],
-        tips: "에어드랍이나 거버넌스 참여 시 Sybil 방지 메커니즘이 있는 프로젝트를 선호하세요.",
-      },
-      {
-        id: "7-4",
-        question: "프로젝트 진위 판단 기준",
-        answer:
-          "팀원의 신원과 경력 공개 여부, 백서의 구체성과 실현 가능성, 기술적 기반과 감사 보고서, 활발하고 건강한 커뮤니티, 명확한 로드맵과 실제 개발 진행 상황, 토크노믹스의 합리성 등을 종합적으로 고려해야 합니다. 과도한 수익률 약속이나 익명 팀은 주의해야 합니다. GitHub 활동, 파트너십, 투자자 정보도 중요한 판단 기준입니다.",
-        links: [
-          { title: "프로젝트 분석 가이드", url: "https://ethereum.org/en/developers/docs/dapps/" },
-          { title: "스마트 컨트랙트 감사", url: "https://consensys.net/diligence/" },
-          { title: "DeFi 프로젝트 평가", url: "https://defisafety.com" },
-        ],
-        tips: "DYOR(Do Your Own Research)를 철저히 하고, 여러 출처에서 정보를 교차 검증하세요.",
+        tips: "Layer 2 프로젝트를 사용하기 전에, 해당 프로젝트의 보안성과 탈중앙화 수준을 확인하는 것이 중요합니다.",
       },
     ],
   },
   {
-    category: "8. 🛠 Tools & Services (도구 & 서비스)",
+    category: "8. ✍️ 스마트 컨트랙트 개발 (Smart Contract Development)",
     items: [
       {
         id: "8-1",
-        question: "Debank, Zapper, Zerion 비교",
+        question: "Solidity 개발 환경 설정",
         answer:
-          "이들은 모두 사용자의 여러 지갑과 다양한 DeFi 프로토콜에 분산된 자산을 한 곳에서 추적하고 관리할 수 있는 포트폴리오 대시보드 서비스입니다. DeBank는 소셜 기능과 Web3 신원에 중점을 두고, Zapper는 DeFi 포지션 관리와 수익률 추적에 특화되어 있으며, Zerion은 모바일 앱과 사용자 경험에 강점이 있습니다. 지원하는 체인, 프로토콜, 제공 기능에서 약간의 차이가 있습니다.",
+          "Remix IDE, Truffle, Hardhat 등을 사용하여 Solidity 스마트 컨트랙트를 개발할 수 있습니다. 각 개발 환경은 고유한 장단점을 가지고 있으며, 개발자의 숙련도와 프로젝트의 요구 사항에 따라 적합한 환경을 선택해야 합니다.",
         links: [
-          { title: "DeBank", url: "https://debank.com" },
-          { title: "Zapper", url: "https://zapper.fi" },
-          { title: "Zerion", url: "https://zerion.io" },
+          { title: "Remix IDE", url: "https://remix.ethereum.org/" },
+          { title: "Truffle", url: "https://trufflesuite.com/" },
         ],
-        tips: "각 플랫폼의 특장점을 파악하고, 본인의 사용 패턴에 맞는 도구를 선택하세요.",
+        tips: "Remix IDE는 간단한 컨트랙트 개발 및 테스트에 적합하며, Truffle과 Hardhat은 복잡한 프로젝트 관리에 유용합니다.",
       },
       {
         id: "8-2",
-        question: "Dune Analytics 사용법",
+        question: "ERC-20 토큰 컨트랙트 작성",
         answer:
-          "Dune Analytics는 사용자들이 직접 SQL 쿼리를 작성하여 블록체인 데이터를 분석하고 시각화(대시보드)할 수 있는 플랫폼입니다. 다른 사람이 만든 대시보드를 보거나, 직접 쿼리를 작성하여 특정 프로젝트의 사용자 수, 거래량, TVL 변화 등을 분석할 수 있습니다. 블록체인 데이터가 테이블 형태로 정리되어 있어 SQL로 쉽게 조회할 수 있습니다.",
+          "ERC-20은 대체 가능한 토큰을 위한 표준 인터페이스입니다. OpenZeppelin Contracts 라이브러리를 사용하여 ERC-20 토큰 컨트랙트를 쉽게 작성할 수 있습니다.",
         links: [
-          { title: "Dune Analytics", url: "https://dune.com" },
-          { title: "Dune 쿼리 가이드", url: "https://docs.dune.com" },
-          { title: "인기 대시보드", url: "https://dune.com/browse/dashboards" },
+          { title: "ERC-20 설명", url: "https://ethereum.org/ko/developers/docs/standards/tokens/erc-20/" },
+          { title: "OpenZeppelin Contracts", url: "https://openzeppelin.com/contracts/" },
         ],
-        tips: "SQL을 모르더라도 기존 쿼리를 복사해서 수정하면서 배울 수 있습니다.",
+        tips: "ERC-20 토큰 컨트랙트 작성 시, 보안 취약점을 방지하기 위해 신뢰할 수 있는 라이브러리를 사용하는 것이 중요합니다.",
       },
       {
         id: "8-3",
-        question: "Etherscan으로 트랜잭션 조회하는 법",
+        question: "스마트 컨트랙트 보안 감사",
         answer:
-          "Etherscan(이더리움 블록 탐색기)에서 트랜잭션 해시(TxID), 지갑 주소, 컨트랙트 주소 등을 검색하여 해당 거래의 상세 정보(보낸 사람, 받는 사람, 금액, 가스비, 상태 등)를 확인할 수 있습니다. 토큰 전송 내역, 스마트 컨트랙트 호출 정보, 내부 거래(Internal Txns) 등도 볼 수 있습니다. 실패한 거래의 경우 실패 이유도 확인할 수 있습니다.",
+          "스마트 컨트랙트는 한번 배포되면 수정하기 어렵기 때문에, 배포 전에 반드시 보안 감사를 받아야 합니다. Slither, Mythril 등의 도구를 사용하여 컨트랙트의 취약점을 분석할 수 있습니다.",
         links: [
-          { title: "Etherscan", url: "https://etherscan.io" },
-          { title: "Etherscan 사용 가이드", url: "https://info.etherscan.com" },
-          { title: "다른 체인 탐색기", url: "https://chainlist.org" },
+          { title: "Slither", url: "https://github.com/crytic/slither" },
+          { title: "Mythril", url: "https://mythril.readthedocs.io/en/latest/" },
         ],
-        tips: "거래가 실패했을 때는 'Logs' 탭에서 자세한 오류 정보를 확인할 수 있습니다.",
+        tips: "스마트 컨트랙트 보안 감사는 전문 감사 기관에 의뢰하는 것이 좋습니다.",
       },
     ],
   },
   {
-    category: "9. 🧱 DAO & Governance (DAO & 거버넌스)",
+    category: "9. 🏛️ Web3 인프라 (Web3 Infrastructure)",
     items: [
       {
         id: "9-1",
-        question: "DAO란 무엇인가요?",
+        question: "Infura, Alchemy 사용법",
         answer:
-          "DAO(Decentralized Autonomous Organization, 탈중앙화 자율 조직)는 중앙 권위체 없이, 스마트 컨트랙트에 의해 정의된 규칙에 따라 구성원들이 공동으로 의사결정을 내리고 운영하는 조직입니다. 투명성과 커뮤니티 참여를 강조하며, 거버넌스 토큰을 통해 의사결정에 참여할 수 있습니다. 전통적인 기업 구조와 달리 계층적 관리 없이 운영됩니다.",
+          "Infura와 Alchemy는 이더리움 노드에 접속하기 위한 API를 제공합니다. 이를 통해 개발자는 직접 노드를 운영하지 않고도 블록체인 데이터에 접근하고 트랜잭션을 전송할 수 있습니다.",
         links: [
-          { title: "DAO 기초 가이드", url: "https://ethereum.org/en/dao/" },
-          { title: "Aragon DAO 플랫폼", url: "https://aragon.org" },
-          { title: "DAO 사례 연구", url: "https://deepdao.io" },
+          { title: "Infura", url: "https://www.infura.io/" },
+          { title: "Alchemy", url: "https://www.alchemy.com/" },
         ],
-        tips: "DAO에 참여하기 전에 해당 조직의 목적, 거버넌스 구조, 토크노믹스를 충분히 이해하세요.",
+        tips: "Infura와 Alchemy는 무료 플랜을 제공하므로, 소규모 프로젝트에 유용하게 사용할 수 있습니다.",
       },
       {
         id: "9-2",
-        question: "거버넌스 토큰의 역할",
+        question: "IPFS (InterPlanetary File System)",
         answer:
-          "거버넌스 토큰은 DAO의 의사결정에 참여할 수 있는 권한(투표권)을 부여하는 암호화폐입니다. 토큰 보유자들은 프로토콜의 변경, 자금 사용, 새로운 기능 추가, 파라미터 조정 등에 대한 제안을 하고 투표할 수 있습니다. 보유량에 따라 투표력이 결정되며, 일부 프로젝트에서는 토큰을 스테이킹해야 투표권을 얻을 수 있습니다.",
+          "IPFS는 분산된 파일 시스템으로, 중앙 서버 없이 파일을 저장하고 공유할 수 있습니다. NFT 메타데이터 저장에 주로 사용됩니다.",
         links: [
-          { title: "거버넌스 토큰 가이드", url: "https://ethereum.org/en/governance/" },
-          { title: "Snapshot 투표 플랫폼", url: "https://snapshot.org" },
-          { title: "거버넌스 참여 방법", url: "https://blog.aragon.org/what-is-governance/" },
+          { title: "IPFS 설명", url: "https://ipfs.io/" },
+          { title: "IPFS Docs", url: "https://docs.ipfs.io/" },
         ],
-        tips: "거버넌스에 참여할 때는 제안 내용을 충분히 검토하고, 커뮤니티 토론에 적극 참여하세요.",
+        tips: "IPFS는 파일의 영구성을 보장하지 않으므로, Pinata와 같은 서비스를 사용하여 파일을 고정하는 것이 좋습니다.",
       },
       {
         id: "9-3",
-        question: "포럼 → 제안 → 투표의 구조",
+        question: "The Graph 사용법",
         answer:
-          "많은 DAO에서 의사결정은 먼저 커뮤니티 포럼(예: Discourse, Discord)에서 아이디어를 논의하고 의견을 수렴하는 단계를 거칩니다. 이후 정식 제안(Proposal) 형태로 만들어져 Snapshot이나 온체인 투표 시스템을 통해 투표가 진행됩니다. 일반적으로 온체인 투표는 가스비가 들지만 구속력이 있고, 오프체인 투표(Snapshot)는 무료지만 신호 투표 성격이 강합니다.",
+          "The Graph는 블록체인 데이터를 효율적으로 쿼리하기 위한 인덱싱 프로토콜입니다. 이를 통해 개발자는 DApp에서 필요한 데이터를 빠르게 검색할 수 있습니다.",
         links: [
-          { title: "Snapshot 투표", url: "https://snapshot.org" },
-          { title: "Tally 거버넌스", url: "https://tally.xyz" },
-          { title: "거버넌스 프로세스", url: "https://ethereum.org/en/governance/" },
+          { title: "The Graph", url: "https://thegraph.com/" },
+          { title: "The Graph Docs", url: "https://thegraph.com/docs/" },
         ],
-        tips: "투표하기 전에 포럼에서 충분한 토론이 이루어졌는지 확인하고, 제안의 장단점을 신중히 검토하세요.",
+        tips: "The Graph는 복잡한 블록체인 데이터를 효율적으로 관리하는 데 유용합니다.",
       },
     ],
   },
   {
-    category: "10. 📈 Airdrops & Missions (에어드랍 & 미션)",
+    category: "10. 📱 Web3 프론트엔드 개발 (Web3 Frontend Development)",
     items: [
       {
         id: "10-1",
-        question: "에어드랍은 왜 존재하나요?",
+        question: "Web3.js, Ethers.js 사용법",
         answer:
-          "에어드랍은 프로젝트 초기에 사용자를 확보하고 커뮤니티를 구축하며, 토큰을 분산시키고, 프로젝트를 홍보하기 위한 마케팅 전략으로 사용됩니다. 또한, 특정 활동에 대한 보상이나 거버넌스 참여를 독려하기 위해서도 진행됩니다. 초기 사용자들에게 보상을 제공하여 네트워크 효과를 만들어내는 것이 주요 목적입니다.",
+          "Web3.js와 Ethers.js는 자바스크립트 라이브러리로, DApp에서 스마트 컨트랙트와 상호 작용하는 데 사용됩니다. 메타마스크와 같은 지갑을 연결하여 트랜잭션을 전송하고, 블록체인 데이터를 읽어올 수 있습니다.",
         links: [
-          { title: "에어드랍 추적 사이트", url: "https://airdrops.io" },
-          { title: "DeFiLlama 에어드랍", url: "https://defillama.com/airdrops" },
-          { title: "에어드랍 안전 가이드", url: "https://ethereum.org/en/security/" },
+          { title: "Web3.js", url: "https://web3js.readthedocs.io/en/v1.7.0/" },
+          { title: "Ethers.js", url: "https://docs.ethers.io/v5/" },
         ],
-        tips: "에어드랍을 받을 때는 피싱 사이트를 주의하고, 과도한 권한을 요구하는 경우 의심해보세요.",
+        tips: "Ethers.js는 Web3.js보다 더 현대적인 기능을 제공하며, 사용하기 더 쉽다는 평가를 받고 있습니다.",
       },
       {
         id: "10-2",
-        question: "Galxe, Zealy, TaskOn 비교",
+        question: "메타마스크(MetaMask) 연동",
         answer:
-          "이들은 Web3 프로젝트들이 사용자를 위한 다양한 미션(퀘스트)을 제공하고, 참여자들에게 보상(NFT, 포인트, 화이트리스트 등)을 지급할 수 있도록 돕는 플랫폼입니다. Galxe는 가장 큰 규모의 퀘스트 플랫폼이고, Zealy는 커뮤니티 참여에 중점을 두며, TaskOn은 아시아 시장에 특화되어 있습니다. 프로젝트 홍보, 커뮤니티 참여 증대, 잠재적 에어드랍 대상자 필터링 등에 활용됩니다.",
+          "DApp에서 메타마스크를 연동하여 사용자의 암호화폐 지갑에 접근하고, 트랜잭션을 요청할 수 있습니다. 메타마스크 API를 사용하여 사용자 인증 및 트랜잭션 서명을 구현할 수 있습니다.",
         links: [
-          { title: "Galxe", url: "https://galxe.com" },
-          { title: "Zealy", url: "https://zealy.io" },
-          { title: "TaskOn", url: "https://taskon.xyz" },
+          { title: "MetaMask Docs", url: "https://docs.metamask.io/" },
+          { title: "MetaMask API", url: "https://docs.metamask.io/guide/ethereum-provider.html#table-of-contents" },
         ],
-        tips: "퀘스트 참여 시 개인정보 보호에 주의하고, 의심스러운 권한 요청은 거절하세요.",
+        tips: "메타마스크 연동 시, 사용자 개인 정보 보호 및 보안에 유의해야 합니다.",
+      },
+      {
+        id: "10-3",
+        question: "DApp UI 디자인",
+        answer:
+          "DApp UI는 사용자가 블록체인과 상호 작용하는 인터페이스입니다. 사용자 친화적이고 직관적인 디자인이 중요하며, Web3 디자인 시스템을 참고하여 일관성 있는 UI를 구축할 수 있습니다.",
+        links: [
+          {
+            title: "Web3 디자인 시스템",
+            url: "https://www.figma.com/community/file/1220944482715423788/Web3-Design-System",
+          },
+          { title: "DApp 디자인 사례", url: "https://dribbble.com/search/dapps" },
+        ],
+        tips: "DApp UI 디자인 시, 사용자의 암호화폐 경험 수준을 고려해야 합니다.",
+      },
+    ],
+  },
+  {
+    category: "11. 👨‍💻 Dev for Non-Dev (비개발자를 위한 개발 지식)",
+    items: [
+      {
+        id: "11-1",
+        question: "스마트컨트랙트란?",
+        answer:
+          "스마트 컨트랙트는 특정 조건이 충족되면 사전에 프로그래밍된 계약 내용이 자동으로 실행되는 디지털 계약입니다. 블록체인 위에서 작동하며, 중개자 없이 투명하고 신뢰할 수 있는 계약 이행을 가능하게 합니다.",
+        links: [
+          { title: "스마트 컨트랙트 기초", url: "https://ethereum.org/en/developers/docs/smart-contracts/" },
+          { title: "Remix IDE", url: "https://remix.ethereum.org" },
+        ],
+        tips: "스마트 컨트랙트는 한번 배포되면 수정이 어려우므로 신중하게 설계해야 합니다.",
+      },
+      {
+        id: "11-2",
+        question: "Solidity vs Vyper",
+        answer:
+          "Solidity는 이더리움 스마트 컨트랙트 개발에 가장 널리 사용되는 객체 지향 프로그래밍 언어로, C++, 파이썬, 자바스크립트와 유사한 문법을 가집니다. Vyper는 파이썬과 유사한 문법을 가지며, 보안성과 코드 가독성을 강조하여 더 간결하고 안전한 계약 작성을 목표로 합니다.",
+        links: [
+          { title: "Solidity 문서", url: "https://soliditylang.org" },
+          { title: "Vyper 문서", url: "https://vyper.readthedocs.io" },
+        ],
+        tips: "초보자는 Solidity부터 시작하는 것이 좋습니다. 더 많은 자료와 커뮤니티 지원이 있습니다.",
+      },
+      {
+        id: "11-3",
+        question: "테스트넷에서 실습하는 법",
+        answer:
+          "테스트넷은 실제 자산을 사용하지 않고 블록체인 개발 및 DApp 테스트를 할 수 있는 실험용 네트워크입니다. 메타마스크 등 지갑에서 테스트넷(예: Sepolia, Goerli)으로 네트워크를 전환하고, 해당 테스트넷의 수도꼭지(Faucet)에서 테스트용 코인을 받아 스마트 컨트랙트 배포나 DApp 기능을 시험해볼 수 있습니다.",
+        links: [
+          { title: "Sepolia Faucet", url: "https://sepoliafaucet.com" },
+          { title: "테스트넷 가이드", url: "https://ethereum.org/en/developers/docs/networks/" },
+        ],
+        tips: "테스트넷에서 충분히 테스트한 후 메인넷에 배포하세요.",
+      },
+    ],
+  },
+  {
+    category: "12. 🧠 Web3 심화 개념 (Web3 Advanced Concepts)",
+    items: [
+      {
+        id: "12-1",
+        question: "탈중앙화란 무엇인가요?",
+        answer:
+          "탈중앙화는 단일 개인이나 기관이 시스템 전체를 통제하지 않고, 권한과 책임이 여러 참여자에게 분산되어 있는 상태를 의미합니다. Web3에서는 데이터 소유권, 의사결정, 네트워크 운영 등에서 중앙 집중적인 통제로부터 벗어나는 것을 목표로 합니다.",
+        links: [
+          { title: "탈중앙화 개념", url: "https://ethereum.org/en/decentralized-identity/" },
+          { title: "Web3 철학", url: "https://ethereum.org/en/web3/" },
+        ],
+        tips: "완전한 탈중앙화는 어려우므로, 적절한 수준의 탈중앙화를 추구하는 것이 현실적입니다.",
+      },
+      {
+        id: "12-2",
+        question: "토크노믹스 기초: 발행량, 소각, 인플레이션",
+        answer:
+          "토크노믹스는 토큰(Token)과 경제학(Economics)의 합성어로, 토큰의 설계, 분배, 공급 및 수요 관리 등 경제적 모델을 의미합니다. 총 발행량은 토큰의 희소성을 결정하고, 소각은 공급량을 줄여 가치를 높이려는 시도이며, 인플레이션은 지속적인 토큰 발행으로 가치가 하락하는 현상을 나타냅니다.",
+        links: [
+          { title: "토크노믹스 가이드", url: "https://ethereum.org/en/developers/docs/standards/tokens/" },
+          { title: "토큰 경제학", url: "https://blog.coinbase.com/a-beginners-guide-to-tokenomics-6e1b3e5d8c5e" },
+        ],
+        tips: "지속 가능한 토크노믹스 설계가 프로젝트의 장기적 성공에 중요합니다.",
+      },
+      {
+        id: "12-3",
+        question: "MEV란?",
+        answer:
+          "MEV(Maximal Extractable Value, 이전에는 Miner Extractable Value)는 블록 생산자(채굴자 또는 검증자)가 블록 내 트랜잭션의 순서, 포함 여부 등을 조작하여 얻을 수 있는 최대 이익을 의미합니다. 차익 거래, 청산 기회 선점 등으로 발생하며, 사용자에게 불리한 가격(슬리피지)을 유발할 수 있습니다.",
+        links: [
+          { title: "MEV 설명", url: "https://ethereum.org/en/developers/docs/mev/" },
+          { title: "Flashbots", url: "https://flashbots.net" },
+        ],
+        tips: "MEV는 블록체인의 투명성으로 인해 발생하는 자연스러운 현상이지만, 사용자에게 부정적 영향을 줄 수 있습니다.",
+      },
+    ],
+  },
+  {
+    category: "13. 🌍 Web3 Ecosystems & Communities (Web3 생태계 & 커뮤니티)",
+    items: [
+      {
+        id: "13-1",
+        question: "주요 레이어1 생태계 비교",
+        answer:
+          "이더리움은 가장 큰 생태계와 개발자 커뮤니티를 가졌지만 확장성 문제가 있습니다. 솔라나는 높은 처리 속도를 자랑하지만 때때로 네트워크 안정성 문제가 발생합니다. 코스모스와 폴카닷은 상호운용 가능한 블록체인 네트워크 구축을 목표로 합니다. 각 생태계는 기술적 특징, 주요 DApp, 커뮤니티 분위기 등이 다릅니다.",
+        links: [
+          { title: "이더리움", url: "https://ethereum.org" },
+          { title: "솔라나", url: "https://solana.com" },
+          { title: "코스모스", url: "https://cosmos.network" },
+        ],
+        tips: "각 생태계의 특성을 이해하고 목적에 맞는 체인을 선택하세요.",
+      },
+      {
+        id: "13-2",
+        question: "Web3 커뮤니티 참여 방법",
+        answer:
+          "트위터, 디스코드, 텔레그램, 레딧 등에서 관심 있는 분야의 프로젝트나 인플루언서를 팔로우하고 관련 커뮤니티 채널에 참여할 수 있습니다. 각 커뮤니티는 고유한 문화와 소통 방식을 가지며, 정보 공유, 토론, 이벤트 참여 등을 통해 활동할 수 있습니다.",
+        links: [
+          { title: "Web3 커뮤니티 가이드", url: "https://ethereum.org/en/community/" },
+          { title: "Discord 서버 목록", url: "https://ethereum.org/en/community/online/" },
+        ],
+        tips: "커뮤니티 규칙을 잘 읽고 존중하며, 건설적인 기여를 하려고 노력하세요.",
+      },
+    ],
+  },
+  {
+    category: "14. 💼 Web3 Careers & Skills (Web3 커리어 & 스킬)",
+    items: [
+      {
+        id: "14-1",
+        question: "Web3 분야의 다양한 직업군",
+        answer:
+          "Web3 분야는 기술 직군(개발, 연구, 보안) 외에도 제품 기획, 디자인, 데이터 분석, 콘텐츠 제작, 커뮤니티 관리, 마케팅, 사업 개발 등 다양한 비기술 직군의 역할이 중요하며 수요가 증가하고 있습니다.",
+        links: [
+          { title: "Web3 Career", url: "https://web3.career" },
+          { title: "CryptoJobs", url: "https://crypto.jobs" },
+        ],
+        tips: "Web3 지식과 기존 전문 분야를 결합하면 경쟁력을 높일 수 있습니다.",
+      },
+      {
+        id: "14-2",
+        question: "Web3 학습 자료",
+        answer:
+          "ConsenSys Academy, Encode Club, CryptoZombies, Udemy, Coursera 등에서 Web3 개발 및 관련 지식 온라인 코스를 찾을 수 있습니다. 다양한 부트캠프 프로그램도 있으며, 특정 기술 스택에 대한 자격증보다는 실제 프로젝트 경험이나 포트폴리오가 더 중요하게 여겨지는 경우가 많습니다.",
+        links: [
+          { title: "ConsenSys Academy", url: "https://consensys.net/academy/" },
+          { title: "CryptoZombies", url: "https://cryptozombies.io" },
+        ],
+        tips: "이론 학습과 함께 실제 프로젝트를 만들어보는 것이 중요합니다.",
+      },
+    ],
+  },
+  {
+    category: "15. 📜 Regulation, Ethics & Society (규제, 윤리 & 사회)",
+    items: [
+      {
+        id: "15-1",
+        question: "주요 국가별 Web3 규제 동향",
+        answer:
+          "미국은 SEC와 CFTC 간의 관할권 문제, 증권성 판단 등으로 규제 불확실성이 존재합니다. 유럽연합은 MiCA(Markets in Crypto-Assets) 법안을 통해 포괄적인 규제 프레임워크를 마련하고 있습니다. 한국은 특정금융정보법을 중심으로 자금세탁방지에 초점을 맞추고 있으며, 투자자 보호 및 산업 육성을 위한 법제화 논의가 진행 중입니다.",
+        links: [
+          {
+            title: "MiCA 규제",
+            url: "https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica",
+          },
+          { title: "한국 규제 현황", url: "https://www.fsc.go.kr" },
+        ],
+        tips: "규제는 빠르게 변화하므로 최신 정보를 지속적으로 확인하세요.",
+      },
+      {
+        id: "15-2",
+        question: "Web3 기술의 윤리적 고려사항",
+        answer:
+          "블록체인의 투명성은 프라이버시 침해로 이어질 수 있고, 탈중앙화는 불법 활동에 악용될 소지도 있습니다. AI와 결합된 알고리즘은 편향성을 가질 수 있으며, PoW 방식의 에너지 소비는 환경 문제를 야기합니다. 이러한 윤리적 문제에 대한 고민과 기술적/사회적 해결 노력이 필요합니다.",
+        links: [
+          { title: "블록체인 윤리", url: "https://ethereum.org/en/energy-consumption/" },
+          { title: "지속가능성", url: "https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/" },
+        ],
+        tips: "기술 발전과 함께 윤리적 책임도 고려해야 합니다.",
+      },
+    ],
+  },
+  {
+    category: "16. 💡 Future of Web3 & Emerging Trends (Web3의 미래 & 신흥 트렌드)",
+    items: [
+      {
+        id: "16-1",
+        question: "AI와 Web3의 융합",
+        answer:
+          "AI 모델 학습 및 운영을 탈중앙화하거나(DeAI), AI 에이전트가 블록체인과 상호작용하며 자율적으로 작업을 수행하고, DAO 운영에 AI를 활용하며, 사용자가 자신의 데이터를 AI 학습에 제공하고 통제하며 보상받는(데이터 주권) 등 다양한 융합 가능성이 탐색되고 있습니다.",
+        links: [
+          { title: "AI와 블록체인", url: "https://ethereum.org/en/developers/docs/" },
+          { title: "탈중앙화 AI", url: "https://blog.oceanprotocol.com" },
+        ],
+        tips: "AI와 Web3의 융합은 아직 초기 단계이지만 큰 잠재력을 가지고 있습니다.",
+      },
+      {
+        id: "16-2",
+        question: "Web3 대중 채택을 위한 과제",
+        answer:
+          "복잡한 사용자 경험(UX)을 개선하고, 더 많은 사용자를 수용할 수 있는 확장성을 확보하며, 명확하고 합리적인 규제 환경을 조성하고, Web3 기술에 대한 대중의 이해도를 높이는 교육이 확대되어야 대중 채택이 이루어질 수 있습니다. 점진적으로 개선될 것으로 전망됩니다.",
+        links: [
+          { title: "Web3 UX", url: "https://ethereum.org/en/developers/docs/intro-to-ether/" },
+          { title: "확장성 솔루션", url: "https://ethereum.org/en/developers/docs/scaling/" },
+        ],
+        tips: "기술적 완성도와 함께 사용자 친화적인 인터페이스가 중요합니다.",
+      },
+      {
+        id: "16-3",
+        question: "메타버스와 Web3 기술의 결합",
+        answer:
+          "Web3 기술(NFT, 암호화폐)은 메타버스 내 디지털 자산(아바타, 아이템, 토지)의 진정한 소유권을 사용자에게 부여하고, 서로 다른 메타버스 간 자산 이동 및 상호작용(상호운용성)을 가능하게 하며, 특정 기업이 통제하지 않는 개방형 메타버스 구축의 기반이 될 수 있습니다.",
+        links: [
+          { title: "메타버스와 NFT", url: "https://ethereum.org/en/nft/" },
+          { title: "디지털 소유권", url: "https://ethereum.org/en/developers/docs/standards/tokens/erc-721/" },
+        ],
+        tips: "메타버스의 성공은 기술적 구현뿐만 아니라 사용자 경험과 콘텐츠에 달려 있습니다.",
       },
     ],
   },
 ]
 
+// 영어 버전도 동일하게 추가
 export const web3DataEn = [
   {
-    category: "1. 👛 Wallet & Identity",
+    category: "1. 🪙 Crypto Basics",
     items: [
       {
         id: "1-1",
-        question: "What is MetaMask and how do I install it?",
+        question: "What is cryptocurrency?",
         answer:
-          "MetaMask is a cryptocurrency wallet in the form of a browser extension and mobile app, primarily used to interact with Ethereum and EVM-compatible blockchains. You can download and install it from the official website (metamask.io), then follow the instructions to create a new wallet or recover an existing one. The most important step after installation is to securely backup your seed phrase.",
+          "Cryptocurrency is a digital or virtual currency that uses cryptography to secure transactions and control the creation of new units. It operates on a decentralized network, free from the control of central banks or financial institutions.",
         links: [
-          { title: "MetaMask Official Website", url: "https://metamask.io" },
-          { title: "MetaMask Installation Guide", url: "https://support.metamask.io/hc/en-us/articles/360015489531" },
-          { title: "MetaMask Security Guide", url: "https://support.metamask.io/hc/en-us/articles/360015489591" },
+          { title: "Bitcoin Whitepaper", url: "https://bitcoin.org/bitcoin.pdf" },
+          { title: "Introduction to Ethereum", url: "https://ethereum.org/en/what-is-ethereum/" },
         ],
-        tips: "Never store your seed phrase online or share it with others. Be cautious of phishing sites and always download only from the official website.",
+        tips: "Cryptocurrency investments are highly volatile and should be approached with caution.",
       },
       {
         id: "1-2",
-        question: "What's the difference between private keys and seed phrases?",
+        question: "What is blockchain?",
         answer:
-          "A private key is a unique cryptographic code that acts like a password to access assets in a specific account. A seed phrase (or recovery phrase) is a combination of 12-24 words used to generate these private keys and recover the entire wallet. One seed phrase can generate multiple private keys and wallet addresses, making the seed phrase a higher-level concept.",
+          "Blockchain is a technology that records transaction data in a distributed, public ledger. Each block is linked to the previous block using a hash, making it difficult to tamper with the data. This provides high security and transparency.",
         links: [
+          { title: "How Blockchain Works", url: "https://www.investopedia.com/terms/b/blockchain.asp" },
           {
-            title: "BIP39 Seed Phrase Standard",
-            url: "https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki",
+            title: "Distributed Ledger Technology (DLT)",
+            url: "https://www.ibm.com/kr-ko/topics/distributed-ledger-technology",
           },
-          { title: "Wallet Security Best Practices", url: "https://ethereum.org/en/wallets/" },
         ],
-        tips: "Since the seed phrase is the only way to recover your wallet, store it physically in a safe place. Avoid storing it digitally and write it down on paper instead.",
+        tips: "Blockchain can bring innovative changes to various industries.",
       },
       {
         id: "1-3",
-        question: "How are wallet addresses generated and how many can you create?",
+        question: "Types and usage of wallets",
         answer:
-          "Wallet addresses are derived from public keys and serve as unique identifiers for sending and receiving cryptocurrency. One seed phrase can theoretically generate nearly infinite wallet addresses (exactly 2^160). This is possible thanks to HD (Hierarchical Deterministic) wallet structure, which systematically generates addresses following the BIP44 standard.",
+          "Cryptocurrency wallets are tools that store private keys and allow you to securely manage your cryptocurrencies. There are software wallets (desktop, mobile, web) and hardware wallets (cold wallets). Choose the appropriate wallet based on your purpose and security requirements.",
         links: [
-          { title: "HD Wallet Structure", url: "https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki" },
-          { title: "BIP44 Standard", url: "https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki" },
-        ],
-        tips: "For privacy protection, it's recommended to use a new address for each transaction. Most wallets handle this automatically.",
-      },
-      {
-        id: "1-4",
-        question: "Security differences between hardware wallets (Ledger, Trezor) and hot wallets?",
-        answer:
-          "Hot wallets are internet-connected wallets (like MetaMask) that are convenient to use but vulnerable to hacking. Hardware wallets store private keys on offline devices, making them much safer from online attacks, though they may be slightly less convenient to use. Hardware wallets require physical access, making remote hacking nearly impossible.",
-        links: [
-          { title: "Ledger Official Website", url: "https://www.ledger.com" },
-          { title: "Trezor Official Website", url: "https://trezor.io" },
-          { title: "Hardware Wallet Comparison", url: "https://ethereum.org/en/wallets/find-wallet/" },
-        ],
-        tips: "Use hardware wallets for storing large amounts and hot wallets for daily transactions.",
-      },
-      {
-        id: "1-5",
-        question: "How to recover a wallet?",
-        answer:
-          "You can recover your wallet using the seed phrase (recovery phrase) you received when creating the wallet on a new device or wallet software. The seed phrase is the only way to recover your wallet, so it must be stored safely. When recovering, the exact word order and spelling are crucial.",
-        links: [
+          { title: "How to use MetaMask", url: "https://metamask.io/download/" },
           {
-            title: "MetaMask Wallet Recovery Guide",
-            url: "https://support.metamask.io/hc/en-us/articles/360015289612",
+            title: "Cold Wallet Comparison",
+            url: "https://www.coindesk.com/tech/2021/03/29/hot-wallets-vs-cold-wallets-whats-the-difference/",
           },
-          { title: "Wallet Recovery Best Practices", url: "https://ethereum.org/en/wallets/" },
         ],
-        tips: "When entering your recovery phrase, make sure no one is around and preferably do it in an offline environment.",
+        tips: "Never share your private key with anyone. You may lose your assets if you lose it.",
       },
     ],
   },
   {
-    category: "2. 🔗 Blockchain Basics",
+    category: "2. 💰 Crypto Trading",
     items: [
       {
         id: "2-1",
-        question: "What is blockchain? How is it different from central servers?",
+        question: "Considerations when choosing an exchange",
         answer:
-          "Blockchain is a technology that records transaction history in units called 'blocks' and connects them sequentially like a 'chain', managed collectively by distributed network participants (nodes). While central server systems are controlled by a single entity, blockchain is decentralized, offering higher transparency and security. It also has no single point of failure, making it more stable.",
+          "Consider various factors such as trading volume, security, fees, supported cryptocurrencies, user interface, and customer support. It is important to choose a reliable exchange and strengthen security settings.",
         links: [
-          { title: "Blockchain Basics Guide", url: "https://ethereum.org/en/developers/docs/intro-to-ethereum/" },
-          { title: "Bitcoin Whitepaper", url: "https://bitcoin.org/bitcoin.pdf" },
-          { title: "Blockchain Visualization Tool", url: "https://andersbrownworth.com/blockchain/" },
+          { title: "Binance", url: "https://www.binance.com/ko" },
+          { title: "Coinbase", url: "https://www.coinbase.com/" },
         ],
-        tips: "The core of blockchain is a 'trustless system'. The system operates normally even when participants don't trust each other.",
+        tips: "Consider decentralized exchanges (DEX) as well. They have different advantages and disadvantages compared to centralized exchanges.",
       },
       {
         id: "2-2",
-        question: "Relationship between blocks, transactions, nodes, and chains",
+        question: "Market analysis basics: How to read charts",
         answer:
-          "Transactions are all record units that occur on the blockchain. Multiple transactions come together to form one block, and these blocks are cryptographically connected in chronological order to form a chain. Nodes are computers or systems that participate in this blockchain network to store and verify data. Each block contains the hash of the previous block to ensure chain integrity.",
+          "You can use candlestick charts, moving averages, and volume indicators to understand market trends. In addition to technical analysis, it is important to analyze the project's fundamental value (whitepaper, team, roadmap).",
         links: [
-          { title: "Block Structure Explanation", url: "https://ethereum.org/en/developers/docs/blocks/" },
-          { title: "Transaction Structure", url: "https://ethereum.org/en/developers/docs/transactions/" },
-          { title: "Node Types Explanation", url: "https://ethereum.org/en/developers/docs/nodes-and-clients/" },
+          { title: "Candlestick Chart Explanation", url: "https://www.investopedia.com/trading/candlestick-charting/" },
+          { title: "TradingView", url: "https://www.tradingview.com/" },
         ],
-        tips: "You can directly check actual block and transaction structures using blockchain explorers like Etherscan.",
+        tips: "Past data does not guarantee the future. Always keep risk management in mind.",
       },
       {
         id: "2-3",
-        question: "What is EVM and why is it important?",
+        question: "Order types: Limit order, Market order",
         answer:
-          "EVM (Ethereum Virtual Machine) is a virtual environment that executes smart contract code on the Ethereum blockchain. It provides the foundation for developers to create various DApps, and many other blockchains adopt EVM compatibility to connect with the Ethereum ecosystem. EVM is a Turing-complete virtual machine capable of executing complex logic.",
+          "A limit order is a method of placing an order at a desired price, and a market order is a method of trading immediately at the current market price. You can increase trading efficiency by selecting the appropriate order method depending on the situation.",
         links: [
-          { title: "EVM Detailed Explanation", url: "https://ethereum.org/en/developers/docs/evm/" },
-          { title: "Solidity Programming Language", url: "https://soliditylang.org/" },
-          { title: "EVM Compatible Chains List", url: "https://chainlist.org/" },
+          { title: "Order Method Explanation", url: "https://www.binance.com/en/support/faq/360020390472" },
+          { title: "Slippage", url: "https://academy.binance.com/en/articles/slippage-in-crypto-trading" },
         ],
-        tips: "Thanks to EVM compatibility, DApps built for Ethereum can easily be used on other chains.",
-      },
-      {
-        id: "2-4",
-        question: "Public chains vs Private chains",
-        answer:
-          "Public blockchains (like Bitcoin, Ethereum) are open blockchains where anyone can participate in the network and verify transactions. Private blockchains are closed blockchains where only specific authorized participants can access and use them, mainly used in enterprise environments. Consortium blockchains are a middle ground between these two.",
-        links: [
-          { title: "Blockchain Types Comparison", url: "https://ethereum.org/en/developers/docs/networks/" },
-          { title: "Enterprise Blockchain", url: "https://consensys.net/blockchain-use-cases/enterprise-ethereum/" },
-        ],
-        tips: "Public chains prioritize transparency and decentralization, while private chains focus on speed and privacy.",
-      },
-      {
-        id: "2-5",
-        question: "Why do transaction fees occur?",
-        answer:
-          "Transaction fees (gas fees) are rewards paid to nodes (miners or validators) that process transactions and record them in blocks on the blockchain network. They serve to maintain network security and prevent indiscriminate transaction generation. Fees fluctuate based on network congestion.",
-        links: [
-          { title: "Ethereum Gas Explanation", url: "https://ethereum.org/en/developers/docs/gas/" },
-          { title: "Gas Tracker", url: "https://etherscan.io/gastracker" },
-          {
-            title: "Gas Optimization Tips",
-            url: "https://ethereum.org/en/developers/docs/gas/#tips-to-reduce-gas-costs",
-          },
-        ],
-        tips: "To save on gas fees, use the network during less congested times or use Layer 2 solutions.",
+        tips: "In case of high market volatility, a limit order may not be executed.",
       },
     ],
   },
   {
-    category: "3. 🪙 Token & NFT",
+    category: "3. 🔐 Security",
     items: [
       {
         id: "3-1",
-        question: "Difference between ERC-20, ERC-721, and ERC-1155",
+        question: "Setting up 2FA (Two-Factor Authentication)",
         answer:
-          "ERC-20 is the standard for fungible tokens (FT), where each token has the same value (e.g., cryptocurrency). ERC-721 is the standard for non-fungible tokens (NFT), where each token has unique value and information (e.g., digital art). ERC-1155 is a multi-token standard that can manage both FTs and NFTs in one contract, making it efficient for game items, etc.",
+          "2FA is an additional authentication step that enhances account security. In addition to your password, you can use a mobile phone authentication code or OTP (One-Time Password) to enhance login security.",
         links: [
-          { title: "ERC-20 Standard Document", url: "https://eips.ethereum.org/EIPS/eip-20" },
-          { title: "ERC-721 Standard Document", url: "https://eips.ethereum.org/EIPS/eip-721" },
-          { title: "ERC-1155 Standard Document", url: "https://eips.ethereum.org/EIPS/eip-1155" },
-          { title: "OpenZeppelin Token Implementation", url: "https://docs.openzeppelin.com/contracts/4.x/tokens" },
+          { title: "Google Authenticator", url: "https://support.google.com/accounts/answer/185839?hl=ko" },
+          { title: "Authy", url: "https://authy.com/" },
         ],
-        tips: "ERC-1155 can significantly save on gas fees, making it preferred in games or projects dealing with large amounts of tokens.",
+        tips: "Enabling 2FA can greatly reduce hacking attempts.",
       },
       {
         id: "3-2",
-        question: "Why isn't an NFT just a JPEG?",
+        question: "Preventing phishing attacks",
         answer:
-          "JPEG is just an image file format, while an NFT is a 'digital certificate' that records the ownership and authenticity of that image (or other digital asset) on the blockchain. An NFT is not the image itself, but rather a token that represents the unique rights to that image. What is stored on the blockchain is metadata and ownership information, while the actual file is stored separately.",
+          "Do not click on links or emails from unknown sources, and do not respond to messages asking for personal information. Check the official website address and report any suspicious activity to the exchange immediately.",
         links: [
-          { title: "NFT Basics Guide", url: "https://ethereum.org/en/nft/" },
-          { title: "OpenSea NFT Marketplace", url: "https://opensea.io" },
-          { title: "NFT Metadata Standards", url: "https://docs.opensea.io/docs/metadata-standards" },
+          {
+            title: "Phishing Attack Prevention Guide",
+            url: "https://www.consumer.ftc.gov/articles/how-recognize-and-avoid-phishing-attacks",
+          },
+          { title: "Security News", url: "https://krebsonsecurity.com/" },
         ],
-        tips: "When purchasing an NFT, check where the metadata is stored. Decentralized storage like IPFS or Arweave is safer.",
+        tips: "Always be suspicious and get into the habit of checking.",
       },
       {
         id: "3-3",
-        question: "Where is NFT metadata stored?",
+        question: "Using a Cold Wallet",
         answer:
-          "NFT metadata (name, description, image link, etc.) can be stored on-chain (directly on the blockchain, high cost) or off-chain (decentralized storage like IPFS, Arweave, or a central server, low cost). In most cases, the image file itself is stored off-chain, and the link to it is recorded on-chain. The persistence of the NFT varies depending on the storage method.",
+          "A cold wallet is a hardware wallet that is not connected to the internet, which can reduce the risk of hacking by storing cryptocurrencies offline. Suitable for long-term investors.",
         links: [
-          { title: "IPFS Decentralized Storage", url: "https://ipfs.io" },
-          { title: "Arweave Permanent Storage", url: "https://arweave.org" },
-          { title: "NFT Storage Comparison", url: "https://ethereum.org/en/developers/docs/storage/" },
+          { title: "Ledger", url: "https://www.ledger.com/" },
+          { title: "Trezor", url: "https://trezor.io/" },
         ],
-        tips: "NFTs stored on a central server may become inaccessible if the server goes down. NFTs using decentralized storage are safer.",
-      },
-      {
-        id: "3-4",
-        question: "How do you issue a token?",
-        answer:
-          "Token issuance is done by writing and deploying a smart contract that conforms to the standard (e.g., ERC-20) of the corresponding blockchain (e.g., Ethereum, Solana). Development knowledge is required, and recently there have been platforms or tools that help with token issuance. You need to define the token name, symbol, total supply, decimal places, etc.",
-        links: [
-          { title: "OpenZeppelin Token Generator", url: "https://wizard.openzeppelin.com" },
-          { title: "Remix IDE", url: "https://remix.ethereum.org" },
-          { title: "Token Issuance Guide", url: "https://ethereum.org/en/developers/tutorials/erc20-annotated-code/" },
-        ],
-        tips: "Before issuing a token, it is recommended to carefully design tokenomics (token economics) and get a security audit.",
-      },
-      {
-        id: "3-5",
-        question: "Difference between NFT minting and airdrop",
-        answer:
-          "NFT minting means the process of initially creating and registering a digital asset as an NFT on the blockchain, usually accompanied by a purchase. An airdrop is a marketing or reward method that distributes tokens or NFTs for free to users who meet certain conditions. Minting is the creation process, and airdrop is the distribution method.",
-        links: [
-          { title: "NFT Minting Guide", url: "https://ethereum.org/en/developers/tutorials/how-to-mint-an-nft/" },
-          { title: "Airdrop Tracking Site", url: "https://airdrops.io" },
-          { title: "NFT Marketplace Comparison", url: "https://ethereum.org/en/dapps/?category=collectibles" },
-        ],
-        tips: "When receiving an airdrop, be careful of phishing sites and be suspicious if they ask for excessive wallet permissions.",
+        tips: "Keep your cold wallet's Seed Phrase safe.",
       },
     ],
   },
   {
-    category: "4. 🌉 Bridge & Multichain",
+    category: "4. 💡 DeFi (Decentralized Finance)",
     items: [
       {
         id: "4-1",
-        question: "Why is asset transfer possible between blockchains?",
+        question: "What is DeFi?",
         answer:
-          "A blockchain bridge is a technology that connects different blockchain networks to enable the transfer of tokens or data between them. It typically works by locking up assets on one chain and issuing corresponding wrapped assets on another chain, or by exchanging them through a liquidity pool. Bridges are a key infrastructure of the multichain ecosystem.",
+          "DeFi is a decentralized financial system built on blockchain technology. It provides financial services such as lending, deposits, and trading through cryptocurrencies without intermediaries such as banks.",
         links: [
-          { title: "How Bridges Work", url: "https://ethereum.org/en/bridges/" },
-          { title: "L2Beat Bridge Comparison", url: "https://l2beat.com/bridges" },
-          {
-            title: "Bridge Security Guide",
-            url: "https://blog.li.fi/what-are-blockchain-bridges-and-how-can-we-classify-them-560dc6ec05fa",
-          },
+          { title: "DeFi Explanation", url: "https://ethereum.org/ko/defi/" },
+          { title: "DeFi Pulse", url: "https://defipulse.com/" },
         ],
-        tips: "When using a bridge, always check the official website and it is safer to send large amounts in multiple installments.",
+        tips: "DeFi offers high returns, but there are also risks such as smart contract bugs and hacking.",
       },
       {
         id: "4-2",
-        question: "Example of how to use a bridge (Stargate, LayerZero, etc.)",
+        question: "How to use DEX (Decentralized Exchange)",
         answer:
-          "Using a bridge usually involves connecting a wallet to the bridge website, selecting the sending chain and asset, the receiving chain and asset, then entering the quantity, approving, and transferring. Stargate is a bridge that utilizes LayerZero technology and supports native asset transfers between multiple chains. Each bridge supports different chains and tokens, so it is necessary to check in advance.",
+          "DEX is a platform where users can directly trade cryptocurrencies without a central authority. Representative examples include Uniswap and SushiSwap, and you can trade by connecting your personal wallet.",
         links: [
-          { title: "Stargate Finance", url: "https://stargate.finance" },
-          { title: "LayerZero Protocol", url: "https://layerzero.network" },
-          { title: "Bridge Comparison Site", url: "https://defillama.com/bridges" },
+          { title: "Uniswap", url: "https://uniswap.org/" },
+          { title: "SushiSwap", url: "https://www.sushi.com/" },
         ],
-        tips: "Before using a bridge, check the fees and time required, and it is recommended to practice on the testnet first.",
+        tips: "When using DEX, you should consider slippage settings and gas fees.",
       },
       {
         id: "4-3",
-        question: "Why do bridge hacks happen so often?",
+        question: "Liquidity Providing",
         answer:
-          "Bridges have a large attack surface because they interact with multiple blockchains and have complex smart contract logic. Large amounts of funds deposited in bridges are often major targets for hackers due to smart contract vulnerabilities, poor private key management, and verification logic errors. There are also risks such as key management of multi-signature wallets and oracle manipulation.",
+          "Liquidity providing contributes to activating transactions by depositing cryptocurrency pairs into DEX and receiving fees in return. You can earn high returns, but there is a risk of Impermanent Loss.",
         links: [
-          { title: "Bridge Hack Case Analysis", url: "https://rekt.news/leaderboard/" },
-          { title: "Bridge Security Best Practices", url: "https://ethereum.org/en/bridges/#bridge-risk" },
           {
-            title: "DeFi Security Guide",
-            url: "https://consensys.net/diligence/blog/2019/09/stop-using-soliditys-transfer-now/",
+            title: "Impermanent Loss Explanation",
+            url: "https://academy.binance.com/en/articles/impermanent-loss-explained",
           },
+          { title: "Liquidity Providing Guide", url: "https://www.gemini.com/learn/what-is-liquidity-pool" },
         ],
-        tips: "Use only trusted and audited bridges, and choose bridges with high TVL and long operating history.",
-      },
-      {
-        id: "4-4",
-        question: "How to safely manage assets in a Multichain environment",
-        answer:
-          "Use trusted and audited bridges and do not move too much money at once. Check wallet permissions before and after using the bridge, and revoke unnecessary permissions immediately. It is important to diversify assets across multiple chains and understand the security characteristics of each chain. You may also consider using separate wallets for each chain.",
-        links: [
-          { title: "Revoke.cash Permission Management", url: "https://revoke.cash" },
-          { title: "Multichain Portfolio Tracking", url: "https://debank.com" },
-          { title: "Chain-Specific Security Guide", url: "https://ethereum.org/en/security/" },
-        ],
-        tips: "Check your wallet permissions regularly and revoke permissions for DApps you don't use immediately.",
+        tips: "Before providing liquidity, you should fully understand Impermanent Loss.",
       },
     ],
   },
   {
-    category: "5. 💸 DeFi 101",
+    category: "5. 🖼️ NFT (Non-Fungible Token)",
     items: [
       {
         id: "5-1",
-        question: "What is DeFi?",
+        question: "What is an NFT?",
         answer:
-          "DeFi (Decentralized Finance) is a system that provides financial services based on blockchain and smart contracts without central intermediaries such as banks or securities companies. Various financial activities such as deposits, loans, transactions, and investments can be done in a P2P manner transparently and openly. It operates 24/7 and is accessible to anyone worldwide.",
+          "NFT is a non-fungible token used to prove ownership of digital assets. Various forms of digital content such as images, videos, music, and game items can be issued as NFTs.",
         links: [
-          { title: "DeFi Basics Guide", url: "https://ethereum.org/en/defi/" },
-          { title: "DeFi Pulse TVL Tracking", url: "https://defipulse.com" },
-          { title: "DeFi Protocol Comparison", url: "https://defillama.com" },
+          { title: "NFT Explanation", url: "https://ethereum.org/ko/nft/" },
+          { title: "OpenSea", url: "https://opensea.io/" },
         ],
-        tips: "When starting DeFi, practice with small amounts and participate after fully understanding the risks of each protocol.",
+        tips: "NFT investments are highly risky and should be approached with caution.",
       },
       {
         id: "5-2",
-        question: "What is AMM? (How Uniswap works)",
+        question: "How to buy and sell NFTs",
         answer:
-          "AMM (Automated Market Maker) is a core mechanism of a decentralized exchange (DEX) that determines token prices and automatically executes transactions within a liquidity pool using mathematical formulas instead of the traditional order book method. Uniswap is a representative AMM-based DEX that uses the x*y=k formula. Transactions are made from the liquidity pool provided by users.",
+          "You can buy or sell NFTs on NFT marketplaces such as OpenSea and Rarible. Connect a cryptocurrency wallet such as MetaMask to proceed with the transaction.",
         links: [
-          { title: "Uniswap Official Documentation", url: "https://docs.uniswap.org" },
-          { title: "How AMM Works", url: "https://ethereum.org/en/developers/docs/dexs/" },
-          { title: "Uniswap V3 Guide", url: "https://uniswap.org/blog/uniswap-v3" },
+          { title: "Rarible", url: "https://rarible.com/" },
+          { title: "NFT Marketplace Comparison", url: "https://www.creativebloq.com/features/nft-marketplaces" },
         ],
-        tips: "When trading on AMM, consider slippage and it is recommended to execute large transactions in multiple installments.",
+        tips: "Before purchasing an NFT, it is important to check the project's reliability and community.",
       },
       {
         id: "5-3",
-        question: "Profit structure of liquidity providers (LPs)",
+        question: "NFT use cases",
         answer:
-          "Liquidity Providers (LPs) deposit their token pairs (e.g., ETH/USDC) into the liquidity pool of an AMM-based DEX and receive a portion of the transaction fees generated from that pool as compensation. In addition, additional LP token rewards may be received depending on the project. LPs receive fees distributed according to the proportion of liquidity provided.",
+          "NFTs are used in various fields such as digital art, game items, membership cards, and real estate. In particular, it is contributing to building a new digital economy by combining with the metaverse.",
         links: [
-          { title: "LP Profit Calculator", url: "https://apy.vision" },
-          { title: "Liquidity Mining Guide", url: "https://ethereum.org/en/developers/docs/dexs/" },
-          { title: "LP Risk Management", url: "https://finematics.com/liquidity-mining-explained/" },
-        ],
-        tips: "Before starting LP, fully understand Impermanent Loss and start with stable pairs.",
-      },
-      {
-        id: "5-4",
-        question: "What is impermanent loss?",
-        answer:
-          "Impermanent Loss means the phenomenon in which the asset value becomes lower than if you had simply held the tokens due to price fluctuations of the deposited tokens when you deposit assets into the AMM liquidity pool. It is called 'non-permanent' because the loss disappears when the price returns to its original ratio, but it can lead to actual loss. The greater the price fluctuation, the greater the loss.",
-        links: [
-          { title: "Impermanent Loss Calculator", url: "https://dailydefi.org/tools/impermanent-loss-calculator/" },
-          { title: "IL Detailed Explanation", url: "https://finematics.com/impermanent-loss-explained/" },
+          { title: "NFT Games", url: "https://playtoearn.net/" },
           {
-            title: "IL Minimization Strategy",
-            url: "https://blog.bancor.network/beginners-guide-to-getting-rekt-by-impermanent-loss-7c9510cb2f22",
+            title: "Metaverse NFT",
+            url: "https://www.forbes.com/sites/cathyhackl/2021/04/04/nfts-and-the-metaverse-how-non-fungible-tokens-will-drive-the-future-of-digital-economies/?sh=6c0425a31953",
           },
         ],
-        tips: "You can reduce impermanent loss by selecting token pairs with high correlation (e.g., ETH/stETH).",
-      },
-      {
-        id: "5-5",
-        question: "Principle of Lending Protocol (Aave, Compound)",
-        answer:
-          "A Lending Protocol is a DeFi service that allows users to deposit cryptocurrencies to earn interest or borrow other cryptocurrencies with collateral. Aave and Compound are representative lending protocols that automate loan conditions, interest rates, and collateral management through smart contracts. Interest rates fluctuate in real time depending on supply and demand.",
-        links: [
-          { title: "Aave Protocol", url: "https://aave.com" },
-          { title: "Compound Finance", url: "https://compound.finance" },
-          { title: "Lending Protocol Comparison", url: "https://defiprime.com/decentralized_lending" },
-        ],
-        tips: "Maintain a sufficient collateral ratio and always monitor liquidation risk. Be careful when using volatile assets as collateral.",
+        tips: "NFTs are more than just speculative assets; they are technologies with various possibilities.",
       },
     ],
   },
   {
-    category: "6. 🧠 ZK & Layer 2",
+    category: "6. 🌐 DAO (Decentralized Autonomous Organization)",
     items: [
       {
         id: "6-1",
-        question: "What is Rollup? Why is it needed?",
+        question: "What is a DAO?",
         answer:
-          "Rollup is a Layer 2 (L2) solution to solve the scalability problem of Layer 1 (L1) blockchains such as Ethereum. It processes multiple transactions in L2 and records only the results (or proofs) in L1 to reduce the burden on L1, increase transaction processing speed, and lower fees. It can greatly improve scalability while inheriting the security of Ethereum.",
+          "A DAO is a blockchain-based decentralized autonomous organization. It is operated by smart contracts, and decisions are made through voting by members. Transparent and democratic organizational operation is possible.",
         links: [
-          { title: "Rollup Basics Guide", url: "https://ethereum.org/en/developers/docs/scaling/layer-2-rollups/" },
-          { title: "L2Beat Rollup Comparison", url: "https://l2beat.com" },
-          { title: "Rollup Ecosystem Status", url: "https://l2fees.info" },
+          { title: "DAO Explanation", url: "https://ethereum.org/ko/dao/" },
+          { title: "DAOhaus", url: "https://daohaus.club/" },
         ],
-        tips: "When using a rollup, check the withdrawal time and fees in advance, and choose after understanding the characteristics of each rollup.",
+        tips: "Before participating in a DAO, you should fully understand the organization's goals and operating methods.",
       },
       {
         id: "6-2",
-        question: "Optimistic Rollup vs ZK Rollup",
+        question: "How to participate in a DAO",
         answer:
-          "Optimistic rollups assume that L2 transactions are valid by default and catch errors through fraud proofs. Implementation is relatively easy, but a dispute resolution period (7 days) is required upon withdrawal. ZK rollups use zero-knowledge proofs to instantly verify the validity of L2 transactions in L1. It is faster and safer, but the technology is complex and EVM compatibility is difficult to implement.",
+          "You can become a member by purchasing a DAO's membership token or contributing to the DAO. You can participate in voting through platforms such as Snapshot and influence the DAO's decision-making.",
         links: [
-          { title: "Optimism Official Documentation", url: "https://docs.optimism.io" },
-          { title: "Arbitrum Guide", url: "https://docs.arbitrum.io" },
-          { title: "ZK Rollup Comparison", url: "https://ethereum.org/en/developers/docs/scaling/zk-rollups/" },
+          { title: "Snapshot", url: "https://snapshot.org/" },
+          { title: "DAO Membership", url: "https://consensys.net/blog/blockchain/how-to-join-a-dao/" },
         ],
-        tips: "Consider ZK rollups if you need fast withdrawals, and optimistic rollups if EVM compatibility is important.",
+        tips: "Since DAO is a new form of organizational operation, it is important to actively participate and learn.",
       },
       {
         id: "6-3",
-        question: "zkSync Era, StarkNet, Scroll Comparison",
+        question: "DAO use cases",
         answer:
-          "These are all representative L2 solutions that use ZK rollup technology. zkSync Era emphasizes EVM compatibility and allows Solidity developers to easily migrate. StarkNet uses its own programming language, Cairo, to pursue higher performance and flexibility. Scroll aims for maximum compatibility with EVM at the bytecode level. Each solves the scalability problem with a different approach.",
+          "DAOs are used in various fields such as investment, charity, and social networking. In particular, it is effective for project fund management and community operation.",
         links: [
-          { title: "zkSync Era", url: "https://zksync.io" },
-          { title: "StarkNet", url: "https://starknet.io" },
-          { title: "Scroll", url: "https://scroll.io" },
-          { title: "ZK Rollup Ecosystem", url: "https://l2beat.com/scaling/zk-rollups" },
+          {
+            title: "DAO Cases",
+            url: "https://builtin.com/blockchain/decentralized-autonomous-organization-dao-examples",
+          },
+          {
+            title: "Charity DAO",
+            url: "https://www.coindesk.com/layer2/2022/12/16/crypto-winter-didnt-kill-giving-daos/",
+          },
         ],
-        tips: "Check the ecosystem and supported DApps of each ZK rollup, and select a platform that suits your purpose.",
+        tips: "DAOs can contribute to increasing the transparency and efficiency of organizational operations.",
       },
     ],
   },
   {
-    category: "7. 🚨 Safety & Scams",
+    category: "7. ⛓️ Layer 2 Scaling Solutions",
     items: [
       {
         id: "7-1",
-        question: "How to distinguish phishing links",
+        question: "What is Layer 2?",
         answer:
-          "Check that the official website address and spelling match exactly, and check for HTTPS secure connection. Do not click on links, emails, or DMs from unknown sources, and be careful with shortened URLs until you verify the original address. Be suspicious of messages that give sudden warnings or urgent requests. Use browser bookmarks or check links from official social media.",
+          "Layer 2 is a solution built to solve the scalability problem of the main blockchain (Layer 1). It processes transactions in Layer 2 and records the results in Layer 1 to reduce network congestion and increase transaction speed.",
         links: [
-          { title: "Report Phishing Site", url: "https://safebrowsing.google.com/safebrowsing/report_phish/" },
-          { title: "Web3 Security Guide", url: "https://ethereum.org/en/security/" },
-          { title: "MetaMask Security Tips", url: "https://support.metamask.io/hc/en-us/articles/360015489591" },
+          { title: "Layer 2 Explanation", url: "https://ethereum.org/ko/layer-2/" },
+          { title: "L2BEAT", url: "https://l2beat.com/" },
         ],
-        tips: "Never click on suspicious links and always bookmark and use the official website.",
+        tips: "Layer 2 solutions can greatly improve the scalability of the Ethereum network.",
       },
       {
         id: "7-2",
-        question: "Wallet Permission Management (Revoke)",
+        question: "Optimistic Rollups vs ZK-Rollups",
         answer:
-          "When using a DApp, you grant a spending limit (allowance) for a specific token to a smart contract. Permissions granted to unused DApps or suspicious contracts should be checked and revoked regularly using tools such as Revoke.cash to protect assets. Revoking permissions prevents the contract from accessing the token any longer.",
+          "Optimistic Rollups assume that transactions are valid and perform verification only when a problem is found. ZK-Rollups use Zero-Knowledge Proof to verify the validity of transactions. Each has its advantages and disadvantages, and the appropriate solution should be selected depending on the use case.",
         links: [
-          { title: "Revoke.cash", url: "https://revoke.cash" },
-          { title: "Etherscan Token Approval", url: "https://etherscan.io/tokenapprovalchecker" },
-          { title: "Wallet Security Checklist", url: "https://ethereum.org/en/security/" },
+          {
+            title: "Optimistic Rollups Explanation",
+            url: "https://ethereum.org/en/developers/docs/scaling/optimistic-rollups/",
+          },
+          { title: "ZK-Rollups Explanation", url: "https://ethereum.org/en/developers/docs/scaling/zk-rollups/" },
         ],
-        tips: "Check your wallet permissions regularly every month and revoke permissions for DApps you don't use immediately.",
+        tips: "ZK-Rollups offer higher security than Optimistic Rollups, but use more complex technology.",
       },
       {
         id: "7-3",
-        question: "What is a Sybil attack?",
+        question: "Major Layer 2 Projects",
         answer:
-          "A Sybil attack is an attack in which one attacker creates multiple fake identities (accounts) to exert undue influence on a network or system. It can be exploited for governance voting manipulation, airdrop fraud, reputation system manipulation, etc. These attacks are particularly problematic in blockchain because identity verification is difficult.",
+          "Arbitrum, Optimism, zkSync, and StarkNet are representative Layer 2 projects. Each project has its own technical characteristics and ecosystem.",
         links: [
-          {
-            title: "Sybil Resistance Design",
-            url: "https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/attack-and-defense/",
-          },
-          { title: "Gitcoin Passport", url: "https://passport.gitcoin.co" },
-          { title: "Identity Verification Solution", url: "https://ethereum.org/en/decentralized-identity/" },
+          { title: "Arbitrum", url: "https://arbitrum.io/" },
+          { title: "Optimism", url: "https://www.optimism.io/" },
         ],
-        tips: "Prefer projects with Sybil prevention mechanisms when participating in airdrops or governance.",
-      },
-      {
-        id: "7-4",
-        question: "Project Authenticity Criteria",
-        answer:
-          "A comprehensive consideration should be given to whether the team members' identities and careers are disclosed, the specificity and feasibility of the white paper, the technical basis and audit report, the active and healthy community, the clear roadmap and actual development progress, and the rationality of tokenomics. Promises of excessive returns or anonymous teams should be treated with caution. GitHub activity, partnerships, and investor information are also important criteria.",
-        links: [
-          { title: "Project Analysis Guide", url: "https://ethereum.org/en/developers/docs/dapps/" },
-          { title: "Smart Contract Audit", url: "https://consensys.net/diligence/" },
-          { title: "DeFi Project Evaluation", url: "https://defisafety.com" },
-        ],
-        tips: "Thoroughly DYOR (Do Your Own Research) and cross-validate information from multiple sources.",
+        tips: "Before using a Layer 2 project, it is important to check the security and decentralization level of the project.",
       },
     ],
   },
   {
-    category: "8. 🛠 Tools & Services",
+    category: "8. ✍️ Smart Contract Development",
     items: [
       {
         id: "8-1",
-        question: "Debank, Zapper, Zerion Comparison",
+        question: "Setting up the Solidity development environment",
         answer:
-          "These are all portfolio dashboard services that allow users to track and manage assets distributed across multiple wallets and various DeFi protocols in one place. DeBank focuses on social features and Web3 identity, Zapper specializes in DeFi position management and yield tracking, and Zerion has strengths in mobile apps and user experience. There are slight differences in supported chains, protocols, and features provided.",
+          "You can develop Solidity smart contracts using Remix IDE, Truffle, Hardhat, etc. Each development environment has its own advantages and disadvantages, and the appropriate environment should be selected depending on the developer's proficiency and project requirements.",
         links: [
-          { title: "DeBank", url: "https://debank.com" },
-          { title: "Zapper", url: "https://zapper.fi" },
-          { title: "Zerion", url: "https://zerion.io" },
+          { title: "Remix IDE", url: "https://remix.ethereum.org/" },
+          { title: "Truffle", url: "https://trufflesuite.com/" },
         ],
-        tips: "Understand the strengths of each platform and choose a tool that fits your usage patterns.",
+        tips: "Remix IDE is suitable for simple contract development and testing, while Truffle and Hardhat are useful for complex project management.",
       },
       {
         id: "8-2",
-        question: "How to use Dune Analytics",
+        question: "Writing an ERC-20 token contract",
         answer:
-          "Dune Analytics is a platform that allows users to directly write SQL queries to analyze and visualize (dashboard) blockchain data. You can view dashboards created by others or write your own queries to analyze the number of users, transaction volume, TVL changes, etc. of a particular project. Blockchain data is organized in a table format, making it easy to query with SQL.",
+          "ERC-20 is the standard interface for fungible tokens. You can easily write an ERC-20 token contract using the OpenZeppelin Contracts library.",
         links: [
-          { title: "Dune Analytics", url: "https://dune.com" },
-          { title: "Dune Query Guide", url: "https://docs.dune.com" },
-          { title: "Popular Dashboards", url: "https://dune.com/browse/dashboards" },
+          { title: "ERC-20 Explanation", url: "https://ethereum.org/ko/developers/docs/standards/tokens/erc-20/" },
+          { title: "OpenZeppelin Contracts", url: "https://openzeppelin.com/contracts/" },
         ],
-        tips: "Even if you don't know SQL, you can learn by copying and modifying existing queries.",
+        tips: "When writing an ERC-20 token contract, it is important to use a trusted library to prevent security vulnerabilities.",
       },
       {
         id: "8-3",
-        question: "How to view transactions with Etherscan",
+        question: "Smart Contract Security Audit",
         answer:
-          "On Etherscan (Ethereum Block Explorer), you can search for transaction hash (TxID), wallet address, contract address, etc. to view detailed information about the transaction (sender, recipient, amount, gas fee, status, etc.). You can also view token transfer history, smart contract call information, internal transactions (Internal Txns), etc. If a transaction fails, you can also check the reason for the failure.",
+          "Since smart contracts are difficult to modify once deployed, they must be security audited before deployment. You can use tools such as Slither and Mythril to analyze contract vulnerabilities.",
         links: [
-          { title: "Etherscan", url: "https://etherscan.io" },
-          { title: "Etherscan Usage Guide", url: "https://info.etherscan.com" },
-          { title: "Other Chain Explorers", url: "https://chainlist.org" },
+          { title: "Slither", url: "https://github.com/crytic/slither" },
+          { title: "Mythril", url: "https://mythril.readthedocs.io/en/latest/" },
         ],
-        tips: "If a transaction fails, you can check detailed error information in the 'Logs' tab.",
+        tips: "It is recommended to entrust smart contract security audits to professional audit institutions.",
       },
     ],
   },
   {
-    category: "9. 🧱 DAO & Governance",
+    category: "9. 🏛️ Web3 Infrastructure",
     items: [
       {
         id: "9-1",
-        question: "What is a DAO?",
+        question: "How to use Infura and Alchemy",
         answer:
-          "A DAO (Decentralized Autonomous Organization) is an organization in which members jointly make decisions and operate according to rules defined by smart contracts, without a central authority. It emphasizes transparency and community participation, and allows participation in decision-making through governance tokens. Unlike traditional corporate structures, it operates without hierarchical management.",
+          "Infura and Alchemy provide APIs for accessing Ethereum nodes. This allows developers to access blockchain data and send transactions without operating nodes directly.",
         links: [
-          { title: "DAO Basics Guide", url: "https://ethereum.org/en/dao/" },
-          { title: "Aragon DAO Platform", url: "https://aragon.org" },
-          { title: "DAO Case Studies", url: "https://deepdao.io" },
+          { title: "Infura", url: "https://www.infura.io/" },
+          { title: "Alchemy", url: "https://www.alchemy.com/" },
         ],
-        tips: "Before participating in a DAO, fully understand the organization's purpose, governance structure, and tokenomics.",
+        tips: "Infura and Alchemy offer free plans, making them useful for small projects.",
       },
       {
         id: "9-2",
-        question: "Role of Governance Tokens",
+        question: "IPFS (InterPlanetary File System)",
         answer:
-          "Governance tokens are cryptocurrencies that grant the right (voting rights) to participate in the decision-making of a DAO. Token holders can propose and vote on protocol changes, use of funds, addition of new features, parameter adjustments, etc. Voting power is determined by the amount held, and some projects require tokens to be staked to obtain voting rights.",
+          "IPFS is a distributed file system that allows you to store and share files without a central server. It is mainly used for storing NFT metadata.",
         links: [
-          { title: "Governance Token Guide", url: "https://ethereum.org/en/governance/" },
-          { title: "Snapshot Voting Platform", url: "https://snapshot.org" },
-          { title: "How to Participate in Governance", url: "https://blog.aragon.org/what-is-governance/" },
+          { title: "IPFS Explanation", url: "https://ipfs.io/" },
+          { title: "IPFS Docs", url: "https://docs.ipfs.io/" },
         ],
-        tips: "When participating in governance, fully review the proposal and actively participate in community discussions.",
+        tips: "IPFS does not guarantee file persistence, so it is recommended to fix files using a service such as Pinata.",
       },
       {
         id: "9-3",
-        question: "Forum → Proposal → Voting Structure",
+        question: "How to use The Graph",
         answer:
-          "In many DAOs, decision-making first involves discussing ideas and gathering opinions in a community forum (e.g., Discourse, Discord). It is then made into a formal proposal and voted on through Snapshot or an on-chain voting system. On-chain voting generally incurs gas fees but is binding, while off-chain voting (Snapshot) is free but is more of a signal vote.",
+          "The Graph is an indexing protocol for efficiently querying blockchain data. This allows developers to quickly search for the data they need in DApps.",
         links: [
-          { title: "Snapshot Voting", url: "https://snapshot.org" },
-          { title: "Tally Governance", url: "https://tally.xyz" },
-          { title: "Governance Process", url: "https://ethereum.org/en/governance/" },
+          { title: "The Graph", url: "https://thegraph.com/" },
+          { title: "The Graph Docs", url: "https://thegraph.com/docs/" },
         ],
-        tips: "Before voting, check that there has been sufficient discussion in the forum and carefully consider the pros and cons of the proposal.",
+        tips: "The Graph is useful for efficiently managing complex blockchain data.",
       },
     ],
   },
   {
-    category: "10. 📈 Airdrops & Missions",
+    category: "10. 📱 Web3 Frontend Development",
     items: [
       {
         id: "10-1",
-        question: "Why do airdrops exist?",
+        question: "How to use Web3.js and Ethers.js",
         answer:
-          "Airdrops are used as a marketing strategy to acquire users, build a community, distribute tokens, and promote a project in the early stages of a project. It is also conducted to reward specific activities or encourage governance participation. The main purpose is to create a network effect by providing rewards to early users.",
+          "Web3.js and Ethers.js are JavaScript libraries used in DApps to interact with smart contracts. You can connect wallets such as MetaMask to send transactions and read blockchain data.",
         links: [
-          { title: "Airdrop Tracking Site", url: "https://airdrops.io" },
-          { title: "DeFiLlama Airdrop", url: "https://defillama.com/airdrops" },
-          { title: "Airdrop Safety Guide", url: "https://ethereum.org/en/security/" },
+          { title: "Web3.js", url: "https://web3js.readthedocs.io/en/v1.7.0/" },
+          { title: "Ethers.js", url: "https://docs.ethers.io/v5/" },
         ],
-        tips: "When receiving an airdrop, be careful of phishing sites and be suspicious if they ask for excessive permissions.",
+        tips: "Ethers.js offers more modern features than Web3.js and is considered easier to use.",
       },
       {
         id: "10-2",
-        question: "Galxe, Zealy, TaskOn Comparison",
+        question: "MetaMask Integration",
         answer:
-          "These are platforms that help Web3 projects provide various missions (quests) for users and reward participants (NFTs, points, whitelists, etc.). Galxe is the largest quest platform, Zealy focuses on community participation, and TaskOn is specialized for the Asian market. It is used for project promotion, increased community participation, and filtering potential airdrop recipients.",
+          "You can integrate MetaMask into your DApp to access the user's cryptocurrency wallet and request transactions. You can use the MetaMask API to implement user authentication and transaction signing.",
         links: [
-          { title: "Galxe", url: "https://galxe.com" },
-          { title: "Zealy", url: "https://zealy.io" },
-          { title: "TaskOn", url: "https://taskon.xyz" },
+          { title: "MetaMask Docs", url: "https://docs.metamask.io/" },
+          { title: "MetaMask API", url: "https://docs.metamask.io/guide/ethereum-provider.html#table-of-contents" },
         ],
-        tips: "Be careful about protecting your personal information when participating in quests, and reject suspicious permission requests.",
+        tips: "When integrating MetaMask, be careful about user privacy and security.",
+      },
+      {
+        id: "10-3",
+        question: "DApp UI Design",
+        answer:
+          "The DApp UI is the interface through which users interact with the blockchain. User-friendly and intuitive design is important, and you can build a consistent UI by referring to the Web3 design system.",
+        links: [
+          {
+            title: "Web3 Design System",
+            url: "https://www.figma.com/community/file/1220944482715423788/Web3-Design-System",
+          },
+          { title: "DApp Design Examples", url: "https://dribbble.com/search/dapps" },
+        ],
+        tips: "When designing a DApp UI, you should consider the user's level of cryptocurrency experience.",
+      },
+    ],
+  },
+  {
+    category: "11. 👨‍💻 Dev for Non-Dev",
+    items: [
+      {
+        id: "11-1",
+        question: "What are smart contracts?",
+        answer:
+          "Smart contracts are digital contracts that automatically execute predefined contract terms when specific conditions are met. They operate on blockchain and enable transparent and trustworthy contract execution without intermediaries.",
+        links: [
+          { title: "Smart Contract Basics", url: "https://ethereum.org/en/developers/docs/smart-contracts/" },
+          { title: "Remix IDE", url: "https://remix.ethereum.org" },
+        ],
+        tips: "Smart contracts are difficult to modify once deployed, so they must be designed carefully.",
+      },
+      {
+        id: "11-2",
+        question: "Solidity vs Vyper",
+        answer:
+          "Solidity is the most widely used object-oriented programming language for Ethereum smart contract development, with syntax similar to C++, Python, and JavaScript. Vyper has Python-like syntax and emphasizes security and code readability, aiming for more concise and secure contract writing.",
+        links: [
+          { title: "Solidity Documentation", url: "https://soliditylang.org" },
+          { title: "Vyper Documentation", url: "https://vyper.readthedocs.io" },
+        ],
+        tips: "Beginners should start with Solidity as it has more resources and community support.",
+      },
+      {
+        id: "11-3",
+        question: "How to practice on testnets",
+        answer:
+          "Testnets are experimental networks where you can develop blockchain applications and test DApps without using real assets. You can switch to testnets (like Sepolia, Goerli) in wallets like MetaMask, get test coins from faucets, and test smart contract deployment or DApp functionality.",
+        links: [
+          { title: "Sepolia Faucet", url: "https://sepoliafaucet.com" },
+          { title: "Testnet Guide", url: "https://ethereum.org/en/developers/docs/networks/" },
+        ],
+        tips: "Test thoroughly on testnets before deploying to mainnet.",
+      },
+    ],
+  },
+  {
+    category: "12. 🧠 Web3 Advanced Concepts",
+    items: [
+      {
+        id: "12-1",
+        question: "What is decentralization?",
+        answer:
+          "Decentralization means a state where no single individual or institution controls the entire system, and authority and responsibility are distributed among multiple participants. In Web3, the goal is to move away from centralized control in data ownership, decision-making, and network operations.",
+        links: [
+          { title: "Decentralization Concept", url: "https://ethereum.org/en/decentralized-identity/" },
+          { title: "Web3 Philosophy", url: "https://ethereum.org/en/web3/" },
+        ],
+        tips: "Complete decentralization is difficult, so pursuing an appropriate level of decentralization is realistic.",
+      },
+      {
+        id: "12-2",
+        question: "Tokenomics basics: Supply, burning, inflation",
+        answer:
+          "Tokenomics is a combination of Token and Economics, referring to the economic model of token design, distribution, supply and demand management. Total supply determines token scarcity, burning attempts to increase value by reducing supply, and inflation represents the phenomenon of value decline due to continuous token issuance.",
+        links: [
+          { title: "Tokenomics Guide", url: "https://ethereum.org/en/developers/docs/standards/tokens/" },
+          { title: "Token Economics", url: "https://blog.coinbase.com/a-beginners-guide-to-tokenomics-6e1b3e5d8c5e" },
+        ],
+        tips: "Sustainable tokenomics design is important for the long-term success of projects.",
+      },
+      {
+        id: "12-3",
+        question: "What is MEV?",
+        answer:
+          "MEV (Maximal Extractable Value, formerly Miner Extractable Value) refers to the maximum profit that block producers (miners or validators) can obtain by manipulating the order and inclusion of transactions within blocks. It occurs through arbitrage, liquidation opportunities, etc., and can cause unfavorable prices (slippage) for users.",
+        links: [
+          { title: "MEV Explanation", url: "https://ethereum.org/en/developers/docs/mev/" },
+          { title: "Flashbots", url: "https://flashbots.net" },
+        ],
+        tips: "MEV is a natural phenomenon due to blockchain transparency, but it can negatively impact users.",
+      },
+    ],
+  },
+  {
+    category: "13. 🌍 Web3 Ecosystems & Communities",
+    items: [
+      {
+        id: "13-1",
+        question: "Major Layer 1 ecosystem comparison",
+        answer:
+          "Ethereum has the largest ecosystem and developer community but has scalability issues. Solana boasts high processing speed but sometimes experiences network stability issues. Cosmos and Polkadot aim to build interoperable blockchain networks. Each ecosystem has different technical characteristics, major DApps, and community atmospheres.",
+        links: [
+          { title: "Ethereum", url: "https://ethereum.org" },
+          { title: "Solana", url: "https://solana.com" },
+          { title: "Cosmos", url: "https://cosmos.network" },
+        ],
+        tips: "Understand the characteristics of each ecosystem and choose the chain that fits your purpose.",
+      },
+      {
+        id: "13-2",
+        question: "How to participate in Web3 communities",
+        answer:
+          "You can follow projects or influencers in areas of interest on Twitter, Discord, Telegram, Reddit, etc., and participate in related community channels. Each community has its own culture and communication style, and you can be active through information sharing, discussions, and event participation.",
+        links: [
+          { title: "Web3 Community Guide", url: "https://ethereum.org/en/community/" },
+          { title: "Discord Server List", url: "https://ethereum.org/en/community/online/" },
+        ],
+        tips: "Read and respect community rules, and try to make constructive contributions.",
+      },
+    ],
+  },
+  {
+    category: "14. 💼 Web3 Careers & Skills",
+    items: [
+      {
+        id: "14-1",
+        question: "Various job categories in Web3",
+        answer:
+          "In addition to technical roles (development, research, security), Web3 also has important and growing demand for various non-technical roles such as product planning, design, data analysis, content creation, community management, marketing, and business development.",
+        links: [
+          { title: "Web3 Career", url: "https://web3.career" },
+          { title: "CryptoJobs", url: "https://crypto.jobs" },
+        ],
+        tips: "Combining Web3 knowledge with existing expertise can increase competitiveness.",
+      },
+      {
+        id: "14-2",
+        question: "Web3 learning resources",
+        answer:
+          "You can find Web3 development and related knowledge online courses at ConsenSys Academy, Encode Club, CryptoZombies, Udemy, Coursera, etc. There are also various bootcamp programs, and actual project experience or portfolios are often considered more important than certifications for specific technology stacks.",
+        links: [
+          { title: "ConsenSys Academy", url: "https://consensys.net/academy/" },
+          { title: "CryptoZombies", url: "https://cryptozombies.io" },
+        ],
+        tips: "It's important to create actual projects along with theoretical learning.",
+      },
+    ],
+  },
+  {
+    category: "15. 📜 Regulation, Ethics & Society",
+    items: [
+      {
+        id: "15-1",
+        question: "Web3 regulatory trends by major countries",
+        answer:
+          "The US has regulatory uncertainty due to jurisdictional issues between SEC and CFTC, and securities determination. The EU is establishing a comprehensive regulatory framework through the MiCA (Markets in Crypto-Assets) bill. Korea focuses on anti-money laundering centered on the Specific Financial Information Act, and discussions on legislation for investor protection and industry development are ongoing.",
+        links: [
+          {
+            title: "MiCA Regulation",
+            url: "https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica",
+          },
+          { title: "Korea Regulatory Status", url: "https://www.fsc.go.kr" },
+        ],
+        tips: "Regulations change rapidly, so continuously check for the latest information.",
+      },
+      {
+        id: "15-2",
+        question: "Ethical considerations of Web3 technology",
+        answer:
+          "Blockchain transparency can lead to privacy violations, and decentralization can be misused for illegal activities. Algorithms combined with AI can have bias, and PoW energy consumption causes environmental problems. Consideration of these ethical issues and technical/social solution efforts are needed.",
+        links: [
+          { title: "Blockchain Ethics", url: "https://ethereum.org/en/energy-consumption/" },
+          { title: "Sustainability", url: "https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/" },
+        ],
+        tips: "Ethical responsibility should be considered along with technological advancement.",
+      },
+    ],
+  },
+  {
+    category: "16. 💡 Future of Web3 & Emerging Trends",
+    items: [
+      {
+        id: "16-1",
+        question: "Convergence of AI and Web3",
+        answer:
+          "Various convergence possibilities are being explored, such as decentralizing AI model training and operation (DeAI), AI agents autonomously performing tasks by interacting with blockchain, utilizing AI in DAO operations, and users providing their data for AI training while controlling and receiving compensation (data sovereignty).",
+        links: [
+          { title: "AI and Blockchain", url: "https://ethereum.org/en/developers/docs/" },
+          { title: "Decentralized AI", url: "https://blog.oceanprotocol.com" },
+        ],
+        tips: "The convergence of AI and Web3 is still in its early stages but has great potential.",
+      },
+      {
+        id: "16-2",
+        question: "Challenges for Web3 mass adoption",
+        answer:
+          "Mass adoption can be achieved by improving complex user experience (UX), securing scalability to accommodate more users, creating clear and reasonable regulatory environments, and expanding education to increase public understanding of Web3 technology. It is expected to improve gradually.",
+        links: [
+          { title: "Web3 UX", url: "https://ethereum.org/en/developers/docs/intro-to-ether/" },
+          { title: "Scalability Solutions", url: "https://ethereum.org/en/developers/docs/scaling/" },
+        ],
+        tips: "User-friendly interfaces are important along with technical completeness.",
+      },
+      {
+        id: "16-3",
+        question: "Combination of metaverse and Web3 technology",
+        answer:
+          "Web3 technologies (NFTs, cryptocurrencies) can grant users true ownership of digital assets (avatars, items, land) in the metaverse, enable asset movement and interaction between different metaverses (interoperability), and serve as the foundation for building open metaverses not controlled by specific companies.",
+        links: [
+          { title: "Metaverse and NFT", url: "https://ethereum.org/en/nft/" },
+          { title: "Digital Ownership", url: "https://ethereum.org/en/developers/docs/standards/tokens/erc-721/" },
+        ],
+        tips: "The success of the metaverse depends not only on technical implementation but also on user experience and content.",
       },
     ],
   },
