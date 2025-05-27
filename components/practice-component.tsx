@@ -11,7 +11,7 @@ interface PracticeProps {
     steps: string[]
     warning?: string
   }
-  language: "ko" | "en"
+  language: "ko"
 }
 
 export function PracticeComponent({ practice, language }: PracticeProps) {
@@ -35,35 +35,33 @@ export function PracticeComponent({ practice, language }: PracticeProps) {
   const progress = (completedSteps.size / practice.steps.length) * 100
 
   return (
-    <Card className="bg-green-500/10 border border-green-500/20 rounded-lg p-6">
-      <div className="flex items-center justify-between mb-4">
+    <Card className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 sm:p-6">
+      <div className="flex items-center justify-between mb-3 sm:mb-4">
         <div className="flex items-center">
-          <BookOpen className="w-5 h-5 text-green-400 mr-2" />
-          <h4 className="text-lg font-semibold text-green-300">
-            {language === "ko" ? "실습 가이드" : "Practice Guide"}
-          </h4>
+          <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-2" />
+          <h4 className="text-base sm:text-lg font-semibold text-green-300">실습 가이드</h4>
         </div>
         <Button
           onClick={() => setIsExpanded(!isExpanded)}
           variant="ghost"
           size="sm"
-          className="text-green-300 hover:text-green-200"
+          className="text-green-300 hover:text-green-200 text-xs sm:text-sm"
         >
-          {isExpanded ? (language === "ko" ? "접기" : "Collapse") : language === "ko" ? "펼치기" : "Expand"}
+          {isExpanded ? "접기" : "펼치기"}
         </Button>
       </div>
 
-      <h5 className="text-white font-medium mb-4">{practice.title}</h5>
+      <h5 className="text-white font-medium mb-3 sm:mb-4 text-sm sm:text-base">{practice.title}</h5>
 
       {/* Progress Bar */}
-      <div className="mb-4">
-        <div className="flex justify-between text-sm text-gray-400 mb-2">
-          <span>{language === "ko" ? "진행률" : "Progress"}</span>
+      <div className="mb-3 sm:mb-4">
+        <div className="flex justify-between text-xs sm:text-sm text-gray-400 mb-2">
+          <span>진행률</span>
           <span>{Math.round(progress)}%</span>
         </div>
-        <div className="w-full bg-gray-700 rounded-full h-2">
+        <div className="w-full bg-gray-700 rounded-full h-1.5 sm:h-2">
           <div
-            className="bg-green-500 h-2 rounded-full transition-all duration-300"
+            className="bg-green-500 h-1.5 sm:h-2 rounded-full transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -75,7 +73,7 @@ export function PracticeComponent({ practice, language }: PracticeProps) {
             <div
               key={index}
               className={`
-                flex items-start p-3 rounded-lg border transition-all duration-200 cursor-pointer
+                flex items-start p-2 sm:p-3 rounded-lg border transition-all duration-200 cursor-pointer
                 ${
                   completedSteps.has(index)
                     ? "bg-green-500/20 border-green-500/50"
@@ -84,15 +82,15 @@ export function PracticeComponent({ practice, language }: PracticeProps) {
               `}
               onClick={() => toggleStep(index)}
             >
-              <div className="flex-shrink-0 mt-0.5 mr-3">
+              <div className="flex-shrink-0 mt-0.5 mr-2 sm:mr-3">
                 {completedSteps.has(index) ? (
-                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
                 ) : (
-                  <Circle className="w-5 h-5 text-gray-400" />
+                  <Circle className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                 )}
               </div>
               <span
-                className={`text-sm ${completedSteps.has(index) ? "text-green-300 line-through" : "text-gray-300"}`}
+                className={`text-xs sm:text-sm ${completedSteps.has(index) ? "text-green-300 line-through" : "text-gray-300"}`}
               >
                 {step}
               </span>
@@ -115,12 +113,12 @@ export function PracticeComponent({ practice, language }: PracticeProps) {
               size="sm"
               className="border-green-500/30 text-green-300 hover:bg-green-500/10"
             >
-              {language === "ko" ? "초기화" : "Reset"}
+              초기화
             </Button>
             {completedSteps.size === practice.steps.length && (
               <div className="flex items-center text-green-300 text-sm">
                 <CheckCircle className="w-4 h-4 mr-1" />
-                {language === "ko" ? "완료!" : "Completed!"}
+                완료!
               </div>
             )}
           </div>
