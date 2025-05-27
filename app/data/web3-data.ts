@@ -1,3 +1,8 @@
+export const searchKeywords = {
+  ko: ["NFT", "DeFi", "DAO", "이더리움", "메타마스크", "스마트 컨트랙트", "레이어2", "토큰", "지갑", "거래소"],
+  en: ["NFT", "DeFi", "DAO", "Ethereum", "MetaMask", "Smart Contract", "Layer 2", "Token", "Wallet", "Exchange"],
+}
+
 export const web3Data = [
   {
     category: "1. 🪙 암호화폐 기초 (Crypto Basics)",
@@ -6,12 +11,30 @@ export const web3Data = [
         id: "1-1",
         question: "암호화폐란 무엇인가요?",
         answer:
-          "암호화폐는 암호화 기술을 사용하여 거래의 보안을 유지하고, 새로운 화폐 발행을 통제하는 디지털 또는 가상 화폐입니다. 중앙 은행이나 금융 기관의 통제를 받지 않고 분산된 네트워크에서 운영됩니다.",
+          "암호화폐는 암호화 기술을 사용하여 거래의 보안을 유지하고, 새로운 화폐 발행을 통제하는 디지털 또는 가상 화폐입니다. 중앙 은행이나 금융 기관의 통제를 받지 않고 분산된 네트워크에서 운영됩니다.\n\n**핵심 특징:**\n• **탈중앙화**: 중앙 기관의 통제 없이 P2P 네트워크에서 운영\n• **암호화 보안**: 해시 함수와 디지털 서명으로 보안 유지\n• **투명성**: 모든 거래가 블록체인에 공개적으로 기록\n• **불변성**: 한번 기록된 거래는 변경이 거의 불가능\n• **희소성**: 대부분의 암호화폐는 발행량이 제한됨",
         links: [
           { title: "비트코인 백서", url: "https://bitcoin.org/bitcoin.pdf" },
           { title: "이더리움 소개", url: "https://ethereum.org/ko/what-is-ethereum/" },
         ],
-        tips: "암호화폐 투자는 높은 변동성을 가지므로 신중하게 접근해야 합니다.",
+        tips: "암호화폐 투자는 높은 변동성을 가지므로 신중하게 접근해야 합니다. 먼저 소액으로 시작하여 기술을 이해한 후 투자 규모를 늘리는 것이 좋습니다.",
+        quiz: {
+          question: "암호화폐의 핵심 특징이 아닌 것은?",
+          options: ["탈중앙화된 네트워크", "암호화 기술 사용", "중앙은행의 통제", "블록체인 기반"],
+          correctAnswer: 2,
+          explanation: "암호화폐는 중앙은행이나 금융기관의 통제를 받지 않는 탈중앙화된 시스템입니다.",
+        },
+        practice: {
+          title: "첫 번째 암호화폐 지갑 만들기",
+          steps: [
+            "1. 메타마스크 공식 사이트(metamask.io) 방문",
+            "2. 브라우저 확장 프로그램 설치",
+            "3. '지갑 생성' 선택",
+            "4. 강력한 비밀번호 설정",
+            "5. 시드 구문(12개 단어) 안전하게 백업",
+            "6. 시드 구문 확인 테스트 완료",
+          ],
+          warning: "⚠️ 시드 구문은 절대 온라인에 저장하지 마세요. 종이에 적어서 안전한 곳에 보관하세요.",
+        },
       },
       {
         id: "1-2",
@@ -249,7 +272,7 @@ export const web3Data = [
         id: "7-1",
         question: "Layer 2란 무엇인가요?",
         answer:
-          "Layer 2는 메인 블록체인(Layer 1)의 확장성 문제를 해결하기 위해 구축된 솔루션입니다. 트랜잭션을 Layer 2에서 처리하고, 그 결과를 Layer 1에 기록하여 네트워크 혼잡을 줄이고, 거래 속도를 높입니다.",
+          "Layer 2는 메인 블록체인(Layer 1)의 확장성 문제를 해결하기 위해 구축된 솔루션입니다. 각 블록은 이전 블록의 해시값을 포함하여 연결되어 있어, 데이터의 위변조가 어렵습니다. 이러한 특성 덕분에 높은 보안성과 투명성을 제공합니다.",
         links: [
           { title: "Layer 2 설명", url: "https://ethereum.org/ko/layer-2/" },
           { title: "L2BEAT", url: "https://l2beat.com/" },
@@ -290,7 +313,7 @@ export const web3Data = [
         id: "8-1",
         question: "Solidity 개발 환경 설정",
         answer:
-          "Remix IDE, Truffle, Hardhat 등을 사용하여 Solidity 스마트 컨트랙트를 개발할 수 있습니다. 각 개발 환경은 고유한 장단점을 가지고 있으며, 개발자의 숙련도와 프로젝트의 요구 사항에 따라 적합한 환경을 선택해야 합니다.",
+          "Remix IDE, Truffle, Hardhat 등을 사용하여 Solidity 스마트 컨트랙트를 개발할 수 있습니다. 각 개발 환경은 고유한 장단점을 가지고 있으며, 사용자의 숙련도와 프로젝트의 요구 사항에 따라 적절한 환경을 선택해야 합니다.",
         links: [
           { title: "Remix IDE", url: "https://remix.ethereum.org/" },
           { title: "Truffle", url: "https://trufflesuite.com/" },
@@ -1132,12 +1155,12 @@ export const web3DataEn = [
         id: "14-2",
         question: "Web3 learning resources",
         answer:
-          "You can find Web3 development and related knowledge online courses at ConsenSys Academy, Encode Club, CryptoZombies, Udemy, Coursera, etc. There are also various bootcamp programs, and actual project experience or portfolios are often considered more important than certifications for specific technology stacks.",
+          "ConsenSys Academy, Encode Club, CryptoZombies, Udemy, Coursera, etc. offer online courses for Web3 development and related knowledge. Various bootcamp programs are also available, and practical experience or a portfolio is often more important than specific technical stack certifications.",
         links: [
           { title: "ConsenSys Academy", url: "https://consensys.net/academy/" },
           { title: "CryptoZombies", url: "https://cryptozombies.io" },
         ],
-        tips: "It's important to create actual projects along with theoretical learning.",
+        tips: "Practical learning through projects is important.",
       },
     ],
   },
@@ -1146,28 +1169,28 @@ export const web3DataEn = [
     items: [
       {
         id: "15-1",
-        question: "Web3 regulatory trends by major countries",
+        question: "Major national Web3 regulatory trends",
         answer:
-          "The US has regulatory uncertainty due to jurisdictional issues between SEC and CFTC, and securities determination. The EU is establishing a comprehensive regulatory framework through the MiCA (Markets in Crypto-Assets) bill. Korea focuses on anti-money laundering centered on the Specific Financial Information Act, and discussions on legislation for investor protection and industry development are ongoing.",
+          "In the United States, there is regulatory uncertainty due to jurisdictional issues between SEC and CFTC and asset classification. The European Union is developing a comprehensive regulatory framework with the MiCA (Markets in Crypto-Assets) law. In South Korea, regulations focus on anti-money laundering centered around specific financial information laws, with discussions ongoing for investor protection and industrial development.",
         links: [
           {
             title: "MiCA Regulation",
             url: "https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica",
           },
-          { title: "Korea Regulatory Status", url: "https://www.fsc.go.kr" },
+          { title: "South Korea Regulatory Status", url: "https://www.fsc.go.kr" },
         ],
-        tips: "Regulations change rapidly, so continuously check for the latest information.",
+        tips: "Regulations are rapidly changing, so it is important to continuously check the latest information.",
       },
       {
         id: "15-2",
         question: "Ethical considerations of Web3 technology",
         answer:
-          "Blockchain transparency can lead to privacy violations, and decentralization can be misused for illegal activities. Algorithms combined with AI can have bias, and PoW energy consumption causes environmental problems. Consideration of these ethical issues and technical/social solution efforts are needed.",
+          "Blockchain transparency can lead to privacy breaches, and decentralization can be exploited for illegal activities. Algorithms combined with AI can have biases, and PoW (Proof of Work) energy consumption can cause environmental issues. Consideration and technological/social solutions for these ethical problems are necessary.",
         links: [
           { title: "Blockchain Ethics", url: "https://ethereum.org/en/energy-consumption/" },
           { title: "Sustainability", url: "https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/" },
         ],
-        tips: "Ethical responsibility should be considered along with technological advancement.",
+        tips: "Ethical responsibility should be considered as technology develops.",
       },
     ],
   },
@@ -1176,31 +1199,31 @@ export const web3DataEn = [
     items: [
       {
         id: "16-1",
-        question: "Convergence of AI and Web3",
+        question: "AI and Web3 integration",
         answer:
-          "Various convergence possibilities are being explored, such as decentralizing AI model training and operation (DeAI), AI agents autonomously performing tasks by interacting with blockchain, utilizing AI in DAO operations, and users providing their data for AI training while controlling and receiving compensation (data sovereignty).",
+          "AI models can be decentralized (DeAI), AI agents can interact with blockchain and perform autonomous tasks, AI can be used in DAO operations, users can provide their data for AI training and receive compensation (data sovereignty), etc. Various integration possibilities are being explored.",
         links: [
           { title: "AI and Blockchain", url: "https://ethereum.org/en/developers/docs/" },
           { title: "Decentralized AI", url: "https://blog.oceanprotocol.com" },
         ],
-        tips: "The convergence of AI and Web3 is still in its early stages but has great potential.",
+        tips: "AI and Web3 integration is still in the early stages but has great potential.",
       },
       {
         id: "16-2",
-        question: "Challenges for Web3 mass adoption",
+        question: "Challenges for widespread adoption of Web3",
         answer:
-          "Mass adoption can be achieved by improving complex user experience (UX), securing scalability to accommodate more users, creating clear and reasonable regulatory environments, and expanding education to increase public understanding of Web3 technology. It is expected to improve gradually.",
+          "Improving complex user experience (UX), ensuring scalability to accommodate more users, forming a clear and reasonable regulatory environment, and expanding education to raise public awareness of Web3 technology are necessary for widespread adoption. It is expected to improve gradually.",
         links: [
           { title: "Web3 UX", url: "https://ethereum.org/en/developers/docs/intro-to-ether/" },
           { title: "Scalability Solutions", url: "https://ethereum.org/en/developers/docs/scaling/" },
         ],
-        tips: "User-friendly interfaces are important along with technical completeness.",
+        tips: "Both technical maturity and user-friendly interfaces are important.",
       },
       {
         id: "16-3",
-        question: "Combination of metaverse and Web3 technology",
+        question: "Combining Web3 technology with the metaverse",
         answer:
-          "Web3 technologies (NFTs, cryptocurrencies) can grant users true ownership of digital assets (avatars, items, land) in the metaverse, enable asset movement and interaction between different metaverses (interoperability), and serve as the foundation for building open metaverses not controlled by specific companies.",
+          "Web3 technology (NFT, cryptocurrencies) can grant users true ownership of digital assets within the metaverse, enable interoperability between different metaverses, and serve as the foundation for building an open metaverse not controlled by any specific company.",
         links: [
           { title: "Metaverse and NFT", url: "https://ethereum.org/en/nft/" },
           { title: "Digital Ownership", url: "https://ethereum.org/en/developers/docs/standards/tokens/erc-721/" },

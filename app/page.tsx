@@ -24,6 +24,10 @@ import {
   Send,
 } from "lucide-react"
 import { web3Data, web3DataEn } from "./data/web3-data"
+import { QuizComponent } from "@/components/quiz-component"
+import { PracticeComponent } from "@/components/practice-component"
+import { SearchSuggestions } from "@/components/search-suggestions"
+import { searchKeywords } from "./data/web3-data"
 
 type Language = "ko" | "en"
 
@@ -429,6 +433,15 @@ export default function HeyChainApp() {
               />
             </div>
 
+            {/* Search Suggestions - 검색어가 비어있을 때만 표시 */}
+            {!searchTerm.trim() && (
+              <SearchSuggestions
+                keywords={searchKeywords[language]}
+                onKeywordClick={(keyword) => setSearchTerm(keyword)}
+                language={language}
+              />
+            )}
+
             {/* Categories with Enhanced Styling */}
             <nav className="space-y-3">
               {currentData.map((category, index) => (
@@ -542,6 +555,12 @@ export default function HeyChainApp() {
                             <div className="px-6 pb-6 border-t border-purple-500/20 animate-in slide-in-from-top-2 duration-300">
                               <div className="pt-4 space-y-4">
                                 <p className="text-gray-300 leading-relaxed">{item.answer}</p>
+
+                                {/* Quiz Component */}
+                                {item.quiz && <QuizComponent quiz={item.quiz} language={language} />}
+
+                                {/* Practice Component */}
+                                {item.practice && <PracticeComponent practice={item.practice} language={language} />}
 
                                 {/* Enhanced Links Section */}
                                 {item.links && item.links.length > 0 && (
