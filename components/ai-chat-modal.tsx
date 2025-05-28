@@ -4,159 +4,145 @@ import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
 import { useChat } from "ai/react"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
-import { Send, Sparkles, Bot, User, Loader2, AlertCircle } from "lucide-react"
+import { Sparkles, Send, Bot, User, AlertCircle, Zap, Crown, Clock } from "lucide-react"
 import { chatLimitManager } from "@/lib/chat-limit"
-import { ChatLimitModal } from "@/components/chat-limit-modal"
+import { subscriptionManager } from "@/lib/subscription"
 
 interface AIChatModalProps {
-  language: "ko" | "en"
-  searchQuery?: string
+  isOpen: boolean
+  onClose: () => void
+  onLimitReached: () => void
+  onSignupPrompt: () => void
 }
 
-export function AIChatModal({ language, searchQuery }: AIChatModalProps) {
-  const [open, setOpen] = useState(false)
-  const [showLimitModal, setShowLimitModal] = useState(false)
-  const [chatUsage, setChatUsage] = useState(chatLimitManager.getCurrentUsage())
+export default function AIChatModal({ isOpen, onClose, onLimitReached, onSignupPrompt }: AIChatModalProps) {
+  const [isLimitReached, setIsLimitReached] = useState(false)
+  const [usageStats, setUsageStats] = useState(chatLimitManager.getUsageStats())
   const scrollAreaRef = useRef<HTMLDivElement>(null)
 
-  const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
+  const subscriptionStatus = subscriptionManager.getStatus()
+
+  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
     api: "/api/chat",
-    initialInput: searchQuery || "",
+    onFinish: () => {
+      // 질문 사용량 증가
+      chatLimitManager.incrementQueryCount()
+      updateUsageStats()
+    },
     onError: (error) => {
       console.error("Chat error:", error)
     },
-    onFinish: () => {
-      // 채팅 완료 후 사용량 증가
-      const newUsage = chatLimitManager.incrementUsage()
-      setChatUsage(newUsage)
-    },
   })
 
-  const texts = {
-    ko: {
-      title: "AI 어시스턴트",
-      description: "Web3에 대한 모든 질문에 답변해드립니다",
-      placeholder: "Web3에 대해 궁금한 것을 물어보세요...",
-      button: "AI에게 질문하기",
-      welcome: "안녕하세요! Web3에 대해 궁금한 것이 있으시면 언제든 물어보세요.",
-      error: "오류가 발생했습니다. 다시 시도해주세요.",
-      limitReached: "오늘의 질문 한도에 도달했습니다.",
-    },
-    en: {
-      title: "AI Assistant",
-      description: "Ask me anything about Web3",
-      placeholder: "Ask me anything about Web3...",
-      button: "Ask AI",
-      welcome: "Hello! Feel free to ask me anything about Web3.",
-      error: "An error occurred. Please try again.",
-      limitReached: "You've reached today's question limit.",
-    },
+  const updateUsageStats = () => {
+    setUsageStats(chatLimitManager.getUsageStats())
   }
 
-  const currentTexts = texts[language]
-
-  // 사용량 업데이트
   useEffect(() => {
-    setChatUsage(chatLimitManager.getCurrentUsage())
-  }, [open])
+    updateUsageStats()
+  }, [isOpen])
 
-  // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     if (scrollAreaRef.current) {
-      const scrollElement = scrollAreaRef.current.querySelector("[data-radix-scroll-area-viewport]")
-      if (scrollElement) {
-        scrollElement.scrollTop = scrollElement.scrollHeight
-      }
+      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight
     }
   }, [messages])
 
-  // 커스텀 submit 핸들러
-  const handleCustomSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // 사용량 체크
-    if (!chatLimitManager.canMakeRequest()) {
-      setShowLimitModal(true)
+    // 사용량 제한 확인
+    if (!chatLimitManager.canMakeQuery() && !subscriptionManager.canMakeQuery()) {
+      setIsLimitReached(true)
+      onLimitReached()
       return
     }
 
-    // 정상적으로 제출
+    // 회원가입 유도 (3회 사용 후)
+    if (usageStats.dailyQuestions >= 2 && !usageStats.isRegistered && !usageStats.isPremium) {
+      onSignupPrompt()
+      return
+    }
+
     handleSubmit(e)
   }
 
-  const remainingChats = chatLimitManager.getRemainingChats()
-  const resetTime = chatLimitManager.getResetTime()
-
   return (
-    <>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white min-h-[44px]">
-            <Sparkles className="w-4 h-4 mr-2" />
-            {currentTexts.button}
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="max-w-4xl h-[85vh] bg-gray-900 border-purple-500/20 flex flex-col">
-          <DialogHeader className="flex-shrink-0">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <Bot className="w-5 h-5 mr-2 text-blue-400" />
-                <div>
-                  <DialogTitle className="text-white">{currentTexts.title}</DialogTitle>
-                  <DialogDescription className="text-gray-400">{currentTexts.description}</DialogDescription>
-                </div>
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="max-w-4xl h-[80vh] bg-gray-900 border-purple-500/20">
+        <DialogHeader>
+          <DialogTitle className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-white" />
               </div>
-              <div className="flex items-center space-x-2">
-                <Badge
-                  className={`${
-                    remainingChats > 2
-                      ? "bg-green-500/20 text-green-300 border-green-500/30"
-                      : remainingChats > 0
-                        ? "bg-yellow-500/20 text-yellow-300 border-yellow-500/30"
-                        : "bg-red-500/20 text-red-300 border-red-500/30"
-                  }`}
-                >
-                  남은 질문: {remainingChats}/5
-                </Badge>
-              </div>
+              <span className="text-white">HeyChain AI 어시스턴트</span>
             </div>
-          </DialogHeader>
+            <div className="flex items-center space-x-2">
+              {/* 사용량 표시 */}
+              {!usageStats.isPremium && (
+                <div className="flex items-center space-x-2">
+                  <Badge
+                    variant={usageStats.remainingQueries > 2 ? "default" : "destructive"}
+                    className="flex items-center space-x-1"
+                  >
+                    <Zap className="w-3 h-3" />
+                    <span>{usageStats.remainingQueries === -1 ? "∞" : usageStats.remainingQueries}회 남음</span>
+                  </Badge>
+                  {subscriptionStatus.tokens > 0 && (
+                    <Badge variant="outline" className="flex items-center space-x-1 border-yellow-500 text-yellow-500">
+                      <Crown className="w-3 h-3" />
+                      <span>{subscriptionStatus.tokens} 토큰</span>
+                    </Badge>
+                  )}
+                </div>
+              )}
 
-          {/* 사용량 경고 */}
-          {remainingChats <= 2 && remainingChats > 0 && (
-            <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3 flex items-center space-x-2 flex-shrink-0">
-              <AlertCircle className="w-4 h-4 text-yellow-400 flex-shrink-0" />
-              <p className="text-yellow-200 text-sm">
-                {remainingChats === 1
-                  ? "마지막 질문입니다. 더 많은 질문을 원하시면 토큰을 구매하거나 구독하세요."
-                  : `${remainingChats}번의 질문이 남았습니다.`}
+              {usageStats.isPremium && (
+                <Badge className="bg-gradient-to-r from-purple-500 to-pink-500">
+                  <Crown className="w-3 h-3 mr-1" />
+                  프리미엄
+                </Badge>
+              )}
+            </div>
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="flex flex-col h-full space-y-4">
+          {/* 제한 도달 알림 */}
+          {isLimitReached && (
+            <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
+              <div className="flex items-center space-x-2 text-red-400">
+                <AlertCircle className="w-5 h-5" />
+                <span className="font-medium">일일 무료 질문 한도에 도달했습니다!</span>
+              </div>
+              <p className="text-red-300 text-sm mt-2">
+                다음 리셋까지: <span className="font-medium">{chatLimitManager.getTimeUntilReset()}</span>
               </p>
+              <div className="flex items-center space-x-2 mt-3">
+                <Button size="sm" className="bg-gradient-to-r from-purple-500 to-pink-500">
+                  유료 플랜 구독하기
+                </Button>
+                <Button size="sm" variant="outline">
+                  토큰 구매하기
+                </Button>
+              </div>
             </div>
           )}
 
-          {/* Chat Messages */}
-          <ScrollArea ref={scrollAreaRef} className="flex-1 pr-4">
-            <div className="space-y-4 pb-4">
+          {/* 채팅 메시지 영역 */}
+          <ScrollArea ref={scrollAreaRef} className="flex-1 p-4 border border-gray-700 rounded-lg">
+            <div className="space-y-4">
               {messages.length === 0 && (
-                <div className="flex items-start space-x-3 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Bot className="w-4 h-4 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-blue-200 text-sm">{currentTexts.welcome}</p>
-                  </div>
+                <div className="text-center py-8">
+                  <Bot className="w-12 h-12 text-purple-400 mx-auto mb-4" />
+                  <h3 className="text-white font-medium mb-2">HeyChain AI와 대화를 시작하세요!</h3>
+                  <p className="text-gray-400 text-sm">Web3, 블록체인, DeFi, NFT 등에 대해 무엇이든 물어보세요.</p>
                 </div>
               )}
 
@@ -166,24 +152,24 @@ export function AIChatModal({ language, searchQuery }: AIChatModalProps) {
                   className={`flex items-start space-x-3 ${message.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   {message.role === "assistant" && (
-                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
                       <Bot className="w-4 h-4 text-white" />
                     </div>
                   )}
 
                   <div
-                    className={`max-w-[80%] p-4 rounded-lg ${
+                    className={`max-w-[80%] p-3 rounded-lg ${
                       message.role === "user"
-                        ? "bg-purple-500 text-white"
-                        : "bg-gray-800 text-gray-200 border border-gray-700"
+                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                        : "bg-gray-800 text-gray-100 border border-gray-700"
                     }`}
                   >
-                    <div className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</div>
+                    <div className="whitespace-pre-wrap text-sm">{message.content}</div>
                   </div>
 
                   {message.role === "user" && (
-                    <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
-                      <User className="w-4 h-4 text-white" />
+                    <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
+                      <User className="w-4 h-4 text-gray-300" />
                     </div>
                   )}
                 </div>
@@ -191,78 +177,61 @@ export function AIChatModal({ language, searchQuery }: AIChatModalProps) {
 
               {isLoading && (
                 <div className="flex items-start space-x-3">
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
                     <Bot className="w-4 h-4 text-white" />
                   </div>
-                  <div className="bg-gray-800 border border-gray-700 rounded-lg p-4">
+                  <div className="bg-gray-800 border border-gray-700 rounded-lg p-3">
                     <div className="flex items-center space-x-2">
-                      <Loader2 className="w-4 h-4 animate-spin text-blue-400" />
+                      <div className="flex space-x-1">
+                        <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce"></div>
+                        <div
+                          className="w-2 h-2 bg-purple-400 rounded-full animate-bounce"
+                          style={{ animationDelay: "0.1s" }}
+                        ></div>
+                        <div
+                          className="w-2 h-2 bg-purple-400 rounded-full animate-bounce"
+                          style={{ animationDelay: "0.2s" }}
+                        ></div>
+                      </div>
                       <span className="text-gray-400 text-sm">답변을 생성하고 있습니다...</span>
                     </div>
                   </div>
                 </div>
               )}
-
-              {error && (
-                <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
-                  <p className="text-red-300 text-sm">{currentTexts.error}</p>
-                  <p className="text-red-400 text-xs mt-1">{error.message}</p>
-                </div>
-              )}
             </div>
           </ScrollArea>
 
-          {/* Input Form */}
-          <form onSubmit={handleCustomSubmit} className="flex space-x-2 pt-4 border-t border-gray-700 flex-shrink-0">
+          {/* 입력 영역 */}
+          <form onSubmit={onSubmit} className="flex items-center space-x-3">
             <Input
               value={input}
               onChange={handleInputChange}
-              placeholder={remainingChats > 0 ? currentTexts.placeholder : "질문 한도에 도달했습니다"}
-              disabled={isLoading || remainingChats === 0}
-              className="flex-1 bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-purple-500 disabled:opacity-50"
+              placeholder={isLimitReached ? "일일 무료 한도에 도달했습니다..." : "Web3에 대해 무엇이든 물어보세요..."}
+              disabled={isLoading || isLimitReached}
+              className="flex-1 bg-gray-800 border-gray-700 text-white placeholder-gray-400"
             />
             <Button
               type="submit"
-              disabled={isLoading || !input.trim() || remainingChats === 0}
-              className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 disabled:opacity-50 px-4"
+              disabled={isLoading || !input.trim() || isLimitReached}
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
             >
-              {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+              <Send className="w-4 h-4" />
             </Button>
           </form>
 
-          {/* Usage Info */}
-          <div className="flex-shrink-0 pt-2">
-            <div className="flex items-center justify-between text-xs text-gray-500">
-              <span>AI 어시스턴트가 도움을 드립니다</span>
-              <div className="flex items-center space-x-2">
-                <Badge variant="outline" className="border-gray-600 text-gray-400">
-                  GPT-4o
-                </Badge>
-                {remainingChats === 0 && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setShowLimitModal(true)}
-                    className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10 text-xs h-6"
-                  >
-                    더 많은 질문하기
-                  </Button>
-                )}
-              </div>
+          {/* 하단 정보 */}
+          <div className="flex items-center justify-between text-xs text-gray-500">
+            <div className="flex items-center space-x-2">
+              <Clock className="w-3 h-3" />
+              <span>
+                {!usageStats.isPremium && `다음 리셋: ${chatLimitManager.getTimeUntilReset()}`}
+                {usageStats.isPremium && "무제한 사용 가능"}
+              </span>
             </div>
+            <div>AI는 실수할 수 있습니다. 중요한 정보는 검증하세요.</div>
           </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* 사용량 제한 모달 */}
-      <ChatLimitModal
-        open={showLimitModal}
-        onOpenChange={setShowLimitModal}
-        remainingChats={remainingChats}
-        resetTime={resetTime}
-      />
-    </>
+        </div>
+      </DialogContent>
+    </Dialog>
   )
 }
-
-export default AIChatModal

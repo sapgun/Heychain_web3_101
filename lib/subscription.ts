@@ -1,274 +1,169 @@
-// 구독 및 결제 관련 타입과 유틸리티
+// 구독 관리 시스템
+
 export interface SubscriptionPlan {
   id: string
   name: string
   price: number
-  currency: string
-  period: "monthly" | "yearly"
   features: string[]
-  questionsLimit: number | "unlimited"
-  popular?: boolean
+  queryLimit: number // -1은 무제한
+  recommended?: boolean
 }
 
-export interface TokenPackage {
-  id: string
-  name: string
-  price: number
-  currency: string
-  tokens: number
-  bonus?: number
-  popular?: boolean
-}
-
-export interface User {
-  id: string
-  email: string
-  name?: string
-  subscription?: {
-    planId: string
-    status: "active" | "canceled" | "expired"
-    expiresAt: Date
-  }
-  tokens: number
-  createdAt: Date
-}
-
-// 구독 플랜 정의
 export const subscriptionPlans: SubscriptionPlan[] = [
   {
     id: "free",
     name: "무료 플랜",
     price: 0,
-    currency: "KRW",
-    period: "monthly",
-    features: ["하루 5회 질문", "기본 Web3 정보", "커뮤니티 지원"],
-    questionsLimit: 5,
+    queryLimit: 5,
+    features: ["하루 5회 AI 질문", "기본 Web3 가이드 접근", "커뮤니티 지원"],
   },
   {
-    id: "pro-monthly",
-    name: "프로 월간",
+    id: "basic",
+    name: "베이직",
     price: 9900,
-    currency: "KRW",
-    period: "monthly",
-    features: ["무제한 질문", "우선 응답", "고급 분석", "이메일 지원", "새로운 기능 우선 체험"],
-    questionsLimit: "unlimited",
-    popular: true,
+    queryLimit: 100,
+    features: [
+      "하루 100회 AI 질문",
+      "모든 Web3 가이드 무제한 접근",
+      "실시간 뉴스 알림",
+      "개인화된 학습 추천",
+      "우선 고객 지원",
+    ],
+    recommended: true,
   },
   {
-    id: "pro-yearly",
-    name: "프로 연간",
-    price: 99000,
-    currency: "KRW",
-    period: "yearly",
+    id: "premium",
+    name: "프리미엄",
+    price: 19900,
+    queryLimit: -1,
     features: [
-      "무제한 질문",
-      "우선 응답",
-      "고급 분석",
-      "이메일 지원",
-      "새로운 기능 우선 체험",
-      "2개월 무료 (연간 결제 시)",
+      "무제한 AI 질문",
+      "고급 분석 및 인사이트",
+      "독점 콘텐츠 접근",
+      "1:1 전문가 상담 (월 1회)",
+      "API 접근 권한",
+      "24/7 VIP 지원",
     ],
-    questionsLimit: "unlimited",
   },
 ]
 
-// 토큰 패키지 정의
-export const tokenPackages: TokenPackage[] = [
+export interface TokenPack {
+  id: string
+  name: string
+  tokens: number
+  price: number
+  bonus?: number
+}
+
+export const tokenPacks: TokenPack[] = [
   {
-    id: "tokens-10",
-    name: "스타터 팩",
-    price: 2900,
-    currency: "KRW",
-    tokens: 10,
+    id: "small",
+    name: "스몰 팩",
+    tokens: 20,
+    price: 3900,
   },
   {
-    id: "tokens-50",
-    name: "베이직 팩",
-    price: 12900,
-    currency: "KRW",
+    id: "medium",
+    name: "미디엄 팩",
     tokens: 50,
+    price: 8900,
     bonus: 5,
-    popular: true,
   },
   {
-    id: "tokens-100",
-    name: "프리미엄 팩",
-    price: 24900,
-    currency: "KRW",
+    id: "large",
+    name: "라지 팩",
     tokens: 100,
+    price: 15900,
     bonus: 15,
   },
-  {
-    id: "tokens-500",
-    name: "울트라 팩",
-    price: 99000,
-    currency: "KRW",
-    tokens: 500,
-    bonus: 100,
-  },
 ]
 
-// 사용자 관리 클래스
-class UserManager {
-  private storageKey = "heychain_user"
-
-  getUser(): User | null {
-    if (typeof window === "undefined") return null
-
-    try {
-      const stored = localStorage.getItem(this.storageKey)
-      if (!stored) return null
-
-      const parsed = JSON.parse(stored)
-      return {
-        ...parsed,
-        createdAt: new Date(parsed.createdAt),
-        subscription: parsed.subscription
-          ? {
-              ...parsed.subscription,
-              expiresAt: new Date(parsed.subscription.expiresAt),
-            }
-          : undefined,
-      }
-    } catch {
-      return null
-    }
-  }
-
-  saveUser(user: User): void {
-    if (typeof window === "undefined") return
-
-    try {
-      localStorage.setItem(this.storageKey, JSON.stringify(user))
-    } catch (error) {
-      console.error("Failed to save user data:", error)
-    }
-  }
-
-  createUser(email: string, name?: string): User {
-    const user: User = {
-      id: crypto.randomUUID(),
-      email,
-      name,
-      tokens: 0,
-      createdAt: new Date(),
+class SubscriptionManager {
+  private getCurrentSubscription(): SubscriptionPlan {
+    if (typeof window === "undefined") {
+      return subscriptionPlans[0] // 무료 플랜
     }
 
-    this.saveUser(user)
-    return user
+    const stored = localStorage.getItem("heychain_subscription")
+    if (!stored) {
+      return subscriptionPlans[0]
+    }
+
+    const data = JSON.parse(stored)
+    return subscriptionPlans.find((plan) => plan.id === data.planId) || subscriptionPlans[0]
   }
 
-  updateUserTokens(tokens: number): User | null {
-    const user = this.getUser()
-    if (!user) return null
+  private getTokenBalance(): number {
+    if (typeof window === "undefined") return 0
 
-    user.tokens = Math.max(0, user.tokens + tokens)
-    this.saveUser(user)
-    return user
+    const stored = localStorage.getItem("heychain_tokens")
+    return stored ? Number.parseInt(stored) : 0
   }
 
-  updateUserSubscription(planId: string): User | null {
-    const user = this.getUser()
-    if (!user) return null
-
+  subscribeToPlan(planId: string): void {
     const plan = subscriptionPlans.find((p) => p.id === planId)
-    if (!plan) return null
+    if (!plan) return
 
-    const expiresAt = new Date()
-    if (plan.period === "monthly") {
-      expiresAt.setMonth(expiresAt.getMonth() + 1)
-    } else {
-      expiresAt.setFullYear(expiresAt.getFullYear() + 1)
+    if (typeof window !== "undefined") {
+      localStorage.setItem(
+        "heychain_subscription",
+        JSON.stringify({
+          planId,
+          subscribedAt: Date.now(),
+          expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000, // 30일 후
+        }),
+      )
+    }
+  }
+
+  purchaseTokens(packId: string): void {
+    const pack = tokenPacks.find((p) => p.id === packId)
+    if (!pack) return
+
+    const currentTokens = this.getTokenBalance()
+    const newTokens = currentTokens + pack.tokens + (pack.bonus || 0)
+
+    if (typeof window !== "undefined") {
+      localStorage.setItem("heychain_tokens", newTokens.toString())
+    }
+  }
+
+  canMakeQuery(): boolean {
+    const subscription = this.getCurrentSubscription()
+    const tokens = this.getTokenBalance()
+
+    if (subscription.queryLimit === -1) return true // 무제한
+    if (tokens > 0) return true // 토큰 있음
+
+    // 일일 제한 확인은 ChatLimitManager에서 처리
+    return false
+  }
+
+  useQuery(): void {
+    const subscription = this.getCurrentSubscription()
+    const tokens = this.getTokenBalance()
+
+    // 무제한 플랜이면 토큰 차감 안 함
+    if (subscription.queryLimit === -1) return
+
+    // 토큰이 있으면 토큰 우선 사용
+    if (tokens > 0) {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("heychain_tokens", (tokens - 1).toString())
+      }
+      return
     }
 
-    user.subscription = {
-      planId,
-      status: "active",
-      expiresAt,
-    }
-
-    this.saveUser(user)
-    return user
+    // 나머지는 ChatLimitManager에서 처리
   }
 
-  hasActiveSubscription(): boolean {
-    const user = this.getUser()
-    if (!user?.subscription) return false
-
-    return user.subscription.status === "active" && user.subscription.expiresAt > new Date()
-  }
-
-  canMakeUnlimitedQuestions(): boolean {
-    return this.hasActiveSubscription()
-  }
-
-  hasTokens(): boolean {
-    const user = this.getUser()
-    return (user?.tokens || 0) > 0
-  }
-
-  useToken(): boolean {
-    const user = this.getUser()
-    if (!user || user.tokens <= 0) return false
-
-    user.tokens -= 1
-    this.saveUser(user)
-    return true
-  }
-}
-
-export const userManager = new UserManager()
-
-// 유틸리티 함수들
-export function formatPrice(price: number, currency = "KRW"): string {
-  return new Intl.NumberFormat("ko-KR", {
-    style: "currency",
-    currency,
-  }).format(price)
-}
-
-export function getPlanFeatures(planId: string): string[] {
-  const plan = subscriptionPlans.find((p) => p.id === planId)
-  return plan?.features || []
-}
-
-export async function canUserMakeQuestion(): {
-  canAsk: boolean
-  reason?: "daily_limit" | "no_tokens" | "no_subscription"
-  suggestion?: "buy_tokens" | "subscribe" | "wait"
-} {
-  const user = userManager.getUser()
-
-  // 구독 사용자는 무제한
-  if (userManager.canMakeUnlimitedQuestions()) {
-    return { canAsk: true }
-  }
-
-  // 토큰이 있으면 사용 가능
-  if (userManager.hasTokens()) {
-    return { canAsk: true }
-  }
-
-  // 무료 사용자 (회원/비회원 모두)의 일일 한도 확인
-  const { usageLimitManager } = await import("./usage-limit")
-  const canMake = usageLimitManager.canMakeRequest()
-
-  if (canMake) {
-    return { canAsk: true }
-  }
-
-  // 한도 초과
-  if (!user) {
+  getStatus() {
     return {
-      canAsk: false,
-      reason: "daily_limit",
-      suggestion: "subscribe",
+      subscription: this.getCurrentSubscription(),
+      tokens: this.getTokenBalance(),
+      canQuery: this.canMakeQuery(),
     }
   }
-
-  return {
-    canAsk: false,
-    reason: "daily_limit",
-    suggestion: "buy_tokens",
-  }
 }
+
+export const subscriptionManager = new SubscriptionManager()
