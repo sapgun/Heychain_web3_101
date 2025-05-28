@@ -8,6 +8,7 @@ import { Gamepad2, Brain, Puzzle, Trophy, Clock, Star, X, Play } from "lucide-re
 import Web3QuizGame from "./web3-quiz-game"
 import CryptoMemoryGame from "./crypto-memory-game"
 import BlockchainPuzzle from "./blockchain-puzzle"
+import ChainMergeGame from "./chain-merge-game"
 
 interface MiniGamesModalProps {
   isOpen: boolean
@@ -69,6 +70,15 @@ export default function MiniGamesModal({ isOpen, onClose }: MiniGamesModalProps)
       time: "5-15분",
       color: "from-green-500 to-emerald-500",
     },
+    {
+      id: "merge",
+      title: "체인 병합 게임",
+      description: "같은 체인끼리 병합해서 비트코인을 만드세요",
+      icon: Gamepad2,
+      difficulty: "중급",
+      time: "10-20분",
+      color: "from-orange-500 to-red-500",
+    },
   ]
 
   if (currentGame === "quiz") {
@@ -94,6 +104,15 @@ export default function MiniGamesModal({ isOpen, onClose }: MiniGamesModalProps)
       <BlockchainPuzzle
         onClose={() => setCurrentGame(null)}
         onComplete={(score) => handleGameComplete("블록체인 퍼즐", score)}
+      />
+    )
+  }
+
+  if (currentGame === "merge") {
+    return (
+      <ChainMergeGame
+        onClose={() => setCurrentGame(null)}
+        onComplete={(score) => handleGameComplete("체인 병합", score)}
       />
     )
   }
