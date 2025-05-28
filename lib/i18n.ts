@@ -101,6 +101,26 @@ export interface TranslationData {
 
   veryFast?: string
   verySlow?: string
+
+  // 홈 화면 전용
+  homeTitle: string
+  homeSubtitle: string
+  exploreWeb3: string
+  conversationalLearning: string
+  conversationalLearningDesc: string
+  fastAnswers: string
+  fastAnswersDesc: string
+  reliableInfo: string
+  reliableInfoDesc: string
+  howToUse: string
+  step1Title: string
+  step1Desc: string
+  step2Title: string
+  step2Desc: string
+  step3Title: string
+  step3Desc: string
+  step4Title: string
+  step4Desc: string
 }
 
 // 기본 한국어 번역
@@ -201,6 +221,27 @@ const koTranslations: TranslationData = {
   justNow: "방금 전",
   veryFast: "매우 빠름 (20초)",
   verySlow: "매우 느림 (120초)",
+
+  // 홈 화면 전용
+  homeTitle: "Web3, 이제 대화로 배우세요",
+  homeSubtitle:
+    "복잡한 백서나 위키는 그만!\nzk-Rollup부터 메타마스크 설정까지,\n질문 한 번이면 바로 핵심만 짚어 간단하게 설명해드립니다.",
+  exploreWeb3: "Web3 알아보기",
+  conversationalLearning: "대화형 학습",
+  conversationalLearningDesc: "AI와 대화하며 Web3 개념을 쉽게 이해하세요",
+  fastAnswers: "빠른 답변",
+  fastAnswersDesc: "복잡한 개념도 몇 초 만에 핵심만 요약",
+  reliableInfo: "신뢰할 수 있는 정보",
+  reliableInfoDesc: "검증된 Web3 전문 지식을 기반으로 한 답변",
+  howToUse: "사용 방법",
+  step1Title: "Web3 알아보기 클릭",
+  step1Desc: "메인 화면으로 이동하여 다양한 Web3 주제를 탐색하세요",
+  step2Title: "카테고리 선택",
+  step2Desc: "관심 있는 주제의 카테고리를 선택하거나 검색하세요",
+  step3Title: "질문 선택",
+  step3Desc: "궁금한 질문을 클릭하여 자세한 설명을 확인하세요",
+  step4Title: "AI 채팅 활용",
+  step4Desc: "추가 질문이 있다면 AI 채팅으로 더 자세히 알아보세요",
 }
 
 // 오프라인 번역 데이터 (빠른 로딩을 위한 정적 번역)
@@ -286,6 +327,25 @@ const offlineTranslations: Record<Language, TranslationData> = {
     justNow: "Just now",
     veryFast: "Very Fast (20s)",
     verySlow: "Very Slow (120s)",
+    homeTitle: "Learn Web3 through conversation",
+    homeSubtitle:
+      "No more complex whitepapers or wikis!\nFrom zk-Rollup to MetaMask setup,\nget straight to the point with simple explanations in just one question.",
+    exploreWeb3: "Explore Web3",
+    conversationalLearning: "Conversational Learning",
+    conversationalLearningDesc: "Easily understand Web3 concepts through AI conversation",
+    fastAnswers: "Fast Answers",
+    fastAnswersDesc: "Core summaries of complex concepts in seconds",
+    reliableInfo: "Reliable Information",
+    reliableInfoDesc: "Answers based on verified Web3 expertise",
+    howToUse: "How to Use",
+    step1Title: "Click Explore Web3",
+    step1Desc: "Navigate to the main screen to explore various Web3 topics",
+    step2Title: "Select Category",
+    step2Desc: "Choose a category of interest or search for topics",
+    step3Title: "Select Question",
+    step3Desc: "Click on questions you're curious about for detailed explanations",
+    step4Title: "Use AI Chat",
+    step4Desc: "For additional questions, learn more through AI chat",
   },
   ja: {
     title: "HeyChain 101",
@@ -367,6 +427,25 @@ const offlineTranslations: Record<Language, TranslationData> = {
     justNow: "たった今",
     veryFast: "とても速い（20秒）",
     verySlow: "とても遅い（120秒）",
+    homeTitle: "会話でWeb3を学ぶ",
+    homeSubtitle:
+      "複雑なホワイトペーパーやウィキはもう必要ありません！\nzk-RollupからMetaMaskの設定まで、\n質問1つで要点を絞って簡単に説明します。",
+    exploreWeb3: "Web3を探検",
+    conversationalLearning: "会話型学習",
+    conversationalLearningDesc: "AIとの会話を通じてWeb3の概念を簡単に理解する",
+    fastAnswers: "迅速な回答",
+    fastAnswersDesc: "複雑な概念のコアな要約を数秒で",
+    reliableInfo: "信頼できる情報",
+    reliableInfoDesc: "検証済みのWeb3専門知識に基づいた回答",
+    howToUse: "使い方",
+    step1Title: "Web3を探検をクリック",
+    step1Desc: "メイン画面に移動して、さまざまなWeb3トピックを探検する",
+    step2Title: "カテゴリを選択",
+    step2Desc: "興味のあるカテゴリを選択するか、トピックを検索する",
+    step3Title: "質問を選択",
+    step3Desc: "詳細な説明については、気になる質問をクリックする",
+    step4Title: "AIチャットを使用",
+    step4Desc: "追加の質問については、AIチャットを通じて詳細を学ぶ",
   },
   zh: {
     title: "HeyChain 101",
@@ -448,6 +527,24 @@ const offlineTranslations: Record<Language, TranslationData> = {
     justNow: "刚刚",
     veryFast: "很快（20秒）",
     verySlow: "很慢（120秒）",
+    homeTitle: "通过对话学习Web3",
+    homeSubtitle: "不再需要复杂的白皮书或维基百科！\n从zk-Rollup到MetaMask设置，\n只需一个问题即可获得简单明了的解释。",
+    exploreWeb3: "探索Web3",
+    conversationalLearning: "对话式学习",
+    conversationalLearningDesc: "通过AI对话轻松理解Web3概念",
+    fastAnswers: "快速解答",
+    fastAnswersDesc: "几秒钟内总结复杂概念的核心内容",
+    reliableInfo: "可靠的信息",
+    reliableInfoDesc: "基于经过验证的Web3专业知识的答案",
+    howToUse: "如何使用",
+    step1Title: "点击探索Web3",
+    step1Desc: "导航到主屏幕以探索各种Web3主题",
+    step2Title: "选择类别",
+    step2Desc: "选择感兴趣的类别或搜索主题",
+    step3Title: "选择问题",
+    step3Desc: "点击您感兴趣的问题以获取详细说明",
+    step4Title: "使用AI聊天",
+    step4Desc: "如有其他问题，请通过AI聊天了解更多信息",
   },
   es: {
     title: "HeyChain 101",
@@ -529,6 +626,25 @@ const offlineTranslations: Record<Language, TranslationData> = {
     justNow: "Ahora mismo",
     veryFast: "Muy Rápido (20s)",
     verySlow: "Muy Lento (120s)",
+    homeTitle: "Aprende Web3 a través de la conversación",
+    homeSubtitle:
+      "¡No más documentos técnicos o wikis complejos!\nDesde zk-Rollup hasta la configuración de MetaMask,\nobtén explicaciones sencillas y directas con solo una pregunta.",
+    exploreWeb3: "Explora Web3",
+    conversationalLearning: "Aprendizaje Conversacional",
+    conversationalLearningDesc: "Comprende fácilmente los conceptos de Web3 a través de la conversación con IA",
+    fastAnswers: "Respuestas Rápidas",
+    fastAnswersDesc: "Resúmenes concisos de conceptos complejos en segundos",
+    reliableInfo: "Información Confiable",
+    reliableInfoDesc: "Respuestas basadas en conocimientos especializados verificados de Web3",
+    howToUse: "Cómo usar",
+    step1Title: "Haz clic en Explorar Web3",
+    step1Desc: "Navega a la pantalla principal para explorar varios temas de Web3",
+    step2Title: "Selecciona Categoría",
+    step2Desc: "Elige una categoría de interés o busca temas",
+    step3Title: "Selecciona Pregunta",
+    step3Desc: "Haz clic en las preguntas que te interesen para obtener explicaciones detalladas",
+    step4Title: "Usa el Chat de IA",
+    step4Desc: "Si tienes preguntas adicionales, obtén más información a través del chat de IA",
   },
   fr: {
     title: "HeyChain 101",
@@ -610,6 +726,25 @@ const offlineTranslations: Record<Language, TranslationData> = {
     justNow: "À l'instant",
     veryFast: "Très Rapide (20s)",
     verySlow: "Très Lent (120s)",
+    homeTitle: "Apprenez Web3 par la conversation",
+    homeSubtitle:
+      "Plus besoin de livres blancs ou de wikis complexes !\nDu zk-Rollup à la configuration de MetaMask,\nobtenez des explications simples et directes en une seule question.",
+    exploreWeb3: "Explorez Web3",
+    conversationalLearning: "Apprentissage Conversationnel",
+    conversationalLearningDesc: "Comprenez facilement les concepts de Web3 grâce à la conversation avec l'IA",
+    fastAnswers: "Réponses Rapides",
+    fastAnswersDesc: "Résumés concis des concepts complexes en quelques secondes",
+    reliableInfo: "Informations Fiables",
+    reliableInfoDesc: "Réponses basées sur une expertise Web3 vérifiée",
+    howToUse: "Comment utiliser",
+    step1Title: "Cliquez sur Explorer Web3",
+    step1Desc: "Accédez à l'écran principal pour explorer divers sujets Web3",
+    step2Title: "Sélectionnez une Catégorie",
+    step2Desc: "Choisissez une catégorie d'intérêt ou recherchez des sujets",
+    step3Title: "Sélectionnez une Question",
+    step3Desc: "Cliquez sur les questions qui vous intéressent pour obtenir des explications détaillées",
+    step4Title: "Utilisez le Chat IA",
+    step4Desc: "Pour des questions supplémentaires, apprenez-en davantage grâce au chat IA",
   },
 }
 

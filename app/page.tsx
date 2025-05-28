@@ -215,7 +215,7 @@ export default function Home() {
   useEffect(() => {
     if (!isHomePage) return
 
-    const text = "Web3, 이제 대화로 배우세요"
+    const text = t.homeTitle // "Web3, 이제 대화로 배우세요" 대신
     let index = 0
 
     const typeTimer = setInterval(() => {
@@ -350,15 +350,14 @@ export default function Home() {
                 {showCursor && !isTypingComplete && <span className="animate-pulse text-white">|</span>}
               </span>
             </h1>
-            <div
-              className={`transition-all duration-1000 ${isTypingComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-            >
-              <p className="text-xl lg:text-2xl text-gray-300 mb-8 leading-relaxed">
-                복잡한 백서나 위키는 그만! <br />
-                zk-Rollup부터 메타마스크 설정까지, <br />
-                질문 한 번이면 바로 핵심만 짚어 간단하게 설명해드립니다.
-              </p>
-            </div>
+            <p className="text-xl lg:text-2xl text-gray-300 mb-8 leading-relaxed">
+              {t.homeSubtitle.split("\n").map((line, index) => (
+                <span key={index}>
+                  {line}
+                  {index < t.homeSubtitle.split("\n").length - 1 && <br />}
+                </span>
+              ))}
+            </p>
           </div>
 
           {/* 메인 버튼 - 리플 효과 추가 */}
@@ -372,7 +371,7 @@ export default function Home() {
             >
               <span className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               <Sparkles className="w-6 h-6 mr-3 animate-spin-slow" />
-              Web3 알아보기
+              {t.exploreWeb3}
               <span className="absolute inset-0 rounded-xl bg-white/20 scale-0 group-active:scale-100 transition-transform duration-150"></span>
             </Button>
           </div>
@@ -382,15 +381,20 @@ export default function Home() {
             {[
               {
                 icon: MessageCircle,
-                title: "대화형 학습",
-                desc: "AI와 대화하며 Web3 개념을 쉽게 이해하세요",
+                title: t.conversationalLearning,
+                desc: t.conversationalLearningDesc,
                 color: "purple",
               },
-              { icon: Zap, title: "빠른 답변", desc: "복잡한 개념도 몇 초 만에 핵심만 요약", color: "yellow" },
+              {
+                icon: Zap,
+                title: t.fastAnswers,
+                desc: t.fastAnswersDesc,
+                color: "yellow",
+              },
               {
                 icon: Shield,
-                title: "신뢰할 수 있는 정보",
-                desc: "검증된 Web3 전문 지식을 기반으로 한 답변",
+                title: t.reliableInfo,
+                desc: t.reliableInfoDesc,
                 color: "green",
               },
             ].map((card, index) => (
@@ -423,13 +427,13 @@ export default function Home() {
       {/* 사용 방법 섹션 - 애니메이션 강화 */}
       <div className="bg-gray-900/50 backdrop-blur-sm border-t border-purple-500/20 relative z-10">
         <div className="container mx-auto px-4 py-12">
-          <h2 className="text-3xl font-bold text-white text-center mb-8 animate-slide-up">사용 방법</h2>
+          <h2 className="text-3xl font-bold text-white text-center mb-8 animate-slide-up">{t.howToUse}</h2>
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { step: "1", title: "Web3 알아보기 클릭", desc: "메인 화면으로 이동하여 다양한 Web3 주제를 탐색하세요" },
-              { step: "2", title: "카테고리 선택", desc: "관심 있는 주제의 카테고리를 선택하거나 검색하세요" },
-              { step: "3", title: "질문 선택", desc: "궁금한 질문을 클릭하여 자세한 설명을 확인하세요" },
-              { step: "4", title: "AI 채팅 활용", desc: "추가 질문이 있다면 AI 채팅으로 더 자세히 알아보세요" },
+              { step: "1", title: t.step1Title, desc: t.step1Desc },
+              { step: "2", title: t.step2Title, desc: t.step2Desc },
+              { step: "3", title: t.step3Title, desc: t.step3Desc },
+              { step: "4", title: t.step4Title, desc: t.step4Desc },
             ].map((item, index) => (
               <div
                 key={index}
