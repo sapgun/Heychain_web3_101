@@ -1,4 +1,6 @@
-// 사용량 제한 관리
+// 사용량 제한 관리 (업데이트된 버전)
+import { userManager } from "./subscription"
+
 export interface UsageLimit {
   count: number
   lastReset: Date
@@ -66,11 +68,27 @@ export class UsageLimitManager {
   }
 
   canMakeRequest(): boolean {
+    // 구독 사용자는 무제한
+    if (userManager.canMakeUnlimitedQuestions()) {
+      return true
+    }
+
+    // 토큰이 있으면 사용 가능
+    if (userManager.hasTokens()) {
+      return true
+    }
+
+    // 무료 사용자는 일일 제한 확인
     const usage = this.getCurrentUsage()
     return usage.count < DAILY_LIMIT
   }
 
   incrementUsage(): UsageLimit {
+    // 구독 사용자나 토큰 사용자는 일일 제한을 증가시키지 않음
+    if (userManager.canMakeUnlimitedQuestions() || userManager.hasTokens()) {
+      return this.getCurrentUsage()
+    }
+
     const usage = this.getCurrentUsage()
     const newUsage = {
       ...usage,
@@ -82,6 +100,18 @@ export class UsageLimitManager {
   }
 
   getRemainingQuestions(): number {
+    // 구독 사용자는 무제한
+    if (userManager.canMakeUnlimitedQuestions()) {
+      return Number.POSITIVE_INFINITY
+    }
+
+    // 토큰 사용자는 토큰 수만큼
+    const user = userManager.getUser()
+    if (user && user.tokens > 0) {
+      return user.tokens
+    }
+
+    // 무료 사용자는 일일 제한
     const usage = this.getCurrentUsage()
     return Math.max(0, DAILY_LIMIT - usage.count)
   }
