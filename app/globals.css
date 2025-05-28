@@ -75,13 +75,13 @@
   }
 }
 
-/* 뉴스 티커 애니메이션 */
+/* 뉴스 티커 애니메이션 - 무한 루프로 수정 */
 @keyframes ticker {
   0% {
-    transform: translateX(100%);
+    transform: translateX(0%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%); /* 복제된 콘텐츠의 절반만큼 이동 */
   }
 }
 
@@ -91,4 +91,15 @@
 
 .animate-pause {
   animation-play-state: paused;
+}
+
+/* 티커 컨테이너 스타일 */
+.ticker-container {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-content {
+  display: inline-flex;
+  animation: ticker linear infinite;
 }

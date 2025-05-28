@@ -120,6 +120,24 @@ export default function NewsDetailModal({ isOpen, onClose, newsItem }: NewsDetai
         <div className="space-y-4">
           <div>
             <h3 className="text-xl font-semibold mb-3 text-white">{newsItem.title}</h3>
+            {/* 원문 보기 버튼 - 상단에 크게 배치 */}
+            <div className="mb-6">
+              <Button
+                asChild
+                size="lg"
+                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-3"
+              >
+                <a
+                  href={newsItem.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center space-x-2"
+                >
+                  <ExternalLink className="w-5 h-5" />
+                  <span>원문 기사 보러가기</span>
+                </a>
+              </Button>
+            </div>
             <div className="flex items-center space-x-2 mb-3">
               <Badge variant="secondary" className="bg-purple-500/20 text-purple-300 border-purple-500/30">
                 {newsItem.category}
@@ -149,17 +167,8 @@ export default function NewsDetailModal({ isOpen, onClose, newsItem }: NewsDetai
             <p className="text-gray-300 leading-relaxed">{newsItem.description}</p>
           </div>
 
-          <div className="flex items-center justify-between pt-4 border-t border-gray-700">
+          <div className="pt-4 border-t border-gray-700 text-center">
             <div className="text-sm text-gray-500">이 소식이 도움이 되셨나요?</div>
-            <Button
-              asChild
-              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
-            >
-              <a href={newsItem.url} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
-                <span>원문 보기</span>
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </Button>
           </div>
         </div>
       </DialogContent>

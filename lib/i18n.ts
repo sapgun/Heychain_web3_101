@@ -98,6 +98,9 @@ export interface TranslationData {
   hoursAgo: string
   daysAgo: string
   justNow: string
+
+  veryFast?: string
+  verySlow?: string
 }
 
 // 기본 한국어 번역
@@ -148,7 +151,7 @@ const koTranslations: TranslationData = {
   allNews: "전체",
   category: "카테고리",
   speed: "속도",
-  fast: "빠름 (30초)",
+  fast: "빠름 (40초)",
   normal: "보통 (60초)",
   slow: "느림 (90초)",
   language: "언어",
@@ -196,6 +199,8 @@ const koTranslations: TranslationData = {
   hoursAgo: "시간 전",
   daysAgo: "일 전",
   justNow: "방금 전",
+  veryFast: "매우 빠름 (20초)",
+  verySlow: "매우 느림 (120초)",
 }
 
 // 오프라인 번역 데이터 (빠른 로딩을 위한 정적 번역)
@@ -239,7 +244,7 @@ const offlineTranslations: Record<Language, TranslationData> = {
     allNews: "All",
     category: "Category",
     speed: "Speed",
-    fast: "Fast (30s)",
+    fast: "Fast (40s)",
     normal: "Normal (60s)",
     slow: "Slow (90s)",
     language: "Language",
@@ -279,6 +284,8 @@ const offlineTranslations: Record<Language, TranslationData> = {
     hoursAgo: " hours ago",
     daysAgo: " days ago",
     justNow: "Just now",
+    veryFast: "Very Fast (20s)",
+    verySlow: "Very Slow (120s)",
   },
   ja: {
     title: "HeyChain 101",
@@ -318,7 +325,7 @@ const offlineTranslations: Record<Language, TranslationData> = {
     allNews: "すべて",
     category: "カテゴリ",
     speed: "速度",
-    fast: "速い（30秒）",
+    fast: "速い（40秒）",
     normal: "普通（60秒）",
     slow: "遅い（90秒）",
     language: "言語",
@@ -358,6 +365,8 @@ const offlineTranslations: Record<Language, TranslationData> = {
     hoursAgo: "時間前",
     daysAgo: "日前",
     justNow: "たった今",
+    veryFast: "とても速い（20秒）",
+    verySlow: "とても遅い（120秒）",
   },
   zh: {
     title: "HeyChain 101",
@@ -397,7 +406,7 @@ const offlineTranslations: Record<Language, TranslationData> = {
     allNews: "全部",
     category: "分类",
     speed: "速度",
-    fast: "快速（30秒）",
+    fast: "快速（40秒）",
     normal: "正常（60秒）",
     slow: "慢速（90秒）",
     language: "语言",
@@ -437,6 +446,8 @@ const offlineTranslations: Record<Language, TranslationData> = {
     hoursAgo: "小时前",
     daysAgo: "天前",
     justNow: "刚刚",
+    veryFast: "很快（20秒）",
+    verySlow: "很慢（120秒）",
   },
   es: {
     title: "HeyChain 101",
@@ -476,7 +487,7 @@ const offlineTranslations: Record<Language, TranslationData> = {
     allNews: "Todas",
     category: "Categoría",
     speed: "Velocidad",
-    fast: "Rápido (30s)",
+    fast: "Rápido (40s)",
     normal: "Normal (60s)",
     slow: "Lento (90s)",
     language: "Idioma",
@@ -516,6 +527,8 @@ const offlineTranslations: Record<Language, TranslationData> = {
     hoursAgo: " horas atrás",
     daysAgo: " días atrás",
     justNow: "Ahora mismo",
+    veryFast: "Muy Rápido (20s)",
+    verySlow: "Muy Lento (120s)",
   },
   fr: {
     title: "HeyChain 101",
@@ -555,7 +568,7 @@ const offlineTranslations: Record<Language, TranslationData> = {
     allNews: "Toutes",
     category: "Catégorie",
     speed: "Vitesse",
-    fast: "Rapide (30s)",
+    fast: "Rapide (40s)",
     normal: "Normal (60s)",
     slow: "Lent (90s)",
     language: "Langue",
@@ -595,6 +608,8 @@ const offlineTranslations: Record<Language, TranslationData> = {
     hoursAgo: " heures",
     daysAgo: " jours",
     justNow: "À l'instant",
+    veryFast: "Très Rapide (20s)",
+    verySlow: "Très Lent (120s)",
   },
 }
 

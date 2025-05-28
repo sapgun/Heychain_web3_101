@@ -1,5 +1,7 @@
 "use client"
 
+import { DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+
 import { useState, useEffect } from "react"
 import {
   ExternalLink,
@@ -19,7 +21,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
   DropdownMenuSeparator,
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu"
@@ -75,7 +76,7 @@ export default function ChainNewsTicker() {
   const [error, setError] = useState<string | null>(null)
   const [isPaused, setIsPaused] = useState(false)
   const [isPlaying, setIsPlaying] = useState(true)
-  const [speed, setSpeed] = useState(60)
+  const [speed, setSpeed] = useState(90) // 60에서 90으로 변경
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [selectedNewsItem, setSelectedNewsItem] = useState<NewsItem | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -186,8 +187,8 @@ export default function ChainNewsTicker() {
           fetchNews(false) // 로딩 표시 없이 백그라운드 업데이트
         }
       },
-      10 * 60 * 1000,
-    ) // 10분
+      60 * 60 * 1000, // 1시간으로 변경
+    )
 
     return () => clearInterval(interval)
   }, [language, selectedCategory, isOnline, error])
@@ -368,9 +369,11 @@ export default function ChainNewsTicker() {
                 <DropdownMenuContent>
                   <DropdownMenuLabel>{t.speed}</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => setSpeed(30)}>{t.fast}</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSpeed(20)}>{t.veryFast}</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSpeed(40)}>{t.fast}</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => setSpeed(60)}>{t.normal}</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => setSpeed(90)}>{t.slow}</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSpeed(120)}>{t.verySlow}</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
@@ -388,20 +391,44 @@ export default function ChainNewsTicker() {
 
           {/* 뉴스 티커 */}
           <div
-            className="flex-1 overflow-hidden relative"
+            className="flex-1 overflow-hidden relative ticker-container"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
             {newsItems.length > 0 ? (
               <div
-                className={`flex items-center space-x-6 ${isPlaying ? "animate-ticker" : ""} ${isPaused ? "animate-pause" : ""}`}
-                style={{ animationDuration: `${speed}s` }}
+                className={`ticker-content ${isPlaying ? "" : ""} ${isPaused ? "animate-pause" : ""}`}
+                style={{
+                  animationDuration: `${speed}s`,
+                  animationPlayState: isPlaying ? (isPaused ? "paused" : "running") : "paused",
+                }}
               >
-                {newsItems.map((item, index) => (
+                {/* 원본 뉴스 아이템들 */}
+                {news.map((item, index) => (
                   <div
-                    key={`${item.id}-${index}`}
+                    key={`original-${item.id}-${index}`}
                     onClick={() => handleNewsClick(item)}
-                    className="flex items-center space-x-2 flex-shrink-0 group cursor-pointer"
+                    className="flex items-center space-x-2 flex-shrink-0 group cursor-pointer mr-6"
+                  >
+                    <ChainLogo chain={item.chain} />
+                    <span className="text-xs lg:text-sm text-gray-300 group-hover:text-white transition-colors whitespace-nowrap">
+                      <span className="text-purple-400 font-medium mr-1">{item.chain}:</span>
+                      {item.title}
+                    </span>
+                    <Badge variant="secondary" className="text-xs ml-1 lg:ml-2 hidden sm:inline-flex">
+                      {item.source}
+                    </Badge>
+                    <span className="text-xs text-gray-500 hidden lg:inline">{formatTimeAgo(item.publishedAt)}</span>
+                    <ExternalLink className="w-3 h-3 text-gray-500 group-hover:text-purple-400 transition-colors" />
+                  </div>
+                ))}
+
+                {/* 복제된 뉴스 아이템들 (무한 루프용) */}
+                {news.map((item, index) => (
+                  <div
+                    key={`duplicate-${item.id}-${index}`}
+                    onClick={() => handleNewsClick(item)}
+                    className="flex items-center space-x-2 flex-shrink-0 group cursor-pointer mr-6"
                   >
                     <ChainLogo chain={item.chain} />
                     <span className="text-xs lg:text-sm text-gray-300 group-hover:text-white transition-colors whitespace-nowrap">

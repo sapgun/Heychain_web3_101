@@ -15,7 +15,7 @@ interface NewsItem {
 
 // 체인 키워드 매핑
 const chainKeywords = {
-  ethereum: ["ethereum", "eth", "이더리움"],
+  ethereum: ["ethereum", "eth", "이더리움", "ether"],
   bitcoin: ["bitcoin", "btc", "비트코인"],
   solana: ["solana", "sol", "솔라나"],
   polygon: ["polygon", "matic", "폴리곤"],
@@ -25,6 +25,8 @@ const chainKeywords = {
   cardano: ["cardano", "ada", "카르다노"],
   polkadot: ["polkadot", "dot", "폴카닷"],
   chainlink: ["chainlink", "link", "체인링크"],
+  ripple: ["ripple", "xrp", "리플"],
+  binance: ["binance", "bnb", "바이낸스"],
 }
 
 // 뉴스에서 체인 추출 함수
@@ -62,353 +64,620 @@ function extractCategory(title: string, description: string): string {
   if (text.includes("price") || text.includes("market") || text.includes("가격") || text.includes("시장")) {
     return "시장"
   }
+  if (text.includes("etf") || text.includes("상장지수펀드")) {
+    return "ETF"
+  }
+  if (text.includes("staking") || text.includes("스테이킹")) {
+    return "스테이킹"
+  }
+  if (text.includes("gaming") || text.includes("game") || text.includes("게임")) {
+    return "게임"
+  }
 
   return "일반"
 }
 
-// 안정적인 한국어 뉴스 데이터
-function getKoreanNews(): NewsItem[] {
-  const baseTime = Date.now()
-
-  return [
+// 업데이트된 RSS 피드 목록 - 더 많은 소스 추가
+const RSS_FEEDS = {
+  korean: [
     {
-      id: "kr-stable-1",
-      chain: "Bitcoin",
-      title: "비트코인, 기관 투자자들의 지속적인 관심으로 상승세 유지",
-      description:
-        "주요 투자기관들이 비트코인에 대한 투자를 확대하면서 가격 상승세가 이어지고 있습니다. 특히 ETF 승인 이후 기관 자금 유입이 크게 증가했습니다.",
-      url: "https://coinness.com/news/bitcoin-institutional-interest",
-      publishedAt: new Date(baseTime - Math.random() * 3600000).toISOString(),
-      source: "코인니스",
-      category: "시장",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=bitcoin+chart",
+      url: "https://kr.cointelegraph.com/rss",
+      source: "코인텔레그래프 KR",
+      language: "ko",
+      priority: 1,
     },
     {
-      id: "kr-stable-2",
-      chain: "Ethereum",
-      title: "이더리움 2.0 스테이킹 보상률 상승, 검증자 수 증가",
-      description:
-        "이더리움 네트워크의 스테이킹 보상률이 상승하면서 더 많은 검증자들이 참여하고 있습니다. 네트워크 보안성도 함께 강화되고 있습니다.",
-      url: "https://tokenpost.kr/news/ethereum-staking-rewards",
-      publishedAt: new Date(baseTime - Math.random() * 7200000).toISOString(),
-      source: "토큰포스트",
-      category: "스테이킹",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=ethereum+staking",
+      url: "https://kr.cointelegraph.com/editors_pick_rss",
+      source: "코인텔레그래프 에디터스픽",
+      language: "ko",
+      priority: 2,
     },
     {
-      id: "kr-stable-3",
-      chain: "Solana",
-      title: "솔라나 생태계, 새로운 DeFi 프로토콜 출시로 TVL 급증",
-      description:
-        "솔라나 블록체인에 새로운 탈중앙화 금융(DeFi) 프로토콜이 출시되면서 총 예치 자산(TVL)이 크게 증가했습니다.",
-      url: "https://coinness.com/news/solana-defi-tvl",
-      publishedAt: new Date(baseTime - Math.random() * 10800000).toISOString(),
-      source: "코인니스",
-      category: "DeFi",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=solana+defi",
+      url: "https://kr.beincrypto.com/feed/",
+      source: "BeInCrypto 한국어",
+      language: "ko",
+      priority: 3,
+    },
+  ],
+  english: [
+    {
+      url: "https://cointelegraph.com/rss",
+      source: "CoinTelegraph",
+      language: "en",
+      priority: 1,
     },
     {
-      id: "kr-stable-4",
-      chain: "Ripple",
-      title: "리플, 아시아 태평양 지역 CBDC 파트너십 확대",
-      description:
-        "리플이 아시아 태평양 지역의 중앙은행 디지털화폐(CBDC) 프로젝트에 대한 파트너십을 확대한다고 발표했습니다.",
-      url: "https://tokenpost.kr/news/ripple-cbdc-asia",
-      publishedAt: new Date(baseTime - Math.random() * 14400000).toISOString(),
-      source: "토큰포스트",
-      category: "파트너십",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=ripple+cbdc",
+      url: "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      source: "CoinDesk",
+      language: "en",
+      priority: 2,
     },
     {
-      id: "kr-stable-5",
-      chain: "Polygon",
-      title: "폴리곤 zkEVM, 메인넷 출시 후 사용자 급증",
-      description: "폴리곤의 zkEVM 솔루션이 메인넷에 출시된 후 일일 활성 사용자 수가 크게 증가하고 있습니다.",
-      url: "https://coinness.com/news/polygon-zkevm-users",
-      publishedAt: new Date(baseTime - Math.random() * 18000000).toISOString(),
-      source: "코인니스",
-      category: "성장",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=polygon+zkevm",
+      url: "https://decrypt.co/feed",
+      source: "Decrypt",
+      language: "en",
+      priority: 3,
     },
     {
-      id: "kr-stable-6",
-      chain: "Avalanche",
-      title: "아발란체, 한국 블록체인 개발자 지원 프로그램 확대",
-      description: "아발란체 재단이 한국 블록체인 개발자들을 위한 지원 프로그램을 확대한다고 발표했습니다.",
-      url: "https://tokenpost.kr/news/avalanche-korea-developers",
-      publishedAt: new Date(baseTime - Math.random() * 21600000).toISOString(),
-      source: "토큰포스트",
-      category: "생태계",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=avalanche+developers",
+      url: "https://www.theblock.co/rss.xml",
+      source: "The Block",
+      language: "en",
+      priority: 4,
     },
     {
-      id: "kr-stable-7",
-      chain: "Cardano",
-      title: "카르다노, 새로운 스마트 컨트랙트 업데이트 예정",
-      description: "카르다노가 스마트 컨트랙트 기능을 개선하는 새로운 업데이트를 준비 중이라고 발표했습니다.",
-      url: "https://coinness.com/news/cardano-smart-contracts",
-      publishedAt: new Date(baseTime - Math.random() * 25200000).toISOString(),
-      source: "코인니스",
-      category: "업데이트",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=cardano+smart+contracts",
+      url: "https://cryptoslate.com/feed/",
+      source: "CryptoSlate",
+      language: "en",
+      priority: 5,
     },
     {
-      id: "kr-stable-8",
-      chain: "Chainlink",
-      title: "체인링크, 크로스체인 상호운용성 프로토콜 확장",
-      description: "체인링크가 서로 다른 블록체인 간의 상호운용성을 높이는 새로운 프로토콜을 발표했습니다.",
-      url: "https://tokenpost.kr/news/chainlink-cross-chain",
-      publishedAt: new Date(baseTime - Math.random() * 28800000).toISOString(),
-      source: "토큰포스트",
-      category: "기술",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=chainlink+cross+chain",
+      url: "https://beincrypto.com/feed/",
+      source: "BeInCrypto",
+      language: "en",
+      priority: 6,
     },
-  ]
+    {
+      url: "https://coingape.com/feed/",
+      source: "CoinGape",
+      language: "en",
+      priority: 7,
+    },
+    {
+      url: "https://www.newsbtc.com/feed/",
+      source: "NewsBTC",
+      language: "en",
+      priority: 8,
+    },
+    {
+      url: "https://cryptonews.com/news/feed/",
+      source: "CryptoNews",
+      language: "en",
+      priority: 9,
+    },
+    {
+      url: "https://news.bitcoin.com/feed/",
+      source: "Bitcoin.com News",
+      language: "en",
+      priority: 10,
+    },
+  ],
 }
 
-// 안정적인 영어 뉴스 데이터
-function getEnglishNews(): NewsItem[] {
-  const baseTime = Date.now()
-
-  return [
-    {
-      id: "en-stable-1",
-      chain: "Bitcoin",
-      title: "Bitcoin ETF Sees Record Inflows as Institutional Adoption Grows",
-      description:
-        "Bitcoin exchange-traded funds have recorded unprecedented inflows this week as major financial institutions continue to embrace cryptocurrency investments.",
-      url: "https://cointelegraph.com/news/bitcoin-etf-record-inflows",
-      publishedAt: new Date(baseTime - Math.random() * 3600000).toISOString(),
-      source: "CoinTelegraph",
-      category: "시장",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=bitcoin+etf+chart",
-    },
-    {
-      id: "en-stable-2",
-      chain: "Ethereum",
-      title: "Ethereum Layer 2 Solutions See 300% Growth in Transaction Volume",
-      description:
-        "Layer 2 scaling solutions on Ethereum have experienced a 300% increase in transaction volume over the past quarter, driven by lower fees and faster processing.",
-      url: "https://coindesk.com/news/ethereum-layer2-growth",
-      publishedAt: new Date(baseTime - Math.random() * 7200000).toISOString(),
-      source: "CoinDesk",
-      category: "성장",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=ethereum+layer2",
-    },
-    {
-      id: "en-stable-3",
-      chain: "Solana",
-      title: "Solana NFT Marketplace Surpasses Ethereum in Daily Transactions",
-      description:
-        "Solana-based NFT marketplaces have overtaken Ethereum in daily transaction count, marking a significant milestone for the ecosystem.",
-      url: "https://cointelegraph.com/news/solana-nft-ethereum-transactions",
-      publishedAt: new Date(baseTime - Math.random() * 10800000).toISOString(),
-      source: "CoinTelegraph",
-      category: "NFT",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=solana+nft+marketplace",
-    },
-    {
-      id: "en-stable-4",
-      chain: "Arbitrum",
-      title: "Arbitrum Announces $200M Developer Fund to Boost Ecosystem",
-      description:
-        "Arbitrum Foundation has unveiled a $200 million developer fund aimed at accelerating the growth of decentralized applications on its network.",
-      url: "https://coindesk.com/news/arbitrum-developer-fund",
-      publishedAt: new Date(baseTime - Math.random() * 14400000).toISOString(),
-      source: "CoinDesk",
-      category: "생태계",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=arbitrum+developer+fund",
-    },
-    {
-      id: "en-stable-5",
-      chain: "Polygon",
-      title: "Major Gaming Studio Partners with Polygon for Web3 Integration",
-      description:
-        "A leading gaming studio has announced a partnership with Polygon to integrate blockchain technology into their upcoming titles.",
-      url: "https://cointelegraph.com/news/gaming-studio-polygon-web3",
-      publishedAt: new Date(baseTime - Math.random() * 18000000).toISOString(),
-      source: "CoinTelegraph",
-      category: "게임",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=polygon+gaming+web3",
-    },
-    {
-      id: "en-stable-6",
-      chain: "Optimism",
-      title: "Optimism Introduces New Governance Token Distribution Model",
-      description:
-        "Optimism has announced a new model for distributing governance tokens to encourage long-term participation in the ecosystem.",
-      url: "https://coindesk.com/news/optimism-governance-token",
-      publishedAt: new Date(baseTime - Math.random() * 21600000).toISOString(),
-      source: "CoinDesk",
-      category: "거버넌스",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=optimism+governance",
-    },
-    {
-      id: "en-stable-7",
-      chain: "Avalanche",
-      title: "Avalanche Subnets Gain Traction with Enterprise Adoption",
-      description:
-        "Enterprise companies are increasingly adopting Avalanche subnets for their blockchain infrastructure needs, driving network growth.",
-      url: "https://cointelegraph.com/news/avalanche-subnets-enterprise",
-      publishedAt: new Date(baseTime - Math.random() * 25200000).toISOString(),
-      source: "CoinTelegraph",
-      category: "기업",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=avalanche+enterprise",
-    },
-    {
-      id: "en-stable-8",
-      chain: "Chainlink",
-      title: "Chainlink Expands Oracle Network to Support AI Applications",
-      description:
-        "Chainlink has announced the expansion of its oracle network to provide data feeds specifically designed for AI and machine learning applications.",
-      url: "https://coindesk.com/news/chainlink-oracle-ai",
-      publishedAt: new Date(baseTime - Math.random() * 28800000).toISOString(),
-      source: "CoinDesk",
-      category: "AI",
-      imageUrl: "/placeholder.svg?height=200&width=400&query=chainlink+ai+oracle",
-    },
-  ]
-}
-
-// NewsAPI를 안전하게 시도하는 함수 (선택적)
-async function tryFetchNewsAPI(): Promise<NewsItem[]> {
+// RSS 파서 동적 로딩 및 안전한 RSS 처리
+async function fetchRSSFeed(feedConfig: {
+  url: string
+  source: string
+  language: string
+  priority: number
+}): Promise<NewsItem[]> {
   try {
-    const apiKey = process.env.NEWS_API_KEY
-    if (!apiKey) {
+    console.log(`RSS 피드 가져오기 시도: ${feedConfig.source} (우선순위: ${feedConfig.priority})`)
+
+    // RSS 파서 동적 로딩
+    let Parser
+    try {
+      Parser = (await import("rss-parser")).default
+    } catch (importError) {
+      console.error("RSS Parser 로딩 실패:", importError)
+      throw new Error("RSS Parser를 로드할 수 없습니다")
+    }
+
+    const parser = new Parser({
+      timeout: 15000, // 타임아웃 증가
+      customFields: {
+        item: [
+          ["media:content", "mediaContent"],
+          ["media:thumbnail", "mediaThumbnail"],
+          ["enclosure", "enclosure"],
+          ["dc:creator", "creator"],
+        ],
+      },
+    })
+
+    // RSS 피드 가져오기 (한국어 사이트용 헤더 최적화)
+    const headers = {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      Accept: "application/rss+xml, application/xml, text/xml, application/atom+xml, */*",
+      "Accept-Language": feedConfig.language === "ko" ? "ko-KR,ko;q=0.9,en;q=0.8" : "en-US,en;q=0.9",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Cache-Control": "no-cache",
+      Pragma: "no-cache",
+    }
+
+    const response = await fetch(feedConfig.url, {
+      headers,
+      signal: AbortSignal.timeout(15000),
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status} ${response.statusText} for ${feedConfig.source}`)
+    }
+
+    const contentType = response.headers.get("content-type") || ""
+    console.log(`${feedConfig.source} Content-Type:`, contentType)
+
+    const xmlText = await response.text()
+    console.log(`${feedConfig.source} 응답 길이:`, xmlText.length)
+
+    if (!xmlText || xmlText.length < 100) {
+      throw new Error(`${feedConfig.source}: RSS 내용이 너무 짧습니다 (${xmlText.length}자)`)
+    }
+
+    // HTML 페이지인지 확인
+    if (xmlText.includes("<!DOCTYPE html") || xmlText.includes("<html")) {
+      throw new Error(`${feedConfig.source}: HTML 페이지를 반환함 (RSS 피드 아님)`)
+    }
+
+    // RSS/Atom 형식 확인
+    const hasRssTag = xmlText.includes("<rss")
+    const hasFeedTag = xmlText.includes("<feed")
+    const hasChannelTag = xmlText.includes("<channel")
+    const hasItemTag = xmlText.includes("<item")
+
+    console.log(`${feedConfig.source} 형식 분석:`, {
+      hasRssTag,
+      hasFeedTag,
+      hasChannelTag,
+      hasItemTag,
+    })
+
+    if (!hasRssTag && !hasFeedTag) {
+      throw new Error(`${feedConfig.source}: RSS 또는 Atom 태그를 찾을 수 없음`)
+    }
+
+    if (hasRssTag && (!hasChannelTag || !hasItemTag)) {
+      throw new Error(`${feedConfig.source}: 불완전한 RSS 구조`)
+    }
+
+    const feed = await parser.parseString(xmlText)
+
+    if (!feed.items || feed.items.length === 0) {
+      console.log(`${feedConfig.source}: 피드 아이템이 없음`)
       return []
     }
 
+    console.log(`${feedConfig.source}: ${feed.items.length}개 아이템 발견`)
+
+    const newsItems: NewsItem[] = feed.items.slice(0, 15).map((item: any, index: number) => {
+      const title = item.title || "제목 없음"
+      const description = item.contentSnippet || item.content || item.description || "내용 없음"
+      const chain = extractChainFromNews(title, description)
+      const category = extractCategory(title, description)
+
+      // 이미지 URL 추출 (코인텔레그래프 특화)
+      let imageUrl = undefined
+      if (item.enclosure?.url && item.enclosure.type?.startsWith("image/")) {
+        imageUrl = item.enclosure.url
+      } else if (item.mediaContent?.url) {
+        imageUrl = item.mediaContent.url
+      } else if (item.mediaThumbnail?.url) {
+        imageUrl = item.mediaThumbnail.url
+      }
+
+      // 발행 시간 처리
+      let publishedAt = new Date().toISOString()
+      if (item.pubDate) {
+        try {
+          publishedAt = new Date(item.pubDate).toISOString()
+        } catch (e) {
+          console.warn(`날짜 파싱 실패: ${item.pubDate}`)
+        }
+      } else if (item.isoDate) {
+        publishedAt = item.isoDate
+      }
+
+      return {
+        id: `${feedConfig.source.toLowerCase().replace(/\s+/g, "-")}-${index}-${Date.now()}`,
+        chain,
+        title: title.substring(0, 200).trim(),
+        description: description.substring(0, 300).trim(),
+        url: item.link || item.guid || "#",
+        publishedAt,
+        source: feedConfig.source,
+        category,
+        imageUrl,
+      }
+    })
+
+    console.log(`${feedConfig.source}: ${newsItems.length}개 뉴스 수집 완료`)
+    return newsItems
+  } catch (error) {
+    console.error(`RSS 피드 상세 오류 (${feedConfig.source}):`)
+    console.error("- 오류 타입:", error.constructor.name)
+    console.error("- 오류 메시지:", error.message)
+    if (error.stack) {
+      console.error("- 스택 (첫 3줄):", error.stack.split("\n").slice(0, 3).join("\n"))
+    }
+    return []
+  }
+}
+
+// NewsAPI 백업 강화 (더 적극적으로 활용)
+async function fetchNewsAPI(language = "en"): Promise<NewsItem[]> {
+  try {
+    const apiKey = process.env.NEWS_API_KEY
+    if (!apiKey) {
+      console.log("NewsAPI 키가 없음, 건너뜀")
+      return []
+    }
+
+    console.log(`NewsAPI 호출 중... (언어: ${language})`)
+
+    // 언어별 검색 키워드 최적화
+    const searchQueries = {
+      ko: "암호화폐 OR 비트코인 OR 이더리움 OR 블록체인 OR 코인",
+      en: "cryptocurrency OR bitcoin OR ethereum OR blockchain OR crypto OR DeFi OR NFT",
+    }
+
+    const query = searchQueries[language] || searchQueries.en
+    const langParam = language === "ko" ? "ko" : "en"
+
     const response = await fetch(
-      `https://newsapi.org/v2/everything?q=cryptocurrency OR blockchain OR bitcoin OR ethereum&language=en&sortBy=publishedAt&pageSize=10&apiKey=${apiKey}`,
+      `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=${langParam}&sortBy=publishedAt&pageSize=15&apiKey=${apiKey}`,
       {
-        method: "GET",
         headers: {
           "User-Agent": "HeyChain-News-Bot/1.0",
         },
-        signal: AbortSignal.timeout(5000), // 5초 타임아웃
+        signal: AbortSignal.timeout(10000),
       },
     )
 
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`)
+      throw new Error(`NewsAPI HTTP ${response.status}: ${response.statusText}`)
     }
 
     const data = await response.json()
 
     if (data.status !== "ok" || !data.articles) {
-      throw new Error("Invalid API response")
+      throw new Error(`NewsAPI 응답 오류: ${data.message || "Unknown error"}`)
     }
 
-    return data.articles.slice(0, 5).map((article: any, index: number) => {
-      const chain = extractChainFromNews(article.title, article.description || "")
-      const category = extractCategory(article.title, article.description || "")
+    console.log(`NewsAPI 응답: ${data.articles.length}개 기사`)
 
-      return {
-        id: `newsapi-${index}-${Date.now()}`,
-        chain,
-        title: article.title,
-        description: article.description || "상세 내용이 없습니다.",
-        url: article.url,
-        publishedAt: article.publishedAt,
-        source: article.source.name,
-        category,
-        imageUrl: article.urlToImage,
-      }
-    })
+    const newsItems = data.articles
+      .filter((article: any) => {
+        // 품질 필터링
+        return (
+          article.title &&
+          article.description &&
+          article.url &&
+          article.title !== "[Removed]" &&
+          article.description !== "[Removed]" &&
+          !article.title.toLowerCase().includes("removed") &&
+          article.description.length > 50
+        )
+      })
+      .slice(0, 12)
+      .map((article: any, index: number) => {
+        const chain = extractChainFromNews(article.title, article.description || "")
+        const category = extractCategory(article.title, article.description || "")
+
+        return {
+          id: `newsapi-${language}-${index}-${Date.now()}`,
+          chain,
+          title: article.title.substring(0, 200).trim(),
+          description: (article.description || "상세 내용이 없습니다.").substring(0, 300).trim(),
+          url: article.url,
+          publishedAt: article.publishedAt,
+          source: `${article.source.name} (NewsAPI)`,
+          category,
+          imageUrl: article.urlToImage,
+        }
+      })
+
+    console.log(`NewsAPI: ${newsItems.length}개 뉴스 처리 완료`)
+    return newsItems
   } catch (error) {
-    console.log("NewsAPI 호출 실패 (무시됨):", error)
+    console.error("NewsAPI 호출 실패:", error.message)
     return []
   }
 }
 
-// 뉴스 캐싱
-let cachedEnglishNews: NewsItem[] = []
-let cachedKoreanNews: NewsItem[] = []
-let lastEnglishFetch = 0
-let lastKoreanFetch = 0
-const CACHE_DURATION = 10 * 60 * 1000 // 10분 캐시
+// 강화된 폴백 뉴스 시스템
+function getFallbackNews(language: string): NewsItem[] {
+  const baseTime = Date.now()
 
+  if (language === "ko") {
+    return [
+      {
+        id: "fallback-ko-1",
+        chain: "Bitcoin",
+        title: "비트코인, 기관 투자자들의 지속적인 관심으로 상승세 유지",
+        description:
+          "주요 투자기관들이 비트코인에 대한 투자를 확대하면서 가격 상승세가 이어지고 있습니다. 특히 ETF 승인 이후 기관 자금 유입이 크게 증가했습니다.",
+        url: "https://kr.cointelegraph.com",
+        publishedAt: new Date(baseTime - Math.random() * 3600000).toISOString(),
+        source: "코인텔레그래프 KR",
+        category: "시장",
+      },
+      {
+        id: "fallback-ko-2",
+        chain: "Ethereum",
+        title: "이더리움 2.0 스테이킹 보상률 상승, 검증자 수 증가",
+        description:
+          "이더리움 네트워크의 스테이킹 보상률이 상승하면서 더 많은 검증자들이 참여하고 있습니다. 네트워크 보안성도 함께 강화되고 있습니다.",
+        url: "https://ethereum.org",
+        publishedAt: new Date(baseTime - Math.random() * 7200000).toISOString(),
+        source: "이더리움 재단",
+        category: "스테이킹",
+      },
+      {
+        id: "fallback-ko-3",
+        chain: "Solana",
+        title: "솔라나 생태계, 새로운 DeFi 프로토콜 출시로 TVL 급증",
+        description:
+          "솔라나 블록체인에 새로운 탈중앙화 금융(DeFi) 프로토콜이 출시되면서 총 예치 자산(TVL)이 크게 증가했습니다.",
+        url: "https://solana.com",
+        publishedAt: new Date(baseTime - Math.random() * 10800000).toISOString(),
+        source: "솔라나 랩스",
+        category: "DeFi",
+      },
+      {
+        id: "fallback-ko-4",
+        chain: "Polygon",
+        title: "폴리곤, 새로운 zkEVM 업그레이드로 확장성 대폭 개선",
+        description:
+          "폴리곤이 영지식 증명 기반의 새로운 가상머신을 도입하여 트랜잭션 처리 속도와 비용 효율성을 크게 향상시켰습니다.",
+        url: "https://polygon.technology",
+        publishedAt: new Date(baseTime - Math.random() * 14400000).toISOString(),
+        source: "폴리곤 팀",
+        category: "업데이트",
+      },
+      {
+        id: "fallback-ko-5",
+        chain: "Cardano",
+        title: "카르다노, 새로운 스마트 컨트랙트 기능으로 DeFi 생태계 확장",
+        description:
+          "카르다노 블록체인이 향상된 스마트 컨트랙트 기능을 도입하면서 탈중앙화 금융 애플리케이션들이 급속히 증가하고 있습니다.",
+        url: "https://cardano.org",
+        publishedAt: new Date(baseTime - Math.random() * 18000000).toISOString(),
+        source: "카르다노 재단",
+        category: "DeFi",
+      },
+    ]
+  } else {
+    return [
+      {
+        id: "fallback-en-1",
+        chain: "Bitcoin",
+        title: "Bitcoin ETF Sees Record Inflows as Institutional Adoption Grows",
+        description:
+          "Bitcoin exchange-traded funds have recorded unprecedented inflows this week as major financial institutions continue to embrace cryptocurrency investments.",
+        url: "https://cointelegraph.com",
+        publishedAt: new Date(baseTime - Math.random() * 3600000).toISOString(),
+        source: "CoinTelegraph",
+        category: "ETF",
+      },
+      {
+        id: "fallback-en-2",
+        chain: "Ethereum",
+        title: "Ethereum Layer 2 Solutions See 300% Growth in Transaction Volume",
+        description:
+          "Layer 2 scaling solutions on Ethereum have experienced a 300% increase in transaction volume over the past quarter, signaling growing adoption.",
+        url: "https://ethereum.org",
+        publishedAt: new Date(baseTime - Math.random() * 7200000).toISOString(),
+        source: "Ethereum Foundation",
+        category: "Growth",
+      },
+      {
+        id: "fallback-en-3",
+        chain: "Solana",
+        title: "Solana Network Achieves New Milestone with 65,000 TPS",
+        description:
+          "The Solana blockchain has reached a new performance milestone, processing over 65,000 transactions per second during peak usage.",
+        url: "https://solana.com",
+        publishedAt: new Date(baseTime - Math.random() * 10800000).toISOString(),
+        source: "Solana Labs",
+        category: "Performance",
+      },
+      {
+        id: "fallback-en-4",
+        chain: "Polygon",
+        title: "Major DeFi Protocol Launches on Polygon zkEVM",
+        description:
+          "A leading decentralized finance protocol has announced its deployment on Polygon's zkEVM, bringing advanced DeFi features to the Layer 2 ecosystem.",
+        url: "https://polygon.technology",
+        publishedAt: new Date(baseTime - Math.random() * 14400000).toISOString(),
+        source: "Polygon Labs",
+        category: "DeFi",
+      },
+    ]
+  }
+}
+
+// 뉴스 캐싱
+const cachedNews: { [key: string]: { data: NewsItem[]; timestamp: number } } = {}
+const CACHE_DURATION = 30 * 60 * 1000 // 30분 캐시 (더 자주 업데이트)
+
+// 메인 뉴스 수집 로직 업데이트
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url)
+    console.log("=== 뉴스 API 호출 시작 ===")
+
+    const url = new URL(request.url)
+    const searchParams = url.searchParams
     const language = searchParams.get("lang") || "en"
     const category = searchParams.get("category") || "all"
 
-    let news: NewsItem[] = []
+    console.log(`언어: ${language}, 카테고리: ${category}`)
+
+    const cacheKey = `${language}-${category}`
     const now = Date.now()
 
-    if (language === "ko") {
-      // 한국어 뉴스 처리
-      if (now - lastKoreanFetch > CACHE_DURATION || cachedKoreanNews.length === 0) {
-        // 기본 뉴스 가져오기
-        const baseNews = getKoreanNews()
+    // 캐시 확인
+    if (cachedNews[cacheKey] && now - cachedNews[cacheKey].timestamp < CACHE_DURATION) {
+      console.log(`캐시된 뉴스 반환: ${cacheKey}`)
+      return Response.json({
+        success: true,
+        data: cachedNews[cacheKey].data,
+        total: cachedNews[cacheKey].data.length,
+        timestamp: new Date().toISOString(),
+        cached: true,
+      })
+    }
 
-        // 외부 API 시도 (실패해도 무시)
-        try {
-          const externalNews = await tryFetchNewsAPI()
-          if (externalNews.length > 0) {
-            // 외부 뉴스를 한국어로 번역하거나 그대로 추가
-            cachedKoreanNews = [...baseNews, ...externalNews.slice(0, 3)]
-          } else {
-            cachedKoreanNews = baseNews
-          }
-        } catch {
-          cachedKoreanNews = baseNews
-        }
+    console.log(`새로운 뉴스 수집 시작: ${language}`)
 
-        lastKoreanFetch = now
+    let allNews: NewsItem[] = []
+    const feeds = language === "ko" ? RSS_FEEDS.korean : RSS_FEEDS.english
+
+    console.log(`사용할 RSS 피드 수: ${feeds.length}`)
+
+    // RSS 피드들을 우선순위 순으로 처리 (병렬 처리로 속도 향상)
+    const sortedFeeds = feeds.sort((a, b) => a.priority - b.priority)
+
+    // 상위 5개 피드만 병렬 처리 (너무 많으면 느려짐)
+    const primaryFeeds = sortedFeeds.slice(0, 5)
+    const secondaryFeeds = sortedFeeds.slice(5)
+
+    // 1차: 주요 피드들 병렬 처리
+    console.log(`1차 RSS 수집: ${primaryFeeds.length}개 피드 (병렬)`)
+    const primaryPromises = primaryFeeds.map((feed) => fetchRSSFeed(feed))
+    const primaryResults = await Promise.allSettled(primaryPromises)
+
+    primaryResults.forEach((result, index) => {
+      if (result.status === "fulfilled" && result.value.length > 0) {
+        allNews.push(...result.value)
+        console.log(`${primaryFeeds[index].source}: ${result.value.length}개 뉴스 추가`)
+      } else {
+        console.log(`${primaryFeeds[index].source}: 실패 또는 뉴스 없음`)
       }
-      news = cachedKoreanNews
-    } else {
-      // 영어 뉴스 처리
-      if (now - lastEnglishFetch > CACHE_DURATION || cachedEnglishNews.length === 0) {
-        // 기본 뉴스 가져오기
-        const baseNews = getEnglishNews()
+    })
 
-        // 외부 API 시도 (실패해도 무시)
+    // NewsAPI 적극 활용 (RSS와 병렬로 처리)
+    console.log("NewsAPI 백업 호출...")
+    const newsApiPromise = fetchNewsAPI(language)
+
+    // 2차: 보조 피드들 (뉴스가 부족할 때만)
+    if (allNews.length < 10 && secondaryFeeds.length > 0) {
+      console.log(`2차 RSS 수집: ${secondaryFeeds.length}개 피드 (순차)`)
+      for (const feed of secondaryFeeds.slice(0, 3)) {
+        // 최대 3개만 추가
         try {
-          const externalNews = await tryFetchNewsAPI()
-          if (externalNews.length > 0) {
-            cachedEnglishNews = [...externalNews, ...baseNews]
-          } else {
-            cachedEnglishNews = baseNews
+          const feedNews = await fetchRSSFeed(feed)
+          if (feedNews.length > 0) {
+            allNews.push(...feedNews)
+            console.log(`${feed.source}: ${feedNews.length}개 뉴스 추가`)
+            if (allNews.length >= 15) break // 충분하면 중단
           }
-        } catch {
-          cachedEnglishNews = baseNews
+        } catch (error) {
+          console.error(`${feed.source} RSS 처리 실패:`, error.message)
         }
-
-        lastEnglishFetch = now
       }
-      news = cachedEnglishNews
+    }
+
+    // NewsAPI 결과 대기 및 추가
+    try {
+      const newsApiResults = await newsApiPromise
+      if (newsApiResults.length > 0) {
+        allNews.push(...newsApiResults)
+        console.log(`NewsAPI: ${newsApiResults.length}개 뉴스 추가`)
+      }
+    } catch (error) {
+      console.log("NewsAPI 처리 실패:", error.message)
+    }
+
+    // RSS 수집 결과 확인
+    console.log(`총 수집된 뉴스: ${allNews.length}개`)
+
+    // RSS + NewsAPI 모두 실패 시 폴백 뉴스 사용
+    if (allNews.length === 0) {
+      console.log("모든 소스에서 뉴스를 가져올 수 없음, 폴백 뉴스 사용")
+      allNews = getFallbackNews(language)
+    } else if (allNews.length < 5) {
+      console.log("뉴스가 부족함, 폴백 뉴스 추가")
+      const fallbackNews = getFallbackNews(language)
+      allNews.push(...fallbackNews.slice(0, 8 - allNews.length))
     }
 
     // 카테고리 필터링
     if (category !== "all") {
-      news = news.filter(
+      const beforeFilter = allNews.length
+      allNews = allNews.filter(
         (item) =>
           item.category.toLowerCase().includes(category.toLowerCase()) ||
           category.toLowerCase().includes(item.category.toLowerCase()),
       )
+      console.log(`카테고리 필터링: ${beforeFilter} -> ${allNews.length}`)
     }
 
     // 최신순 정렬
-    news.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+    allNews.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
 
-    // 최대 20개로 제한
-    news = news.slice(0, 20)
+    // 중복 제거 (제목 기준, 유사도 검사)
+    const uniqueNews = allNews.filter((item, index, self) => {
+      return (
+        index ===
+        self.findIndex((t) => {
+          // 제목이 80% 이상 유사하면 중복으로 간주
+          const similarity = calculateSimilarity(t.title, item.title)
+          return similarity > 0.8
+        })
+      )
+    })
+
+    // 최대 30개로 제한 (더 많은 뉴스 제공)
+    const finalNews = uniqueNews.slice(0, 30)
+
+    // 캐시 저장
+    cachedNews[cacheKey] = {
+      data: finalNews,
+      timestamp: now,
+    }
+
+    console.log(`뉴스 수집 완료: ${finalNews.length}개 (${language})`)
+
+    // 소스별 통계
+    const sourceStats = finalNews.reduce((acc, item) => {
+      acc[item.source] = (acc[item.source] || 0) + 1
+      return acc
+    }, {})
 
     return Response.json({
       success: true,
-      data: news,
-      total: news.length,
+      data: finalNews,
+      total: finalNews.length,
       timestamp: new Date().toISOString(),
-      cached: true,
+      sources: Object.keys(sourceStats),
+      cached: false,
+      debug: {
+        rssFeeds: feeds.length,
+        rssNews: finalNews.filter((item) => !item.id.startsWith("newsapi") && !item.id.startsWith("fallback")).length,
+        newsApiNews: finalNews.filter((item) => item.id.startsWith("newsapi")).length,
+        fallbackNews: finalNews.filter((item) => item.id.startsWith("fallback")).length,
+        sourceStats,
+        language,
+        category,
+      },
     })
   } catch (error) {
-    console.error("뉴스 API 최종 오류:", error)
+    console.error("=== 뉴스 API 최종 오류 ===")
+    console.error("Error:", error)
 
-    // 완전 실패 시에도 기본 뉴스 제공
-    const fallbackNews = getEnglishNews()
+    // 완전 실패 시에도 폴백 뉴스 제공
+    const language = new URL(request.url).searchParams.get("lang") || "en"
+    const fallbackNews = getFallbackNews(language)
 
     return Response.json({
       success: true,
@@ -416,7 +685,50 @@ export async function GET(request: NextRequest) {
       total: fallbackNews.length,
       timestamp: new Date().toISOString(),
       fallback: true,
-      message: "기본 뉴스를 표시합니다.",
+      error: error instanceof Error ? error.message : "Unknown error",
+      debug: {
+        errorType: error instanceof Error ? error.constructor.name : "Unknown",
+        errorMessage: error instanceof Error ? error.message : "Unknown error",
+        fallbackUsed: true,
+      },
     })
   }
+}
+
+// 문자열 유사도 계산 함수
+function calculateSimilarity(str1: string, str2: string): number {
+  const longer = str1.length > str2.length ? str1 : str2
+  const shorter = str1.length > str2.length ? str2 : str1
+
+  if (longer.length === 0) {
+    return 1.0
+  }
+
+  const editDistance = levenshteinDistance(longer, shorter)
+  return (longer.length - editDistance) / longer.length
+}
+
+// 레벤슈타인 거리 계산
+function levenshteinDistance(str1: string, str2: string): number {
+  const matrix = []
+
+  for (let i = 0; i <= str2.length; i++) {
+    matrix[i] = [i]
+  }
+
+  for (let j = 0; j <= str1.length; j++) {
+    matrix[0][j] = j
+  }
+
+  for (let i = 1; i <= str2.length; i++) {
+    for (let j = 1; j <= str1.length; j++) {
+      if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1]
+      } else {
+        matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1)
+      }
+    }
+  }
+
+  return matrix[str2.length][str1.length]
 }
