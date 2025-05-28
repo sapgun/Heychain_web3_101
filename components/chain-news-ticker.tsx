@@ -142,22 +142,24 @@ export default function ChainNewsTicker() {
       <div className="w-full bg-gray-900/80 backdrop-blur-sm border-t border-purple-500/20 py-3 overflow-hidden">
         <div className="container mx-auto px-4">
           {/* 컨트롤 바 */}
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center space-x-3">
-              <div className="flex-shrink-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+          <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+            <div className="flex items-center space-x-2 lg:space-x-3">
+              <div className="flex-shrink-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-2 lg:px-3 py-1 rounded-full text-xs font-medium">
                 🔥 실시간 뉴스
               </div>
               <Badge variant="outline" className="text-xs">
                 {news.length}개 소식
               </Badge>
-              <span className="text-xs text-gray-500">{news.length > 0 && formatTimeAgo(news[0].publishedAt)}</span>
+              <span className="text-xs text-gray-500 hidden sm:inline">
+                {news.length > 0 && formatTimeAgo(news[0].publishedAt)}
+              </span>
             </div>
 
-            <div className="flex items-center space-x-2">
-              {/* 언어 선택 */}
+            <div className="flex items-center space-x-1 lg:space-x-2">
+              {/* 언어 선택 - 모바일에서 숨김 */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="text-xs">
+                  <Button variant="ghost" size="sm" className="text-xs hidden sm:flex">
                     {language === "ko" ? "🇰🇷 한국어" : "🇺🇸 English"}
                   </Button>
                 </DropdownMenuTrigger>
@@ -237,14 +239,14 @@ export default function ChainNewsTicker() {
                     className="flex items-center space-x-2 flex-shrink-0 group cursor-pointer"
                   >
                     <ChainLogo chain={item.chain} />
-                    <span className="text-sm text-gray-300 group-hover:text-white transition-colors whitespace-nowrap">
+                    <span className="text-xs lg:text-sm text-gray-300 group-hover:text-white transition-colors whitespace-nowrap">
                       <span className="text-purple-400 font-medium mr-1">{item.chain}:</span>
                       {item.title}
                     </span>
-                    <Badge variant="secondary" className="text-xs ml-2">
+                    <Badge variant="secondary" className="text-xs ml-1 lg:ml-2 hidden sm:inline-flex">
                       {item.source}
                     </Badge>
-                    <span className="text-xs text-gray-500">{formatTimeAgo(item.publishedAt)}</span>
+                    <span className="text-xs text-gray-500 hidden lg:inline">{formatTimeAgo(item.publishedAt)}</span>
                     <ExternalLink className="w-3 h-3 text-gray-500 group-hover:text-purple-400 transition-colors" />
                   </div>
                 ))}

@@ -67,7 +67,7 @@ export default function SignupModal({ isOpen, onClose, onSuccess }: SignupModalP
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-lg bg-gray-900 border-purple-500/20">
+      <DialogContent className="max-w-lg bg-gray-900 border-purple-500/20 mx-4">
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
@@ -125,7 +125,7 @@ export default function SignupModal({ isOpen, onClose, onSuccess }: SignupModalP
             <Button
               type="submit"
               disabled={isLoading || !email.trim()}
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-sm lg:text-base"
             >
               {isLoading ? (
                 <div className="flex items-center space-x-2">

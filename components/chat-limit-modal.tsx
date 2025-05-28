@@ -19,7 +19,7 @@ export default function ChatLimitModal({ isOpen, onClose, onSubscribe, onPurchas
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl bg-gray-900 border-purple-500/20">
+      <DialogContent className="max-w-4xl bg-gray-900 border-purple-500/20 mx-4 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-orange-500 rounded-lg flex items-center justify-center">
@@ -45,7 +45,7 @@ export default function ChatLimitModal({ isOpen, onClose, onSubscribe, onPurchas
           </div>
 
           {/* 해결 방법 */}
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
             {/* 즉시 사용 - 토큰 구매 */}
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
@@ -58,18 +58,20 @@ export default function ChatLimitModal({ isOpen, onClose, onSubscribe, onPurchas
                 {tokenPacks.map((pack) => (
                   <div
                     key={pack.id}
-                    className="border border-gray-700 rounded-lg p-4 hover:border-yellow-500/50 transition-colors"
+                    className="border border-gray-700 rounded-lg p-3 lg:p-4 hover:border-yellow-500/50 transition-colors"
                   >
                     <div className="flex items-center justify-between mb-2">
                       <div>
-                        <h4 className="text-white font-medium">{pack.name}</h4>
-                        <p className="text-gray-400 text-sm">
+                        <h4 className="text-white font-medium text-sm lg:text-base">{pack.name}</h4>
+                        <p className="text-gray-400 text-xs lg:text-sm">
                           {pack.tokens}회 질문
                           {pack.bonus && <span className="text-yellow-500"> (+{pack.bonus}회 보너스!)</span>}
                         </p>
                       </div>
                       <div className="text-right">
-                        <div className="text-white font-medium">₩{pack.price.toLocaleString()}</div>
+                        <div className="text-white font-medium text-sm lg:text-base">
+                          ₩{pack.price.toLocaleString()}
+                        </div>
                         <div className="text-gray-400 text-xs">
                           질문당 ₩{Math.round(pack.price / (pack.tokens + (pack.bonus || 0)))}
                         </div>

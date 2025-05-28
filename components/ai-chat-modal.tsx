@@ -74,25 +74,30 @@ export default function AIChatModal({ isOpen, onClose, onLimitReached, onSignupP
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl h-[80vh] bg-gray-900 border-purple-500/20">
+      <DialogContent className="max-w-4xl lg:h-[80vh] h-[90vh] bg-gray-900 border-purple-500/20 mx-4">
         <DialogHeader>
-          <DialogTitle className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
+          <DialogTitle className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center space-x-2 lg:space-x-3">
+              <div className="w-6 h-6 lg:w-8 lg:h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                <Sparkles className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
               </div>
-              <span className="text-white">HeyChain AI 어시스턴트</span>
+              <span className="text-white text-sm lg:text-base">HeyChain AI 어시스턴트</span>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 lg:space-x-2">
               {/* 사용량 표시 */}
               {!usageStats.isPremium && (
                 <div className="flex items-center space-x-2">
                   <Badge
                     variant={usageStats.remainingQueries > 2 ? "default" : "destructive"}
-                    className="flex items-center space-x-1"
+                    className="flex items-center space-x-1 text-xs"
                   >
                     <Zap className="w-3 h-3" />
-                    <span>{usageStats.remainingQueries === -1 ? "∞" : usageStats.remainingQueries}회 남음</span>
+                    <span className="hidden sm:inline">
+                      {usageStats.remainingQueries === -1 ? "∞" : usageStats.remainingQueries}회 남음
+                    </span>
+                    <span className="sm:hidden">
+                      {usageStats.remainingQueries === -1 ? "∞" : usageStats.remainingQueries}
+                    </span>
                   </Badge>
                   {subscriptionStatus.tokens > 0 && (
                     <Badge variant="outline" className="flex items-center space-x-1 border-yellow-500 text-yellow-500">
@@ -202,18 +207,18 @@ export default function AIChatModal({ isOpen, onClose, onLimitReached, onSignupP
           </ScrollArea>
 
           {/* 입력 영역 */}
-          <form onSubmit={onSubmit} className="flex items-center space-x-3">
+          <form onSubmit={onSubmit} className="flex items-center space-x-2 lg:space-x-3">
             <Input
               value={input}
               onChange={handleInputChange}
               placeholder={isLimitReached ? "일일 무료 한도에 도달했습니다..." : "Web3에 대해 무엇이든 물어보세요..."}
               disabled={isLoading || isLimitReached}
-              className="flex-1 bg-gray-800 border-gray-700 text-white placeholder-gray-400"
+              className="flex-1 bg-gray-800 border-gray-700 text-white placeholder-gray-400 text-sm lg:text-base"
             />
             <Button
               type="submit"
               disabled={isLoading || !input.trim() || isLimitReached}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 px-3 lg:px-4"
             >
               <Send className="w-4 h-4" />
             </Button>

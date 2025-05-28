@@ -137,20 +137,24 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex flex-col">
       {/* 헤더 */}
       <header className="border-b border-purple-500/20 bg-gray-900/50 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-4 py-3 lg:py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-purple-400 to-pink-400 rounded-xl flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-white" />
+            <div className="flex items-center space-x-2 lg:space-x-3">
+              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-r from-purple-400 to-pink-400 rounded-xl flex items-center justify-center">
+                <Sparkles className="w-4 h-4 lg:w-6 lg:h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-white">HeyChain 101</h1>
-                <p className="text-sm text-gray-400">Web3 대화형 요약 비서</p>
+                <h1 className="text-lg lg:text-2xl font-bold text-white">HeyChain 101</h1>
+                <p className="text-xs lg:text-sm text-gray-400">Web3 대화형 요약 비서</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
               <Link href="https://x.com/caro7370" target="_blank">
-                <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white hover:bg-gray-800">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-gray-400 hover:text-white hover:bg-gray-800 hidden sm:flex"
+                >
                   <span className="text-xs">Powered by SAPGUN</span>
                 </Button>
               </Link>
@@ -160,11 +164,11 @@ export default function Home() {
       </header>
 
       {/* 메인 콘텐츠 */}
-      <div className="flex-1 flex">
+      <div className="flex-1 flex flex-col lg:flex-row">
         {/* 사이드바 */}
-        <div className="w-80 bg-gray-900/50 backdrop-blur-sm border-r border-purple-500/20 p-6">
+        <div className="w-full lg:w-80 bg-gray-900/50 backdrop-blur-sm border-b lg:border-r lg:border-b-0 border-purple-500/20 p-4 lg:p-6">
           {/* 검색 */}
-          <div className="mb-6">
+          <div className="mb-4 lg:mb-6">
             <form onSubmit={handleSearch} className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
               <Input
@@ -178,10 +182,10 @@ export default function Home() {
           </div>
 
           {/* AI 질문하기 버튼 */}
-          <div className="mb-6">
+          <div className="mb-4 lg:mb-6">
             <Button
               onClick={handleAIChatOpen}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white"
+              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white text-sm lg:text-base"
             >
               <Sparkles className="w-4 h-4 mr-2" />
               AI에게 질문하기
@@ -189,7 +193,7 @@ export default function Home() {
           </div>
 
           {/* 인기 키워드 */}
-          <div className="mb-6">
+          <div className="mb-4 lg:mb-6 hidden sm:block">
             <h3 className="text-white font-medium mb-3 flex items-center">
               <span className="text-purple-400 mr-2">#</span>
               인기 키워드
@@ -232,7 +236,7 @@ export default function Home() {
           {/* 카테고리 목록 */}
           <div>
             <h3 className="text-white font-medium mb-3">카테고리</h3>
-            <ScrollArea className="h-[calc(100vh-500px)]">
+            <ScrollArea className="h-32 sm:h-48 lg:h-[calc(100vh-500px)]">
               <div className="space-y-1">
                 {web3Data.map((category, index) => (
                   <Button
@@ -254,7 +258,7 @@ export default function Home() {
         </div>
 
         {/* 메인 콘텐츠 영역 */}
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-4 lg:p-8">
           {searchResults.length > 0 ? (
             <div>
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
