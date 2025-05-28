@@ -23,8 +23,11 @@ interface AIChatModalProps {
 export function AIChatModal({ language = "ko" }: AIChatModalProps) {
   const [open, setOpen] = useState(false)
 
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
     api: "/api/chat",
+    onError: (error) => {
+      console.error("Chat error:", error)
+    },
   })
 
   const texts = {
@@ -149,6 +152,18 @@ export function AIChatModal({ language = "ko" }: AIChatModalProps) {
                         <Loader2 className="w-4 h-4 animate-spin text-blue-400" />
                         <span className="text-sm text-gray-300">답변을 생성하고 있습니다...</span>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {error && (
+                <div className="flex justify-start">
+                  <div className="flex">
+                    <div className="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mr-2">
+                      <Bot className="w-4 h-4 text-white" />
+                    </div>
+                    <div className="bg-red-500/20 border border-red-500/30 px-4 py-3 rounded-2xl">
+                      <div className="text-sm text-red-300">죄송합니다. 오류가 발생했습니다. 다시 시도해주세요.</div>
                     </div>
                   </div>
                 </div>

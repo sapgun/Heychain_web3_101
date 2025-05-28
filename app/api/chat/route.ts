@@ -2,11 +2,28 @@ import { streamText } from "ai"
 import { openai } from "@ai-sdk/openai"
 
 export async function POST(req: Request) {
-  const { messages } = await req.json()
+  try {
+    // 환경 변수 확인
+    if (!process.env.OPENAI_API_KEY) {
+      return new Response(JSON.stringify({ error: "OpenAI API key not configured" }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      })
+    }
 
-  const result = await streamText({
-    model: openai("gpt-4o"),
-    system: `당신은 HeyChain의 Web3 전문 AI 어시스턴트입니다. 
+    const { messages } = await req.json()
+
+    // 메시지 유효성 검사
+    if (!messages || !Array.isArray(messages)) {
+      return new Response(JSON.stringify({ error: "Invalid messages format" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      })
+    }
+
+    const result = await streamText({
+      model: openai("gpt-4o"),
+      system: `당신은 HeyChain의 Web3 전문 AI 어시스턴트입니다. 
 
 역할:
 - Web3, 블록체인, 암호화폐, DeFi, NFT, DAO 등에 대한 전문적이고 정확한 정보 제공
@@ -25,8 +42,15 @@ export async function POST(req: Request) {
 - 투자 조언은 하지 않음 (일반적인 정보만 제공)
 - 불확실한 정보는 추측하지 않음
 - 최신 가격 정보나 실시간 데이터는 제공하지 않음`,
-    messages,
-  })
+      messages,
+    })
 
-  return result.toAIStreamResponse()
+    return result.toAIStreamResponse()
+  } catch (error) {
+    console.error("Chat API Error:", error)
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    })
+  }
 }
