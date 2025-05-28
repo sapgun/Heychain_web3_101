@@ -1,56 +1,55 @@
 "use client"
 
-import type React from "react"
-
-// components/search-suggestions.tsx
-import { Shuffle, TrendingUp } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { useClient } from "usehooks-ts"
+import { TrendingUp, Hash } from "lucide-react"
 
 interface SearchSuggestionsProps {
-  suggestedKeywords: string[]
+  keywords: string[]
   popularSearches: string[]
-  texts: {
-    suggestedKeywords: string
-    popularSearches: string
-    refresh: string
-  }
   onKeywordClick: (keyword: string) => void
-  refreshSuggestions: () => void
+  language: "ko" | "en"
 }
 
-const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({
-  suggestedKeywords,
-  popularSearches,
-  texts,
-  onKeywordClick,
-  refreshSuggestions,
-}) => {
-  const isClient = useClient()
-  const displayKeywords = suggestedKeywords.slice(0, 5)
-
+export function SearchSuggestions({ keywords, popularSearches, onKeywordClick, language }: SearchSuggestionsProps) {
   return (
-    <div className="space-y-3 sm:space-y-4">
-      {/* 추천 검색어 */}
-      <div className="bg-gray-700/30 rounded-lg p-3 sm:p-4 border border-purple-500/20">
-        <div className="flex items-center justify-between mb-2 sm:mb-3">
-          <h4 className="text-sm font-semibold text-purple-300">{texts.suggestedKeywords}</h4>
-          {isClient && (
-            <button
-              onClick={refreshSuggestions}
-              className="text-purple-400 hover:text-purple-300 transition-colors p-2 -m-2 rounded-lg"
-              title={texts.refresh}
-            >
-              <Shuffle className="w-4 h-4" />
-            </button>
-          )}
+    <div className="space-y-4">
+      {/* 인기 검색어 */}
+      <div>
+        <div className="flex items-center mb-3">
+          <TrendingUp className="w-4 h-4 text-purple-400 mr-2" />
+          <h3 className="text-sm font-semibold text-purple-300">
+            {language === "ko" ? "인기 검색어" : "Popular Searches"}
+          </h3>
         </div>
         <div className="flex flex-wrap gap-2">
-          {displayKeywords.map((keyword, index) => (
+          {popularSearches.map((search, index) => (
             <Badge
-              key={`${keyword}-${index}`}
+              key={search}
               variant="outline"
-              className="border-purple-500/30 text-purple-300 hover:bg-purple-500/20 cursor-pointer transition-colors text-sm px-3 py-2 min-h-[36px] flex items-center"
+              className="border-purple-500/30 text-purple-300 hover:bg-purple-500/20 hover:border-purple-400 cursor-pointer transition-all text-xs"
+              onClick={() => onKeywordClick(search)}
+            >
+              <span className="text-purple-400 mr-1">#{index + 1}</span>
+              {search}
+            </Badge>
+          ))}
+        </div>
+      </div>
+
+      {/* 추천 키워드 */}
+      <div>
+        <div className="flex items-center mb-3">
+          <Hash className="w-4 h-4 text-blue-400 mr-2" />
+          <h3 className="text-sm font-semibold text-blue-300">
+            {language === "ko" ? "추천 키워드" : "Recommended Keywords"}
+          </h3>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {keywords.map((keyword) => (
+            <Badge
+              key={keyword}
+              variant="outline"
+              className="border-blue-500/30 text-blue-300 hover:bg-blue-500/20 hover:border-blue-400 cursor-pointer transition-all text-xs"
               onClick={() => onKeywordClick(keyword)}
             >
               {keyword}
@@ -58,30 +57,6 @@ const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({
           ))}
         </div>
       </div>
-
-      {/* 인기 검색어 */}
-      {popularSearches.length > 0 && (
-        <div className="bg-gray-700/30 rounded-lg p-3 sm:p-4 border border-blue-500/20">
-          <div className="flex items-center justify-between mb-2 sm:mb-3">
-            <h4 className="text-sm font-semibold text-blue-300 flex items-center">
-              <TrendingUp className="w-4 h-4 mr-2" />
-              {texts.popularSearches}
-            </h4>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {popularSearches.map((keyword, index) => (
-              <Badge
-                key={`popular-${keyword}-${index}`}
-                variant="outline"
-                className="border-blue-500/30 text-blue-300 hover:bg-blue-500/20 cursor-pointer transition-colors text-sm px-3 py-2 min-h-[36px] flex items-center"
-                onClick={() => onKeywordClick(keyword)}
-              >
-                {keyword}
-              </Badge>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   )
 }

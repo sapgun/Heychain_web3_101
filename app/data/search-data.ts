@@ -1,15 +1,35 @@
 export const searchKeywords = {
-  ko: ["메타마스크", "NFT", "DeFi", "스테이킹", "롤업", "레이어2", "지갑", "이더리움", "비트코인", "스마트 컨트랙트"],
-  en: ["MetaMask", "NFT", "DeFi", "Staking", "Rollup", "Layer2", "Wallet", "Ethereum", "Bitcoin", "Smart Contract"],
+  ko: [
+    "메타마스크",
+    "DeFi",
+    "NFT",
+    "스마트컨트랙트",
+    "가스비",
+    "브릿지",
+    "스테이킹",
+    "DAO",
+    "토큰",
+    "지갑",
+    "블록체인",
+    "이더리움",
+  ],
+  en: [
+    "MetaMask",
+    "DeFi",
+    "NFT",
+    "Smart Contract",
+    "Gas Fee",
+    "Bridge",
+    "Staking",
+    "DAO",
+    "Token",
+    "Wallet",
+    "Blockchain",
+    "Ethereum",
+  ],
 }
 
 export const popularSearches = {
-  ko: ["메타마스크 설치 방법", "NFT 민팅이란?", "DeFi 수익률 비교", "이더리움 2.0 스테이킹", "롤업과 레이어2의 차이"],
-  en: [
-    "How to install MetaMask",
-    "What is NFT minting?",
-    "DeFi yield comparison",
-    "Ethereum 2.0 staking",
-    "Difference between rollups and Layer 2",
-  ],
+  ko: ["메타마스크 설정", "DeFi 프로토콜", "NFT 민팅", "가스비 최적화", "브릿지 사용법"],
+  en: ["MetaMask Setup", "DeFi Protocols", "NFT Minting", "Gas Optimization", "Bridge Usage"],
 }
