@@ -352,12 +352,10 @@ export default function HeyChainApp() {
               language="ko"
             />
 
-            {/* AI Chat Button - 환경 변수가 있을 때만 표시 */}
-            {typeof window !== "undefined" && (
-              <div className="space-y-2">
-                <AIChatModal language="ko" />
-              </div>
-            )}
+            {/* AI Chat Button */}
+            <div className="space-y-2">
+              <AIChatModal language="ko" />
+            </div>
 
             {/* Search Suggestions - 검색어가 없을 때만 표시 */}
             {!searchTerm.trim() && (

@@ -13,6 +13,8 @@ export interface ChatAnalytics {
   sessionId: string
   category?: string
   satisfied?: boolean
+  isLimitedUser?: boolean // 추가
+  dailyQuestionCount?: number // 추가
 }
 
 export interface PopularQuestion {

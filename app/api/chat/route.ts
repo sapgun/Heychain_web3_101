@@ -67,6 +67,8 @@ export async function POST(req: Request) {
       userAgent,
       sessionId,
       category,
+      isLimitedUser: true, // 비회원 사용자로 가정
+      dailyQuestionCount: 1, // 실제로는 현재 사용량을 계산해야 함
     })
 
     return result.toAIStreamResponse()
