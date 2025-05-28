@@ -1,124 +1,116 @@
 "use client"
 
 import type React from "react"
-
-import { useState, useEffect, useRef } from "react"
-import { Search, X, ArrowUp, ArrowDown, CornerDownLeft } from "lucide-react"
+import { useState, useRef, useEffect, type KeyboardEvent } from "react"
+import { useRouter } from "next/router"
+import { ArrowUp, ArrowDown, CornerDownLeft, X } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { web3Data } from "@/app/data/web3-data"
+import { useToast } from "@/components/ui/use-toast"
 
 interface AutocompleteSearchProps {
-  searchTerm: string
-  onSearchChange: (value: string) => void
-  onSearchSubmit: (value: string) => void
-  language: "ko" | "en"
+  texts: {
+    searchPlaceholder: string
+    recentSearches: string
+    suggestions: string
+  }
+  onSearch: (term: string) => void
+  getSuggestions: (term: string) => Promise<string[]>
+  maxRecentSearches?: number
 }
 
-export function AutocompleteSearch({ searchTerm, onSearchChange, onSearchSubmit, language }: AutocompleteSearchProps) {
+const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
+  texts,
+  onSearch,
+  getSuggestions,
+  maxRecentSearches = 5,
+}) => {
+  const [searchTerm, setSearchTerm] = useState("")
   const [suggestions, setSuggestions] = useState<string[]>([])
   const [isOpen, setIsOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(-1)
-  const [recentSearches, setRecentSearches] = useState<string[]>([])
+  const [recentSearches, setRecentSearches] = useState<string[]>(() => {
+    if (typeof window === "undefined") return []
+    const storedSearches = localStorage.getItem("recentSearches")
+    return storedSearches ? JSON.parse(storedSearches) : []
+  })
   const inputRef = useRef<HTMLInputElement>(null)
   const suggestionsRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
+  const { toast } = useToast()
 
-  // 로컬 스토리지에서 최근 검색어 불러오기
   useEffect(() => {
-    const storedSearches = localStorage.getItem("recentSearches")
-    if (storedSearches) {
-      setRecentSearches(JSON.parse(storedSearches))
-    }
-  }, [])
+    if (typeof window === "undefined") return
+    localStorage.setItem("recentSearches", JSON.stringify(recentSearches))
+  }, [recentSearches])
 
-  // 검색어 저장
-  const saveSearch = (term: string) => {
-    if (!term.trim()) return
-
-    const newRecentSearches = [term, ...recentSearches.filter((s) => s !== term)].slice(0, 5)
-
-    setRecentSearches(newRecentSearches)
-    localStorage.setItem("recentSearches", JSON.stringify(newRecentSearches))
-  }
-
-  // 검색어 입력에 따른 자동완성 제안
-  useEffect(() => {
-    if (!searchTerm.trim()) {
+  const onSearchChange = async (value: string) => {
+    setSearchTerm(value)
+    if (value.trim() === "") {
       setSuggestions([])
       setIsOpen(false)
       return
     }
 
-    const term = searchTerm.toLowerCase()
-    const allSuggestions = new Set<string>()
-
-    // 카테고리 이름에서 검색
-    web3Data.forEach((category) => {
-      if (category.category.toLowerCase().includes(term)) {
-        allSuggestions.add(category.category)
-      }
-
-      // 질문과 답변에서 검색
-      category.items.forEach((item) => {
-        if (item.question.toLowerCase().includes(term)) {
-          allSuggestions.add(item.question)
-        }
-
-        // 답변에서 키워드 추출 (첫 100자 내에서만)
-        const answerPreview = item.answer.slice(0, 100).toLowerCase()
-        if (answerPreview.includes(term)) {
-          const words = item.question.split(" ")
-          if (words.length > 3) {
-            allSuggestions.add(words.slice(0, 3).join(" ") + "...")
-          } else {
-            allSuggestions.add(item.question)
-          }
-        }
+    try {
+      const fetchedSuggestions = await getSuggestions(value)
+      setSuggestions(fetchedSuggestions)
+      setIsOpen(fetchedSuggestions.length > 0)
+      setSelectedIndex(-1) // Reset selected index when suggestions change
+    } catch (error) {
+      console.error("Error fetching suggestions:", error)
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to fetch suggestions.",
       })
+    }
+  }
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setSearchTerm(suggestion)
+    addRecentSearch(suggestion)
+    onSearch(suggestion)
+    setIsOpen(false)
+    router.push(`/?q=${encodeURIComponent(suggestion)}`)
+  }
+
+  const handleRecentSearchClick = (term: string) => {
+    setSearchTerm(term)
+    onSearch(term)
+    setIsOpen(false)
+    router.push(`/?q=${encodeURIComponent(term)}`)
+  }
+
+  const addRecentSearch = (term: string) => {
+    setRecentSearches((prevSearches) => {
+      const newSearches = [term, ...prevSearches.filter((t) => t !== term)]
+      return newSearches.slice(0, maxRecentSearches)
     })
+  }
 
-    // 최대 7개까지만 표시
-    setSuggestions(Array.from(allSuggestions).slice(0, 7))
-    setIsOpen(allSuggestions.size > 0)
-    setSelectedIndex(-1)
-  }, [searchTerm])
+  const removeRecentSearch = (e: React.MouseEvent, term: string) => {
+    e.stopPropagation() // Prevent click from triggering handleRecentSearchClick
+    setRecentSearches((prevSearches) => prevSearches.filter((t) => t !== term))
+  }
 
-  // 키보드 네비게이션
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (!isOpen) return
 
-    // 위 화살표
     if (e.key === "ArrowUp") {
       e.preventDefault()
-      setSelectedIndex((prev) => (prev <= 0 ? suggestions.length - 1 : prev - 1))
-    }
-    // 아래 화살표
-    else if (e.key === "ArrowDown") {
+      setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : suggestions.length - 1))
+    } else if (e.key === "ArrowDown") {
       e.preventDefault()
-      setSelectedIndex((prev) => (prev >= suggestions.length - 1 ? 0 : prev + 1))
-    }
-    // 엔터
-    else if (e.key === "Enter") {
-      e.preventDefault()
-      if (selectedIndex >= 0) {
-        const selected = suggestions[selectedIndex]
-        onSearchChange(selected)
-        onSearchSubmit(selected)
-        saveSearch(selected)
-        setIsOpen(false)
-      } else if (searchTerm.trim()) {
-        onSearchSubmit(searchTerm)
-        saveSearch(searchTerm)
-        setIsOpen(false)
-      }
-    }
-    // ESC
-    else if (e.key === "Escape") {
+      setSelectedIndex((prevIndex) => (prevIndex < suggestions.length - 1 ? prevIndex + 1 : 0))
+    } else if (e.key === "Enter" && selectedIndex !== -1) {
+      handleSuggestionClick(suggestions[selectedIndex])
+    } else if (e.key === "Escape") {
       setIsOpen(false)
     }
   }
 
-  // 검색창 외부 클릭 시 자동완성 닫기
+  // Close suggestions on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -137,76 +129,45 @@ export function AutocompleteSearch({ searchTerm, onSearchChange, onSearchSubmit,
     }
   }, [])
 
-  // 검색어 지우기
-  const clearSearch = () => {
-    onSearchChange("")
-    setIsOpen(false)
-    inputRef.current?.focus()
-  }
-
-  // 검색어 선택
-  const handleSuggestionClick = (suggestion: string) => {
-    onSearchChange(suggestion)
-    onSearchSubmit(suggestion)
-    saveSearch(suggestion)
-    setIsOpen(false)
-  }
-
-  // 최근 검색어 선택
-  const handleRecentSearchClick = (term: string) => {
-    onSearchChange(term)
-    onSearchSubmit(term)
-    setIsOpen(false)
-  }
-
-  // 최근 검색어 삭제
-  const removeRecentSearch = (e: React.MouseEvent, term: string) => {
-    e.stopPropagation()
-    const newRecentSearches = recentSearches.filter((s) => s !== term)
-    setRecentSearches(newRecentSearches)
-    localStorage.setItem("recentSearches", JSON.stringify(newRecentSearches))
-  }
-
-  const texts = {
-    searchPlaceholder: language === "ko" ? "질문 검색..." : "Search questions...",
-    recentSearches: language === "ko" ? "최근 검색어" : "Recent Searches",
-    suggestions: language === "ko" ? "추천 검색어" : "Suggestions",
-    noRecentSearches: language === "ko" ? "최근 검색어가 없습니다" : "No recent searches",
-  }
-
   return (
     <div className="relative w-full">
-      <div className="relative group">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 group-focus-within:text-purple-400 transition-colors" />
-        <Input
-          ref={inputRef}
-          type="text"
-          placeholder={texts.searchPlaceholder}
-          value={searchTerm}
-          onChange={(e) => onSearchChange(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onFocus={() => searchTerm.trim() && setSuggestions.length > 0 && setIsOpen(true)}
-          className="pl-10 pr-10 bg-gray-700/50 border-purple-500/30 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-all"
-        />
-        {searchTerm && (
-          <button
-            onClick={clearSearch}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300"
-            aria-label="Clear search"
-          >
-            <X className="h-4 w-4" />
-          </button>
-        )}
+      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <svg
+          aria-hidden="true"
+          className="w-5 h-5 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          ></path>
+        </svg>
       </div>
+      {/* Input 컴포넌트를 다음과 같이 수정 */}
+      <Input
+        ref={inputRef}
+        type="text"
+        placeholder={texts.searchPlaceholder}
+        value={searchTerm}
+        onChange={(e) => onSearchChange(e.target.value)}
+        onKeyDown={handleKeyDown}
+        onFocus={() => searchTerm.trim() && suggestions.length > 0 && setIsOpen(true)}
+        className="pl-10 pr-10 bg-gray-700/50 border-purple-500/30 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-all h-12 sm:h-10 text-base sm:text-sm"
+      />
 
-      {/* 자동완성 드롭다운 */}
+      {/* 자동완성 드롭다운을 다음과 같이 수정 */}
       {isOpen && (
         <div
           ref={suggestionsRef}
-          className="absolute z-50 mt-1 w-full bg-gray-800 border border-purple-500/30 rounded-lg shadow-lg overflow-hidden"
+          className="absolute z-50 mt-1 w-full bg-gray-800 border border-purple-500/30 rounded-lg shadow-lg overflow-hidden max-h-80 sm:max-h-96"
         >
-          {/* 키보드 네비게이션 도움말 */}
-          <div className="px-3 py-2 border-b border-gray-700 flex items-center justify-between text-xs text-gray-400">
+          {/* 키보드 네비게이션 도움말 - 모바일에서는 숨김 */}
+          <div className="hidden sm:flex px-3 py-2 border-b border-gray-700 items-center justify-between text-xs text-gray-400">
             <div className="flex items-center space-x-3">
               <div className="flex items-center">
                 <ArrowUp className="h-3 w-3 mr-1" />
@@ -230,12 +191,12 @@ export function AutocompleteSearch({ searchTerm, onSearchChange, onSearchSubmit,
                   <Badge
                     key={`recent-${index}`}
                     variant="outline"
-                    className="border-blue-500/30 text-blue-300 hover:bg-blue-500/20 cursor-pointer transition-colors text-xs px-2 py-1 flex items-center"
+                    className="border-blue-500/30 text-blue-300 hover:bg-blue-500/20 cursor-pointer transition-colors text-xs px-3 py-2 flex items-center min-h-[32px]"
                     onClick={() => handleRecentSearchClick(term)}
                   >
                     {term}
                     <X
-                      className="h-3 w-3 ml-1 text-gray-400 hover:text-gray-300"
+                      className="h-3 w-3 ml-2 text-gray-400 hover:text-gray-300"
                       onClick={(e) => removeRecentSearch(e, term)}
                     />
                   </Badge>
@@ -251,7 +212,7 @@ export function AutocompleteSearch({ searchTerm, onSearchChange, onSearchSubmit,
               {suggestions.map((suggestion, index) => (
                 <div
                   key={`suggestion-${index}`}
-                  className={`px-3 py-2 rounded-md cursor-pointer text-sm ${
+                  className={`px-3 py-3 sm:py-2 rounded-md cursor-pointer text-sm min-h-[44px] sm:min-h-auto flex items-center ${
                     selectedIndex === index ? "bg-purple-500/30 text-white" : "text-gray-300 hover:bg-gray-700/50"
                   }`}
                   onClick={() => handleSuggestionClick(suggestion)}
@@ -266,3 +227,5 @@ export function AutocompleteSearch({ searchTerm, onSearchChange, onSearchSubmit,
     </div>
   )
 }
+
+export default AutocompleteSearch
