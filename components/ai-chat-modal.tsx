@@ -49,9 +49,25 @@ export default function AIChatModal({ isOpen, onClose, onLimitReached, onSignupP
 
   useEffect(() => {
     if (scrollAreaRef.current) {
-      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight
+      const scrollContainer = scrollAreaRef.current.querySelector("[data-radix-scroll-area-viewport]")
+      if (scrollContainer) {
+        scrollContainer.scrollTop = scrollContainer.scrollHeight
+      }
     }
-  }, [messages])
+  }, [messages, isLoading])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (isLoading && scrollAreaRef.current) {
+        const scrollContainer = scrollAreaRef.current.querySelector("[data-radix-scroll-area-viewport]")
+        if (scrollContainer) {
+          scrollContainer.scrollTop = scrollContainer.scrollHeight
+        }
+      }
+    }, 100) // 100ms마다 스크롤 체크
+
+    return () => clearInterval(interval)
+  }, [isLoading])
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -70,6 +86,16 @@ export default function AIChatModal({ isOpen, onClose, onLimitReached, onSignupP
     }
 
     handleSubmit(e)
+
+    // 전송 후 즉시 스크롤
+    setTimeout(() => {
+      if (scrollAreaRef.current) {
+        const scrollContainer = scrollAreaRef.current.querySelector("[data-radix-scroll-area-viewport]")
+        if (scrollContainer) {
+          scrollContainer.scrollTop = scrollContainer.scrollHeight
+        }
+      }
+    }, 50)
   }
 
   return (
@@ -141,7 +167,11 @@ export default function AIChatModal({ isOpen, onClose, onLimitReached, onSignupP
           )}
 
           {/* 채팅 메시지 영역 */}
-          <ScrollArea ref={scrollAreaRef} className="flex-1 p-4 border border-gray-700 rounded-lg">
+          <ScrollArea
+            ref={scrollAreaRef}
+            className="flex-1 p-4 border border-gray-700 rounded-lg overflow-y-auto"
+            style={{ maxHeight: "calc(100vh - 300px)" }}
+          >
             <div className="space-y-4">
               {messages.length === 0 && (
                 <div className="text-center py-8">
