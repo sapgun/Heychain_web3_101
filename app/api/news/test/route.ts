@@ -32,7 +32,13 @@ export async function GET(request: NextRequest) {
       priority: 3,
       language: "ko",
     },
-
+    {
+      name: "토큰포스트",
+      url: "https://rss.app/feeds/mYPCACzVBKWfuCiC.xml",
+      expected: "Korean crypto news",
+      priority: 4,
+      language: "ko",
+    },
     // 영어 피드 (주요)
     {
       name: "CoinTelegraph EN",

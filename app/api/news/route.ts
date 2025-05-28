@@ -98,6 +98,12 @@ const RSS_FEEDS = {
       language: "ko",
       priority: 3,
     },
+    {
+      url: "https://rss.app/feeds/mYPCACzVBKWfuCiC.xml",
+      source: "토큰포스트",
+      language: "ko",
+      priority: 4,
+    },
   ],
   english: [
     {

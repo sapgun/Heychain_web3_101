@@ -1,11 +1,12 @@
 "use client"
 
+import type React from "react"
+
 import { DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 import { useState, useEffect } from "react"
 import {
   ExternalLink,
-  Settings,
   Filter,
   Play,
   Pause,
@@ -14,6 +15,7 @@ import {
   Wifi,
   WifiOff,
   ArrowLeft,
+  Gauge,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -24,6 +26,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import NewsDetailModal from "./news-detail-modal"
 import LanguageSelector from "./language-selector"
 import { useLanguage } from "@/lib/language-context"
@@ -38,6 +41,66 @@ interface NewsItem {
   source: string
   category: string
   imageUrl?: string
+}
+
+// 커스텀 슬라이더 컴포넌트
+const CustomSlider = ({
+  value,
+  onChange,
+  min = 0.2,
+  max = 2.5,
+  step = 0.1,
+}: {
+  value: number
+  onChange: (value: number) => void
+  min?: number
+  max?: number
+  step?: number
+}) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(Number(e.target.value))
+  }
+
+  const percentage = ((value - min) / (max - min)) * 100
+
+  return (
+    <div className="relative w-full">
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={handleChange}
+        className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
+        style={{
+          background: `linear-gradient(to right, rgb(168, 85, 247) 0%, rgb(236, 72, 153) ${percentage}%, rgb(55, 65, 81) ${percentage}%, rgb(55, 65, 81) 100%)`,
+        }}
+      />
+      <style jsx>{`
+        .slider::-webkit-slider-thumb {
+          appearance: none;
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          background: linear-gradient(45deg, rgb(168, 85, 247), rgb(236, 72, 153));
+          cursor: pointer;
+          border: 2px solid white;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .slider::-moz-range-thumb {
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          background: linear-gradient(45deg, rgb(168, 85, 247), rgb(236, 72, 153));
+          cursor: pointer;
+          border: 2px solid white;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+      `}</style>
+    </div>
+  )
 }
 
 // 체인 로고 컴포넌트
@@ -76,12 +139,32 @@ export default function ChainNewsTicker() {
   const [error, setError] = useState<string | null>(null)
   const [isPaused, setIsPaused] = useState(false)
   const [isPlaying, setIsPlaying] = useState(true)
-  const [speed, setSpeed] = useState(90) // 60에서 90으로 변경
+  const [speed, setSpeed] = useState(1.0) // 단일 값으로 변경
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [selectedNewsItem, setSelectedNewsItem] = useState<NewsItem | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isOnline, setIsOnline] = useState(true)
   const [retryCount, setRetryCount] = useState(0)
+  const [isSpeedPopoverOpen, setIsSpeedPopoverOpen] = useState(false)
+
+  // 속도를 CSS 애니메이션 지속시간으로 변환하는 함수
+  const getAnimationDuration = (speedValue: number) => {
+    // 기본 60초를 기준으로 속도 배율 적용
+    // 속도가 높을수록 애니메이션이 빨라짐 (지속시간이 짧아짐)
+    const baseDuration = 60 // 기본 60초
+    return baseDuration / speedValue
+  }
+
+  // 속도 레이블 생성 함수
+  const getSpeedLabel = (speedValue: number) => {
+    if (speedValue <= 0.3) return "매우 느림"
+    if (speedValue <= 0.5) return "느림"
+    if (speedValue <= 0.8) return "조금 느림"
+    if (speedValue <= 1.2) return "보통"
+    if (speedValue <= 1.5) return "빠름"
+    if (speedValue <= 2.0) return "매우 빠름"
+    return "초고속"
+  }
 
   // 네트워크 상태 감지
   useEffect(() => {
@@ -238,6 +321,12 @@ export default function ChainNewsTicker() {
     fetchNews()
   }
 
+  // 속도 프리셋 함수들
+  const setSpeedPreset = (speedValue: number) => {
+    setSpeed(speedValue)
+    setIsSpeedPopoverOpen(false)
+  }
+
   if (loading && news.length === 0) {
     return (
       <div className="w-full bg-gray-900/80 backdrop-blur-sm border-t border-purple-500/20 py-3">
@@ -358,24 +447,69 @@ export default function ChainNewsTicker() {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* 속도 조절 */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+              {/* 속도 조절 - 팝오버로 변경 */}
+              <Popover open={isSpeedPopoverOpen} onOpenChange={setIsSpeedPopoverOpen}>
+                <PopoverTrigger asChild>
                   <Button variant="ghost" size="sm" className="text-xs">
-                    <Settings className="w-3 h-3 mr-1" />
-                    {t.speed}
+                    <Gauge className="w-3 h-3 mr-1" />
+                    <span className="hidden sm:inline">{speed.toFixed(1)}x</span>
+                    <span className="sm:hidden">{speed.toFixed(1)}</span>
                   </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>{t.speed}</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => setSpeed(20)}>{t.veryFast}</DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setSpeed(40)}>{t.fast}</DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setSpeed(60)}>{t.normal}</DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setSpeed(90)}>{t.slow}</DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setSpeed(120)}>{t.verySlow}</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                </PopoverTrigger>
+                <PopoverContent className="w-80 bg-gray-900 border-gray-700" align="end">
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-medium text-white">속도 조절</h4>
+                      <Badge variant="outline" className="text-xs">
+                        {speed.toFixed(1)}x ({getSpeedLabel(speed)})
+                      </Badge>
+                    </div>
+
+                    {/* 커스텀 슬라이더 */}
+                    <div className="space-y-3">
+                      <CustomSlider value={speed} onChange={setSpeed} min={0.2} max={2.5} step={0.1} />
+
+                      {/* 속도 표시 */}
+                      <div className="flex justify-between text-xs text-gray-400">
+                        <span>0.2x (매우 느림)</span>
+                        <span>1.0x (보통)</span>
+                        <span>2.5x (초고속)</span>
+                      </div>
+                    </div>
+
+                    {/* 프리셋 버튼들 */}
+                    <div className="space-y-2">
+                      <div className="text-xs text-gray-400 mb-2">빠른 설정:</div>
+                      <div className="grid grid-cols-3 gap-2">
+                        <Button variant="outline" size="sm" onClick={() => setSpeedPreset(0.3)} className="text-xs h-8">
+                          0.3x
+                        </Button>
+                        <Button variant="outline" size="sm" onClick={() => setSpeedPreset(0.5)} className="text-xs h-8">
+                          0.5x
+                        </Button>
+                        <Button variant="outline" size="sm" onClick={() => setSpeedPreset(1.0)} className="text-xs h-8">
+                          1.0x
+                        </Button>
+                        <Button variant="outline" size="sm" onClick={() => setSpeedPreset(1.3)} className="text-xs h-8">
+                          1.3x
+                        </Button>
+                        <Button variant="outline" size="sm" onClick={() => setSpeedPreset(1.5)} className="text-xs h-8">
+                          1.5x
+                        </Button>
+                        <Button variant="outline" size="sm" onClick={() => setSpeedPreset(2.0)} className="text-xs h-8">
+                          2.0x
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* 현재 설정 정보 */}
+                    <div className="text-xs text-gray-500 pt-2 border-t border-gray-700">
+                      현재 속도: {speed.toFixed(1)}x ({getSpeedLabel(speed)})
+                      <br />한 바퀴 시간: 약 {Math.round(getAnimationDuration(speed))}초
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
 
               {/* 새로고침 */}
               <Button variant="ghost" size="sm" onClick={handleRetry} className="text-xs" disabled={loading}>
@@ -399,7 +533,7 @@ export default function ChainNewsTicker() {
               <div
                 className={`ticker-content ${isPlaying ? "" : ""} ${isPaused ? "animate-pause" : ""}`}
                 style={{
-                  animationDuration: `${speed}s`,
+                  animationDuration: `${getAnimationDuration(speed)}s`,
                   animationPlayState: isPlaying ? (isPaused ? "paused" : "running") : "paused",
                 }}
               >
