@@ -13,7 +13,10 @@ import { PracticeComponent } from "@/components/practice-component"
 import { SearchSuggestions } from "@/components/search-suggestions"
 import { AutocompleteSearch } from "@/components/autocomplete-search"
 import { AIChatModal } from "@/components/ai-chat-modal"
+import { UsageGuideModal } from "@/components/usage-guide-modal"
+import { HeaderGuideButton } from "@/components/header-guide-button"
 import { popularSearches } from "@/utils/search-utils"
+import { hasViewedGuide, markGuideAsViewed } from "@/lib/guide-utils"
 
 export default function HeyChainApp() {
   const [selectedCategory, setSelectedCategory] = useState<number>(-1)
@@ -23,11 +26,24 @@ export default function HeyChainApp() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [email, setEmail] = useState("")
   const [isClient, setIsClient] = useState(false)
+  const [showGuideModal, setShowGuideModal] = useState(false)
 
   // Ensure client-side rendering for interactive elements
   useEffect(() => {
     setIsClient(true)
   }, [])
+
+  useEffect(() => {
+    if (isClient && showApp) {
+      // 처음 방문한 사용자에게 가이드 표시
+      if (!hasViewedGuide()) {
+        setTimeout(() => {
+          setShowGuideModal(true)
+          markGuideAsViewed()
+        }, 1500) // 1.5초 후에 가이드 표시
+      }
+    }
+  }, [isClient, showApp])
 
   const currentData = web3Data
 
@@ -160,7 +176,12 @@ export default function HeyChainApp() {
                 <MessageCircle className="w-5 h-5 mr-2" />
                 {texts.startNow}
               </Button>
-              <Button size="lg" variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-800">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-gray-600 text-gray-300 hover:bg-gray-800"
+                onClick={() => setShowGuideModal(true)}
+              >
                 <BookOpen className="w-5 h-5 mr-2" />
                 {texts.howToUse}
               </Button>
@@ -307,6 +328,7 @@ export default function HeyChainApp() {
             </div>
 
             <div className="flex items-center space-x-2 sm:space-x-4">
+              <HeaderGuideButton />
               <Button
                 variant="ghost"
                 size="sm"
@@ -496,6 +518,7 @@ export default function HeyChainApp() {
           </div>
         </main>
       </div>
+      <UsageGuideModal open={showGuideModal} onOpenChange={setShowGuideModal} />
     </div>
   )
 }
