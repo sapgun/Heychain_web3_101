@@ -818,110 +818,6 @@ export const web3Data = [
             "Soulbound Token(SBT)의 주요 특징은 양도 불가능(non-transferable)하다는 점입니다. 이는 특정 지갑이나 사용자에게 영구적으로 연결되어 있어 다른 사람에게 전송할 수 없습니다. 이러한 특성 때문에 학위, 자격증, 멤버십 등 개인의 신원이나 성취와 관련된 정보를 나타내는 데 적합합니다.",
         },
       },
-      {
-        id: "10-6",
-        question: "Data DAO란?",
-        answer:
-          "데이터 DAO는 데이터를 집단적으로 소유, 관리, 통제하고 그로부터 발생하는 가치를 공유하기 위해 만들어진 탈중앙화 자율 조직입니다. 데이터의 수집, 레이블링, 분석, 거래 등을 커뮤니티 기반으로 운영하며, 데이터 주권과 공정한 데이터 경제를 목표로 할 수 있습니다.",
-        links: [
-          { title: "Ocean Protocol", url: "https://oceanprotocol.com/" },
-          { title: "데이터 DAO 개념", url: "https://medium.com/oceanprotocol/introducing-data-nfts-3a7e589afbcb" },
-        ],
-        tips: "데이터 DAO는 AI 학습 데이터 등 가치 있는 데이터셋의 공동 관리에 적합합니다.",
-        quiz: {
-          question: "데이터 DAO의 주요 목적이 아닌 것은?",
-          options: ["데이터 소유권의 민주화", "데이터 가치의 공정한 분배", "데이터 접근성 향상", "데이터 독점 강화"],
-          correctAnswer: 3,
-          explanation:
-            "데이터 DAO의 주요 목적은 데이터 독점을 강화하는 것이 아니라, 오히려 그 반대입니다. 데이터 DAO는 데이터 소유권을 민주화하고, 데이터에서 발생하는 가치를 공정하게 분배하며, 데이터 접근성을 향상시키는 것을 목표로 합니다. 이는 현재 소수의 대형 기업이 데이터를 독점하는 구조에 대한 대안으로 제시됩니다.",
-        },
-      },
-      {
-        id: "10-7",
-        question: "MEV란?",
-        answer:
-          "MEV(Maximal Extractable Value, 이전에는 Miner Extractable Value)는 블록 생산자(채굴자 또는 검증자)가 블록 내 트랜잭션의 순서, 포함 여부 등을 조작하여 얻을 수 있는 최대 이익을 의미합니다. 차익 거래, 청산 기회 선점 등으로 발생하며, 사용자에게 불리한 가격(슬리피지)을 유발할 수 있습니다.",
-        links: [
-          { title: "MEV 설명", url: "https://ethereum.org/ko/developers/docs/mev/" },
-          { title: "Flashbots", url: "https://www.flashbots.net/" },
-        ],
-        tips: "MEV는 DeFi 생태계에서 중요한 이슈이며, 이를 완화하기 위한 다양한 솔루션이 개발되고 있습니다.",
-        quiz: {
-          question: "MEV의 대표적인 예시가 아닌 것은?",
-          options: [
-            "샌드위치 공격(Sandwich Attack)",
-            "차익 거래(Arbitrage)",
-            "청산 경쟁(Liquidation)",
-            "51% 공격(51% Attack)",
-          ],
-          correctAnswer: 3,
-          explanation:
-            "51% 공격은 MEV의 예시가 아닙니다. 51% 공격은 블록체인 네트워크의 해시파워나 지분의 과반수를 장악하여 이중 지불 등의 공격을 수행하는 것을 의미합니다. 반면, 샌드위치 공격(사용자 거래 전후로 주문을 넣어 이익 취득), 차익 거래(여러 시장 간 가격 차이 활용), 청산 경쟁(담보 청산 기회 선점)은 모두 MEV의 대표적인 예시입니다.",
-        },
-      },
-      {
-        id: "10-8",
-        question: "DePIN, RWA, SocialFi 소개",
-        answer:
-          "DePIN(Decentralized Physical Infrastructure Networks)은 블록체인과 토큰 인센티브를 활용하여 실제 물리적 인프라(예: 무선 네트워크, 저장 공간, 에너지망)를 분산된 방식으로 구축하고 운영하는 분야입니다. RWA(Real World Asset)는 부동산, 미술품, 채권 등 현실 세계 자산을 토큰화하여 블록체인 상에서 거래하거나 담보로 활용하는 것입니다. SocialFi는 소셜 미디어와 DeFi를 결합하여 콘텐츠 제작, 커뮤니티 활동 등에 대한 경제적 보상을 제공하는 분야입니다.",
-        links: [
-          { title: "Helium (DePIN 예시)", url: "https://www.helium.com/" },
-          { title: "Lens Protocol (SocialFi 예시)", url: "https://www.lens.xyz/" },
-        ],
-        tips: "이러한 분야들은 Web3 기술을 실생활과 연결하는 중요한 응용 사례입니다.",
-        quiz: {
-          question: "RWA(Real World Asset) 토큰화의 주요 이점은?",
-          options: [
-            "실물 자산의 완전한 디지털화",
-            "자산의 유동성 및 접근성 향상",
-            "자산 가치의 변동성 제거",
-            "규제 회피",
-          ],
-          correctAnswer: 1,
-          explanation:
-            "RWA 토큰화의 주요 이점은 전통적으로 유동성이 낮은 실물 자산(부동산, 미술품 등)의 유동성과 접근성을 향상시키는 것입니다. 토큰화를 통해 자산을 분할 소유할 수 있게 되어 더 많은 사람들이 적은 금액으로도 투자할 수 있게 됩니다. 그러나 이는 자산의 완전한 디지털화나 가치 변동성 제거를 의미하지는 않으며, 규제 회피가 목적이 아닙니다.",
-        },
-      },
-      {
-        id: "10-9",
-        question:
-          "검열 저항성(Censorship Resistance)이란 무엇이며, 블록체인 아키텍처에서 어떻게 구현되나요? (PBS, crLists 등)",
-        answer:
-          "검열 저항성은 특정 주체(정부, 기업 등)가 트랜잭션을 임의로 차단하거나 방해할 수 없는 특성입니다. 탈중앙화된 네트워크, 다수의 검증자 참여, 암호학적 보안 등을 통해 구현됩니다. PBS(Proposer-Builder Separation)는 블록 제안자와 블록 빌더 역할을 분리하여 검열 위험을 줄이려는 시도이며, crLists(Censorship Resistance Lists)는 특정 트랜잭션 포함을 강제하는 메커니즘입니다.",
-        links: [
-          { title: "검열 저항성 설명", url: "https://ethereum.org/ko/developers/docs/consensus-mechanisms/pow/" },
-          {
-            title: "PBS 소개",
-            url: "https://ethresear.ch/t/proposer-block-builder-separation-friendly-fee-market-designs/9725",
-          },
-        ],
-        tips: "검열 저항성은 블록체인의 핵심 가치 중 하나이지만, 완벽한 검열 저항성을 달성하는 것은 기술적으로 도전적입니다.",
-        quiz: {
-          question: "PBS(Proposer-Builder Separation)의 주요 목적은?",
-          options: ["트랜잭션 처리 속도 향상", "MEV 추출 최대화", "검열 위험 감소 및 MEV 시장 효율화", "가스비 절감"],
-          correctAnswer: 2,
-          explanation:
-            "PBS(Proposer-Builder Separation)의 주요 목적은 블록 제안자와 블록 빌더의 역할을 분리함으로써 검열 위험을 줄이고 MEV 시장을 더 효율적으로 만드는 것입니다. 이를 통해 블록 빌더는 MEV 추출을 최적화하고, 블록 제안자는 최고 입찰가를 선택하여 네트워크의 경제적 효율성을 높일 수 있습니다. 또한 역할 분리로 인해 검열 시도가 더 어려워집니다.",
-        },
-      },
-      {
-        id: "10-10",
-        question: "네트워크 효과(Network Effects)가 Web3 프로젝트의 성공과 실패에 미치는 영향은?",
-        answer:
-          "네트워크 효과는 특정 제품이나 서비스의 사용자 수가 증가할수록 그 가치가 더욱 커지는 현상입니다. Web3 프로젝트에서 더 많은 사용자, 개발자, 유동성이 모일수록 생태계가 활성화되고 다른 참여자들에게 더 매력적이 되어 선순환을 만들 수 있지만, 초기 사용자 확보가 어려우면 성장이 정체될 수 있습니다.",
-        links: [
-          { title: "네트워크 효과 설명", url: "https://a16z.com/network-effects-and-web3/" },
-          { title: "Web3 성장 전략", url: "https://future.a16z.com/how-to-win-users-in-web3/" },
-        ],
-        tips: "Web3 프로젝트는 커뮤니티 구축과 참여 유도에 집중해야 합니다.",
-        quiz: {
-          question: "네트워크 효과가 강한 Web3 프로젝트의 특징은?",
-          options: ["높은 진입 장벽", "폐쇄적인 커뮤니티", "낮은 사용자 참여도", "활발한 커뮤니티와 다양한 참여 기회"],
-          correctAnswer: 3,
-          explanation:
-            "네트워크 효과가 강한 Web3 프로젝트는 활발한 커뮤니티와 다양한 참여 기회를 제공합니다. 더 많은 사용자가 참여하고 기여할수록 프로젝트의 가치가 높아지고, 이는 다시 더 많은 사용자를 유치하는 선순환을 만듭니다. 높은 진입 장벽, 폐쇄적인 커뮤니티, 낮은 사용자 참여도는 네트워크 효과를 저해하는 요소입니다.",
-        },
-      },
     ],
   },
   {
@@ -963,494 +859,188 @@ export const web3Data = [
             "Vyper는 보안을 강화하기 위해 무한 루프를 방지하는 설계를 채택했습니다. 이를 위해 재귀 호출이나 무한 루프를 만들 수 있는 기능을 제한합니다. 또한 Vyper는 상속, 오버로딩, 재귀 등의 복잡한 기능을 의도적으로 제거하여 코드 감사를 더 쉽게 만들었습니다.",
         },
       },
+    ],
+  },
+  {
+    category: "12. 🌍 Web3 생태계 & 커뮤니티 (Web3 Ecosystems & Communities)",
+    items: [
       {
-        id: "11-3",
-        question: "Remix IDE 사용법",
+        id: "12-1",
+        question: "주요 레이어1 생태계 비교",
         answer:
-          "Remix IDE는 웹 브라우저에서 직접 스마트 컨트랙트(주로 Solidity)를 작성, 컴파일, 배포, 테스트할 수 있는 통합 개발 환경입니다. 초보자들이 쉽게 스마트 컨트랙트 개발을 시작하고 실험해볼 수 있도록 다양한 기능과 플러그인을 제공합니다.",
+          "이더리움은 가장 큰 생태계와 개발자 커뮤니티를 가졌지만 확장성 문제가 있습니다. 솔라나는 높은 처리 속도를 자랑하지만 때때로 네트워크 안정성 문제가 발생합니다. 코스모스와 폴카닷은 상호운용 가능한 블록체인 네트워크 구축을 목표로 합니다. 각 생태계는 기술적 특징, 주요 DApp, 커뮤니티 분위기 등이 다릅니다.",
         links: [
-          { title: "Remix IDE", url: "https://remix.ethereum.org/" },
-          { title: "Remix 문서", url: "https://remix-ide.readthedocs.io/" },
+          { title: "이더리움", url: "https://ethereum.org" },
+          { title: "솔라나", url: "https://solana.com" },
+          { title: "코스모스", url: "https://cosmos.network" },
         ],
-        tips: "Remix는 학습과 프로토타이핑에 적합하지만, 대규모 프로젝트는 로컬 개발 환경을 고려하세요.",
-        practice: {
-          title: "Remix IDE로 첫 스마트 컨트랙트 만들기",
-          steps: [
-            "1. remix.ethereum.org 접속",
-            "2. 파일 탐색기에서 새 파일 생성 (MyContract.sol)",
-            "3. 기본 컨트랙트 코드 작성",
-            "4. Solidity 컴파일러 탭에서 컴파일",
-            "5. Deploy & Run 탭에서 JavaScript VM 환경 선택",
-            "6. 컨트랙트 배포 및 함수 테스트",
-          ],
-          warning: "⚠️ 테스트넷이나 메인넷에 배포할 때는 항상 코드를 철저히 검토하고 테스트하세요.",
-        },
+        tips: "각 생태계의 특성을 이해하고 목적에 맞는 체인을 선택하세요.",
       },
       {
-        id: "11-4",
-        question: "Ethers.js vs Web3.js",
+        id: "12-2",
+        question: "Web3 커뮤니티 참여 방법",
         answer:
-          "Ethers.js와 Web3.js는 자바스크립트 애플리케이션(예: 웹사이트)이 이더리움 블록체인과 상호작용(지갑 연결, 컨트랙트 호출, 잔액 조회 등)할 수 있도록 돕는 라이브러리입니다. Ethers.js는 더 간결하고 현대적인 API를 제공하며 최근에 더 많이 선호되는 경향이 있습니다.",
+          "트위터, 디스코드, 텔레그램, 레딧 등에서 관심 있는 분야의 프로젝트나 인플루언서를 팔로우하고 관련 커뮤니티 채널에 참여할 수 있습니다. 각 커뮤니티는 고유한 문화와 소통 방식을 가지며, 정보 공유, 토론, 이벤트 참여 등을 통해 활동할 수 있습니다.",
         links: [
-          { title: "Ethers.js 가이드", url: "https://docs.ethers.io/v5/getting-started/" },
-          { title: "Web3.js 가이드", url: "https://web3js.readthedocs.io/en/v1.7.3/getting-started.html" },
+          { title: "Web3 커뮤니티 가이드", url: "https://ethereum.org/en/community/" },
+          { title: "Discord 서버 목록", url: "https://ethereum.org/en/community/online/" },
         ],
-        tips: "두 라이브러리 모두 유사한 기능을 제공하므로, 프로젝트 요구사항과 개인 선호도에 따라 선택하세요.",
-        quiz: {
-          question: "Ethers.js와 Web3.js의 공통점이 아닌 것은?",
-          options: [
-            "스마트 컨트랙트 상호작용 지원",
-            "지갑 연결 기능 제공",
-            "동일한 API 구조",
-            "이더리움 네트워크와의 통신",
-          ],
-          correctAnswer: 2,
-          explanation:
-            "Ethers.js와 Web3.js는 API 구조가 다릅니다. Ethers.js는 더 모듈화된 접근 방식을 취하며, 프로바이더(Provider), 서명자(Signer), 컨트랙트(Contract) 등의 개념으로 구분됩니다. 반면 Web3.js는 더 통합된 접근 방식을 사용합니다. 두 라이브러리 모두 스마트 컨트랙트 상호작용, 지갑 연결, 이더리움 네트워크 통신 등의 기능을 제공합니다.",
-        },
-      },
-      {
-        id: "11-5",
-        question: "Hardhat vs Foundry",
-        answer:
-          "Hardhat과 Foundry는 이더리움 스마트 컨트랙트 개발을 위한 프레임워크입니다. Hardhat은 자바스크립트 기반으로 유연한 개발 환경과 다양한 플러그인을 제공합니다. Foundry는 Solidity로 테스트 코드를 작성할 수 있게 하여 개발 속도와 편의성을 높인 Rust 기반의 툴킷입니다.",
-        links: [
-          { title: "Hardhat 문서", url: "https://hardhat.org/getting-started/" },
-          { title: "Foundry 문서", url: "https://book.getfoundry.sh/" },
-        ],
-        tips: "Hardhat은 JavaScript/TypeScript 개발자에게 친숙하고, Foundry는 Solidity 개발자에게 효율적입니다.",
-        quiz: {
-          question: "Foundry의 주요 특징이 아닌 것은?",
-          options: [
-            "Solidity로 테스트 작성 가능",
-            "Rust 기반 개발",
-            "JavaScript 플러그인 생태계",
-            "빠른 테스트 실행 속도",
-          ],
-          correctAnswer: 2,
-          explanation:
-            "Foundry는 JavaScript 플러그인 생태계를 가지고 있지 않습니다. 이는 Hardhat의 특징입니다. Foundry는 Rust 기반으로 개발되었으며, Solidity로 테스트를 작성할 수 있고, 빠른 테스트 실행 속도를 제공합니다. Foundry는 JavaScript 대신 Solidity를 사용하여 개발 워크플로우를 단순화하는 것을 목표로 합니다.",
-        },
-      },
-      {
-        id: "11-6",
-        question: "테스트넷에서 실습하는 법",
-        answer:
-          "테스트넷은 실제 자산을 사용하지 않고 블록체인 개발 및 DApp 테스트를 할 수 있는 실험용 네트워크입니다. 메타마스크 등 지갑에서 테스트넷(예: Sepolia, Goerli)으로 네트워크를 전환하고, 해당 테스트넷의 수도꼭지(Faucet)에서 테스트용 코인을 받아 스마트 컨트랙트 배포나 DApp 기능을 시험해볼 수 있습니다.",
-        links: [
-          { title: "Sepolia 수도꼭지", url: "https://sepoliafaucet.com/" },
-          { title: "테스트넷 가이드", url: "https://ethereum.org/ko/developers/docs/networks/#testnets" },
-        ],
-        tips: "테스트넷은 메인넷과 동일한 환경을 제공하지만, 실제 가치가 없는 토큰을 사용합니다.",
-        practice: {
-          title: "Sepolia 테스트넷 설정 및 ETH 받기",
-          steps: [
-            "1. 메타마스크 설치 및 계정 생성",
-            "2. 네트워크 드롭다운 메뉴에서 'Sepolia 테스트 네트워크' 선택",
-            "3. sepoliafaucet.com 방문",
-            "4. 지갑 주소 입력 및 인증 과정 완료",
-            "5. 테스트 ETH 수령 (트랜잭션 확인)",
-            "6. 메타마스크에서 잔액 확인",
-          ],
-          warning:
-            "⚠️ 테스트넷 ETH는 실제 가치가 없습니다. 또한 테스트넷은 주기적으로 리셋될 수 있으니 중요한 데이터는 백업하세요.",
-        },
-      },
-      {
-        id: "11-7",
-        question: "GitHub 오픈소스 보는 법",
-        answer:
-          "GitHub는 많은 Web3 프로젝트들이 소스 코드를 공개하고 협업하는 플랫폼입니다. 프로젝트의 GitHub 저장소(Repository)에서 코드를 직접 보거나, 이슈(Issue) 탭에서 버그나 개선 사항 논의를, 풀 리퀘스트(Pull Request) 탭에서 코드 변경 제안 및 리뷰 과정을 확인할 수 있습니다.",
-        links: [
-          { title: "GitHub 가이드", url: "https://docs.github.com/ko" },
-          { title: "OpenZeppelin 저장소", url: "https://github.com/OpenZeppelin/openzeppelin-contracts" },
-        ],
-        tips: "README.md 파일을 먼저 읽으면 프로젝트의 개요, 설치 방법, 사용법 등을 파악할 수 있습니다.",
-        practice: {
-          title: "GitHub에서 스마트 컨트랙트 코드 분석하기",
-          steps: [
-            "1. github.com/OpenZeppelin/openzeppelin-contracts 방문",
-            "2. 'contracts' 폴더 클릭",
-            "3. 관심 있는 컨트랙트 카테고리 선택 (예: token)",
-            "4. 특정 컨트랙트 파일 열기 (예: ERC20.sol)",
-            "5. 코드 상단의 주석과 문서 링크 확인",
-            "6. 'Blame' 버튼을 클릭하여 각 라인의 변경 이력 확인",
-          ],
-          warning:
-            "⚠️ 항상 공식 저장소인지 확인하고, 스마트 컨트랙트 코드를 그대로 복사해 사용할 때는 라이센스를 확인하세요.",
-        },
-      },
-      {
-        id: "11-8",
-        question: "Tenderly, OpenZeppelin, Slither 소개",
-        answer:
-          "Tenderly는 스마트 컨트랙트 개발 및 운영을 위한 모니터링, 디버깅, 시뮬레이션 플랫폼입니다. OpenZeppelin은 안전하고 표준화된 스마트 컨트랙트 라이브러리(예: ERC20, ERC721 구현)를 제공하여 개발자들이 보안 취약점을 줄이고 빠르게 개발할 수 있도록 돕습니다. Slither는 Solidity 코드의 취약점을 자동으로 분석해주는 정적 분석 도구입니다.",
-        links: [
-          { title: "Tenderly", url: "https://tenderly.co/" },
-          { title: "OpenZeppelin", url: "https://openzeppelin.com/" },
-          { title: "Slither", url: "https://github.com/crytic/slither" },
-        ],
-        tips: "이러한 도구들을 활용하면 스마트 컨트랙트의 보안성과 품질을 높일 수 있습니다.",
-        quiz: {
-          question: "Slither의 주요 기능은?",
-          options: [
-            "스마트 컨트랙트 모니터링",
-            "표준 컨트랙트 라이브러리 제공",
-            "트랜잭션 시뮬레이션",
-            "코드 취약점 정적 분석",
-          ],
-          correctAnswer: 3,
-          explanation:
-            "Slither는 Solidity 코드의 취약점을 자동으로 찾아내는 정적 분석 도구입니다. 재진입 공격, 정수 오버플로우, 권한 관리 문제 등 다양한 보안 취약점을 감지할 수 있습니다. 스마트 컨트랙트 모니터링은 Tenderly, 표준 컨트랙트 라이브러리는 OpenZeppelin의 주요 기능입니다.",
-        },
-      },
-      {
-        id: "11-9",
-        question: "API와 RPC 노드의 차이점과 역할은 무엇인가요? (Infura, Alchemy, QuickNode 등 서비스 소개)",
-        answer:
-          "RPC(Remote Procedure Call) 노드는 블록체인 네트워크에 직접 연결되어 데이터를 읽거나 트랜잭션을 보낼 수 있게 하는 서버입니다. API(Application Programming Interface)는 개발자가 특정 기능을 쉽게 사용할 수 있도록 미리 정의된 인터페이스로, RPC 노드 기능을 포함하여 더 추상화된 형태로 제공될 수 있습니다. Infura, Alchemy, QuickNode는 개발자들이 직접 노드를 운영할 필요 없이 RPC 접근 및 추가 API 기능을 제공하는 노드 서비스 제공업체입니다.",
-        links: [
-          { title: "Infura", url: "https://infura.io/" },
-          { title: "Alchemy", url: "https://www.alchemy.com/" },
-        ],
-        tips: "자체 노드 운영은 완전한 탈중앙화를 제공하지만, 노드 서비스는 개발 속도와 편의성을 높여줍니다.",
-        quiz: {
-          question: "노드 서비스 제공업체(Infura, Alchemy 등)의 주요 장점이 아닌 것은?",
-          options: [
-            "인프라 관리 부담 감소",
-            "추가 개발 도구 및 분석 기능",
-            "완전한 탈중앙화 보장",
-            "높은 가용성과 안정성",
-          ],
-          correctAnswer: 2,
-          explanation:
-            "노드 서비스 제공업체를 사용하면 중앙화된 서비스에 의존하게 되므로 완전한 탈중앙화를 보장하지 않습니다. 이는 단일 실패 지점이 될 수 있습니다. 그러나 인프라 관리 부담 감소, 추가 개발 도구 제공, 높은 가용성 등의 장점이 있어 많은 개발자들이 사용합니다.",
-        },
-      },
-      {
-        id: "11-10",
-        question: "블록체인 인덱싱 프로토콜(The Graph, SubQuery, Satsuma)은 개발자와 사용자에게 왜 필요한가요?",
-        answer:
-          "블록체인 데이터는 직접 쿼리하기 어렵고 비효율적일 수 있습니다. 인덱싱 프로토콜은 블록체인 데이터를 정리하고 색인화하여, DApp 개발자들이 필요한 데이터를 빠르고 쉽게 검색하고 사용할 수 있도록 API(GraphQL 등) 형태로 제공합니다. The Graph가 대표적이며, SubQuery, Satsuma 등도 유사한 기능을 제공합니다.",
-        links: [
-          { title: "The Graph", url: "https://thegraph.com/" },
-          { title: "SubQuery", url: "https://subquery.network/" },
-        ],
-        tips: "인덱싱 프로토콜을 사용하면 복잡한 데이터 쿼리를 효율적으로 처리할 수 있습니다.",
-        quiz: {
-          question: "블록체인 인덱싱 프로토콜의 주요 이점은?",
-          options: [
-            "블록체인 트랜잭션 속도 향상",
-            "스마트 컨트랙트 보안 강화",
-            "효율적인 데이터 쿼리 및 검색",
-            "가스비 절감",
-          ],
-          correctAnswer: 2,
-          explanation:
-            "블록체인 인덱싱 프로토콜의 주요 이점은 효율적인 데이터 쿼리 및 검색입니다. 블록체인 데이터를 구조화하고 인덱싱하여 개발자가 복잡한 쿼리를 쉽게 실행할 수 있게 합니다. 이는 DApp의 성능과 사용자 경험을 향상시키지만, 블록체인 자체의 트랜잭션 속도나 가스비에는 직접적인 영향을 미치지 않습니다.",
-        },
-      },
-      {
-        id: "11-11",
-        question: "스마트 컨트랙트 업그레이드 방식(프록시 패턴: UUPS, Transparent Proxy 등)의 기본 개념은?",
-        answer:
-          "블록체인에 배포된 스마트 컨트랙트 코드는 기본적으로 변경이 불가능합니다. 프록시 패턴은 사용자가 상호작용하는 주소(프록시 컨트랙트)는 고정해두고, 실제 로직이 담긴 컨트랙트 주소만 변경하여 스마트 컨트랙트를 업그레이드할 수 있게 하는 방식입니다. UUPS와 Transparent Proxy는 프록시 패턴의 구체적인 구현 방식들입니다.",
-        links: [
-          { title: "프록시 패턴 설명", url: "https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies" },
-          {
-            title: "UUPS vs Transparent",
-            url: "https://docs.openzeppelin.com/contracts/4.x/api/proxy#transparent-vs-uups",
-          },
-        ],
-        tips: "업그레이드 가능한 컨트랙트는 유연성을 제공하지만, 거버넌스와 보안 측면에서 신중하게 설계해야 합니다.",
-        quiz: {
-          question: "UUPS(Universal Upgradeable Proxy Standard)와 Transparent Proxy의 주요 차이점은?",
-          options: [
-            "UUPS는 업그레이드 로직이 구현 컨트랙트에 있고, Transparent Proxy는 프록시 컨트랙트에 있다",
-            "UUPS는 가스 비용이 더 높다",
-            "Transparent Proxy는 업그레이드가 불가능하다",
-            "UUPS는 ERC-20 토큰에만 사용할 수 있다",
-          ],
-          correctAnswer: 0,
-          explanation:
-            "UUPS와 Transparent Proxy의 주요 차이점은 업그레이드 로직의 위치입니다. UUPS에서는 업그레이드 로직이 구현 컨트랙트에 있어 프록시 컨트랙트가 더 간단해지고 가스 비용이 절감됩니다. Transparent Proxy에서는 업그레이드 로직이 프록시 컨트랙트 자체에 있습니다. 두 방식 모두 업그레이드가 가능하며, 다양한 컨트랙트 유형에 사용할 수 있습니다.",
-        },
-      },
-      {
-        id: "11-12",
-        question: "가스 효율적인 스마트 컨트랙트 작성의 기본 원칙 (비개발자도 이해할 수 있는 수준으로)",
-        answer:
-          "스마트 컨트랙트의 각 연산은 가스(수수료)를 소모하므로, 불필요한 연산이나 데이터 저장을 최소화해야 합니다. 예를 들어, 반복문 대신 더 효율적인 자료구조를 사용하거나, 자주 변경되지 않는 데이터는 저장 비용이 낮은 방식으로 관리하고, 가능한 한 계산을 오프체인에서 수행 후 결과만 온체인에 기록하는 것이 좋습니다.",
-        links: [
-          { title: "가스 최적화 팁", url: "https://ethereum.org/ko/developers/docs/gas/" },
-          { title: "Solidity 가스 최적화", url: "https://docs.soliditylang.org/en/latest/internals/optimizer.html" },
-        ],
-        tips: "가스 효율성은 사용자 경험과 경제성에 직접적인 영향을 미치므로 중요합니다.",
-        quiz: {
-          question: "Solidity에서 가스 비용을 줄이는 방법으로 적절하지 않은 것은?",
-          options: [
-            "uint256 대신 uint8 사용하기",
-            "불필요한 상태 변수 제거하기",
-            "복잡한 계산을 오프체인으로 옮기기",
-            "가능한 많은 이벤트 발생시키기",
-          ],
-          correctAnswer: 3,
-          explanation:
-            "이벤트를 발생시키는 것(emit)도 가스를 소모하므로, 불필요하게 많은 이벤트를 발생시키면 가스 비용이 증가합니다. 반면, 불필요한 상태 변수 제거, 복잡한 계산의 오프체인 처리, 적절한 데이터 타입 사용(단, uint8이 항상 uint256보다 효율적인 것은 아님)은 가스 비용을 줄이는 방법입니다.",
-        },
-      },
-      {
-        id: "11-13",
-        question: "노코드/로우코드 Web3 개발 플랫폼(Thirdweb, Bunzz, BuildShip 등) 소개 및 활용 가능성",
-        answer:
-          "노코드/로우코드 Web3 플랫폼은 코딩 지식이 거의 없거나 적은 사용자도 미리 만들어진 템플릿이나 드래그앤드롭 인터페이스를 통해 간단한 스마트 컨트랙트(NFT 발행, 토큰 생성 등)를 배포하거나 DApp을 만들 수 있도록 지원하는 도구입니다. Web3 개발의 진입 장벽을 낮추는 데 기여합니다.",
-        links: [
-          { title: "Thirdweb", url: "https://thirdweb.com/" },
-          { title: "Bunzz", url: "https://bunzz.dev/" },
-        ],
-        tips: "노코드 도구는 빠른 프로토타이핑과 기본 기능 구현에 유용하지만, 복잡한 로직은 여전히 코딩이 필요할 수 있습니다.",
-        quiz: {
-          question: "노코드/로우코드 Web3 개발 플랫폼의 주요 장점은?",
-          options: [
-            "모든 종류의 복잡한 DApp 개발 가능",
-            "개발 시간 및 비용 절감",
-            "완전한 커스터마이징 지원",
-            "모든 블록체인 네트워크 지원",
-          ],
-          correctAnswer: 1,
-          explanation:
-            "노코드/로우코드 Web3 개발 플랫폼의 주요 장점은 개발 시간과 비용을 절감할 수 있다는 점입니다. 미리 만들어진 템플릿과 컴포넌트를 활용하여 기본적인 기능을 빠르게 구현할 수 있습니다. 그러나 매우 복잡한 DApp 개발, 완전한 커스터마이징, 모든 블록체인 네트워크 지원 등에는 한계가 있을 수 있습니다.",
-        },
+        tips: "커뮤니티 규칙을 잘 읽고 존중하며, 건설적인 기여를 하려고 노력하세요.",
       },
     ],
   },
   {
-    category: "12. 🧠 Web3 심화 개념 (Web3 Advanced Concepts)",
+    category: "13. 💼 Web3 커리어 & 스킬 (Web3 Careers & Skills)",
     items: [
       {
-        id: "12-1",
-        question: "탈중앙화란 무엇인가요?",
+        id: "13-1",
+        question: "Web3 분야의 다양한 직업군",
         answer:
-          "탈중앙화는 단일 개인이나 기관이 시스템 전체를 통제하지 않고, 권한과 책임이 여러 참여자에게 분산되어 있는 상태를 의미합니다. Web3에서는 데이터 소유권, 의사결정, 네트워크 운영 등에서 중앙 집중적인 통제로부터 벗어나는 것을 목표로 합니다.",
+          "Web3 분야는 기술 직군(개발, 연구, 보안) 외에도 제품 기획, 디자인, 데이터 분석, 콘텐츠 제작, 커뮤니티 관리, 마케팅, 사업 개발 등 다양한 비기술 직군의 역할이 중요하며 수요가 증가하고 있습니다.",
         links: [
-          { title: "탈중앙화 설명", url: "https://ethereum.org/ko/developers/docs/consensus-mechanisms/" },
-          { title: "Web3 철학", url: "https://ethereum.org/ko/web3/" },
+          { title: "Web3 Career", url: "https://web3.career" },
+          { title: "CryptoJobs", url: "https://crypto.jobs" },
         ],
-        tips: "완전한 탈중앙화는 이상적인 목표이지만, 현실에서는 다양한 수준의 탈중앙화가 존재합니다.",
-        quiz: {
-          question: "탈중앙화 시스템의 특징이 아닌 것은?",
-          options: [
-            "단일 실패 지점이 없다",
-            "검열 저항성이 있다",
-            "의사결정이 분산되어 있다",
-            "항상 중앙화된 시스템보다 효율적이다",
-          ],
-          correctAnswer: 3,
-          explanation:
-            "탈중앙화 시스템은 일반적으로 중앙화된 시스템보다 효율성이 낮을 수 있습니다. 합의 메커니즘과 데이터 복제 등의 과정이 필요하기 때문입니다. 그러나 이러한 효율성 저하는 보안, 투명성, 검열 저항성 등의 이점을 위한 트레이드오프로 볼 수 있습니다.",
-        },
+        tips: "Web3 지식과 기존 전문 분야를 결합하면 경쟁력을 높일 수 있습니다.",
       },
       {
-        id: "12-2",
-        question: "토크노믹스 기초: 발행량, 소각, 인플레이션",
+        id: "13-2",
+        question: "Web3 학습 자료",
         answer:
-          "토크노믹스는 토큰(Token)과 경제학(Economics)의 합성어로, 토큰의 설계, 분배, 공급 및 수요 관리 등 경제적 모델을 의미합니다. 총 발행량은 토큰의 희소성을 결정하고, 소각은 공급량을 줄여 가치를 높이려는 시도이며, 인플레이션은 지속적인 토큰 발행으로 가치가 하락하는 현상을 나타냅니다.",
+          "ConsenSys Academy, Encode Club, CryptoZombies, Udemy, Coursera 등에서 Web3 개발 및 관련 지식 온라인 코스를 찾을 수 있습니다. 다양한 부트캠프 프로그램도 있으며, 특정 기술 스택에 대한 자격증보다는 실제 프로젝트 경험이나 포트폴리오가 더 중요하게 여겨지는 경우가 많습니다.",
+        links: [
+          { title: "ConsenSys Academy", url: "https://consensys.net/academy/" },
+          { title: "CryptoZombies", url: "https://cryptozombies.io" },
+        ],
+        tips: "이론 학습과 함께 실제 프로젝트를 만들어보는 것이 중요합니다.",
+      },
+    ],
+  },
+  {
+    category: "14. 📜 규제, 윤리 & 사회 (Regulation, Ethics & Society)",
+    items: [
+      {
+        id: "14-1",
+        question: "주요 국가별 Web3 규제 동향",
+        answer:
+          "미국은 SEC와 CFTC 간의 관할권 문제, 증권성 판단 등으로 규제 불확실성이 존재합니다. 유럽연합은 MiCA(Markets in Crypto-Assets) 법안을 통해 포괄적인 규제 프레임워크를 마련하고 있습니다. 한국은 특정금융정보법을 중심으로 자금세탁방지에 초점을 맞추고 있으며, 투자자 보호 및 산업 육성을 위한 법제화 논의가 진행 중입니다.",
         links: [
           {
-            title: "토크노믹스 설계",
-            url: "https://medium.com/coinmonks/token-economics-101-a-beginners-guide-to-tokenomics-2e8d13cb1fe3",
+            title: "MiCA 규제",
+            url: "https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica",
           },
-          { title: "토큰 소각 메커니즘", url: "https://academy.binance.com/en/articles/what-is-token-burning" },
+          { title: "한국 규제 현황", url: "https://www.fsc.go.kr" },
         ],
-        tips: "지속 가능한 토크노믹스 설계는 프로젝트의 장기적인 성공에 중요한 요소입니다.",
-        quiz: {
-          question: "토큰 소각(burning)의 주요 목적은?",
-          options: [
-            "네트워크 수수료 증가",
-            "토큰 공급량 감소를 통한 가치 상승 유도",
-            "거버넌스 참여 증가",
-            "스테이킹 보상 증가",
-          ],
-          correctAnswer: 1,
-          explanation:
-            "토큰 소각은 유통 중인 토큰의 일부를 영구적으로 제거하여 공급량을 줄이는 과정입니다. 이는 희소성을 증가시켜 토큰 가치 상승을 유도하는 것이 주요 목적입니다. 또한 일부 프로젝트에서는 수수료의 일부를 소각하여 디플레이션 모델을 구현하기도 합니다.",
-        },
+        tips: "규제는 빠르게 변화하므로 최신 정보를 지속적으로 확인하세요.",
       },
       {
-        id: "12-3",
-        question: "모듈형 블록체인이란? (Celestia, Fuel 등)",
+        id: "14-2",
+        question: "Web3 기술의 윤리적 고려사항",
         answer:
-          "모듈형 블록체인은 블록체인의 핵심 기능(실행, 합의, 데이터 가용성, 결제)을 각각 독립적인 모듈(계층)로 분리하여, 각 기능을 전문화하고 최적화하려는 아키텍처입니다. 이를 통해 확장성, 유연성, 주권 등을 향상시킬 수 있습니다. Celestia(데이터 가용성), Fuel(실행) 등이 대표적입니다.",
+          "블록체인의 투명성은 프라이버시 침해로 이어질 수 있고, 탈중앙화는 불법 활동에 악용될 소지도 있습니다. AI와 결합된 알고리즘은 편향성을 가질 수 있으며, PoW 방식의 에너지 소비는 환경 문제를 야기합니다. 이러한 윤리적 문제에 대한 고민과 기술적/사회적 해결 노력이 필요합니다.",
         links: [
-          {
-            title: "모듈형 블록체인 설명",
-            url: "https://celestia.org/learn/basics-of-modular-blockchains/introduction/",
-          },
-          { title: "Celestia", url: "https://celestia.org/" },
+          { title: "블록체인 윤리", url: "https://ethereum.org/en/energy-consumption/" },
+          { title: "지속가능성", url: "https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/" },
         ],
-        tips: "모듈형 접근 방식은 각 계층이 독립적으로 최적화될 수 있어 확장성 문제 해결에 효과적입니다.",
-        quiz: {
-          question: "모듈형 블록체인 아키텍처의 주요 이점은?",
-          options: [
-            "모든 트랜잭션이 하나의 체인에서 처리됨",
-            "각 계층이 독립적으로 최적화될 수 있음",
-            "항상 완전한 탈중앙화를 보장함",
-            "스마트 컨트랙트가 필요 없음",
-          ],
-          correctAnswer: 1,
-          explanation:
-            "모듈형 블록체인의 주요 이점은 실행, 합의, 데이터 가용성 등의 계층을 분리하여 각 계층이 독립적으로 최적화될 수 있다는 점입니다. 이를 통해 특정 용도에 맞게 각 계층을 조합하여 확장성, 보안성, 탈중앙화 등의 특성을 조절할 수 있습니다.",
-        },
+        tips: "기술 발전과 함께 윤리적 책임도 고려해야 합니다.",
+      },
+    ],
+  },
+  {
+    category: "15. 💡 Web3의 미래 & 신흥 트렌드 (Future of Web3 & Emerging Trends)",
+    items: [
+      {
+        id: "15-1",
+        question: "AI와 Web3의 융합",
+        answer:
+          "AI 모델 학습 및 운영을 탈중앙화하거나(DeAI), AI 에이전트가 블록체인과 상호작용하며 자율적으로 작업을 수행하고, DAO 운영에 AI를 활용하며, 사용자가 자신의 데이터를 AI 학습에 제공하고 통제하며 보상받는(데이터 주권) 등 다양한 융합 가능성이 탐색되고 있습니다.",
+        links: [
+          { title: "AI와 블록체인", url: "https://ethereum.org/en/developers/docs/" },
+          { title: "탈중앙화 AI", url: "https://blog.oceanprotocol.com" },
+        ],
+        tips: "AI와 Web3의 융합은 아직 초기 단계이지만 큰 잠재력을 가지고 있습니다.",
       },
       {
-        id: "12-4",
-        question: "Privacy Chain: Aleo, Aztec, Iron Fish",
+        id: "15-2",
+        question: "Web3 대중 채택을 위한 과제",
         answer:
-          "프라이버시 체인은 거래 내역이나 사용자 신원을 기본적으로 비공개로 처리하여 익명성과 프라이버시를 강화한 블록체인입니다. 영지식 증명 등의 암호학 기술을 활용하여 거래의 유효성은 검증하면서도 세부 내용은 숨깁니다. Aleo, Aztec, Iron Fish 등이 이러한 프라이버시 기능을 제공하는 프로젝트입니다.",
+          "복잡한 사용자 경험(UX)을 개선하고, 더 많은 사용자를 수용할 수 있는 확장성을 확보하며, 명확하고 합리적인 규제 환경을 조성하고, Web3 기술에 대한 대중의 이해도를 높이는 교육이 확대되어야 대중 채택이 이루어질 수 있습니다. 점진적으로 개선될 것으로 전망됩니다.",
         links: [
-          { title: "Aleo", url: "https://aleo.org/" },
-          { title: "Aztec", url: "https://aztec.network/" },
+          { title: "Web3 UX", url: "https://ethereum.org/en/developers/docs/intro-to-ether/" },
+          { title: "확장성 솔루션", url: "https://ethereum.org/en/developers/docs/scaling/" },
         ],
-        tips: "프라이버시 체인은 금융 거래나 개인 정보가 포함된 애플리케이션에 적합합니다.",
-        quiz: {
-          question: "프라이버시 체인에서 주로 사용되는 암호학 기술은?",
-          options: [
-            "영지식 증명(Zero-Knowledge Proofs)",
-            "작업 증명(Proof of Work)",
-            "지분 증명(Proof of Stake)",
-            "권한 증명(Proof of Authority)",
-          ],
-          correctAnswer: 0,
-          explanation:
-            "프라이버시 체인은 주로 영지식 증명(Zero-Knowledge Proofs) 기술을 사용합니다. 이 기술은 특정 정보를 공개하지 않고도 그 정보가 유효하다는 것을 증명할 수 있게 해줍니다. 예를 들어, 트랜잭션의 금액이나 참여자를 공개하지 않고도 트랜잭션이 유효하다는 것을 증명할 수 있습니다.",
-        },
+        tips: "기술적 완성도와 함께 사용자 친화적인 인터페이스가 중요합니다.",
       },
       {
-        id: "12-5",
-        question: "Web3 ID: DID, SBT, VC",
+        id: "15-3",
+        question: "메타버스와 Web3 기술의 결합",
         answer:
-          "Web3 ID는 사용자가 자신의 디지털 신원을 스스로 통제하고 관리할 수 있도록 하는 개념입니다. DID(Decentralized Identifiers)는 탈중앙화된 식별자이고, SBT(Soulbound Tokens)는 양도 불가능한 신원 증명 토큰이며, VC(Verifiable Credentials)는 검증 가능한 자격 증명(예: 졸업장, 면허증)을 디지털 형태로 표현한 것입니다.",
+          "Web3 기술(NFT, 암호화폐)은 메타버스 내 디지털 자산(아바타, 아이템, 토지)의 진정한 소유권을 사용자에게 부여하고, 서로 다른 메타버스 간 자산 이동 및 상호작용(상호운용성)을 가능하게 하며, 특정 기업이 통제하지 않는 개방형 메타버스 구축의 기반이 될 수 있습니다.",
         links: [
-          { title: "DID 설명", url: "https://www.w3.org/TR/did-core/" },
-          { title: "SBT 소개", url: "https://vitalik.ca/general/2022/01/26/soulbound.html" },
+          { title: "메타버스와 NFT", url: "https://ethereum.org/en/nft/" },
+          { title: "디지털 소유권", url: "https://ethereum.org/en/developers/docs/standards/tokens/erc-721/" },
         ],
-        tips: "Web3 ID는 개인 정보 보호와 자기 주권 신원(Self-Sovereign Identity)을 가능하게 합니다.",
-        quiz: {
-          question: "Soulbound Token(SBT)의 주요 특징은?",
-          options: [
-            "다른 지갑으로 전송 가능",
-            "NFT와 동일한 표준 사용",
-            "양도 불가능(non-transferable)",
-            "항상 금전적 가치를 가짐",
-          ],
-          correctAnswer: 2,
-          explanation:
-            "Soulbound Token(SBT)의 주요 특징은 양도 불가능(non-transferable)하다는 점입니다. 이는 특정 지갑이나 사용자에게 영구적으로 연결되어 있어 다른 사람에게 전송할 수 없습니다. 이러한 특성 때문에 학위, 자격증, 멤버십 등 개인의 신원이나 성취와 관련된 정보를 나타내는 데 적합합니다.",
-        },
+        tips: "메타버스의 성공은 기술적 구현뿐만 아니라 사용자 경험과 콘텐츠에 달려 있습니다.",
+      },
+    ],
+  },
+  {
+    category: "16. 🌐 대체 블록체인 생태계 (Alternative Blockchain Ecosystems)",
+    items: [
+      {
+        id: "16-1",
+        question: "Avalanche (AVAX) 생태계 소개",
+        answer:
+          "Avalanche는 높은 처리량과 낮은 지연시간을 제공하는 블록체인 플랫폼으로, 서브넷(Subnet) 기능을 통해 맞춤형 블록체인을 구축할 수 있습니다. 이더리움과 호환되면서도 더 빠른 트랜잭션 처리가 가능하며, DeFi, NFT, 게임 등 다양한 분야에서 활용되고 있습니다.",
+        links: [
+          { title: "Avalanche 공식 사이트", url: "https://www.avax.network/" },
+          { title: "Avalanche 개발자 문서", url: "https://docs.avax.network/" },
+        ],
+        tips: "Avalanche의 서브넷 기능은 특정 용도에 최적화된 블록체인을 만들 수 있게 해줍니다.",
       },
       {
-        id: "12-6",
-        question: "Data DAO란?",
+        id: "16-2",
+        question: "Solana (SOL) 생태계 소개",
         answer:
-          "데이터 DAO는 데이터를 집단적으로 소유, 관리, 통제하고 그로부터 발생하는 가치를 공유하기 위해 만들어진 탈중앙화 자율 조직입니다. 데이터의 수집, 레이블링, 분석, 거래 등을 커뮤니티 기반으로 운영하며, 데이터 주권과 공정한 데이터 경제를 목표로 할 수 있습니다.",
+          "Solana는 Proof of History(PoH) 합의 메커니즘을 사용하여 초당 수만 건의 트랜잭션을 처리할 수 있는 고성능 블록체인입니다. 낮은 수수료와 빠른 처리 속도로 DeFi, NFT, Web3 애플리케이션 개발에 인기가 높으며, Rust 프로그래밍 언어를 사용합니다.",
         links: [
-          { title: "Ocean Protocol", url: "https://oceanprotocol.com/" },
-          { title: "데이터 DAO 개념", url: "https://medium.com/oceanprotocol/introducing-data-nfts-3a7e589afbcb" },
+          { title: "Solana 공식 사이트", url: "https://solana.com/" },
+          { title: "Solana 개발자 문서", url: "https://docs.solana.com/" },
         ],
-        tips: "데이터 DAO는 AI 학습 데이터 등 가치 있는 데이터셋의 공동 관리에 적합합니다.",
-        quiz: {
-          question: "데이터 DAO의 주요 목적이 아닌 것은?",
-          options: ["데이터 소유권의 민주화", "데이터 가치의 공정한 분배", "데이터 접근성 향상", "데이터 독점 강화"],
-          correctAnswer: 3,
-          explanation:
-            "데이터 DAO의 주요 목적은 데이터 독점을 강화하는 것이 아니라, 오히려 그 반대입니다. 데이터 DAO는 데이터 소유권을 민주화하고, 데이터에서 발생하는 가치를 공정하게 분배하며, 데이터 접근성을 향상시키는 것을 목표로 합니다. 이는 현재 소수의 대형 기업이 데이터를 독점하는 구조에 대한 대안으로 제시됩니다.",
-        },
+        tips: "Solana는 높은 성능을 제공하지만, 네트워크 안정성에 대한 우려가 있으므로 주의깊게 모니터링해야 합니다.",
       },
       {
-        id: "12-7",
-        question: "MEV란?",
+        id: "16-3",
+        question: "Aptos 생태계 소개",
         answer:
-          "MEV(Maximal Extractable Value, 이전에는 Miner Extractable Value)는 블록 생산자(채굴자 또는 검증자)가 블록 내 트랜잭션의 순서, 포함 여부 등을 조작하여 얻을 수 있는 최대 이익을 의미합니다. 차익 거래, 청산 기회 선점 등으로 발생하며, 사용자에게 불리한 가격(슬리피지)을 유발할 수 있습니다.",
+          "Aptos는 Meta(구 Facebook)의 Diem 프로젝트에서 파생된 블록체인으로, Move 프로그래밍 언어를 사용합니다. 병렬 실행 엔진과 모듈형 아키텍처를 통해 높은 확장성과 안전성을 제공하며, 사용자 친화적인 Web3 경험을 목표로 합니다.",
         links: [
-          { title: "MEV 설명", url: "https://ethereum.org/ko/developers/docs/mev/" },
-          { title: "Flashbots", url: "https://www.flashbots.net/" },
+          { title: "Aptos 공식 사이트", url: "https://aptoslabs.com/" },
+          { title: "Aptos 개발자 문서", url: "https://aptos.dev/" },
         ],
-        tips: "MEV는 DeFi 생태계에서 중요한 이슈이며, 이를 완화하기 위한 다양한 솔루션이 개발되고 있습니다.",
-        quiz: {
-          question: "MEV의 대표적인 예시가 아닌 것은?",
-          options: [
-            "샌드위치 공격(Sandwich Attack)",
-            "차익 거래(Arbitrage)",
-            "청산 경쟁(Liquidation)",
-            "51% 공격(51% Attack)",
-          ],
-          correctAnswer: 3,
-          explanation:
-            "51% 공격은 MEV의 예시가 아닙니다. 51% 공격은 블록체인 네트워크의 해시파워나 지분의 과반수를 장악하여 이중 지불 등의 공격을 수행하는 것을 의미합니다. 반면, 샌드위치 공격(사용자 거래 전후로 주문을 넣어 이익 취득), 차익 거래(여러 시장 간 가격 차이 활용), 청산 경쟁(담보 청산 기회 선점)은 모두 MEV의 대표적인 예시입니다.",
-        },
+        tips: "Aptos의 Move 언어는 리소스 중심의 프로그래밍 모델로 보안성을 강화합니다.",
       },
       {
-        id: "12-8",
-        question: "DePIN, RWA, SocialFi 소개",
+        id: "16-4",
+        question: "Sui 생태계 소개",
         answer:
-          "DePIN(Decentralized Physical Infrastructure Networks)은 블록체인과 토큰 인센티브를 활용하여 실제 물리적 인프라(예: 무선 네트워크, 저장 공간, 에너지망)를 분산된 방식으로 구축하고 운영하는 분야입니다. RWA(Real World Asset)는 부동산, 미술품, 채권 등 현실 세계 자산을 토큰화하여 블록체인 상에서 거래하거나 담보로 활용하는 것입니다. SocialFi는 소셜 미디어와 DeFi를 결합하여 콘텐츠 제작, 커뮤니티 활동 등에 대한 경제적 보상을 제공하는 분야입니다.",
+          "Sui는 Aptos와 마찬가지로 Move 언어를 사용하는 블록체인이지만, 객체 중심의 데이터 모델과 독특한 합의 메커니즘을 채택했습니다. 단순한 트랜잭션에 대해서는 합의 없이 즉시 처리가 가능하여 매우 빠른 속도를 자랑합니다.",
         links: [
-          { title: "Helium (DePIN 예시)", url: "https://www.helium.com/" },
-          { title: "Lens Protocol (SocialFi 예시)", url: "https://www.lens.xyz/" },
+          { title: "Sui 공식 사이트", url: "https://sui.io/" },
+          { title: "Sui 개발자 문서", url: "https://docs.sui.io/" },
         ],
-        tips: "이러한 분야들은 Web3 기술을 실생활과 연결하는 중요한 응용 사례입니다.",
-        quiz: {
-          question: "RWA(Real World Asset) 토큰화의 주요 이점은?",
-          options: [
-            "실물 자산의 완전한 디지털화",
-            "자산의 유동성 및 접근성 향상",
-            "자산 가치의 변동성 제거",
-            "규제 회피",
-          ],
-          correctAnswer: 1,
-          explanation:
-            "RWA 토큰화의 주요 이점은 전통적으로 유동성이 낮은 실물 자산(부동산, 미술품 등)의 유동성과 접근성을 향상시키는 것입니다. 토큰화를 통해 자산을 분할 소유할 수 있게 되어 더 많은 사람들이 적은 금액으로도 투자할 수 있게 됩니다. 그러나 이는 자산의 완전한 디지털화나 가치 변동성 제거를 의미하지는 않으며, 규제 회피가 목적이 아닙니다.",
-        },
+        tips: "Sui의 객체 중심 모델은 기존 블록체인과 다른 새로운 패러다임을 제시합니다.",
       },
       {
-        id: "12-9",
-        question:
-          "검열 저항성(Censorship Resistance)이란 무엇이며, 블록체인 아키텍처에서 어떻게 구현되나요? (PBS, crLists 등)",
+        id: "16-5",
+        question: "NEAR Protocol (NEAR) 생태계 소개",
         answer:
-          "검열 저항성은 특정 주체(정부, 기업 등)가 트랜잭션을 임의로 차단하거나 방해할 수 없는 특성입니다. 탈중앙화된 네트워크, 다수의 검증자 참여, 암호학적 보안 등을 통해 구현됩니다. PBS(Proposer-Builder Separation)는 블록 제안자와 블록 빌더 역할을 분리하여 검열 위험을 줄이려는 시도이며, crLists(Censorship Resistance Lists)는 특정 트랜잭션 포함을 강제하는 메커니즘입니다.",
+          "NEAR는 샤딩 기술을 통해 확장성을 해결하고, 개발자와 사용자 모두에게 친화적인 경험을 제공하는 블록체인입니다. 인간이 읽을 수 있는 계정 이름, 점진적 보안 모델, 그리고 Rust와 AssemblyScript를 지원하여 Web2 개발자들의 진입 장벽을 낮췄습니다.",
         links: [
-          { title: "검열 저항성 설명", url: "https://ethereum.org/ko/developers/docs/consensus-mechanisms/pow/" },
-          {
-            title: "PBS 소개",
-            url: "https://ethresear.ch/t/proposer-block-builder-separation-friendly-fee-market-designs/9725",
-          },
+          { title: "NEAR 공식 사이트", url: "https://near.org/" },
+          { title: "NEAR 개발자 문서", url: "https://docs.near.org/" },
         ],
-        tips: "검열 저항성은 블록체인의 핵심 가치 중 하나이지만, 완벽한 검열 저항성을 달성하는 것은 기술적으로 도전적입니다.",
-        quiz: {
-          question: "PBS(Proposer-Builder Separation)의 주요 목적은?",
-          options: ["트랜잭션 처리 속도 향상", "MEV 추출 최대화", "검열 위험 감소 및 MEV 시장 효율화", "가스비 절감"],
-          correctAnswer: 2,
-          explanation:
-            "PBS(Proposer-Builder Separation)의 주요 목적은 블록 제안자와 블록 빌더의 역할을 분리함으로써 검열 위험을 줄이고 MEV 시장을 더 효율적으로 만드는 것입니다. 이를 통해 블록 빌더는 MEV 추출을 최적화하고, 블록 제안자는 최고 입찰가를 선택하여 네트워크의 경제적 효율성을 높일 수 있습니다. 또한 역할 분리로 인해 검열 시도가 더 어려워집니다.",
-        },
-      },
-      {
-        id: "12-10",
-        question: "네트워크 효과(Network Effects)가 Web3 프로젝트의 성공과 실패에 미치는 영향은?",
-        answer:
-          "네트워크 효과는 특정 제품이나 서비스의 사용자 수가 증가할수록 그 가치가 더욱 커지는 현상입니다. Web3 프로젝트에서 더 많은 사용자, 개발자, 유동성이 모일수록 생태계가 활성화되고 다른 참여자들에게 더 매력적이 되어 선순환을 만들 수 있지만, 초기 사용자 확보가 어려우면 성장이 정체될 수 있습니다.",
-        links: [
-          { title: "네트워크 효과 설명", url: "https://a16z.com/network-effects-and-web3/" },
-          { title: "Web3 성장 전략", url: "https://future.a16z.com/how-to-win-users-in-web3/" },
-        ],
-        tips: "Web3 프로젝트는 커뮤니티 구축과 참여 유도에 집중해야 합니다.",
-        quiz: {
-          question: "네트워크 효과가 강한 Web3 프로젝트의 특징은?",
-          options: ["높은 진입 장벽", "폐쇄적인 커뮤니티", "낮은 사용자 참여도", "활발한 커뮤니티와 다양한 참여 기회"],
-          correctAnswer: 3,
-          explanation:
-            "네트워크 효과가 강한 Web3 프로젝트는 활발한 커뮤니티와 다양한 참여 기회를 제공합니다. 더 많은 사용자가 참여하고 기여할수록 프로젝트의 가치가 높아지고, 이는 다시 더 많은 사용자를 유치하는 선순환을 만듭니다. 높은 진입 장벽, 폐쇄적인 커뮤니티, 낮은 사용자 참여도는 네트워크 효과를 저해하는 요소입니다.",
-        },
+        tips: "NEAR의 샤딩 기술인 'Nightshade'는 네트워크가 성장함에 따라 자동으로 확장됩니다.",
       },
     ],
   },
