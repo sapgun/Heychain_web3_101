@@ -1,35 +1,34 @@
 "use client"
 
 import type React from "react"
-
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import {
   MessageCircle,
   Zap,
   BookOpen,
   Sparkles,
   Shield,
-  Search,
   ChevronDown,
   ChevronRight,
   Menu,
   X,
-  Globe,
-  ExternalLink,
   Send,
+  Search,
 } from "lucide-react"
-import { web3Data, web3DataEn } from "./data/web3-data"
+import { web3Data, searchKeywords } from "./data/web3-data"
 import { QuizComponent } from "@/components/quiz-component"
 import { PracticeComponent } from "@/components/practice-component"
 import { SearchSuggestions } from "@/components/search-suggestions"
-import { searchKeywords } from "./data/web3-data"
-
-type Language = "ko" | "en"
+import { AutocompleteSearch } from "@/components/autocomplete-search"
+import { AIChatModal } from "@/components/ai-chat-modal"
+import { UsageGuideModal } from "@/components/usage-guide-modal"
+import { HeaderGuideButton } from "@/components/header-guide-button"
+import { popularSearches } from "@/utils/search-utils"
+import { hasViewedGuide, markGuideAsViewed } from "@/lib/guide-utils"
 
 export default function HeyChainApp() {
   const [selectedCategory, setSelectedCategory] = useState<number>(-1)
@@ -37,10 +36,28 @@ export default function HeyChainApp() {
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set())
   const [showApp, setShowApp] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [language, setLanguage] = useState<Language>("ko")
   const [email, setEmail] = useState("")
+  const [isClient, setIsClient] = useState(false)
+  const [showGuideModal, setShowGuideModal] = useState(false)
 
-  const currentData = language === "ko" ? web3Data : web3DataEn
+  // Ensure client-side rendering for interactive elements
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  useEffect(() => {
+    if (isClient && showApp) {
+      // 처음 방문한 사용자에게 가이드 표시
+      if (!hasViewedGuide()) {
+        setTimeout(() => {
+          setShowGuideModal(true)
+          markGuideAsViewed()
+        }, 1500) // 1.5초 후에 가이드 표시
+      }
+    }
+  }, [isClient, showApp])
+
+  const currentData = web3Data
 
   const filteredItems = useMemo(() => {
     if (!searchTerm.trim()) {
@@ -64,12 +81,21 @@ export default function HeyChainApp() {
     return results
   }, [searchTerm, selectedCategory, currentData])
 
+  // toggleExpanded 함수를 찾아 스크롤 기능을 추가합니다.
   const toggleExpanded = (id: string) => {
     const newExpanded = new Set(expandedItems)
     if (newExpanded.has(id)) {
       newExpanded.delete(id)
     } else {
       newExpanded.add(id)
+
+      // 약간의 지연 후 해당 요소로 스크롤 (DOM이 업데이트된 후)
+      setTimeout(() => {
+        const element = document.getElementById(`item-${id}`)
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" })
+        }
+      }, 100)
     }
     setExpandedItems(newExpanded)
   }
@@ -78,62 +104,61 @@ export default function HeyChainApp() {
     setSelectedCategory(index)
     setSearchTerm("")
     setSidebarOpen(false)
+
+    // 페이지 상단으로 스크롤
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // 부드러운 스크롤 효과
+    })
   }
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Newsletter subscription logic here
+    if (!isClient) return
+
     console.log("Newsletter subscription:", email)
     setEmail("")
-    alert(language === "ko" ? "뉴스레터 구독이 완료되었습니다!" : "Newsletter subscription completed!")
+    alert("뉴스레터 구독이 완료되었습니다!")
   }
 
   const showWelcome = selectedCategory === -1 && !searchTerm.trim()
 
   const texts = {
-    ko: {
-      title: "HeyChain",
-      subtitle: "Web3 대화형 요약 비서",
-      heroTitle: "Web3, 이제 대화로 배우세요",
-      heroDescription:
-        "복잡한 백서나 위키는 그만! zk-Rollup부터 메타마스크 설정까지, 질문 한 번이면 바로 핵심만 짚어 간단하게 설명해드립니다.",
-      startNow: "지금 질문하기",
-      howToUse: "사용법 보기",
-      home: "홈으로",
-      search: "질문 검색...",
-      welcome: "Web3의 세계에 오신 것을 환영합니다!",
-      welcomeDesc:
-        "왼쪽 메뉴에서 궁금한 카테고리를 선택하거나 질문을 검색하여 Web3에 대한 모든 것을 알아보세요. HeyChain이 여러분의 Web3 여정을 도와드립니다.",
-      searchResults: "검색 결과",
-      noResults: "검색 결과가 없습니다.",
-      newsletter: "뉴스레터 구독",
-      newsletterDesc: "Web3 최신 소식과 HeyChain 업데이트를 받아보세요",
-      emailPlaceholder: "이메일 주소를 입력하세요",
-      subscribe: "구독하기",
-    },
-    en: {
-      title: "HeyChain",
-      subtitle: "Web3 Interactive Summary Assistant",
-      heroTitle: "Learn Web3 through Conversation",
-      heroDescription:
-        "No more complex whitepapers or wikis! From zk-Rollup to MetaMask setup, get simple explanations with just one question.",
-      startNow: "Ask Now",
-      howToUse: "How to Use",
-      home: "Home",
-      search: "Search questions...",
-      welcome: "Welcome to the World of Web3!",
-      welcomeDesc:
-        "Select a category from the left menu or search for questions to learn everything about Web3. HeyChain will guide your Web3 journey.",
-      searchResults: "Search Results",
-      noResults: "No search results found.",
-      newsletter: "Newsletter",
-      newsletterDesc: "Get the latest Web3 news and HeyChain updates",
-      emailPlaceholder: "Enter your email address",
-      subscribe: "Subscribe",
-    },
+    title: "HeyChain",
+    subtitle: "Web3 대화형 요약 비서",
+    heroTitle: "Web3, 이제 대화로 배우세요",
+    heroDescription:
+      "복잡한 백서나 위키는 그만! zk-Rollup부터 메타마스크 설정까지, 질문 한 번이면 바로 핵심만 짚어 간단하게 설명해드립니다.",
+    startNow: "지금 질문하기",
+    howToUse: "사용법 보기",
+    home: "홈으로",
+    search: "질문 검색...",
+    welcome: "Web3의 세계에 오신 것을 환영합니다!",
+    welcomeDesc:
+      "왼쪽 메뉴에서 궁금한 카테고리를 선택하거나 질문을 검색하여 Web3에 대한 모든 것을 알아보세요. HeyChain이 여러분의 Web3 여정을 도와드립니다.",
+    searchResults: "검색 결과",
+    noResults: "검색 결과가 없습니다.",
+    newsletter: "뉴스레터 구독",
+    newsletterDesc: "Web3 최신 소식과 HeyChain 업데이트를 받아보세요",
+    emailPlaceholder: "이메일 주소를 입력하세요",
+    subscribe: "구독하기",
   }
 
-  const t = texts[language]
+  // Prevent hydration mismatch by not rendering interactive elements until client-side
+  if (!isClient) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse">
+              <MessageCircle className="w-8 h-8 text-white" />
+            </div>
+            <p className="text-white text-lg">Loading HeyChain...</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   if (!showApp) {
     return (
@@ -145,28 +170,15 @@ export default function HeyChainApp() {
               <div className="w-8 h-8 bg-gradient-to-r from-purple-400 to-pink-400 rounded-lg flex items-center justify-center">
                 <MessageCircle className="w-5 h-5 text-white" />
               </div>
-              <span className="text-2xl font-bold text-white">{t.title}</span>
+              <span className="text-2xl font-bold text-white">{texts.title}</span>
             </div>
             <div className="flex items-center space-x-4">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
-                    <Globe className="w-4 h-4 mr-2" />
-                    {language === "ko" ? "한국어" : "English"}
-                    <ChevronDown className="w-4 h-4 ml-2" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem onClick={() => setLanguage("ko")}>한국어</DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setLanguage("en")}>English</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
               <Button
                 variant="outline"
                 className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
                 onClick={() => setShowApp(true)}
               >
-                {t.startNow}
+                {texts.startNow}
               </Button>
             </div>
           </nav>
@@ -175,26 +187,13 @@ export default function HeyChainApp() {
         {/* Hero Section */}
         <section className="container mx-auto px-4 py-20 text-center">
           <div className="max-w-4xl mx-auto">
-            <Badge className="mb-6 bg-purple-500/20 text-purple-300 border-purple-500/30">🧠 {t.subtitle}</Badge>
+            <Badge className="mb-6 bg-purple-500/20 text-purple-300 border-purple-500/30">🧠 {texts.subtitle}</Badge>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              {language === "ko" ? (
-                <>
-                  Web3, 이제{" "}
-                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                    대화
-                  </span>
-                  로 배우세요
-                </>
-              ) : (
-                <>
-                  Learn Web3 through{" "}
-                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                    Conversation
-                  </span>
-                </>
-              )}
+              Web3, 이제{" "}
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">대화</span>로
+              배우세요
             </h1>
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed">{t.heroDescription}</p>
+            <p className="text-xl text-gray-300 mb-8 leading-relaxed">{texts.heroDescription}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
@@ -202,11 +201,16 @@ export default function HeyChainApp() {
                 onClick={() => setShowApp(true)}
               >
                 <MessageCircle className="w-5 h-5 mr-2" />
-                {t.startNow}
+                {texts.startNow}
               </Button>
-              <Button size="lg" variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-800">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-gray-600 text-gray-300 hover:bg-gray-800"
+                onClick={() => setShowGuideModal(true)}
+              >
                 <BookOpen className="w-5 h-5 mr-2" />
-                {t.howToUse}
+                {texts.howToUse}
               </Button>
             </div>
           </div>
@@ -215,14 +219,8 @@ export default function HeyChainApp() {
         {/* Features Section */}
         <section className="container mx-auto px-4 py-20">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">
-              {language === "ko" ? "HeyChain이 할 수 있는 일" : "What HeyChain Can Do"}
-            </h2>
-            <p className="text-gray-400 text-lg">
-              {language === "ko"
-                ? "Web3의 모든 것을 간단한 대화로 해결하세요"
-                : "Solve everything about Web3 through simple conversations"}
-            </p>
+            <h2 className="text-4xl font-bold text-white mb-4">HeyChain이 할 수 있는 일</h2>
+            <p className="text-gray-400 text-lg">Web3의 모든 것을 간단한 대화로 해결하세요</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -231,11 +229,9 @@ export default function HeyChainApp() {
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4">
                   <BookOpen className="w-6 h-6 text-white" />
                 </div>
-                <CardTitle className="text-white">{language === "ko" ? "개념 설명" : "Concept Explanation"}</CardTitle>
+                <CardTitle className="text-white">개념 설명</CardTitle>
                 <CardDescription className="text-gray-400">
-                  {language === "ko"
-                    ? "PoW vs PoS, Optimistic vs ZK Rollup 등 헷갈리는 개념들을 명확하게 비교 설명"
-                    : "Clear comparative explanations of confusing concepts like PoW vs PoS, Optimistic vs ZK Rollup"}
+                  PoW vs PoS, Optimistic vs ZK Rollup 등 헷갈리는 개념들을 명확하게 비교 설명
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -245,11 +241,9 @@ export default function HeyChainApp() {
                 <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mb-4">
                   <Zap className="w-6 h-6 text-white" />
                 </div>
-                <CardTitle className="text-white">{language === "ko" ? "실전 가이드" : "Practical Guide"}</CardTitle>
+                <CardTitle className="text-white">실전 가이드</CardTitle>
                 <CardDescription className="text-gray-400">
-                  {language === "ko"
-                    ? "지갑 생성, 체인 브릿지, NFT 민팅 등 실제 사용법을 단계별로 안내"
-                    : "Step-by-step guidance for wallet creation, chain bridging, NFT minting, and more"}
+                  지갑 생성, 체인 브릿지, NFT 민팅 등 실제 사용법을 단계별로 안내
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -259,11 +253,9 @@ export default function HeyChainApp() {
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-4">
                   <Shield className="w-6 h-6 text-white" />
                 </div>
-                <CardTitle className="text-white">{language === "ko" ? "보안 & 안전" : "Security & Safety"}</CardTitle>
+                <CardTitle className="text-white">보안 & 안전</CardTitle>
                 <CardDescription className="text-gray-400">
-                  {language === "ko"
-                    ? "Sybil 공격, 가스비 최적화 등 Web3 환경에서 안전하게 활동하는 방법"
-                    : "How to stay safe in Web3 environment including Sybil attacks, gas optimization, and more"}
+                  Sybil 공격, 가스비 최적화 등 Web3 환경에서 안전하게 활동하는 방법
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -275,12 +267,12 @@ export default function HeyChainApp() {
           <div className="grid md:grid-cols-2 gap-12 mb-8">
             {/* Newsletter Section */}
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4">{t.newsletter}</h3>
-              <p className="text-gray-400 mb-6">{t.newsletterDesc}</p>
+              <h3 className="text-2xl font-bold text-white mb-4">{texts.newsletter}</h3>
+              <p className="text-gray-400 mb-6">{texts.newsletterDesc}</p>
               <form onSubmit={handleNewsletterSubmit} className="flex gap-3">
                 <Input
                   type="email"
-                  placeholder={t.emailPlaceholder}
+                  placeholder={texts.emailPlaceholder}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -291,7 +283,7 @@ export default function HeyChainApp() {
                   className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
                 >
                   <Send className="w-4 h-4 mr-2" />
-                  {t.subscribe}
+                  {texts.subscribe}
                 </Button>
               </form>
             </div>
@@ -302,47 +294,29 @@ export default function HeyChainApp() {
                 <div className="w-8 h-8 bg-gradient-to-r from-purple-400 to-pink-400 rounded-lg flex items-center justify-center">
                   <MessageCircle className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-2xl font-bold text-white">{t.title}</span>
+                <span className="text-2xl font-bold text-white">{texts.title}</span>
               </div>
               <p className="text-gray-400 mb-4">
-                {language === "ko"
-                  ? "Web3를 더 쉽게, 더 빠르게 배울 수 있도록 돕는 대화형 학습 플랫폼입니다."
-                  : "An interactive learning platform that helps you learn Web3 easier and faster."}
+                Web3를 더 쉽게, 더 빠르게 배울 수 있도록 돕는 대화형 학습 플랫폼입니다.
               </p>
-              {/* Social Links */}
-              <div className="flex items-center space-x-4">
-                <a
-                  href="https://x.com/caro7370"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors"
-                  aria-label="Follow on X (Twitter)"
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                  </svg>
-                </a>
-              </div>
             </div>
           </div>
 
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-800">
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 mb-4 md:mb-0">
-              <p className="text-gray-400 text-sm">
-                © 2025 HeyChain. {language === "ko" ? "Web3를 더 쉽게, 더 빠르게." : "Making Web3 easier and faster."}
-              </p>
+              <p className="text-gray-400 text-sm">© 2025 HeyChain. Web3를 더 쉽게, 더 빠르게.</p>
               <span className="text-gray-600 text-sm">•</span>
               <p className="text-gray-500 text-sm">
-                powered by <span className="text-purple-400 font-semibold">SAPGUN</span>
+                powered by{" "}
+                <a
+                  href="https://x.com/caro7370"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-purple-400 font-semibold hover:text-purple-300 transition-colors cursor-pointer"
+                >
+                  SAPGUN
+                </a>
               </p>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
-                {language === "ko" ? "개인정보처리방침" : "Privacy Policy"}
-              </Button>
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
-                {language === "ko" ? "이용약관" : "Terms of Service"}
-              </Button>
             </div>
           </div>
         </footer>
@@ -350,48 +324,48 @@ export default function HeyChainApp() {
     )
   }
 
+  // 검색 핸들러 함수 추가 (onSearchSubmit)
+  const handleSearchSubmit = (value: string) => {
+    // 검색어가 있을 때만 검색 실행
+    if (value.trim()) {
+      setSearchTerm(value)
+      setSelectedCategory(-1) // 카테고리 선택 초기화
+
+      // 페이지 상단으로 스크롤
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // 부드러운 스크롤 효과
+      })
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* App Header */}
-      <header className="border-b border-purple-500/20 bg-gray-900/50 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-4">
+      <header className="border-b border-purple-500/20 bg-gray-900/50 backdrop-blur-sm sticky top-0 z-30">
+        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-purple-400 to-pink-400 rounded-xl flex items-center justify-center">
-                <MessageCircle className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-white">HeyChain 101</h1>
-                <p className="text-sm text-gray-400">{t.subtitle}</p>
-              </div>
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <button
+                onClick={() => setShowApp(false)}
+                className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity p-1 rounded-lg"
+              >
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-400 to-pink-400 rounded-xl flex items-center justify-center">
+                  <MessageCircle className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-lg sm:text-2xl font-bold text-white">HeyChain 101</h1>
+                  <p className="text-xs sm:text-sm text-gray-400">{texts.subtitle}</p>
+                </div>
+              </button>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
-                    <Globe className="w-4 h-4 mr-2" />
-                    {language === "ko" ? "한국어" : "English"}
-                    <ChevronDown className="w-4 h-4 ml-2" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem onClick={() => setLanguage("ko")}>한국어</DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setLanguage("en")}>English</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <HeaderGuideButton />
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-gray-400 hover:text-white"
-                onClick={() => setShowApp(false)}
-              >
-                {t.home}
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="md:hidden text-white"
+                className="md:hidden text-white p-2 h-10 w-10"
                 onClick={() => setSidebarOpen(!sidebarOpen)}
               >
                 {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -401,62 +375,72 @@ export default function HeyChainApp() {
         </div>
       </header>
 
-      <div className="flex h-[calc(100vh-80px)]">
-        {/* Enhanced Sidebar with Animations */}
+      <div className="flex flex-grow">
+        {/* Sidebar */}
         <aside
           className={`
-          fixed inset-y-0 left-0 z-50 w-80 bg-gradient-to-b from-gray-900/95 to-gray-800/95 backdrop-blur-sm border-r border-purple-500/20 
-          transform transition-all duration-500 ease-in-out
-          md:relative md:translate-x-0 md:z-auto
-          ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
-        `}
+    fixed inset-y-0 left-0 z-50 w-full sm:w-80 bg-gradient-to-b from-gray-900/98 to-gray-800/98 backdrop-blur-sm border-r border-purple-500/20 
+    transform transition-all duration-300 ease-in-out pt-16
+    md:relative md:translate-x-0 md:z-auto md:w-80 md:bg-gradient-to-b md:from-gray-900/95 md:to-gray-800/95 md:pt-0
+    ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+  `}
         >
-          <div className="p-6 space-y-6 h-full overflow-y-auto">
-            {/* Animated Header */}
-            <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse">
-                <MessageCircle className="w-8 h-8 text-white" />
-              </div>
-              <h2 className="text-xl font-bold text-white mb-2">Web3 Explorer</h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto"></div>
+          <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 h-full overflow-y-auto">
+            {/* 모바일에서 닫기 버튼 추가 */}
+            <div className="flex items-center justify-between md:hidden mb-4">
+              <h2 className="text-lg font-bold text-white">메뉴</h2>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSidebarOpen(false)}
+                className="text-gray-400 hover:text-white p-2 h-8 w-8"
+              >
+                <X className="w-4 h-4" />
+              </Button>
             </div>
 
             {/* Search */}
-            <div className="relative group">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 group-focus-within:text-purple-400 transition-colors" />
-              <Input
-                type="text"
-                placeholder={t.search}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-gray-700/50 border-purple-500/30 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-all"
-              />
+            <AutocompleteSearch
+              searchTerm={searchTerm}
+              onSearchChange={setSearchTerm}
+              onSearchSubmit={handleSearchSubmit}
+              language="ko"
+            />
+
+            {/* AI Chat Button */}
+            <div className="space-y-2">
+              <AIChatModal language="ko" />
             </div>
 
-            {/* Search Suggestions - 검색어가 비어있을 때만 표시 */}
+            {/* Search Suggestions - 검색어가 없을 때만 표시 */}
             {!searchTerm.trim() && (
               <SearchSuggestions
-                keywords={searchKeywords[language]}
-                onKeywordClick={(keyword) => setSearchTerm(keyword)}
-                language={language}
+                keywords={searchKeywords.ko}
+                popularSearches={popularSearches.ko}
+                onKeywordClick={(keyword) => {
+                  setSearchTerm(keyword)
+                  handleSearchSubmit(keyword)
+                  setSidebarOpen(false) // 모바일에서 검색 후 사이드바 닫기
+                }}
+                language="ko"
               />
             )}
 
-            {/* Categories with Enhanced Styling */}
-            <nav className="space-y-3">
+            {/* Categories */}
+            <nav className="space-y-2 sm:space-y-3">
               {currentData.map((category, index) => (
                 <button
                   key={index}
                   onClick={() => handleCategorySelect(index)}
                   className={`
-                    group w-full text-left px-4 py-4 rounded-xl transition-all duration-300 text-sm font-medium
-                    relative overflow-hidden
-                    ${
-                      selectedCategory === index
-                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/25 scale-105"
-                        : "text-gray-300 hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 hover:text-white hover:scale-102"
-                    }
-                  `}
+            group w-full text-left px-3 sm:px-4 py-3 sm:py-4 rounded-xl transition-all duration-300 text-sm font-medium
+            relative overflow-hidden min-h-[48px] flex items-center
+            ${
+              selectedCategory === index
+                ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/25 scale-105"
+                : "text-gray-300 hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 hover:text-white hover:scale-102"
+            }
+          `}
                 >
                   <div className="relative z-10 flex items-center">
                     <div
@@ -464,19 +448,11 @@ export default function HeyChainApp() {
                         selectedCategory === index ? "bg-white" : "bg-purple-400/50 group-hover:bg-purple-400"
                       }`}
                     ></div>
-                    {category.category}
+                    <span className="leading-tight">{category.category}</span>
                   </div>
-                  {selectedCategory === index && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 animate-pulse"></div>
-                  )}
                 </button>
               ))}
             </nav>
-
-            {/* Floating Elements for Web3 Vibe */}
-            <div className="absolute top-20 right-4 w-2 h-2 bg-purple-400 rounded-full animate-ping"></div>
-            <div className="absolute top-40 right-8 w-1 h-1 bg-pink-400 rounded-full animate-pulse"></div>
-            <div className="absolute bottom-40 right-6 w-3 h-3 bg-blue-400 rounded-full animate-bounce"></div>
           </div>
         </aside>
 
@@ -487,62 +463,105 @@ export default function HeyChainApp() {
 
         {/* Main Content */}
         <main className="flex-1 overflow-y-auto">
-          <div className="container mx-auto px-6 py-8">
+          <div className="container mx-auto px-3 sm:px-6 py-4 sm:py-8 pb-20 sm:pb-8">
             {showWelcome ? (
-              <div className="text-center py-20">
-                <div className="max-w-3xl mx-auto">
-                  <div className="w-20 h-20 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl flex items-center justify-center mx-auto mb-8 animate-bounce">
-                    <Sparkles className="w-10 h-10 text-white" />
+              <div className="text-center py-8 sm:py-20">
+                <div className="max-w-3xl mx-auto px-2 sm:px-4">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl flex items-center justify-center mx-auto mb-6 sm:mb-8 animate-bounce">
+                    <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                   </div>
-                  <h2 className="text-4xl font-bold text-white mb-6">{t.welcome}</h2>
-                  <p className="text-xl text-gray-300 mb-8 leading-relaxed">{t.welcomeDesc}</p>
-                  <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 text-lg px-4 py-2">
-                    {language === "ko"
-                      ? '"말 걸면 바로 요약해주는 대화형 Web3 위키"'
-                      : '"Interactive Web3 Wiki that summarizes instantly when you ask"'}
+                  <h2 className="text-xl sm:text-4xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+                    {texts.welcome}
+                  </h2>
+                  <p className="text-sm sm:text-xl text-gray-300 mb-6 sm:mb-8 leading-relaxed">{texts.welcomeDesc}</p>
+                  <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 text-xs sm:text-lg px-3 sm:px-4 py-2 sm:py-2">
+                    "말 걸면 바로 요약해주는 대화형 Web3 위키"
                   </Badge>
                 </div>
               </div>
             ) : (
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {/* Results Header */}
-                <div className="flex items-center justify-between">
-                  <h2 className="text-2xl font-bold text-white">
-                    {searchTerm ? `"${searchTerm}" ${t.searchResults}` : currentData[selectedCategory]?.category}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-0">
+                  <h2 className="text-lg sm:text-2xl font-bold text-white leading-tight">
+                    {searchTerm ? `"${searchTerm}" ${texts.searchResults}` : currentData[selectedCategory]?.category}
                   </h2>
-                  <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
-                    {filteredItems.length}
-                    {language === "ko" ? "개 항목" : " items"}
+                  <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 self-start sm:self-auto text-xs sm:text-sm">
+                    {filteredItems.length}개 항목
                   </Badge>
                 </div>
 
                 {/* Q&A Items */}
                 {filteredItems.length === 0 ? (
-                  <Card className="bg-gray-800/50 border-purple-500/20 p-8 text-center">
-                    <p className="text-gray-400">{t.noResults}</p>
-                  </Card>
-                ) : (
                   <div className="space-y-4">
+                    <Card className="bg-gray-800/50 border-purple-500/20 p-6 sm:p-8 text-center">
+                      <div className="space-y-4">
+                        <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto">
+                          <Search className="w-8 h-8 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-white text-lg font-semibold mb-2">검색 결과가 없습니다</h3>
+                          <p className="text-gray-400 text-sm mb-4">"{searchTerm}"에 대한 정보를 찾을 수 없습니다.</p>
+                        </div>
+
+                        {/* AI 질문 유도 */}
+                        <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-lg p-4">
+                          <div className="flex items-center justify-center mb-3">
+                            <Sparkles className="w-5 h-5 text-blue-400 mr-2" />
+                            <h4 className="text-blue-300 font-medium">AI 어시스턴트에게 물어보세요!</h4>
+                          </div>
+                          <p className="text-blue-200 text-sm mb-4">
+                            지식 데이터베이스에 없는 내용도 AI가 답변해드릴 수 있습니다.
+                          </p>
+                          <AIChatModal language="ko" searchQuery={searchTerm} />
+                        </div>
+
+                        {/* 관련 추천 */}
+                        <div className="text-left">
+                          <h4 className="text-sm font-medium text-gray-300 mb-3">이런 주제는 어떠세요?</h4>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            {searchKeywords.ko.slice(0, 6).map((keyword) => (
+                              <button
+                                key={keyword}
+                                onClick={() => {
+                                  setSearchTerm(keyword)
+                                  handleSearchSubmit(keyword)
+                                }}
+                                className="text-left p-3 rounded-lg bg-gray-700/30 hover:bg-gray-600/30 transition-colors text-sm text-gray-300 hover:text-white"
+                              >
+                                {keyword}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
+                ) : (
+                  <div className="space-y-3 sm:space-y-4">
                     {filteredItems.map((item) => {
                       const isExpanded = expandedItems.has(item.id)
                       return (
                         <Card
                           key={item.id}
+                          id={`item-${item.id}`}
                           className="bg-gray-800/50 border-purple-500/20 overflow-hidden hover:border-purple-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10"
                         >
                           <button
                             onClick={() => toggleExpanded(item.id)}
-                            className="w-full text-left p-6 flex justify-between items-start hover:bg-purple-500/10 transition-colors"
+                            className="w-full text-left p-4 sm:p-6 flex justify-between items-start hover:bg-purple-500/10 transition-colors min-h-[60px] sm:min-h-auto"
                           >
-                            <div className="flex-1 pr-4">
-                              <h3 className="text-lg font-semibold text-white mb-2">{item.question}</h3>
+                            <div className="flex-1 pr-3 sm:pr-4">
+                              <h3 className="text-sm sm:text-lg font-semibold text-white mb-1 sm:mb-2 leading-tight">
+                                {item.question}
+                              </h3>
                               {searchTerm && item.categoryName && (
-                                <Badge variant="outline" className="border-purple-500/30 text-purple-300 text-xs">
+                                <Badge variant="outline" className="border-purple-500/30 text-purple-300 text-xs mt-2">
                                   {item.categoryName}
                                 </Badge>
                               )}
                             </div>
-                            <div className="flex-shrink-0">
+                            <div className="flex-shrink-0 ml-2">
                               {isExpanded ? (
                                 <ChevronDown className="w-5 h-5 text-purple-400 transition-transform duration-200" />
                               ) : (
@@ -552,49 +571,15 @@ export default function HeyChainApp() {
                           </button>
 
                           {isExpanded && (
-                            <div className="px-6 pb-6 border-t border-purple-500/20 animate-in slide-in-from-top-2 duration-300">
+                            <div className="px-4 sm:px-6 pb-4 sm:pb-6 border-t border-purple-500/20 animate-in slide-in-from-top-2 duration-300">
                               <div className="pt-4 space-y-4">
-                                <p className="text-gray-300 leading-relaxed">{item.answer}</p>
+                                <p className="text-sm sm:text-base text-gray-300 leading-relaxed">{item.answer}</p>
 
                                 {/* Quiz Component */}
-                                {item.quiz && <QuizComponent quiz={item.quiz} language={language} />}
+                                {item.quiz && <QuizComponent quiz={item.quiz} language="ko" />}
 
                                 {/* Practice Component */}
-                                {item.practice && <PracticeComponent practice={item.practice} language={language} />}
-
-                                {/* Enhanced Links Section */}
-                                {item.links && item.links.length > 0 && (
-                                  <div className="bg-gray-700/30 rounded-lg p-4 border border-purple-500/20">
-                                    <h4 className="text-sm font-semibold text-purple-300 mb-3 flex items-center">
-                                      <ExternalLink className="w-4 h-4 mr-2" />
-                                      {language === "ko" ? "유용한 링크" : "Useful Links"}
-                                    </h4>
-                                    <div className="space-y-2">
-                                      {item.links.map((link: any, linkIndex: number) => (
-                                        <a
-                                          key={linkIndex}
-                                          href={link.url}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="flex items-center text-sm text-blue-400 hover:text-blue-300 transition-colors group"
-                                        >
-                                          <ExternalLink className="w-3 h-3 mr-2 group-hover:scale-110 transition-transform" />
-                                          {link.title}
-                                        </a>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
-
-                                {/* Tips Section */}
-                                {item.tips && (
-                                  <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-                                    <h4 className="text-sm font-semibold text-green-400 mb-2">
-                                      💡 {language === "ko" ? "팁" : "Tips"}
-                                    </h4>
-                                    <p className="text-sm text-gray-300">{item.tips}</p>
-                                  </div>
-                                )}
+                                {item.practice && <PracticeComponent practice={item.practice} language="ko" />}
                               </div>
                             </div>
                           )}
@@ -608,6 +593,7 @@ export default function HeyChainApp() {
           </div>
         </main>
       </div>
+      <UsageGuideModal open={showGuideModal} onOpenChange={setShowGuideModal} />
     </div>
   )
 }
