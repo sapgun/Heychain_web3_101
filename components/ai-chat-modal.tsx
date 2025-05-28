@@ -25,9 +25,10 @@ import { SubscriptionModal } from "@/components/subscription-modal"
 
 interface AIChatModalProps {
   language?: "ko" | "en"
+  searchQuery?: string
 }
 
-export function AIChatModal({ language = "ko" }: AIChatModalProps) {
+export function AIChatModal({ language = "ko", searchQuery }: AIChatModalProps) {
   const [open, setOpen] = useState(false)
   const [sessionId] = useState(() => generateSessionId())
   const [usage, setUsage] = useState<UsageLimit>({ count: 0, lastReset: new Date(), isLimited: false })
@@ -44,21 +45,12 @@ export function AIChatModal({ language = "ko" }: AIChatModalProps) {
     onError: (error) => {
       console.error("Chat error:", error)
     },
-    onFinish: () => {
+    onFinish: (message) => {
+      console.log("Chat finished:", message)
       // 질문이 성공적으로 완료되면 사용량 처리
-      const questionCheck = canUserMakeQuestion()
-
-      if (userManager.canMakeUnlimitedQuestions()) {
-        // 구독 사용자는 아무것도 차감하지 않음
-      } else if (userManager.hasTokens()) {
-        // 토큰 사용
-        userManager.useToken()
-        setUser(userManager.getUser())
-      } else {
-        // 무료 사용자는 일일 제한 증가
-        const newUsage = usageLimitManager.incrementUsage()
-        setUsage(newUsage)
-      }
+      const newUsage = usageLimitManager.incrementUsage()
+      setUsage(newUsage)
+      setUser(userManager.getUser())
     },
   })
 
@@ -70,6 +62,21 @@ export function AIChatModal({ language = "ko" }: AIChatModalProps) {
       setUser(userManager.getUser())
     }
   }, [])
+
+  // 검색어가 있을 때 자동으로 입력 (모달이 열릴 때)
+  useEffect(() => {
+    if (searchQuery && open && !input) {
+      const autoQuery = `"${searchQuery}"에 대해 자세히 알려주세요.`
+      handleInputChange({ target: { value: autoQuery } } as any)
+    }
+  }, [searchQuery, open, input, handleInputChange])
+
+  // 검색어가 있을 때 자동으로 입력
+  // useEffect(() => {
+  //   if (searchQuery && open) {
+  //     handleInputChange({ target: { value: `"${searchQuery}"에 대해 자세히 알려주세요.` } } as any)
+  //   }
+  // }, [searchQuery, open])
 
   const texts = {
     title: language === "ko" ? "AI 어시스턴트" : "AI Assistant",
@@ -104,10 +111,7 @@ export function AIChatModal({ language = "ko" }: AIChatModalProps) {
   }
 
   const handleExampleClick = (question: string) => {
-    const questionCheck = canUserMakeQuestion()
-    if (questionCheck.canAsk) {
-      handleInputChange({ target: { value: question } } as any)
-    }
+    handleInputChange({ target: { value: question } } as any)
   }
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -115,12 +119,18 @@ export function AIChatModal({ language = "ko" }: AIChatModalProps) {
 
     if (!isClient) return
 
+    console.log("Submitting chat message:", input)
+
     // 사용량 제한 확인
     const questionCheck = canUserMakeQuestion()
+    console.log("Question check result:", questionCheck)
+
     if (!questionCheck.canAsk) {
+      console.log("Cannot ask question due to limits")
       return
     }
 
+    console.log("Proceeding with chat submission")
     handleSubmit(e)
   }
 
@@ -180,7 +190,7 @@ export function AIChatModal({ language = "ko" }: AIChatModalProps) {
             size="lg"
           >
             <Sparkles className="w-4 h-4 mr-2" />
-            {texts.askAI}
+            {searchQuery ? `"${searchQuery}" AI에게 질문하기` : texts.askAI}
             <Badge className={`ml-2 bg-white/20 text-white border-white/30`}>{statusInfo.text}</Badge>
           </Button>
         </DialogTrigger>

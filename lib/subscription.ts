@@ -232,7 +232,7 @@ export function getPlanFeatures(planId: string): string[] {
   return plan?.features || []
 }
 
-export function canUserMakeQuestion(): {
+export async function canUserMakeQuestion(): {
   canAsk: boolean
   reason?: "daily_limit" | "no_tokens" | "no_subscription"
   suggestion?: "buy_tokens" | "subscribe" | "wait"
@@ -249,7 +249,15 @@ export function canUserMakeQuestion(): {
     return { canAsk: true }
   }
 
-  // 비회원이거나 토큰/구독이 없는 경우
+  // 무료 사용자 (회원/비회원 모두)의 일일 한도 확인
+  const { usageLimitManager } = await import("./usage-limit")
+  const canMake = usageLimitManager.canMakeRequest()
+
+  if (canMake) {
+    return { canAsk: true }
+  }
+
+  // 한도 초과
   if (!user) {
     return {
       canAsk: false,
@@ -260,7 +268,7 @@ export function canUserMakeQuestion(): {
 
   return {
     canAsk: false,
-    reason: "no_tokens",
+    reason: "daily_limit",
     suggestion: "buy_tokens",
   }
 }

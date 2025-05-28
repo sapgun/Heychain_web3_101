@@ -6,7 +6,19 @@ import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { MessageCircle, Zap, BookOpen, Sparkles, Shield, ChevronDown, ChevronRight, Menu, X, Send } from "lucide-react"
+import {
+  MessageCircle,
+  Zap,
+  BookOpen,
+  Sparkles,
+  Shield,
+  ChevronDown,
+  ChevronRight,
+  Menu,
+  X,
+  Send,
+  Search,
+} from "lucide-react"
 import { web3Data, searchKeywords } from "./data/web3-data"
 import { QuizComponent } from "@/components/quiz-component"
 import { PracticeComponent } from "@/components/practice-component"
@@ -460,9 +472,50 @@ export default function HeyChainApp() {
 
                 {/* Q&A Items */}
                 {filteredItems.length === 0 ? (
-                  <Card className="bg-gray-800/50 border-purple-500/20 p-6 sm:p-8 text-center">
-                    <p className="text-gray-400 text-sm sm:text-base">{texts.noResults}</p>
-                  </Card>
+                  <div className="space-y-4">
+                    <Card className="bg-gray-800/50 border-purple-500/20 p-6 sm:p-8 text-center">
+                      <div className="space-y-4">
+                        <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto">
+                          <Search className="w-8 h-8 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-white text-lg font-semibold mb-2">검색 결과가 없습니다</h3>
+                          <p className="text-gray-400 text-sm mb-4">"{searchTerm}"에 대한 정보를 찾을 수 없습니다.</p>
+                        </div>
+
+                        {/* AI 질문 유도 */}
+                        <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-lg p-4">
+                          <div className="flex items-center justify-center mb-3">
+                            <Sparkles className="w-5 h-5 text-blue-400 mr-2" />
+                            <h4 className="text-blue-300 font-medium">AI 어시스턴트에게 물어보세요!</h4>
+                          </div>
+                          <p className="text-blue-200 text-sm mb-4">
+                            지식 데이터베이스에 없는 내용도 AI가 답변해드릴 수 있습니다.
+                          </p>
+                          <AIChatModal language="ko" searchQuery={searchTerm} />
+                        </div>
+
+                        {/* 관련 추천 */}
+                        <div className="text-left">
+                          <h4 className="text-sm font-medium text-gray-300 mb-3">이런 주제는 어떠세요?</h4>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            {searchKeywords.ko.slice(0, 6).map((keyword) => (
+                              <button
+                                key={keyword}
+                                onClick={() => {
+                                  setSearchTerm(keyword)
+                                  handleSearchSubmit(keyword)
+                                }}
+                                className="text-left p-3 rounded-lg bg-gray-700/30 hover:bg-gray-600/30 transition-colors text-sm text-gray-300 hover:text-white"
+                              >
+                                {keyword}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
                 ) : (
                   <div className="space-y-3 sm:space-y-4">
                     {filteredItems.map((item) => {

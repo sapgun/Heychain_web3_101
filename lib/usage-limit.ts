@@ -80,7 +80,9 @@ export class UsageLimitManager {
 
     // 무료 사용자는 일일 제한 확인
     const usage = this.getCurrentUsage()
-    return usage.count < DAILY_LIMIT
+    const canMake = usage.count < DAILY_LIMIT
+    console.log(`Free user can make request: ${canMake}, usage: ${usage.count}/${DAILY_LIMIT}`)
+    return canMake
   }
 
   incrementUsage(): UsageLimit {

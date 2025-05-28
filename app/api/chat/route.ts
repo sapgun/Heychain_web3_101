@@ -8,19 +8,29 @@ export async function POST(req: Request) {
   try {
     // 환경 변수 확인
     if (!process.env.OPENAI_API_KEY) {
+      console.error("OpenAI API key not found")
       return new Response(JSON.stringify({ error: "OpenAI API key not configured" }), {
         status: 500,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization, x-session-id",
+        },
       })
     }
 
     const { messages } = await req.json()
+    console.log("Received messages:", messages?.length || 0)
 
     // 메시지 유효성 검사
     if (!messages || !Array.isArray(messages)) {
       return new Response(JSON.stringify({ error: "Invalid messages format" }), {
         status: 400,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
       })
     }
 
@@ -32,6 +42,8 @@ export async function POST(req: Request) {
     // Get session info
     const userAgent = req.headers.get("user-agent") || undefined
     const sessionId = req.headers.get("x-session-id") || generateSessionId()
+
+    console.log("Calling OpenAI API...")
 
     const result = await streamText({
       model: openai("gpt-4o"),
@@ -57,6 +69,8 @@ export async function POST(req: Request) {
       messages,
     })
 
+    console.log("OpenAI API call successful")
+
     // Track the request
     const responseTime = Date.now() - startTime
 
@@ -67,11 +81,17 @@ export async function POST(req: Request) {
       userAgent,
       sessionId,
       category,
-      isLimitedUser: true, // 비회원 사용자로 가정
-      dailyQuestionCount: 1, // 실제로는 현재 사용량을 계산해야 함
+      isLimitedUser: true,
+      dailyQuestionCount: 1,
     })
 
-    return result.toAIStreamResponse()
+    return result.toAIStreamResponse({
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization, x-session-id",
+      },
+    })
   } catch (error) {
     console.error("Chat API Error:", error)
 
@@ -84,9 +104,30 @@ export async function POST(req: Request) {
       sessionId: generateSessionId(),
     })
 
-    return new Response(JSON.stringify({ error: "Internal server error" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    })
+    return new Response(
+      JSON.stringify({
+        error: "Internal server error",
+        details: error instanceof Error ? error.message : "Unknown error",
+      }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      },
+    )
   }
+}
+
+// OPTIONS 핸들러 추가
+export async function OPTIONS(req: Request) {
+  return new Response(null, {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization, x-session-id",
+    },
+  })
 }
