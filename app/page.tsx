@@ -16,11 +16,12 @@ import AIChatModal from "@/components/ai-chat-modal"
 import ChatLimitModal from "@/components/chat-limit-modal"
 import SignupModal from "@/components/signup-modal"
 import LanguageSelector from "@/components/language-selector"
+import TranslatableContent from "@/components/translatable-content"
 import { subscriptionManager } from "@/lib/subscription"
 import { useLanguage } from "@/lib/language-context"
 
 export default function Home() {
-  const { t, isLoading: translationLoading } = useLanguage()
+  const { t } = useLanguage()
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null)
   const [selectedItem, setSelectedItem] = useState<any | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
@@ -134,17 +135,6 @@ export default function Home() {
   const handleSignupSuccess = () => {
     setIsSignupModalOpen(false)
     setIsAIChatOpen(true)
-  }
-
-  if (translationLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-white text-lg">{t.loading}</p>
-        </div>
-      </div>
-    )
   }
 
   return (
@@ -303,12 +293,16 @@ export default function Home() {
                     onClick={() => handleSearchResultSelect(result)}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-white font-medium">{result.question}</h3>
+                      <TranslatableContent originalText={result.question} showTranslateButton={false}>
+                        <h3 className="text-white font-medium">{result.question}</h3>
+                      </TranslatableContent>
                       <Badge variant="outline" className="border-purple-500/30 text-purple-300">
                         {result.categoryName}
                       </Badge>
                     </div>
-                    <p className="text-gray-300 text-sm line-clamp-2">{result.answer}</p>
+                    <TranslatableContent originalText={result.answer} showTranslateButton={false}>
+                      <p className="text-gray-300 text-sm line-clamp-2">{result.answer}</p>
+                    </TranslatableContent>
                   </div>
                 ))}
               </div>
@@ -327,10 +321,16 @@ export default function Home() {
                     {t.backToList}
                   </Button>
                   <div className="bg-gray-800/50 border border-gray-700 p-8 rounded-lg">
-                    <h3 className="text-2xl font-semibold text-white mb-6">{selectedItem.question}</h3>
-                    <div className="prose prose-invert max-w-none">
-                      <p className="text-gray-300 leading-relaxed whitespace-pre-line">{selectedItem.answer}</p>
-                    </div>
+                    <TranslatableContent originalText={selectedItem.question} className="mb-6">
+                      <h3 className="text-2xl font-semibold text-white">{selectedItem.question}</h3>
+                    </TranslatableContent>
+
+                    <TranslatableContent originalText={selectedItem.answer}>
+                      <div className="prose prose-invert max-w-none">
+                        <p className="text-gray-300 leading-relaxed whitespace-pre-line">{selectedItem.answer}</p>
+                      </div>
+                    </TranslatableContent>
+
                     {selectedItem.links && selectedItem.links.length > 0 && (
                       <div className="mt-8">
                         <h4 className="text-white font-semibold mb-4">참고 링크</h4>
@@ -356,7 +356,9 @@ export default function Home() {
                         <h4 className="text-blue-300 font-semibold flex items-center mb-3">
                           <Star className="w-5 h-5 mr-2" />팁
                         </h4>
-                        <p className="text-blue-200">{selectedItem.tips}</p>
+                        <TranslatableContent originalText={selectedItem.tips} showTranslateButton={false}>
+                          <p className="text-blue-200">{selectedItem.tips}</p>
+                        </TranslatableContent>
                       </div>
                     )}
                   </div>
@@ -369,8 +371,12 @@ export default function Home() {
                       className="p-6 bg-gray-800/50 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-700/50 transition-colors"
                       onClick={() => handleItemSelect(selectedCategory, itemIndex)}
                     >
-                      <h3 className="text-white font-medium mb-2">{item.question}</h3>
-                      <p className="text-gray-400 text-sm line-clamp-2">{item.answer}</p>
+                      <TranslatableContent originalText={item.question} showTranslateButton={false}>
+                        <h3 className="text-white font-medium mb-2">{item.question}</h3>
+                      </TranslatableContent>
+                      <TranslatableContent originalText={item.answer} showTranslateButton={false}>
+                        <p className="text-gray-400 text-sm line-clamp-2">{item.answer}</p>
+                      </TranslatableContent>
                     </div>
                   ))}
                 </div>
