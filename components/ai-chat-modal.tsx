@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { MessageCircle, Send, Bot, User, Sparkles, Loader2 } from "lucide-react"
+import { generateSessionId } from "@/lib/analytics"
 
 interface AIChatModalProps {
   language?: "ko" | "en"
@@ -22,9 +23,13 @@ interface AIChatModalProps {
 
 export function AIChatModal({ language = "ko" }: AIChatModalProps) {
   const [open, setOpen] = useState(false)
+  const [sessionId] = useState(() => generateSessionId())
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
     api: "/api/chat",
+    headers: {
+      "x-session-id": sessionId,
+    },
     onError: (error) => {
       console.error("Chat error:", error)
     },

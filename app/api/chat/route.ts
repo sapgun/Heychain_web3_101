@@ -1,7 +1,10 @@
 import { streamText } from "ai"
 import { openai } from "@ai-sdk/openai"
+import { analyticsStore, categorizeQuestion, generateSessionId } from "@/lib/analytics"
 
 export async function POST(req: Request) {
+  const startTime = Date.now()
+
   try {
     // 환경 변수 확인
     if (!process.env.OPENAI_API_KEY) {
@@ -20,6 +23,15 @@ export async function POST(req: Request) {
         headers: { "Content-Type": "application/json" },
       })
     }
+
+    // Get the latest user message for analytics
+    const latestUserMessage = messages.filter((m) => m.role === "user").pop()
+    const question = latestUserMessage?.content || ""
+    const category = categorizeQuestion(question)
+
+    // Get session info
+    const userAgent = req.headers.get("user-agent") || undefined
+    const sessionId = req.headers.get("x-session-id") || generateSessionId()
 
     const result = await streamText({
       model: openai("gpt-4o"),
@@ -45,9 +57,31 @@ export async function POST(req: Request) {
       messages,
     })
 
+    // Track the request
+    const responseTime = Date.now() - startTime
+
+    // Log analytics (in a real app, you might want to do this asynchronously)
+    analyticsStore.logChat({
+      question,
+      responseTime,
+      userAgent,
+      sessionId,
+      category,
+    })
+
     return result.toAIStreamResponse()
   } catch (error) {
     console.error("Chat API Error:", error)
+
+    // Track error
+    const responseTime = Date.now() - startTime
+    analyticsStore.logChat({
+      question: "Error occurred",
+      responseTime,
+      category: "Error",
+      sessionId: generateSessionId(),
+    })
+
     return new Response(JSON.stringify({ error: "Internal server error" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
