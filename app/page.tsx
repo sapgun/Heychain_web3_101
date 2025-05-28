@@ -19,6 +19,7 @@ import {
   MessageCircle,
   Zap,
   Shield,
+  Gamepad2,
 } from "lucide-react"
 import Link from "next/link"
 import { web3Data } from "@/app/data/web3-data"
@@ -29,6 +30,7 @@ import ChatLimitModal from "@/components/chat-limit-modal"
 import SignupModal from "@/components/signup-modal"
 import QuizModal from "@/components/quiz-modal"
 import PracticeGuideModal from "@/components/practice-guide-modal"
+import MiniGamesModal from "@/components/mini-games/mini-games-modal"
 import LanguageSelector from "@/components/language-selector"
 import TranslatableContent from "@/components/translatable-content"
 import { subscriptionManager } from "@/lib/subscription"
@@ -48,6 +50,7 @@ export default function Home() {
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
   const [isQuizOpen, setIsQuizOpen] = useState(false)
   const [isPracticeOpen, setIsPracticeOpen] = useState(false)
+  const [isMiniGamesOpen, setIsMiniGamesOpen] = useState(false)
 
   // 애니메이션 상태 추가
   const [typedText, setTypedText] = useState("")
@@ -229,7 +232,7 @@ export default function Home() {
     }, 150) // 100ms에서 150ms로 변경
 
     return () => clearInterval(typeTimer)
-  }, [isHomePage])
+  }, [isHomePage, t.homeTitle])
 
   // 커서 깜빡임
   useEffect(() => {
@@ -360,20 +363,32 @@ export default function Home() {
             </p>
           </div>
 
-          {/* 메인 버튼 - 리플 효과 추가 */}
+          {/* 메인 버튼들 */}
           <div
             className={`mb-12 transition-all duration-1000 delay-500 ${isTypingComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
           >
-            <Button
-              onClick={handleExploreWeb3}
-              size="lg"
-              className="relative overflow-hidden bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-lg px-8 py-4 rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-200 group"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              <Sparkles className="w-6 h-6 mr-3 animate-spin-slow" />
-              {t.exploreWeb3}
-              <span className="absolute inset-0 rounded-xl bg-white/20 scale-0 group-active:scale-100 transition-transform duration-150"></span>
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                onClick={handleExploreWeb3}
+                size="lg"
+                className="relative overflow-hidden bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-lg px-8 py-4 rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-200 group"
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                <Sparkles className="w-6 h-6 mr-3 animate-spin-slow" />
+                {t.exploreWeb3}
+                <span className="absolute inset-0 rounded-xl bg-white/20 scale-0 group-active:scale-100 transition-transform duration-150"></span>
+              </Button>
+
+              <Button
+                onClick={() => setIsMiniGamesOpen(true)}
+                size="lg"
+                variant="outline"
+                className="border-2 border-purple-500/50 text-purple-300 hover:bg-purple-500/20 hover:border-purple-400 text-lg px-8 py-4 rounded-xl transition-all duration-200 group"
+              >
+                <Gamepad2 className="w-6 h-6 mr-3 group-hover:animate-bounce" />
+                미니 게임
+              </Button>
+            </div>
           </div>
 
           {/* 특징 카드들 - 순차 애니메이션 */}
@@ -483,6 +498,15 @@ export default function Home() {
               </div>
             </div>
             <div className="flex items-center space-x-2">
+              <Button
+                onClick={() => setIsMiniGamesOpen(true)}
+                variant="ghost"
+                size="sm"
+                className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/20 hidden sm:flex"
+              >
+                <Gamepad2 className="w-4 h-4 mr-2" />
+                게임
+              </Button>
               <LanguageSelector />
               <Link href="https://x.com/caro7370" target="_blank">
                 <Button
@@ -524,6 +548,18 @@ export default function Home() {
             >
               <Sparkles className="w-4 h-4 mr-2" />
               AI에게 질문하기
+            </Button>
+          </div>
+
+          {/* 미니 게임 버튼 */}
+          <div className="mb-4 lg:mb-6">
+            <Button
+              onClick={() => setIsMiniGamesOpen(true)}
+              variant="outline"
+              className="w-full border-purple-500/30 text-purple-300 hover:bg-purple-500/20 text-sm lg:text-base"
+            >
+              <Gamepad2 className="w-4 h-4 mr-2" />
+              미니 게임
             </Button>
           </div>
 
@@ -830,6 +866,9 @@ export default function Home() {
           categoryTitle={selectedItem.question}
         />
       )}
+
+      {/* 미니 게임 모달 */}
+      <MiniGamesModal isOpen={isMiniGamesOpen} onClose={() => setIsMiniGamesOpen(false)} />
     </>
   )
 }
