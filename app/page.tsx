@@ -12,6 +12,7 @@ import { QuizComponent } from "@/components/quiz-component"
 import { PracticeComponent } from "@/components/practice-component"
 import { SearchSuggestions } from "@/components/search-suggestions"
 import { AutocompleteSearch } from "@/components/autocomplete-search"
+import { AIChatModal } from "@/components/ai-chat-modal"
 import { popularSearches } from "@/utils/search-utils"
 
 export default function HeyChainApp() {
@@ -350,6 +351,11 @@ export default function HeyChainApp() {
               onSearchSubmit={handleSearchSubmit}
               language="ko"
             />
+
+            {/* AI Chat Button */}
+            <div className="space-y-2">
+              <AIChatModal language="ko" />
+            </div>
 
             {/* Search Suggestions - 검색어가 없을 때만 표시 */}
             {!searchTerm.trim() && (
