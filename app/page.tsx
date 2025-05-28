@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Search, Sparkles, ChevronRight, Star, ArrowRight } from "lucide-react"
+import { Search, Sparkles, ChevronRight, Star, ArrowRight, Brain, BookOpen, Play } from "lucide-react"
 import Link from "next/link"
 import { web3Data } from "@/app/data/web3-data"
 import { searchKeywords } from "@/app/data/web3-data"
@@ -15,6 +15,8 @@ import ChainNewsTicker from "@/components/chain-news-ticker"
 import AIChatModal from "@/components/ai-chat-modal"
 import ChatLimitModal from "@/components/chat-limit-modal"
 import SignupModal from "@/components/signup-modal"
+import QuizModal from "@/components/quiz-modal"
+import PracticeGuideModal from "@/components/practice-guide-modal"
 import LanguageSelector from "@/components/language-selector"
 import TranslatableContent from "@/components/translatable-content"
 import { subscriptionManager } from "@/lib/subscription"
@@ -31,6 +33,8 @@ export default function Home() {
   const [isAIChatOpen, setIsAIChatOpen] = useState(false)
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false)
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
+  const [isQuizOpen, setIsQuizOpen] = useState(false)
+  const [isPracticeOpen, setIsPracticeOpen] = useState(false)
 
   // 검색 기능
   const handleSearch = (e: React.FormEvent) => {
@@ -135,6 +139,15 @@ export default function Home() {
   const handleSignupSuccess = () => {
     setIsSignupModalOpen(false)
     setIsAIChatOpen(true)
+  }
+
+  // 퀴즈 및 실습 핸들러
+  const handleQuizOpen = () => {
+    setIsQuizOpen(true)
+  }
+
+  const handlePracticeOpen = () => {
+    setIsPracticeOpen(true)
   }
 
   return (
@@ -320,6 +333,7 @@ export default function Home() {
                     <ChevronRight className="w-4 h-4 mr-1 rotate-180" />
                     {t.backToList}
                   </Button>
+
                   <div className="bg-gray-800/50 border border-gray-700 p-8 rounded-lg">
                     <TranslatableContent originalText={selectedItem.question} className="mb-6">
                       <h3 className="text-2xl font-semibold text-white">{selectedItem.question}</h3>
@@ -330,6 +344,40 @@ export default function Home() {
                         <p className="text-gray-300 leading-relaxed whitespace-pre-line">{selectedItem.answer}</p>
                       </div>
                     </TranslatableContent>
+
+                    {/* 인터랙티브 요소들 */}
+                    <div className="flex flex-wrap gap-3 mt-8">
+                      {/* 퀴즈 버튼 */}
+                      {selectedItem.quiz && (
+                        <Button
+                          onClick={handleQuizOpen}
+                          className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 flex items-center space-x-2"
+                        >
+                          <Brain className="w-4 h-4" />
+                          <span>퀴즈 풀기</span>
+                        </Button>
+                      )}
+
+                      {/* 실습 가이드 버튼 */}
+                      {selectedItem.practice && (
+                        <Button
+                          onClick={handlePracticeOpen}
+                          className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 flex items-center space-x-2"
+                        >
+                          <BookOpen className="w-4 h-4" />
+                          <span>실습 가이드</span>
+                        </Button>
+                      )}
+
+                      {/* 동영상 튜토리얼 버튼 (예시) */}
+                      <Button
+                        variant="outline"
+                        className="border-orange-500/30 text-orange-300 hover:bg-orange-500/20 flex items-center space-x-2"
+                      >
+                        <Play className="w-4 h-4" />
+                        <span>동영상 보기</span>
+                      </Button>
+                    </div>
 
                     {selectedItem.links && selectedItem.links.length > 0 && (
                       <div className="mt-8">
@@ -351,6 +399,7 @@ export default function Home() {
                         </ul>
                       </div>
                     )}
+
                     {selectedItem.tips && (
                       <div className="mt-8 bg-blue-500/10 border border-blue-500/20 p-6 rounded-lg">
                         <h4 className="text-blue-300 font-semibold flex items-center mb-3">
@@ -371,9 +420,25 @@ export default function Home() {
                       className="p-6 bg-gray-800/50 border border-gray-700 rounded-lg cursor-pointer hover:bg-gray-700/50 transition-colors"
                       onClick={() => handleItemSelect(selectedCategory, itemIndex)}
                     >
-                      <TranslatableContent originalText={item.question} showTranslateButton={false}>
-                        <h3 className="text-white font-medium mb-2">{item.question}</h3>
-                      </TranslatableContent>
+                      <div className="flex items-center justify-between mb-2">
+                        <TranslatableContent originalText={item.question} showTranslateButton={false}>
+                          <h3 className="text-white font-medium">{item.question}</h3>
+                        </TranslatableContent>
+                        <div className="flex items-center space-x-2">
+                          {item.quiz && (
+                            <Badge variant="outline" className="border-blue-500/30 text-blue-300">
+                              <Brain className="w-3 h-3 mr-1" />
+                              퀴즈
+                            </Badge>
+                          )}
+                          {item.practice && (
+                            <Badge variant="outline" className="border-green-500/30 text-green-300">
+                              <BookOpen className="w-3 h-3 mr-1" />
+                              실습
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
                       <TranslatableContent originalText={item.answer} showTranslateButton={false}>
                         <p className="text-gray-400 text-sm line-clamp-2">{item.answer}</p>
                       </TranslatableContent>
@@ -419,6 +484,26 @@ export default function Home() {
         onClose={() => setIsSignupModalOpen(false)}
         onSuccess={handleSignupSuccess}
       />
+
+      {/* 퀴즈 모달 */}
+      {selectedItem?.quiz && (
+        <QuizModal
+          isOpen={isQuizOpen}
+          onClose={() => setIsQuizOpen(false)}
+          quiz={selectedItem.quiz}
+          title={selectedItem.question}
+        />
+      )}
+
+      {/* 실습 가이드 모달 */}
+      {selectedItem?.practice && (
+        <PracticeGuideModal
+          isOpen={isPracticeOpen}
+          onClose={() => setIsPracticeOpen(false)}
+          guide={selectedItem.practice}
+          categoryTitle={selectedItem.question}
+        />
+      )}
     </div>
   )
 }
