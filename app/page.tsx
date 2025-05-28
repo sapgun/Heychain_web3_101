@@ -211,7 +211,7 @@ export default function Home() {
     setIsPracticeOpen(true)
   }
 
-  // 타이핑 효과
+  // 타이핑 효과 - 속도 조정 (100ms → 150ms)
   useEffect(() => {
     if (!isHomePage) return
 
@@ -226,7 +226,7 @@ export default function Home() {
         setIsTypingComplete(true)
         clearInterval(typeTimer)
       }
-    }, 100)
+    }, 150) // 100ms에서 150ms로 변경
 
     return () => clearInterval(typeTimer)
   }, [isHomePage])
@@ -240,14 +240,15 @@ export default function Home() {
     return () => clearInterval(cursorTimer)
   }, [])
 
-  // 카드 순차 애니메이션
+  // 카드 순차 애니메이션 - 간격 조정 (200ms → 400ms)
   useEffect(() => {
     if (!isHomePage || !isTypingComplete) return
 
-    const timers = [0, 1, 2].map((index) =>
-      setTimeout(() => {
-        setVisibleCards((prev) => [...prev, index])
-      }, index * 200),
+    const timers = [0, 1, 2].map(
+      (index) =>
+        setTimeout(() => {
+          setVisibleCards((prev) => [...prev, index])
+        }, index * 400), // 200ms에서 400ms로 변경
     )
 
     return () => timers.forEach(clearTimeout)
