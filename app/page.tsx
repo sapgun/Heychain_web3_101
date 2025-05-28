@@ -12,17 +12,23 @@ import {
   BookOpen,
   Sparkles,
   Shield,
-  Search,
   ChevronDown,
   ChevronRight,
   Menu,
   X,
   Send,
+  Search,
 } from "lucide-react"
 import { web3Data, searchKeywords } from "./data/web3-data"
 import { QuizComponent } from "@/components/quiz-component"
 import { PracticeComponent } from "@/components/practice-component"
 import { SearchSuggestions } from "@/components/search-suggestions"
+import { AutocompleteSearch } from "@/components/autocomplete-search"
+import { AIChatModal } from "@/components/ai-chat-modal"
+import { UsageGuideModal } from "@/components/usage-guide-modal"
+import { HeaderGuideButton } from "@/components/header-guide-button"
+import { popularSearches } from "@/utils/search-utils"
+import { hasViewedGuide, markGuideAsViewed } from "@/lib/guide-utils"
 
 export default function HeyChainApp() {
   const [selectedCategory, setSelectedCategory] = useState<number>(-1)
@@ -32,11 +38,24 @@ export default function HeyChainApp() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [email, setEmail] = useState("")
   const [isClient, setIsClient] = useState(false)
+  const [showGuideModal, setShowGuideModal] = useState(false)
 
   // Ensure client-side rendering for interactive elements
   useEffect(() => {
     setIsClient(true)
   }, [])
+
+  useEffect(() => {
+    if (isClient && showApp) {
+      // 처음 방문한 사용자에게 가이드 표시
+      if (!hasViewedGuide()) {
+        setTimeout(() => {
+          setShowGuideModal(true)
+          markGuideAsViewed()
+        }, 1500) // 1.5초 후에 가이드 표시
+      }
+    }
+  }, [isClient, showApp])
 
   const currentData = web3Data
 
@@ -62,12 +81,21 @@ export default function HeyChainApp() {
     return results
   }, [searchTerm, selectedCategory, currentData])
 
+  // toggleExpanded 함수를 찾아 스크롤 기능을 추가합니다.
   const toggleExpanded = (id: string) => {
     const newExpanded = new Set(expandedItems)
     if (newExpanded.has(id)) {
       newExpanded.delete(id)
     } else {
       newExpanded.add(id)
+
+      // 약간의 지연 후 해당 요소로 스크롤 (DOM이 업데이트된 후)
+      setTimeout(() => {
+        const element = document.getElementById(`item-${id}`)
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" })
+        }
+      }, 100)
     }
     setExpandedItems(newExpanded)
   }
@@ -76,6 +104,12 @@ export default function HeyChainApp() {
     setSelectedCategory(index)
     setSearchTerm("")
     setSidebarOpen(false)
+
+    // 페이지 상단으로 스크롤
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // 부드러운 스크롤 효과
+    })
   }
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -169,7 +203,12 @@ export default function HeyChainApp() {
                 <MessageCircle className="w-5 h-5 mr-2" />
                 {texts.startNow}
               </Button>
-              <Button size="lg" variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-800">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-gray-600 text-gray-300 hover:bg-gray-800"
+                onClick={() => setShowGuideModal(true)}
+              >
                 <BookOpen className="w-5 h-5 mr-2" />
                 {texts.howToUse}
               </Button>
@@ -285,16 +324,31 @@ export default function HeyChainApp() {
     )
   }
 
+  // 검색 핸들러 함수 추가 (onSearchSubmit)
+  const handleSearchSubmit = (value: string) => {
+    // 검색어가 있을 때만 검색 실행
+    if (value.trim()) {
+      setSearchTerm(value)
+      setSelectedCategory(-1) // 카테고리 선택 초기화
+
+      // 페이지 상단으로 스크롤
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // 부드러운 스크롤 효과
+      })
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* App Header */}
-      <header className="border-b border-purple-500/20 bg-gray-900/50 backdrop-blur-sm">
+      <header className="border-b border-purple-500/20 bg-gray-900/50 backdrop-blur-sm sticky top-0 z-30">
         <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 sm:space-x-3">
               <button
                 onClick={() => setShowApp(false)}
-                className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity"
+                className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity p-1 rounded-lg"
               >
                 <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-400 to-pink-400 rounded-xl flex items-center justify-center">
                   <MessageCircle className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
@@ -306,11 +360,12 @@ export default function HeyChainApp() {
               </button>
             </div>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <HeaderGuideButton />
               <Button
                 variant="ghost"
                 size="sm"
-                className="md:hidden text-white"
+                className="md:hidden text-white p-2 h-10 w-10"
                 onClick={() => setSidebarOpen(!sidebarOpen)}
               >
                 {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -320,53 +375,72 @@ export default function HeyChainApp() {
         </div>
       </header>
 
-      <div className="flex h-[calc(100vh-80px)]">
+      <div className="flex flex-grow">
         {/* Sidebar */}
         <aside
           className={`
-    fixed inset-y-0 left-0 z-50 w-72 sm:w-80 bg-gradient-to-b from-gray-900/95 to-gray-800/95 backdrop-blur-sm border-r border-purple-500/20 
-    transform transition-all duration-500 ease-in-out
-    md:relative md:translate-x-0 md:z-auto md:w-80
+    fixed inset-y-0 left-0 z-50 w-full sm:w-80 bg-gradient-to-b from-gray-900/98 to-gray-800/98 backdrop-blur-sm border-r border-purple-500/20 
+    transform transition-all duration-300 ease-in-out pt-16
+    md:relative md:translate-x-0 md:z-auto md:w-80 md:bg-gradient-to-b md:from-gray-900/95 md:to-gray-800/95 md:pt-0
     ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
   `}
         >
-          <div className="p-6 space-y-6 h-full overflow-y-auto">
-            {/* Search */}
-            <div className="relative group">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 group-focus-within:text-purple-400 transition-colors" />
-              <Input
-                type="text"
-                placeholder={texts.search}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-gray-700/50 border-purple-500/30 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-all"
-              />
+          <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 h-full overflow-y-auto">
+            {/* 모바일에서 닫기 버튼 추가 */}
+            <div className="flex items-center justify-between md:hidden mb-4">
+              <h2 className="text-lg font-bold text-white">메뉴</h2>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSidebarOpen(false)}
+                className="text-gray-400 hover:text-white p-2 h-8 w-8"
+              >
+                <X className="w-4 h-4" />
+              </Button>
             </div>
 
-            {/* Search Suggestions */}
+            {/* Search */}
+            <AutocompleteSearch
+              searchTerm={searchTerm}
+              onSearchChange={setSearchTerm}
+              onSearchSubmit={handleSearchSubmit}
+              language="ko"
+            />
+
+            {/* AI Chat Button */}
+            <div className="space-y-2">
+              <AIChatModal language="ko" />
+            </div>
+
+            {/* Search Suggestions - 검색어가 없을 때만 표시 */}
             {!searchTerm.trim() && (
               <SearchSuggestions
                 keywords={searchKeywords.ko}
-                onKeywordClick={(keyword) => setSearchTerm(keyword)}
+                popularSearches={popularSearches.ko}
+                onKeywordClick={(keyword) => {
+                  setSearchTerm(keyword)
+                  handleSearchSubmit(keyword)
+                  setSidebarOpen(false) // 모바일에서 검색 후 사이드바 닫기
+                }}
                 language="ko"
               />
             )}
 
             {/* Categories */}
-            <nav className="space-y-3">
+            <nav className="space-y-2 sm:space-y-3">
               {currentData.map((category, index) => (
                 <button
                   key={index}
                   onClick={() => handleCategorySelect(index)}
                   className={`
-                    group w-full text-left px-4 py-4 rounded-xl transition-all duration-300 text-sm font-medium
-                    relative overflow-hidden
-                    ${
-                      selectedCategory === index
-                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/25 scale-105"
-                        : "text-gray-300 hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 hover:text-white hover:scale-102"
-                    }
-                  `}
+            group w-full text-left px-3 sm:px-4 py-3 sm:py-4 rounded-xl transition-all duration-300 text-sm font-medium
+            relative overflow-hidden min-h-[48px] flex items-center
+            ${
+              selectedCategory === index
+                ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/25 scale-105"
+                : "text-gray-300 hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 hover:text-white hover:scale-102"
+            }
+          `}
                 >
                   <div className="relative z-10 flex items-center">
                     <div
@@ -374,7 +448,7 @@ export default function HeyChainApp() {
                         selectedCategory === index ? "bg-white" : "bg-purple-400/50 group-hover:bg-purple-400"
                       }`}
                     ></div>
-                    {category.category}
+                    <span className="leading-tight">{category.category}</span>
                   </div>
                 </button>
               ))}
@@ -389,61 +463,105 @@ export default function HeyChainApp() {
 
         {/* Main Content */}
         <main className="flex-1 overflow-y-auto">
-          <div className="container mx-auto px-3 sm:px-6 py-4 sm:py-8">
+          <div className="container mx-auto px-3 sm:px-6 py-4 sm:py-8 pb-20 sm:pb-8">
             {showWelcome ? (
-              <div className="text-center py-10 sm:py-20">
-                <div className="max-w-3xl mx-auto px-4">
+              <div className="text-center py-8 sm:py-20">
+                <div className="max-w-3xl mx-auto px-2 sm:px-4">
                   <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl flex items-center justify-center mx-auto mb-6 sm:mb-8 animate-bounce">
                     <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                   </div>
-                  <h2 className="text-2xl sm:text-4xl font-bold text-white mb-4 sm:mb-6">{texts.welcome}</h2>
-                  <p className="text-base sm:text-xl text-gray-300 mb-6 sm:mb-8 leading-relaxed">{texts.welcomeDesc}</p>
-                  <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 text-sm sm:text-lg px-3 sm:px-4 py-1 sm:py-2">
+                  <h2 className="text-xl sm:text-4xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+                    {texts.welcome}
+                  </h2>
+                  <p className="text-sm sm:text-xl text-gray-300 mb-6 sm:mb-8 leading-relaxed">{texts.welcomeDesc}</p>
+                  <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 text-xs sm:text-lg px-3 sm:px-4 py-2 sm:py-2">
                     "말 걸면 바로 요약해주는 대화형 Web3 위키"
                   </Badge>
                 </div>
               </div>
             ) : (
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {/* Results Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-0">
-                  <h2 className="text-xl sm:text-2xl font-bold text-white">
+                  <h2 className="text-lg sm:text-2xl font-bold text-white leading-tight">
                     {searchTerm ? `"${searchTerm}" ${texts.searchResults}` : currentData[selectedCategory]?.category}
                   </h2>
-                  <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 self-start sm:self-auto">
+                  <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 self-start sm:self-auto text-xs sm:text-sm">
                     {filteredItems.length}개 항목
                   </Badge>
                 </div>
 
                 {/* Q&A Items */}
                 {filteredItems.length === 0 ? (
-                  <Card className="bg-gray-800/50 border-purple-500/20 p-8 text-center">
-                    <p className="text-gray-400">{texts.noResults}</p>
-                  </Card>
-                ) : (
                   <div className="space-y-4">
+                    <Card className="bg-gray-800/50 border-purple-500/20 p-6 sm:p-8 text-center">
+                      <div className="space-y-4">
+                        <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto">
+                          <Search className="w-8 h-8 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-white text-lg font-semibold mb-2">검색 결과가 없습니다</h3>
+                          <p className="text-gray-400 text-sm mb-4">"{searchTerm}"에 대한 정보를 찾을 수 없습니다.</p>
+                        </div>
+
+                        {/* AI 질문 유도 */}
+                        <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-lg p-4">
+                          <div className="flex items-center justify-center mb-3">
+                            <Sparkles className="w-5 h-5 text-blue-400 mr-2" />
+                            <h4 className="text-blue-300 font-medium">AI 어시스턴트에게 물어보세요!</h4>
+                          </div>
+                          <p className="text-blue-200 text-sm mb-4">
+                            지식 데이터베이스에 없는 내용도 AI가 답변해드릴 수 있습니다.
+                          </p>
+                          <AIChatModal language="ko" searchQuery={searchTerm} />
+                        </div>
+
+                        {/* 관련 추천 */}
+                        <div className="text-left">
+                          <h4 className="text-sm font-medium text-gray-300 mb-3">이런 주제는 어떠세요?</h4>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            {searchKeywords.ko.slice(0, 6).map((keyword) => (
+                              <button
+                                key={keyword}
+                                onClick={() => {
+                                  setSearchTerm(keyword)
+                                  handleSearchSubmit(keyword)
+                                }}
+                                className="text-left p-3 rounded-lg bg-gray-700/30 hover:bg-gray-600/30 transition-colors text-sm text-gray-300 hover:text-white"
+                              >
+                                {keyword}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
+                ) : (
+                  <div className="space-y-3 sm:space-y-4">
                     {filteredItems.map((item) => {
                       const isExpanded = expandedItems.has(item.id)
                       return (
                         <Card
                           key={item.id}
+                          id={`item-${item.id}`}
                           className="bg-gray-800/50 border-purple-500/20 overflow-hidden hover:border-purple-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10"
                         >
                           <button
                             onClick={() => toggleExpanded(item.id)}
-                            className="w-full text-left p-3 sm:p-6 flex justify-between items-start hover:bg-purple-500/10 transition-colors"
+                            className="w-full text-left p-4 sm:p-6 flex justify-between items-start hover:bg-purple-500/10 transition-colors min-h-[60px] sm:min-h-auto"
                           >
-                            <div className="flex-1 pr-2 sm:pr-4">
-                              <h3 className="text-base sm:text-lg font-semibold text-white mb-1 sm:mb-2">
+                            <div className="flex-1 pr-3 sm:pr-4">
+                              <h3 className="text-sm sm:text-lg font-semibold text-white mb-1 sm:mb-2 leading-tight">
                                 {item.question}
                               </h3>
                               {searchTerm && item.categoryName && (
-                                <Badge variant="outline" className="border-purple-500/30 text-purple-300 text-xs">
+                                <Badge variant="outline" className="border-purple-500/30 text-purple-300 text-xs mt-2">
                                   {item.categoryName}
                                 </Badge>
                               )}
                             </div>
-                            <div className="flex-shrink-0">
+                            <div className="flex-shrink-0 ml-2">
                               {isExpanded ? (
                                 <ChevronDown className="w-5 h-5 text-purple-400 transition-transform duration-200" />
                               ) : (
@@ -453,8 +571,8 @@ export default function HeyChainApp() {
                           </button>
 
                           {isExpanded && (
-                            <div className="px-3 sm:px-6 pb-3 sm:pb-6 border-t border-purple-500/20 animate-in slide-in-from-top-2 duration-300">
-                              <div className="pt-3 sm:pt-4 space-y-3 sm:space-y-4">
+                            <div className="px-4 sm:px-6 pb-4 sm:pb-6 border-t border-purple-500/20 animate-in slide-in-from-top-2 duration-300">
+                              <div className="pt-4 space-y-4">
                                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed">{item.answer}</p>
 
                                 {/* Quiz Component */}
@@ -475,6 +593,7 @@ export default function HeyChainApp() {
           </div>
         </main>
       </div>
+      <UsageGuideModal open={showGuideModal} onOpenChange={setShowGuideModal} />
     </div>
   )
 }
