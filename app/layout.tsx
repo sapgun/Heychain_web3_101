@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { LanguageProvider } from "@/lib/language-context"
 
 export const metadata: Metadata = {
   title: "HeyChain 101 - Web3 대화형 요약 비서",
@@ -18,7 +19,7 @@ export default function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          {children}
+          <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

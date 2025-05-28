@@ -15,9 +15,12 @@ import ChainNewsTicker from "@/components/chain-news-ticker"
 import AIChatModal from "@/components/ai-chat-modal"
 import ChatLimitModal from "@/components/chat-limit-modal"
 import SignupModal from "@/components/signup-modal"
+import LanguageSelector from "@/components/language-selector"
 import { subscriptionManager } from "@/lib/subscription"
+import { useLanguage } from "@/lib/language-context"
 
 export default function Home() {
+  const { t, isLoading: translationLoading } = useLanguage()
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null)
   const [selectedItem, setSelectedItem] = useState<any | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
@@ -133,6 +136,17 @@ export default function Home() {
     setIsAIChatOpen(true)
   }
 
+  if (translationLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-white text-lg">{t.loading}</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex flex-col">
       {/* 헤더 */}
@@ -144,18 +158,19 @@ export default function Home() {
                 <Sparkles className="w-4 h-4 lg:w-6 lg:h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-lg lg:text-2xl font-bold text-white">HeyChain 101</h1>
-                <p className="text-xs lg:text-sm text-gray-400">블록체인 미로의 친절한 나침반 🧭</p>
+                <h1 className="text-lg lg:text-2xl font-bold text-white">{t.title}</h1>
+                <p className="text-xs lg:text-sm text-gray-400">{t.subtitle}</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
+              <LanguageSelector />
               <Link href="https://x.com/caro7370" target="_blank">
                 <Button
                   variant="ghost"
                   size="sm"
                   className="text-gray-400 hover:text-white hover:bg-gray-800 hidden sm:flex"
                 >
-                  <span className="text-xs">Powered by SAPGUN</span>
+                  <span className="text-xs">{t.poweredBy}</span>
                 </Button>
               </Link>
             </div>
@@ -173,7 +188,7 @@ export default function Home() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
               <Input
                 type="text"
-                placeholder="질문 검색..."
+                placeholder={t.searchPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10 bg-gray-800/50 border-purple-500/30 text-white placeholder-gray-400 focus:border-purple-400"
@@ -188,7 +203,7 @@ export default function Home() {
               className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white text-sm lg:text-base"
             >
               <Sparkles className="w-4 h-4 mr-2" />
-              AI에게 질문하기
+              {t.askAI}
             </Button>
           </div>
 
@@ -196,7 +211,7 @@ export default function Home() {
           <div className="mb-4 lg:mb-6 hidden sm:block">
             <h3 className="text-white font-medium mb-3 flex items-center">
               <span className="text-purple-400 mr-2">#</span>
-              인기 키워드
+              {t.popularKeywords}
             </h3>
             <div className="space-y-2">
               {["NFT", "DeFi", "DAO", "이더리움", "메타마스크", "스마트 컨트랙트", "레이어2"].map((keyword, index) => (
@@ -218,7 +233,7 @@ export default function Home() {
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-white font-medium flex items-center">
                 <span className="text-blue-400 mr-2">#</span>
-                추천 키워드
+                {t.recommendedKeywords}
               </h3>
               <Button
                 variant="ghost"
@@ -231,7 +246,7 @@ export default function Home() {
                   handleKeywordClick(randomKeyword)
                 }}
               >
-                🎲 랜덤
+                {t.random}
               </Button>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -250,7 +265,7 @@ export default function Home() {
 
           {/* 카테고리 목록 */}
           <div>
-            <h3 className="text-white font-medium mb-3">카테고리</h3>
+            <h3 className="text-white font-medium mb-3">{t.categories}</h3>
             <ScrollArea className="h-32 sm:h-48 lg:h-[calc(100vh-500px)]">
               <div className="space-y-1">
                 {web3Data.map((category, index) => (
@@ -278,7 +293,7 @@ export default function Home() {
             <div>
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
                 <Search className="w-6 h-6 mr-2" />
-                검색 결과: "{searchQuery}"
+                {t.searchResults}: "{searchQuery}"
               </h2>
               <div className="space-y-4">
                 {searchResults.map((result, index) => (
@@ -309,7 +324,7 @@ export default function Home() {
                     onClick={() => setSelectedItem(null)}
                   >
                     <ChevronRight className="w-4 h-4 mr-1 rotate-180" />
-                    목록으로 돌아가기
+                    {t.backToList}
                   </Button>
                   <div className="bg-gray-800/50 border border-gray-700 p-8 rounded-lg">
                     <h3 className="text-2xl font-semibold text-white mb-6">{selectedItem.question}</h3>
@@ -366,13 +381,10 @@ export default function Home() {
               <div className="w-24 h-24 bg-gradient-to-r from-purple-400 to-pink-400 rounded-3xl flex items-center justify-center mb-8">
                 <Sparkles className="w-12 h-12 text-white" />
               </div>
-              <h2 className="text-4xl font-bold text-white mb-4">Web3 세상에 오신 걸 환영해요! 🎉</h2>
-              <p className="text-xl text-gray-300 mb-8 max-w-2xl">
-                복잡한 블록체인 세상이 막막하신가요? 걱정 마세요! 왼쪽 메뉴에서 궁금한 주제를 골라보거나, 검색창에
-                질문을 던져보세요. HeyChain이 쉽고 재미있게 설명해드릴게요! 🚀
-              </p>
-              <div className="text-lg text-purple-300 italic mb-4">"복잡한 Web3, 이제 대화로 쉽게 배워요! 💬✨"</div>
-              <div className="text-sm text-gray-400">💡 팁: AI 채팅으로 실시간 질문도 가능해요!</div>
+              <h2 className="text-4xl font-bold text-white mb-4">{t.welcome}</h2>
+              <p className="text-xl text-gray-300 mb-8 max-w-2xl">{t.welcomeDescription}</p>
+              <div className="text-lg text-purple-300 italic mb-4">{t.slogan}</div>
+              <div className="text-sm text-gray-400">{t.tip}</div>
             </div>
           )}
         </div>

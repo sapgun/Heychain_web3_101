@@ -24,6 +24,8 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu"
 import NewsDetailModal from "./news-detail-modal"
+import LanguageSelector from "./language-selector"
+import { useLanguage } from "@/lib/language-context"
 
 interface NewsItem {
   id: string
@@ -67,6 +69,7 @@ const ChainLogo = ({ chain }: { chain: string }) => {
 }
 
 export default function ChainNewsTicker() {
+  const { t, language } = useLanguage()
   const [news, setNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -76,7 +79,6 @@ export default function ChainNewsTicker() {
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [selectedNewsItem, setSelectedNewsItem] = useState<NewsItem | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [language, setLanguage] = useState("ko")
   const [isOnline, setIsOnline] = useState(true)
   const [retryCount, setRetryCount] = useState(0)
 
@@ -212,14 +214,14 @@ export default function ChainNewsTicker() {
       const diffInMinutes = Math.floor((now.getTime() - publishedAt.getTime()) / (1000 * 60))
 
       if (diffInMinutes < 60) {
-        return `${diffInMinutes}분 전`
+        return `${diffInMinutes}${t.minutesAgo}`
       } else if (diffInMinutes < 1440) {
-        return `${Math.floor(diffInMinutes / 60)}시간 전`
+        return `${Math.floor(diffInMinutes / 60)}${t.hoursAgo}`
       } else {
-        return `${Math.floor(diffInMinutes / 1440)}일 전`
+        return `${Math.floor(diffInMinutes / 1440)}${t.daysAgo}`
       }
     } catch (error) {
-      return "방금 전"
+      return t.justNow
     }
   }
 
@@ -241,7 +243,7 @@ export default function ChainNewsTicker() {
         <div className="container mx-auto px-4 flex items-center justify-center">
           <div className="flex items-center space-x-2 text-gray-400">
             <RefreshCw className="w-4 h-4 animate-spin" />
-            <span className="text-sm">최신 뉴스를 불러오는 중...</span>
+            <span className="text-sm">{t.loading}</span>
           </div>
         </div>
       </div>
@@ -254,10 +256,10 @@ export default function ChainNewsTicker() {
         <div className="container mx-auto px-4 flex items-center justify-center">
           <div className="flex items-center space-x-2 text-red-400">
             {isOnline ? <AlertCircle className="w-4 h-4" /> : <WifiOff className="w-4 h-4" />}
-            <span className="text-sm">{isOnline ? error : "오프라인 상태입니다"}</span>
+            <span className="text-sm">{isOnline ? error : t.offline}</span>
             <Button variant="ghost" size="sm" onClick={handleRetry} className="ml-2 text-xs">
               <RefreshCw className="w-3 h-3 mr-1" />
-              다시 시도
+              {t.retry}
             </Button>
           </div>
         </div>
@@ -272,9 +274,7 @@ export default function ChainNewsTicker() {
           <div className="flex items-center space-x-3 text-gray-400">
             <AlertCircle className="w-4 h-4" />
             <span className="text-sm">
-              {selectedCategory === "all"
-                ? "표시할 뉴스가 없습니다."
-                : `'${selectedCategory}' 카테고리에 뉴스가 없습니다.`}
+              {selectedCategory === "all" ? t.noNewsAvailable : `'${selectedCategory}' ${t.noNewsInCategory}`}
             </span>
             <div className="flex items-center space-x-2">
               {selectedCategory !== "all" && (
@@ -285,12 +285,12 @@ export default function ChainNewsTicker() {
                   className="text-xs text-blue-400 hover:text-blue-300"
                 >
                   <ArrowLeft className="w-3 h-3 mr-1" />
-                  전체 뉴스로
+                  {t.backToAllNews}
                 </Button>
               )}
               <Button variant="ghost" size="sm" onClick={handleRetry} className="text-xs">
                 <RefreshCw className="w-3 h-3 mr-1" />
-                새로고침
+                {t.refresh}
               </Button>
             </div>
           </div>
@@ -307,21 +307,22 @@ export default function ChainNewsTicker() {
           <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
             <div className="flex items-center space-x-2 lg:space-x-3">
               <div className="flex-shrink-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-2 lg:px-3 py-1 rounded-full text-xs font-medium">
-                🔥 실시간 뉴스
+                {t.liveNews}
               </div>
               <Badge variant="outline" className="text-xs">
-                {news.length}개 소식
+                {news.length}
+                {t.newsCount}
               </Badge>
               {!isOnline && (
                 <Badge variant="destructive" className="text-xs">
                   <WifiOff className="w-3 h-3 mr-1" />
-                  오프라인
+                  {t.offline}
                 </Badge>
               )}
               {isOnline && (
                 <Badge variant="outline" className="text-xs text-green-400 border-green-400">
                   <Wifi className="w-3 h-3 mr-1" />
-                  온라인
+                  {t.online}
                 </Badge>
               )}
               <span className="text-xs text-gray-500 hidden sm:inline">
@@ -331,28 +332,18 @@ export default function ChainNewsTicker() {
 
             <div className="flex items-center space-x-1 lg:space-x-2">
               {/* 언어 선택 */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="text-xs hidden sm:flex">
-                    {language === "ko" ? "🇰🇷 한국어" : "🇺🇸 English"}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem onClick={() => setLanguage("ko")}>🇰🇷 한국어</DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setLanguage("en")}>🇺🇸 English</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <LanguageSelector showLabel={false} />
 
               {/* 카테고리 필터 */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="text-xs">
                     <Filter className="w-3 h-3 mr-1" />
-                    {selectedCategory === "all" ? "전체" : selectedCategory}
+                    {selectedCategory === "all" ? t.allNews : selectedCategory}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuLabel>카테고리</DropdownMenuLabel>
+                  <DropdownMenuLabel>{t.category}</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   {categories.map((category) => (
                     <DropdownMenuItem
@@ -360,7 +351,7 @@ export default function ChainNewsTicker() {
                       onClick={() => setSelectedCategory(category)}
                       className={selectedCategory === category ? "bg-purple-100" : ""}
                     >
-                      {category === "all" ? "전체" : category}
+                      {category === "all" ? t.allNews : category}
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
@@ -371,15 +362,15 @@ export default function ChainNewsTicker() {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="text-xs">
                     <Settings className="w-3 h-3 mr-1" />
-                    속도
+                    {t.speed}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuLabel>스크롤 속도</DropdownMenuLabel>
+                  <DropdownMenuLabel>{t.speed}</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => setSpeed(30)}>빠름 (30초)</DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setSpeed(60)}>보통 (60초)</DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setSpeed(90)}>느림 (90초)</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSpeed(30)}>{t.fast}</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSpeed(60)}>{t.normal}</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSpeed(90)}>{t.slow}</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
@@ -427,7 +418,7 @@ export default function ChainNewsTicker() {
               </div>
             ) : (
               <div className="flex items-center justify-center py-2">
-                <span className="text-sm text-gray-500">뉴스를 불러올 수 없습니다.</span>
+                <span className="text-sm text-gray-500">{t.noNewsAvailable}</span>
               </div>
             )}
           </div>
