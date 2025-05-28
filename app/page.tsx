@@ -145,7 +145,7 @@ export default function Home() {
               </div>
               <div>
                 <h1 className="text-lg lg:text-2xl font-bold text-white">HeyChain 101</h1>
-                <p className="text-xs lg:text-sm text-gray-400">Web3 대화형 요약 비서</p>
+                <p className="text-xs lg:text-sm text-gray-400">블록체인 미로의 친절한 나침반 🧭</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
@@ -366,12 +366,13 @@ export default function Home() {
               <div className="w-24 h-24 bg-gradient-to-r from-purple-400 to-pink-400 rounded-3xl flex items-center justify-center mb-8">
                 <Sparkles className="w-12 h-12 text-white" />
               </div>
-              <h2 className="text-4xl font-bold text-white mb-4">Web3의 세계에 오신 것을 환영합니다!</h2>
+              <h2 className="text-4xl font-bold text-white mb-4">Web3 세상에 오신 걸 환영해요! 🎉</h2>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl">
-                왼쪽 메뉴에서 궁금한 카테고리를 선택하거나 질문을 검색하여 Web3에 대한 모든 것을 알아보세요. HeyChain이
-                여러분의 Web3 여정을 도와드립니다.
+                복잡한 블록체인 세상이 막막하신가요? 걱정 마세요! 왼쪽 메뉴에서 궁금한 주제를 골라보거나, 검색창에
+                질문을 던져보세요. HeyChain이 쉽고 재미있게 설명해드릴게요! 🚀
               </p>
-              <div className="text-lg text-purple-300 italic">"말 걸면 바로 요약해주는 대화형 Web3 위키"</div>
+              <div className="text-lg text-purple-300 italic mb-4">"복잡한 Web3, 이제 대화로 쉽게 배워요! 💬✨"</div>
+              <div className="text-sm text-gray-400">💡 팁: AI 채팅으로 실시간 질문도 가능해요!</div>
             </div>
           )}
         </div>

@@ -1,7 +1,18 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ExternalLink, Settings, Filter, Play, Pause, RefreshCw, AlertCircle, Wifi, WifiOff } from "lucide-react"
+import {
+  ExternalLink,
+  Settings,
+  Filter,
+  Play,
+  Pause,
+  RefreshCw,
+  AlertCircle,
+  Wifi,
+  WifiOff,
+  ArrowLeft,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -217,6 +228,13 @@ export default function ChainNewsTicker() {
     fetchNews()
   }
 
+  const handleGoBack = () => {
+    // 전체 카테고리로 돌아가기
+    setSelectedCategory("all")
+    setError(null)
+    fetchNews()
+  }
+
   if (loading && news.length === 0) {
     return (
       <div className="w-full bg-gray-900/80 backdrop-blur-sm border-t border-purple-500/20 py-3">
@@ -251,13 +269,30 @@ export default function ChainNewsTicker() {
     return (
       <div className="w-full bg-gray-900/80 backdrop-blur-sm border-t border-purple-500/20 py-3">
         <div className="container mx-auto px-4 flex items-center justify-center">
-          <div className="flex items-center space-x-2 text-gray-400">
+          <div className="flex items-center space-x-3 text-gray-400">
             <AlertCircle className="w-4 h-4" />
-            <span className="text-sm">표시할 뉴스가 없습니다.</span>
-            <Button variant="ghost" size="sm" onClick={handleRetry} className="ml-2 text-xs">
-              <RefreshCw className="w-3 h-3 mr-1" />
-              새로고침
-            </Button>
+            <span className="text-sm">
+              {selectedCategory === "all"
+                ? "표시할 뉴스가 없습니다."
+                : `'${selectedCategory}' 카테고리에 뉴스가 없습니다.`}
+            </span>
+            <div className="flex items-center space-x-2">
+              {selectedCategory !== "all" && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleGoBack}
+                  className="text-xs text-blue-400 hover:text-blue-300"
+                >
+                  <ArrowLeft className="w-3 h-3 mr-1" />
+                  전체 뉴스로
+                </Button>
+              )}
+              <Button variant="ghost" size="sm" onClick={handleRetry} className="text-xs">
+                <RefreshCw className="w-3 h-3 mr-1" />
+                새로고침
+              </Button>
+            </div>
           </div>
         </div>
       </div>
