@@ -63,16 +63,42 @@ export const web3Data = [
         },
         practice: {
           title: "메타마스크 설치 및 지갑 생성하기",
+          description: "처음부터 메타마스크를 설치하고 안전하게 지갑을 생성하는 전체 과정을 단계별로 진행해보세요.",
           steps: [
-            "1. metamask.io 공식 웹사이트 방문",
-            "2. 브라우저에 맞는 확장 프로그램 다운로드",
-            "3. '지갑 생성' 선택",
-            "4. 비밀번호 설정",
-            "5. 시드 구문(12단어) 안전하게 백업",
-            "6. 시드 구문 확인 과정 완료",
+            {
+              title: "metamask.io 공식 웹사이트 방문",
+              description: "브라우저에서 https://metamask.io 에 접속합니다. 반드시 공식 사이트인지 URL을 확인하세요.",
+            },
+            {
+              title: "브라우저에 맞는 확장 프로그램 다운로드",
+              description: "Chrome, Firefox, Edge 등 사용 중인 브라우저에 맞는 확장 프로그램을 다운로드합니다.",
+            },
+            {
+              title: "'지갑 생성' 선택",
+              description:
+                "설치 후 메타마스크를 열고 '지갑 생성'을 선택합니다. 기존 지갑이 있다면 '지갑 가져오기'를 선택하세요.",
+            },
+            {
+              title: "비밀번호 설정",
+              description:
+                "강력한 비밀번호를 설정합니다. 최소 8자 이상, 대소문자, 숫자, 특수문자를 포함하는 것이 좋습니다.",
+            },
+            {
+              title: "시드 구문(12단어) 안전하게 백업",
+              description:
+                "12개의 영어 단어로 구성된 시드 구문을 종이에 적어 안전한 곳에 보관합니다. 절대 디지털로 저장하지 마세요.",
+            },
+            {
+              title: "시드 구문 확인 과정 완료",
+              description: "백업한 시드 구문을 올바른 순서로 입력하여 확인 과정을 완료합니다.",
+            },
           ],
           warning:
             "⚠️ 시드 구문은 절대 스크린샷으로 저장하거나 온라인에 저장하지 마세요. 종이에 적어 안전한 곳에 보관하세요.",
+          links: [
+            { title: "메타마스크 공식 사이트", url: "https://metamask.io/" },
+            { title: "메타마스크 보안 가이드", url: "https://metamask.io/security/" },
+          ],
         },
       },
       {
@@ -108,6 +134,44 @@ export const web3Data = [
           { title: "HD 지갑 설명", url: "https://learnmeabitcoin.com/technical/hd-wallets" },
         ],
         tips: "여러 개의 지갑 주소를 사용하면 프라이버시를 강화하고 자산을 용도별로 구분할 수 있습니다.",
+        practice: {
+          title: "메타마스크 보안 설정 강화하기",
+          description:
+            "메타마스크 지갑의 보안을 최대한 강화하여 해킹과 피싱 공격으로부터 자산을 보호하는 방법을 배워보세요.",
+          steps: [
+            {
+              title: "메타마스크 설정 메뉴 열기",
+              description:
+                "메타마스크 확장 프로그램을 열고 우측 상단의 계정 아이콘을 클릭한 후 'Settings'를 선택합니다.",
+            },
+            {
+              title: "'보안 및 개인정보' 선택",
+              description: "설정 메뉴에서 'Security & Privacy' 탭을 클릭하여 보안 관련 설정에 접근합니다.",
+            },
+            {
+              title: "'시드 구문 공개' 기능 비활성화",
+              description:
+                "'Reveal Secret Recovery Phrase' 기능을 비활성화하여 실수로 시드 구문이 노출되는 것을 방지합니다.",
+            },
+            {
+              title: "자동 잠금 시간 설정 (5분 권장)",
+              description: "'Auto-Lock Timer'를 5분 이하로 설정하여 일정 시간 후 자동으로 지갑이 잠기도록 합니다.",
+            },
+            {
+              title: "피싱 감지 기능 활성화",
+              description: "'Use Phishing Detection'을 활성화하여 알려진 피싱 사이트 접속 시 경고를 받을 수 있습니다.",
+            },
+            {
+              title: "하드웨어 지갑 연결 설정 (선택사항)",
+              description: "추가 보안을 위해 Ledger나 Trezor 같은 하드웨어 지갑을 메타마스크에 연결할 수 있습니다.",
+            },
+          ],
+          warning: "⚠️ 시드 구문은 절대 온라인에 입력하거나 스크린샷으로 저장하지 마세요.",
+          links: [
+            { title: "메타마스크 보안 가이드", url: "https://metamask.io/security/" },
+            { title: "하드웨어 지갑 연결 방법", url: "https://metamask.zendesk.com/hc/en-us/articles/4408552261275" },
+          ],
+        },
       },
     ],
   },
@@ -163,15 +227,41 @@ export const web3Data = [
         },
         practice: {
           title: "블록체인 탐색기로 트랜잭션 추적하기",
+          description: "Etherscan을 사용하여 실제 이더리움 트랜잭션을 조회하고 분석하는 방법을 배워보세요.",
           steps: [
-            "1. Etherscan.io 접속하기",
-            "2. 검색창에 트랜잭션 해시 입력",
-            "3. From/To 주소 확인하기",
-            "4. 가스비와 블록 번호 확인",
-            "5. Input Data 섹션에서 스마트 컨트랙트 호출 내용 확인",
-            "6. Event Logs에서 이벤트 발생 내역 확인",
+            {
+              title: "Etherscan.io 접속하기",
+              description: "브라우저에서 https://etherscan.io 에 접속합니다. 이더리움 메인넷의 공식 블록 탐색기입니다.",
+            },
+            {
+              title: "검색창에 트랜잭션 해시 입력",
+              description: "상단 검색창에 트랜잭션 해시(0x로 시작하는 긴 문자열)를 입력하고 검색합니다.",
+            },
+            {
+              title: "From/To 주소 확인하기",
+              description: "트랜잭션 세부 정보에서 보낸 사람(From)과 받는 사람(To) 주소를 확인합니다.",
+            },
+            {
+              title: "가스비와 블록 번호 확인",
+              description:
+                "Gas Used, Gas Price, Block Number 등의 정보를 확인하여 트랜잭션 비용과 처리 상태를 파악합니다.",
+            },
+            {
+              title: "Input Data 섹션에서 스마트 컨트랙트 호출 내용 확인",
+              description:
+                "스마트 컨트랙트와 상호작용한 트랜잭션의 경우, Input Data에서 호출된 함수와 매개변수를 확인할 수 있습니다.",
+            },
+            {
+              title: "Event Logs에서 이벤트 발생 내역 확인",
+              description:
+                "Logs 탭에서 트랜잭션 실행 중 발생한 이벤트들을 확인하여 실제로 어떤 일이 일어났는지 파악합니다.",
+            },
           ],
           warning: "⚠️ 피싱 사이트 주의! 항상 공식 URL(etherscan.io)을 확인하세요.",
+          links: [
+            { title: "Etherscan 공식 사이트", url: "https://etherscan.io/" },
+            { title: "Etherscan 사용법 가이드", url: "https://info.etherscan.com/" },
+          ],
         },
       },
       {
@@ -199,18 +289,6 @@ export const web3Data = [
           explanation:
             "시드 구문은 절대 타인과 공유해서는 안 됩니다. 시드 구문을 알고 있는 사람은 지갑의 모든 자산에 접근할 수 있습니다.",
         },
-        practice: {
-          title: "메타마스크 보안 설정 강화하기",
-          steps: [
-            "1. 메타마스크 설정 메뉴 열기",
-            "2. '보안 및 개인정보' 선택",
-            "3. '시드 구문 공개' 기능 비활성화",
-            "4. 자동 잠금 시간 설정 (5분 권장)",
-            "5. 피싱 감지 기능 활성화",
-            "6. 하드웨어 지갑 연결 설정 (선택사항)",
-          ],
-          warning: "⚠️ 시드 구문은 절대 온라인에 입력하거나 스크린샷으로 저장하지 마세요.",
-        },
       },
     ],
   },
@@ -229,15 +307,40 @@ export const web3Data = [
         tips: "분산 거래소(DEX)도 고려해 보세요. 중앙화된 거래소와 다른 장단점이 있습니다.",
         practice: {
           title: "거래소 보안 설정 체크리스트",
+          description: "암호화폐 거래소 계정의 보안을 최대한 강화하는 방법을 단계별로 설정해보세요.",
           steps: [
-            "1. 2FA(이중 인증) 설정하기",
-            "2. 출금 화이트리스트 설정",
-            "3. API 키 권한 최소화",
-            "4. 로그인 알림 설정",
-            "5. 안티피싱 코드 설정",
-            "6. 정기적인 보안 감사 로그 확인",
+            {
+              title: "2FA(이중 인증) 설정하기",
+              description:
+                "Google Authenticator나 Authy 앱을 사용하여 2단계 인증을 활성화합니다. SMS보다 앱 기반 인증이 더 안전합니다.",
+            },
+            {
+              title: "출금 화이트리스트 설정",
+              description: "신뢰할 수 있는 지갑 주소만 화이트리스트에 등록하여 해킹 시에도 자산을 보호할 수 있습니다.",
+            },
+            {
+              title: "API 키 권한 최소화",
+              description: "API를 사용할 경우 거래 권한은 제외하고 조회 권한만 부여하여 위험을 최소화합니다.",
+            },
+            {
+              title: "로그인 알림 설정",
+              description: "새로운 기기나 IP에서 로그인할 때 이메일이나 SMS로 알림을 받도록 설정합니다.",
+            },
+            {
+              title: "안티피싱 코드 설정",
+              description:
+                "거래소에서 보내는 공식 이메일에 포함될 개인 코드를 설정하여 가짜 이메일을 구별할 수 있습니다.",
+            },
+            {
+              title: "정기적인 보안 감사 로그 확인",
+              description: "계정 활동 로그를 정기적으로 확인하여 의심스러운 활동이 없는지 모니터링합니다.",
+            },
           ],
           warning: "⚠️ 거래소에 장기간 큰 금액을 보관하지 마세요. Not your keys, not your coins!",
+          links: [
+            { title: "바이낸스 보안 가이드", url: "https://academy.binance.com/en/articles/binance-account-security" },
+            { title: "코인베이스 보안 설정", url: "https://help.coinbase.com/en/coinbase/privacy-and-security" },
+          ],
         },
       },
       {
@@ -298,15 +401,41 @@ export const web3Data = [
         tips: "2FA를 활성화하면 해킹 시도를 크게 줄일 수 있습니다.",
         practice: {
           title: "Google Authenticator로 2FA 설정하기",
+          description:
+            "Google Authenticator 앱을 사용하여 암호화폐 거래소나 지갑에 2단계 인증을 설정하는 방법을 배워보세요.",
           steps: [
-            "1. Google Authenticator 앱 다운로드",
-            "2. 거래소/지갑의 보안 설정 메뉴 접속",
-            "3. 2FA 활성화 선택",
-            "4. QR 코드 스캔 또는 수동 키 입력",
-            "5. 6자리 인증 코드 입력하여 확인",
-            "6. 백업 코드 안전한 곳에 저장",
+            {
+              title: "Google Authenticator 앱 다운로드",
+              description: "스마트폰의 앱스토어에서 'Google Authenticator' 앱을 다운로드하고 설치합니다.",
+            },
+            {
+              title: "거래소/지갑의 보안 설정 메뉴 접속",
+              description: "사용 중인 거래소나 지갑 서비스의 계정 설정에서 보안 또는 2FA 설정 메뉴를 찾습니다.",
+            },
+            {
+              title: "2FA 활성화 선택",
+              description: "'2단계 인증 활성화' 또는 'Enable 2FA' 버튼을 클릭합니다.",
+            },
+            {
+              title: "QR 코드 스캔 또는 수동 키 입력",
+              description:
+                "Google Authenticator 앱에서 '+' 버튼을 누르고 QR 코드를 스캔하거나 수동으로 키를 입력합니다.",
+            },
+            {
+              title: "6자리 인증 코드 입력하여 확인",
+              description: "앱에서 생성된 6자리 숫자 코드를 웹사이트에 입력하여 설정을 완료합니다.",
+            },
+            {
+              title: "백업 코드 안전한 곳에 저장",
+              description:
+                "제공되는 백업 코드들을 종이에 적어 안전한 곳에 보관합니다. 휴대폰 분실 시 복구에 필요합니다.",
+            },
           ],
           warning: "⚠️ 휴대폰 분실에 대비해 백업 코드를 반드시 오프라인에 보관하세요.",
+          links: [
+            { title: "Google Authenticator 다운로드", url: "https://support.google.com/accounts/answer/1066447" },
+            { title: "2FA 보안 가이드", url: "https://authy.com/what-is-2fa/" },
+          ],
         },
       },
       {
@@ -370,15 +499,38 @@ export const web3Data = [
         tips: "DeFi는 높은 수익률을 제공하지만, 스마트 컨트랙트 버그, 해킹 등의 위험도 존재합니다.",
         practice: {
           title: "Uniswap에서 첫 스왑 해보기",
+          description: "가장 인기 있는 탈중앙화 거래소인 Uniswap에서 토큰 스왑을 직접 경험해보세요.",
           steps: [
-            "1. app.uniswap.org 접속",
-            "2. 지갑 연결 (Connect Wallet)",
-            "3. 스왑할 토큰 쌍 선택",
-            "4. 금액 입력 및 예상 수령액 확인",
-            "5. 슬리피지 설정 확인 (기본 0.5%)",
-            "6. 첫 거래 시 토큰 승인(Approve) 후 스왑 실행",
+            {
+              title: "app.uniswap.org 접속",
+              description: "브라우저에서 Uniswap 공식 웹사이트에 접속합니다. 반드시 공식 URL인지 확인하세요.",
+            },
+            {
+              title: "지갑 연결 (Connect Wallet)",
+              description: "우측 상단의 'Connect Wallet' 버튼을 클릭하고 메타마스크를 선택하여 지갑을 연결합니다.",
+            },
+            {
+              title: "스왑할 토큰 쌍 선택",
+              description: "교환하고 싶은 토큰을 선택합니다. 예를 들어 ETH를 USDC로 교환할 수 있습니다.",
+            },
+            {
+              title: "금액 입력 및 예상 수령액 확인",
+              description: "교환할 토큰의 양을 입력하면 받을 수 있는 토큰의 양이 자동으로 계산됩니다.",
+            },
+            {
+              title: "슬리피지 설정 확인 (기본 0.5%)",
+              description: "설정 아이콘을 클릭하여 슬리피지 허용 범위를 확인합니다. 일반적으로 0.5-1%가 적당합니다.",
+            },
+            {
+              title: "첫 거래 시 토큰 승인(Approve) 후 스왑 실행",
+              description: "처음 거래하는 토큰의 경우 먼저 'Approve' 트랜잭션을 실행한 후 'Swap' 버튼을 클릭합니다.",
+            },
           ],
           warning: "⚠️ 가스비가 높을 때는 거래를 미루는 것이 좋습니다. 항상 슬리피지 설정을 확인하세요.",
+          links: [
+            { title: "Uniswap 공식 사이트", url: "https://app.uniswap.org/" },
+            { title: "Uniswap 사용법 가이드", url: "https://docs.uniswap.org/" },
+          ],
         },
       },
       {
@@ -444,15 +596,40 @@ export const web3Data = [
         tips: "NFT 투자는 높은 위험을 수반하므로 신중하게 접근해야 합니다.",
         practice: {
           title: "OpenSea에서 NFT 구매하기",
+          description: "세계 최대 NFT 마켓플레이스인 OpenSea에서 안전하게 NFT를 구매하는 방법을 배워보세요.",
           steps: [
-            "1. OpenSea.io 접속 및 지갑 연결",
-            "2. 관심 있는 컬렉션 검색",
-            "3. 컬렉션 인증 마크 확인",
-            "4. 개별 NFT의 거래 내역 확인",
-            "5. Buy Now 또는 Make Offer 선택",
-            "6. 가스비 포함 총 비용 확인 후 구매",
+            {
+              title: "OpenSea.io 접속 및 지갑 연결",
+              description:
+                "OpenSea 공식 웹사이트에 접속하고 우측 상단의 지갑 아이콘을 클릭하여 메타마스크를 연결합니다.",
+            },
+            {
+              title: "관심 있는 컬렉션 검색",
+              description: "검색창에 원하는 NFT 컬렉션 이름을 입력하거나 카테고리별로 탐색합니다.",
+            },
+            {
+              title: "컬렉션 인증 마크 확인",
+              description: "컬렉션 이름 옆의 파란색 체크 마크를 확인하여 공식 컬렉션인지 검증합니다.",
+            },
+            {
+              title: "개별 NFT의 거래 내역 확인",
+              description:
+                "NFT 상세 페이지에서 Price History와 Activity를 확인하여 가격 변동과 거래 내역을 파악합니다.",
+            },
+            {
+              title: "Buy Now 또는 Make Offer 선택",
+              description: "즉시 구매하려면 'Buy Now', 가격 제안을 하려면 'Make Offer'를 선택합니다.",
+            },
+            {
+              title: "가스비 포함 총 비용 확인 후 구매",
+              description: "NFT 가격과 가스비를 포함한 총 비용을 확인하고 메타마스크에서 트랜잭션을 승인합니다.",
+            },
           ],
           warning: "⚠️ 가짜 컬렉션에 주의하세요. 항상 공식 링크와 인증 마크를 확인하세요.",
+          links: [
+            { title: "OpenSea 공식 사이트", url: "https://opensea.io/" },
+            { title: "OpenSea 안전 가이드", url: "https://support.opensea.io/hc/en-us/articles/4404027708051" },
+          ],
         },
       },
       {
@@ -516,15 +693,39 @@ export const web3Data = [
         tips: "DAO 참여 전, 조직의 목표와 운영 방식에 대해 충분히 이해해야 합니다.",
         practice: {
           title: "Snapshot에서 DAO 투표 참여하기",
+          description: "Snapshot 플랫폼을 통해 실제 DAO 거버넌스 투표에 참여하는 방법을 경험해보세요.",
           steps: [
-            "1. snapshot.org 접속",
-            "2. 참여하고 싶은 DAO 검색",
-            "3. 지갑 연결 및 투표권 확인",
-            "4. 활성 제안(Active Proposals) 확인",
-            "5. 제안 내용 숙독 후 투표",
-            "6. 투표 결과 및 실행 상황 추적",
+            {
+              title: "snapshot.org 접속",
+              description: "브라우저에서 https://snapshot.org 에 접속합니다. 가장 인기 있는 DAO 투표 플랫폼입니다.",
+            },
+            {
+              title: "참여하고 싶은 DAO 검색",
+              description: "검색창에 관심 있는 DAO 이름을 입력하거나 인기 있는 DAO 목록에서 선택합니다.",
+            },
+            {
+              title: "지갑 연결 및 투표권 확인",
+              description:
+                "우측 상단의 'Connect wallet' 버튼을 클릭하여 지갑을 연결하고 투표권(토큰 보유량)을 확인합니다.",
+            },
+            {
+              title: "활성 제안(Active Proposals) 확인",
+              description: "현재 진행 중인 투표 제안들을 확인하고 관심 있는 제안을 클릭합니다.",
+            },
+            {
+              title: "제안 내용 숙독 후 투표",
+              description: "제안의 세부 내용, 찬반 논리, 커뮤니티 토론을 충분히 검토한 후 투표합니다.",
+            },
+            {
+              title: "투표 결과 및 실행 상황 추적",
+              description: "투표 종료 후 결과를 확인하고, 가결된 제안의 실행 상황을 지속적으로 모니터링합니다.",
+            },
           ],
           warning: "⚠️ 투표 전 제안의 세부 내용과 영향을 충분히 이해하세요.",
+          links: [
+            { title: "Snapshot 공식 사이트", url: "https://snapshot.org/" },
+            { title: "DAO 거버넌스 가이드", url: "https://ethereum.org/en/dao/" },
+          ],
         },
       },
       {
@@ -591,15 +792,40 @@ export const web3Data = [
         tips: "Layer 2 솔루션은 이더리움 네트워크의 확장성을 크게 향상시킬 수 있습니다.",
         practice: {
           title: "이더리움에서 Arbitrum으로 브릿지하기",
+          description: "Layer 2 솔루션인 Arbitrum을 사용하여 이더리움 메인넷에서 자산을 브릿지하는 방법을 배워보세요.",
           steps: [
-            "1. bridge.arbitrum.io 접속",
-            "2. 메타마스크 연결",
-            "3. 브릿지할 ETH/토큰 금액 입력",
-            "4. 예상 도착 시간 확인 (약 10분)",
-            "5. 트랜잭션 승인 및 전송",
-            "6. Arbitrum 네트워크로 전환하여 잔액 확인",
+            {
+              title: "bridge.arbitrum.io 접속",
+              description: "Arbitrum 공식 브릿지 웹사이트에 접속합니다. 반드시 공식 URL인지 확인하세요.",
+            },
+            {
+              title: "메타마스크 연결",
+              description:
+                "'Connect Wallet' 버튼을 클릭하여 메타마스크를 연결합니다. 이더리움 메인넷에 연결되어 있는지 확인하세요.",
+            },
+            {
+              title: "브릿지할 ETH/토큰 금액 입력",
+              description:
+                "Arbitrum으로 전송할 ETH 또는 토큰의 양을 입력합니다. 가스비를 고려하여 적절한 양을 설정하세요.",
+            },
+            {
+              title: "예상 도착 시간 확인 (약 10분)",
+              description: "브릿지 완료까지 걸리는 시간을 확인합니다. 일반적으로 10-15분 정도 소요됩니다.",
+            },
+            {
+              title: "트랜잭션 승인 및 전송",
+              description: "'Deposit' 버튼을 클릭하고 메타마스크에서 트랜잭션을 승인합니다.",
+            },
+            {
+              title: "Arbitrum 네트워크로 전환하여 잔액 확인",
+              description: "메타마스크에서 Arbitrum 네트워크로 전환하고 브릿지된 자산이 도착했는지 확인합니다.",
+            },
           ],
           warning: "⚠️ 브릿지 시 소량으로 먼저 테스트하세요. 공식 브릿지만 사용하세요.",
+          links: [
+            { title: "Arbitrum 공식 브릿지", url: "https://bridge.arbitrum.io/" },
+            { title: "Arbitrum 사용법 가이드", url: "https://docs.arbitrum.io/" },
+          ],
         },
       },
       {
@@ -663,15 +889,42 @@ export const web3Data = [
         tips: "Remix IDE는 간단한 컨트랙트 개발 및 테스트에 적합하며, Truffle과 Hardhat은 복잡한 프로젝트 관리에 유용합니다.",
         practice: {
           title: "Remix IDE에서 첫 스마트 컨트랙트 배포하기",
+          description:
+            "웹 브라우저에서 Remix IDE를 사용하여 간단한 스마트 컨트랙트를 작성하고 테스트넷에 배포해보세요.",
           steps: [
-            "1. remix.ethereum.org 접속",
-            "2. 새 파일 생성 (HelloWorld.sol)",
-            "3. 간단한 컨트랙트 코드 작성",
-            "4. Solidity 컴파일러에서 컴파일",
-            "5. Deploy & Run 탭에서 환경 선택",
-            "6. 테스트넷에 배포 및 함수 테스트",
+            {
+              title: "remix.ethereum.org 접속",
+              description: "브라우저에서 Remix IDE 공식 웹사이트에 접속합니다. 별도 설치 없이 바로 사용할 수 있습니다.",
+            },
+            {
+              title: "새 파일 생성 (HelloWorld.sol)",
+              description:
+                "File Explorer에서 'contracts' 폴더를 우클릭하고 'New File'을 선택하여 'HelloWorld.sol' 파일을 생성합니다.",
+            },
+            {
+              title: "간단한 컨트랙트 코드 작성",
+              description: "기본적인 Solidity 컨트랙트 코드를 작성합니다. 예: 문자열을 저장하고 반환하는 함수",
+            },
+            {
+              title: "Solidity 컴파일러에서 컴파일",
+              description:
+                "좌측 메뉴에서 'Solidity Compiler' 탭을 클릭하고 'Compile HelloWorld.sol' 버튼을 눌러 컴파일합니다.",
+            },
+            {
+              title: "Deploy & Run 탭에서 환경 선택",
+              description:
+                "'Deploy & Run Transactions' 탭에서 Environment를 'Injected Provider - MetaMask'로 설정하고 테스트넷을 선택합니다.",
+            },
+            {
+              title: "테스트넷에 배포 및 함수 테스트",
+              description: "'Deploy' 버튼을 클릭하여 컨트랙트를 배포하고, 배포된 컨트랙트의 함수들을 테스트해봅니다.",
+            },
           ],
           warning: "⚠️ 메인넷 배포 전 반드시 테스트넷에서 충분히 테스트하세요.",
+          links: [
+            { title: "Remix IDE", url: "https://remix.ethereum.org/" },
+            { title: "Solidity 문서", url: "https://docs.soliditylang.org/" },
+          ],
         },
       },
       {
