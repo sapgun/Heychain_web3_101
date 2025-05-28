@@ -3,128 +3,120 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { CheckCircle, XCircle, RotateCcw } from "lucide-react"
+import { CheckCircle, XCircle, HelpCircle } from "lucide-react"
 
-interface Quiz {
-  question: string
-  options: string[]
-  correctAnswer: number
-  explanation: string
+interface QuizProps {
+  quiz: {
+    question: string
+    options: string[]
+    correctAnswer: number
+    explanation: string
+  }
+  language: "ko"
 }
 
-interface QuizComponentProps {
-  quiz: Quiz
-  language: "ko" | "en"
-}
-
-export function QuizComponent({ quiz, language }: QuizComponentProps) {
+export function QuizComponent({ quiz, language }: QuizProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [showResult, setShowResult] = useState(false)
-  const [hasAnswered, setHasAnswered] = useState(false)
 
-  const handleAnswerSelect = (answerIndex: number) => {
-    if (hasAnswered) return
-    setSelectedAnswer(answerIndex)
+  const handleAnswerSelect = (index: number) => {
+    if (showResult) return
+    setSelectedAnswer(index)
   }
 
   const handleSubmit = () => {
-    if (selectedAnswer === null) return
-    setShowResult(true)
-    setHasAnswered(true)
+    if (selectedAnswer !== null) {
+      setShowResult(true)
+    }
   }
 
   const handleReset = () => {
     setSelectedAnswer(null)
     setShowResult(false)
-    setHasAnswered(false)
   }
 
   const isCorrect = selectedAnswer === quiz.correctAnswer
 
   return (
-    <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-500/20 p-4">
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">
-            🧠 {language === "ko" ? "퀴즈" : "Quiz"}
-          </Badge>
-          {hasAnswered && (
-            <Button variant="ghost" size="sm" onClick={handleReset} className="text-gray-400 hover:text-white">
-              <RotateCcw className="w-4 h-4 mr-1" />
-              {language === "ko" ? "다시" : "Reset"}
-            </Button>
-          )}
-        </div>
+    <Card className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 sm:p-6">
+      <div className="flex items-center mb-3 sm:mb-4">
+        <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 mr-2" />
+        <h4 className="text-base sm:text-lg font-semibold text-blue-300">퀴즈</h4>
+      </div>
 
-        <h4 className="text-white font-medium">{quiz.question}</h4>
+      <p className="text-white mb-3 sm:mb-4 font-medium text-sm sm:text-base">{quiz.question}</p>
 
-        <div className="space-y-2">
-          {quiz.options.map((option, index) => (
-            <button
-              key={index}
-              onClick={() => handleAnswerSelect(index)}
-              disabled={hasAnswered}
-              className={`w-full text-left p-3 rounded-lg border transition-all ${
-                hasAnswered
-                  ? index === quiz.correctAnswer
-                    ? "bg-green-500/20 border-green-500/50 text-green-300"
-                    : index === selectedAnswer && selectedAnswer !== quiz.correctAnswer
-                      ? "bg-red-500/20 border-red-500/50 text-red-300"
-                      : "bg-gray-700/30 border-gray-600/30 text-gray-400"
-                  : selectedAnswer === index
-                    ? "bg-purple-500/20 border-purple-500/50 text-purple-300"
-                    : "bg-gray-700/30 border-gray-600/30 text-gray-300 hover:bg-gray-600/30 hover:border-gray-500/50"
-              }`}
-            >
-              <div className="flex items-center">
-                <span className="w-6 h-6 rounded-full border border-current flex items-center justify-center mr-3 text-xs">
-                  {String.fromCharCode(65 + index)}
-                </span>
-                {option}
-                {hasAnswered && index === quiz.correctAnswer && (
-                  <CheckCircle className="w-4 h-4 ml-auto text-green-400" />
-                )}
-                {hasAnswered && index === selectedAnswer && selectedAnswer !== quiz.correctAnswer && (
-                  <XCircle className="w-4 h-4 ml-auto text-red-400" />
-                )}
-              </div>
-            </button>
-          ))}
-        </div>
+      <div className="space-y-2 sm:space-y-3 mb-3 sm:mb-4">
+        {quiz.options.map((option, index) => (
+          <button
+            key={index}
+            onClick={() => handleAnswerSelect(index)}
+            disabled={showResult}
+            className={`
+            w-full text-left p-2 sm:p-3 rounded-lg border transition-all duration-200 text-sm sm:text-base
+            ${
+              showResult
+                ? index === quiz.correctAnswer
+                  ? "bg-green-500/20 border-green-500/50 text-green-300"
+                  : index === selectedAnswer && index !== quiz.correctAnswer
+                    ? "bg-red-500/20 border-red-500/50 text-red-300"
+                    : "bg-gray-700/30 border-gray-600 text-gray-300"
+                : selectedAnswer === index
+                  ? "bg-blue-500/20 border-blue-500/50 text-blue-300"
+                  : "bg-gray-700/30 border-gray-600 text-gray-300 hover:bg-gray-600/30"
+            }
+          `}
+          >
+            <div className="flex items-center">
+              <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-current flex items-center justify-center mr-2 sm:mr-3 text-xs font-bold">
+                {String.fromCharCode(65 + index)}
+              </span>
+              {option}
+              {showResult && index === quiz.correctAnswer && (
+                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 ml-auto" />
+              )}
+              {showResult && index === selectedAnswer && index !== quiz.correctAnswer && (
+                <XCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-400 ml-auto" />
+              )}
+            </div>
+          </button>
+        ))}
+      </div>
 
-        {!hasAnswered && selectedAnswer !== null && (
-          <Button onClick={handleSubmit} className="w-full bg-blue-600 hover:bg-blue-700">
-            {language === "ko" ? "답안 제출" : "Submit Answer"}
-          </Button>
-        )}
-
-        {showResult && (
+      {!showResult ? (
+        <Button
+          onClick={handleSubmit}
+          disabled={selectedAnswer === null}
+          className="w-full bg-blue-600 hover:bg-blue-700"
+        >
+          답안 제출
+        </Button>
+      ) : (
+        <div className="space-y-4">
           <div
-            className={`p-4 rounded-lg border ${
-              isCorrect
-                ? "bg-green-500/10 border-green-500/30 text-green-300"
-                : "bg-red-500/10 border-red-500/30 text-red-300"
-            }`}
+            className={`p-3 sm:p-4 rounded-lg ${isCorrect ? "bg-green-500/10 border border-green-500/20" : "bg-red-500/10 border border-red-500/20"}`}
           >
             <div className="flex items-center mb-2">
-              {isCorrect ? <CheckCircle className="w-5 h-5 mr-2" /> : <XCircle className="w-5 h-5 mr-2" />}
-              <span className="font-medium">
-                {isCorrect
-                  ? language === "ko"
-                    ? "정답입니다!"
-                    : "Correct!"
-                  : language === "ko"
-                    ? "틀렸습니다."
-                    : "Incorrect."}
+              {isCorrect ? (
+                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-2" />
+              ) : (
+                <XCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-400 mr-2" />
+              )}
+              <span className={`font-semibold text-sm sm:text-base ${isCorrect ? "text-green-300" : "text-red-300"}`}>
+                {isCorrect ? "정답입니다!" : "틀렸습니다."}
               </span>
             </div>
-            <p className="text-sm text-gray-300">{quiz.explanation}</p>
+            <p className="text-gray-300 text-xs sm:text-sm">{quiz.explanation}</p>
           </div>
-        )}
-      </div>
+          <Button
+            onClick={handleReset}
+            variant="outline"
+            className="w-full border-blue-500/30 text-blue-300 hover:bg-blue-500/10"
+          >
+            다시 풀기
+          </Button>
+        </div>
+      )}
     </Card>
   )
 }
-
-export default QuizComponent

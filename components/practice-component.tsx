@@ -1,173 +1,129 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ChevronRight, ChevronDown, ExternalLink, CheckCircle } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { CheckCircle, Circle, AlertTriangle, BookOpen } from "lucide-react"
 
-interface PracticeStep {
-  title: string
-  description: string
-  tips?: string
-}
-
-interface Practice {
-  title: string
-  description: string
-  steps: PracticeStep[]
-  links?: Array<{ title: string; url: string }>
-}
-
-interface PracticeComponentProps {
-  practice: Practice
-  language: "ko" | "en"
-}
-
-export function PracticeComponent({ practice, language }: PracticeComponentProps) {
-  const [expandedSteps, setExpandedSteps] = useState<Set<number>>(new Set())
-  const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set())
-
-  const toggleStep = (stepIndex: number) => {
-    const newExpanded = new Set(expandedSteps)
-    if (newExpanded.has(stepIndex)) {
-      newExpanded.delete(stepIndex)
-    } else {
-      newExpanded.add(stepIndex)
-    }
-    setExpandedSteps(newExpanded)
+interface PracticeProps {
+  practice: {
+    title: string
+    steps: string[]
+    warning?: string
   }
+  language: "ko"
+}
 
-  const toggleComplete = (stepIndex: number) => {
+export function PracticeComponent({ practice, language }: PracticeProps) {
+  const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set())
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const toggleStep = (index: number) => {
     const newCompleted = new Set(completedSteps)
-    if (newCompleted.has(stepIndex)) {
-      newCompleted.delete(stepIndex)
+    if (newCompleted.has(index)) {
+      newCompleted.delete(index)
     } else {
-      newCompleted.add(stepIndex)
+      newCompleted.add(index)
     }
     setCompletedSteps(newCompleted)
   }
 
+  const resetProgress = () => {
+    setCompletedSteps(new Set())
+  }
+
+  const progress = (completedSteps.size / practice.steps.length) * 100
+
   return (
-    <Card className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-green-500/20 p-4">
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <Badge className="bg-green-500/20 text-green-300 border-green-500/30">
-            🛠️ {language === "ko" ? "실습 가이드" : "Practice Guide"}
-          </Badge>
-          <div className="text-xs text-gray-400">
-            {completedSteps.size}/{practice.steps.length} {language === "ko" ? "완료" : "completed"}
-          </div>
+    <Card className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 sm:p-6">
+      <div className="flex items-center justify-between mb-3 sm:mb-4">
+        <div className="flex items-center">
+          <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-2" />
+          <h4 className="text-base sm:text-lg font-semibold text-green-300">실습 가이드</h4>
         </div>
+        <Button
+          onClick={() => setIsExpanded(!isExpanded)}
+          variant="ghost"
+          size="sm"
+          className="text-green-300 hover:text-green-200 text-xs sm:text-sm"
+        >
+          {isExpanded ? "접기" : "펼치기"}
+        </Button>
+      </div>
 
-        <div>
-          <h4 className="text-white font-medium mb-2">{practice.title}</h4>
-          <p className="text-sm text-gray-300">{practice.description}</p>
+      <h5 className="text-white font-medium mb-3 sm:mb-4 text-sm sm:text-base">{practice.title}</h5>
+
+      {/* Progress Bar */}
+      <div className="mb-3 sm:mb-4">
+        <div className="flex justify-between text-xs sm:text-sm text-gray-400 mb-2">
+          <span>진행률</span>
+          <span>{Math.round(progress)}%</span>
         </div>
+        <div className="w-full bg-gray-700 rounded-full h-1.5 sm:h-2">
+          <div
+            className="bg-green-500 h-1.5 sm:h-2 rounded-full transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
 
+      {isExpanded && (
         <div className="space-y-3">
-          {practice.steps.map((step, index) => {
-            const isExpanded = expandedSteps.has(index)
-            const isCompleted = completedSteps.has(index)
-
-            return (
-              <div
-                key={index}
-                className={`border rounded-lg transition-all ${
-                  isCompleted ? "border-green-500/50 bg-green-500/5" : "border-gray-600/30 bg-gray-700/20"
-                }`}
-              >
-                <button
-                  onClick={() => toggleStep(index)}
-                  className="w-full text-left p-3 flex items-center justify-between hover:bg-gray-600/20 transition-colors"
-                >
-                  <div className="flex items-center flex-1">
-                    <div className="flex items-center mr-3">
-                      <div
-                        className={`w-6 h-6 rounded-full border-2 flex items-center justify-center mr-2 ${
-                          isCompleted ? "border-green-500 bg-green-500" : "border-gray-500"
-                        }`}
-                      >
-                        {isCompleted ? (
-                          <CheckCircle className="w-4 h-4 text-white" />
-                        ) : (
-                          <span className="text-xs text-gray-400">{index + 1}</span>
-                        )}
-                      </div>
-                    </div>
-                    <span className={`font-medium ${isCompleted ? "text-green-300" : "text-white"}`}>{step.title}</span>
-                  </div>
-                  {isExpanded ? (
-                    <ChevronDown className="w-4 h-4 text-gray-400" />
-                  ) : (
-                    <ChevronRight className="w-4 h-4 text-gray-400" />
-                  )}
-                </button>
-
-                {isExpanded && (
-                  <div className="px-3 pb-3 border-t border-gray-600/30">
-                    <div className="pt-3 space-y-3">
-                      <p className="text-sm text-gray-300">{step.description}</p>
-
-                      {step.tips && (
-                        <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
-                          <h5 className="text-sm font-medium text-blue-300 mb-1">
-                            💡 {language === "ko" ? "팁" : "Tip"}
-                          </h5>
-                          <p className="text-xs text-gray-300">{step.tips}</p>
-                        </div>
-                      )}
-
-                      <Button
-                        size="sm"
-                        variant={isCompleted ? "outline" : "default"}
-                        onClick={() => toggleComplete(index)}
-                        className={
-                          isCompleted
-                            ? "border-green-500/50 text-green-300 hover:bg-green-500/10"
-                            : "bg-green-600 hover:bg-green-700"
-                        }
-                      >
-                        {isCompleted
-                          ? language === "ko"
-                            ? "완료됨"
-                            : "Completed"
-                          : language === "ko"
-                            ? "완료 표시"
-                            : "Mark Complete"}
-                      </Button>
-                    </div>
-                  </div>
+          {practice.steps.map((step, index) => (
+            <div
+              key={index}
+              className={`
+                flex items-start p-2 sm:p-3 rounded-lg border transition-all duration-200 cursor-pointer
+                ${
+                  completedSteps.has(index)
+                    ? "bg-green-500/20 border-green-500/50"
+                    : "bg-gray-700/30 border-gray-600 hover:bg-gray-600/30"
+                }
+              `}
+              onClick={() => toggleStep(index)}
+            >
+              <div className="flex-shrink-0 mt-0.5 mr-2 sm:mr-3">
+                {completedSteps.has(index) ? (
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
+                ) : (
+                  <Circle className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                 )}
               </div>
-            )
-          })}
-        </div>
-
-        {practice.links && practice.links.length > 0 && (
-          <div className="border-t border-gray-600/30 pt-4">
-            <h5 className="text-sm font-medium text-gray-300 mb-2">
-              {language === "ko" ? "참고 링크" : "Reference Links"}
-            </h5>
-            <div className="space-y-2">
-              {practice.links.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center text-sm text-blue-400 hover:text-blue-300 transition-colors group"
-                >
-                  <ExternalLink className="w-3 h-3 mr-2 group-hover:scale-110 transition-transform" />
-                  {link.title}
-                </a>
-              ))}
+              <span
+                className={`text-xs sm:text-sm ${completedSteps.has(index) ? "text-green-300 line-through" : "text-gray-300"}`}
+              >
+                {step}
+              </span>
             </div>
+          ))}
+
+          {practice.warning && (
+            <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 mt-4">
+              <div className="flex items-start">
+                <AlertTriangle className="w-5 h-5 text-yellow-400 mr-2 flex-shrink-0 mt-0.5" />
+                <p className="text-yellow-300 text-sm">{practice.warning}</p>
+              </div>
+            </div>
+          )}
+
+          <div className="flex gap-3 mt-4">
+            <Button
+              onClick={resetProgress}
+              variant="outline"
+              size="sm"
+              className="border-green-500/30 text-green-300 hover:bg-green-500/10"
+            >
+              초기화
+            </Button>
+            {completedSteps.size === practice.steps.length && (
+              <div className="flex items-center text-green-300 text-sm">
+                <CheckCircle className="w-4 h-4 mr-1" />
+                완료!
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </Card>
   )
 }
-
-export default PracticeComponent

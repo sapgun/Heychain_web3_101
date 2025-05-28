@@ -1,37 +1,90 @@
 export const searchKeywords = {
   ko: [
-    "NFT",
-    "DeFi",
-    "DAO",
-    "이더리움",
     "메타마스크",
-    "스마트 컨트랙트",
-    "레이어2",
-    "토큰",
     "지갑",
-    "거래소",
-    "Avalanche",
-    "Solana",
-    "Aptos",
-    "Sui",
-    "NEAR",
-  ],
-  en: [
+    "프라이빗키",
+    "시드구문",
+    "ENS",
+    "멀티시그",
+    "계정추상화",
+    "블록체인",
+    "EVM",
+    "합의알고리즘",
+    "PoW",
+    "PoS",
+    "가스비",
+    "트릴레마",
+    "ERC-20",
+    "ERC-721",
     "NFT",
+    "토큰",
+    "SBT",
+    "메타데이터",
+    "IPFS",
+    "브릿지",
+    "멀티체인",
+    "LayerZero",
+    "Wormhole",
+    "크로스체인",
     "DeFi",
+    "AMM",
+    "유니스왑",
+    "유동성",
+    "스테이킹",
+    "파밍",
+    "대출",
+    "오라클",
+    "롤업",
+    "옵티미스틱",
+    "ZK",
+    "zkSync",
+    "Arbitrum",
+    "Optimism",
+    "L2",
+    "피싱",
+    "시빌",
+    "러그풀",
+    "감사",
+    "허니팟",
+    "보안",
     "DAO",
-    "Ethereum",
-    "MetaMask",
-    "Smart Contract",
-    "Layer 2",
-    "Token",
-    "Wallet",
-    "Exchange",
-    "Avalanche",
-    "Solana",
-    "Aptos",
-    "Sui",
-    "NEAR",
+    "거버넌스",
+    "투표",
+    "스냅샷",
+    "트레저리",
+    "위임투표",
+    "에어드랍",
+    "미션",
+    "갤럭시",
+    "시빌방지",
+    "포인트시스템",
+    "솔리디티",
+    "스마트컨트랙트",
+    "리믹스",
+    "하드햇",
+    "테스트넷",
+    "탈중앙화",
+    "토크노믹스",
+    "모듈형블록체인",
+    "프라이버시체인",
+    "MEV",
+    "이더리움",
+    "솔라나",
+    "코스모스",
+    "폴카닷",
+    "아발란체",
+    "앱토스",
+    "규제",
+    "MiCA",
+    "증권성토큰",
+    "법적쟁점",
+    "윤리",
+    "AI",
+    "메타버스",
+    "DePIN",
+    "GameFi",
+    "예측시장",
+    "대중채택",
   ],
 }
 
@@ -44,61 +97,25 @@ export const web3Data = [
         question: "메타마스크란 무엇이고 어떻게 설치하나요?",
         answer:
           "메타마스크는 브라우저 확장 프로그램 및 모바일 앱 형태의 암호화폐 지갑으로, 주로 이더리움 및 EVM 호환 블록체인과 상호작용하는 데 사용됩니다. 공식 웹사이트에서 다운로드하여 설치하고, 안내에 따라 새 지갑을 생성하거나 기존 지갑을 복구할 수 있습니다.",
-        links: [
-          { title: "메타마스크 공식 사이트", url: "https://metamask.io/" },
-          { title: "메타마스크 설치 가이드", url: "https://metamask.io/download/" },
-        ],
-        tips: "메타마스크 설치 시 공식 웹사이트를 통해 다운로드하고, 시드 구문은 안전하게 오프라인으로 보관하세요.",
         quiz: {
-          question: "메타마스크에 대한 설명으로 옳지 않은 것은?",
-          options: [
-            "브라우저 확장 프로그램으로 사용할 수 있다",
-            "이더리움 네트워크와 상호작용할 수 있다",
-            "개인 키를 사용자 대신 안전하게 관리해준다",
-            "시드 구문 없이도 지갑을 복구할 수 있다",
-          ],
-          correctAnswer: 3,
-          explanation:
-            "메타마스크는 시드 구문(복구 구문)이 없으면 지갑을 복구할 수 없습니다. 시드 구문은 지갑의 모든 계정을 생성하는 데 사용되는 유일한 백업 수단이므로 반드시 안전하게 보관해야 합니다.",
+          question: "메타마스크의 주요 기능이 아닌 것은?",
+          options: ["암호화폐 보관", "DApp 연결", "중앙화된 거래소 운영", "트랜잭션 서명"],
+          correctAnswer: 2,
+          explanation: "메타마스크는 탈중앙화된 지갑으로, 중앙화된 거래소를 운영하지 않습니다.",
         },
         practice: {
-          title: "메타마스크 설치 및 지갑 생성하기",
-          description: "처음부터 메타마스크를 설치하고 안전하게 지갑을 생성하는 전체 과정을 단계별로 진행해보세요.",
+          title: "메타마스크 설치 및 설정하기",
           steps: [
-            {
-              title: "metamask.io 공식 웹사이트 방문",
-              description: "브라우저에서 https://metamask.io 에 접속합니다. 반드시 공식 사이트인지 URL을 확인하세요.",
-            },
-            {
-              title: "브라우저에 맞는 확장 프로그램 다운로드",
-              description: "Chrome, Firefox, Edge 등 사용 중인 브라우저에 맞는 확장 프로그램을 다운로드합니다.",
-            },
-            {
-              title: "'지갑 생성' 선택",
-              description:
-                "설치 후 메타마스크를 열고 '지갑 생성'을 선택합니다. 기존 지갑이 있다면 '지갑 가져오기'를 선택하세요.",
-            },
-            {
-              title: "비밀번호 설정",
-              description:
-                "강력한 비밀번호를 설정합니다. 최소 8자 이상, 대소문자, 숫자, 특수문자를 포함하는 것이 좋습니다.",
-            },
-            {
-              title: "시드 구문(12단어) 안전하게 백업",
-              description:
-                "12개의 영어 단어로 구성된 시드 구문을 종이에 적어 안전한 곳에 보관합니다. 절대 디지털로 저장하지 마세요.",
-            },
-            {
-              title: "시드 구문 확인 과정 완료",
-              description: "백업한 시드 구문을 올바른 순서로 입력하여 확인 과정을 완료합니다.",
-            },
+            "1. 메타마스크 공식 웹사이트(metamask.io) 방문",
+            "2. 브라우저에 맞는 확장 프로그램 다운로드",
+            "3. '지갑 생성' 또는 '지갑 가져오기' 선택",
+            "4. 강력한 비밀번호 설정 (8자 이상, 특수문자 포함)",
+            "5. 시드 구문(12개 단어) 안전하게 기록 및 보관",
+            "6. 시드 구문 확인 테스트 완료",
+            "7. 지갑 생성 완료 및 첫 번째 계정 확인",
           ],
           warning:
-            "⚠️ 시드 구문은 절대 스크린샷으로 저장하거나 온라인에 저장하지 마세요. 종이에 적어 안전한 곳에 보관하세요.",
-          links: [
-            { title: "메타마스크 공식 사이트", url: "https://metamask.io/" },
-            { title: "메타마스크 보안 가이드", url: "https://metamask.io/security/" },
-          ],
+            "⚠️ 시드 구문은 절대 온라인에 저장하지 마세요. 종이에 적어서 안전한 곳에 보관하고, 타인과 공유하지 마세요.",
         },
       },
       {
@@ -106,22 +123,11 @@ export const web3Data = [
         question: "프라이빗 키와 시드 구문의 차이는?",
         answer:
           "프라이빗 키는 특정 계정의 자산에 접근할 수 있는 비밀번호와 같은 고유한 암호 코드입니다. 시드 구문(또는 복구 구문)은 이 프라이빗 키들을 생성하고 지갑 전체를 복구하는 데 사용되는 12~24개의 단어 조합입니다.",
-        links: [
-          { title: "프라이빗 키 설명", url: "https://ethereum.org/ko/developers/docs/accounts/" },
-          { title: "시드 구문 안전하게 보관하기", url: "https://support.ledger.com/hc/en-us/articles/360005514233" },
-        ],
-        tips: "프라이빗 키와 시드 구문은 절대 타인과 공유하지 마세요. 이는 디지털 자산의 열쇠와 같습니다.",
         quiz: {
-          question: "시드 구문과 프라이빗 키에 대한 설명으로 옳은 것은?",
-          options: [
-            "프라이빗 키는 여러 개의 시드 구문을 생성할 수 있다",
-            "시드 구문은 여러 개의 프라이빗 키를 생성할 수 있다",
-            "프라이빗 키와 시드 구문은 항상 동일하다",
-            "시드 구문은 프라이빗 키보다 보안성이 낮다",
-          ],
+          question: "시드 구문의 특징으로 올바른 것은?",
+          options: ["계정별로 다름", "하나의 지갑에서 여러 계정 생성 가능", "변경 가능", "온라인 저장 권장"],
           correctAnswer: 1,
-          explanation:
-            "시드 구문은 결정적 알고리즘을 통해 여러 개의 프라이빗 키를 생성할 수 있습니다. 하나의 시드 구문으로 여러 계정(각각 고유한 프라이빗 키를 가짐)을 관리할 수 있는 이유가 이것입니다.",
+          explanation: "하나의 시드 구문으로 여러 개의 계정(프라이빗 키)을 생성할 수 있습니다.",
         },
       },
       {
@@ -129,969 +135,451 @@ export const web3Data = [
         question: "지갑 주소는 어떻게 생성되며 몇 개까지 만들 수 있나요?",
         answer:
           "지갑 주소는 공개키로부터 파생되며, 암호화폐를 주고받는 데 사용되는 고유 식별자입니다. 하나의 시드 구문으로 이론상 거의 무한대에 가까운 지갑 주소를 생성할 수 있습니다.",
-        links: [
-          { title: "이더리움 주소 형식", url: "https://ethereum.org/ko/developers/docs/accounts/#account-creation" },
-          { title: "HD 지갑 설명", url: "https://learnmeabitcoin.com/technical/hd-wallets" },
-        ],
-        tips: "여러 개의 지갑 주소를 사용하면 프라이버시를 강화하고 자산을 용도별로 구분할 수 있습니다.",
-        practice: {
-          title: "메타마스크 보안 설정 강화하기",
-          description:
-            "메타마스크 지갑의 보안을 최대한 강화하여 해킹과 피싱 공격으로부터 자산을 보호하는 방법을 배워보세요.",
-          steps: [
-            {
-              title: "메타마스크 설정 메뉴 열기",
-              description:
-                "메타마스크 확장 프로그램을 열고 우측 상단의 계정 아이콘을 클릭한 후 'Settings'를 선택합니다.",
-            },
-            {
-              title: "'보안 및 개인정보' 선택",
-              description: "설정 메뉴에서 'Security & Privacy' 탭을 클릭하여 보안 관련 설정에 접근합니다.",
-            },
-            {
-              title: "'시드 구문 공개' 기능 비활성화",
-              description:
-                "'Reveal Secret Recovery Phrase' 기능을 비활성화하여 실수로 시드 구문이 노출되는 것을 방지합니다.",
-            },
-            {
-              title: "자동 잠금 시간 설정 (5분 권장)",
-              description: "'Auto-Lock Timer'를 5분 이하로 설정하여 일정 시간 후 자동으로 지갑이 잠기도록 합니다.",
-            },
-            {
-              title: "피싱 감지 기능 활성화",
-              description: "'Use Phishing Detection'을 활성화하여 알려진 피싱 사이트 접속 시 경고를 받을 수 있습니다.",
-            },
-            {
-              title: "하드웨어 지갑 연결 설정 (선택사항)",
-              description: "추가 보안을 위해 Ledger나 Trezor 같은 하드웨어 지갑을 메타마스크에 연결할 수 있습니다.",
-            },
-          ],
-          warning: "⚠️ 시드 구문은 절대 온라인에 입력하거나 스크린샷으로 저장하지 마세요.",
-          links: [
-            { title: "메타마스크 보안 가이드", url: "https://metamask.io/security/" },
-            { title: "하드웨어 지갑 연결 방법", url: "https://metamask.zendesk.com/hc/en-us/articles/4408552261275" },
-          ],
+      },
+      {
+        id: "1-4",
+        question: "하드월렛(Ledger, Trezor)과 핫월렛의 보안 차이는?",
+        answer:
+          "핫월렛은 인터넷에 연결된 지갑(예: 메타마스크)으로 사용이 편리하지만 해킹 위험이 있습니다. 하드월렛은 프라이빗 키를 오프라인 장치에 보관하여 온라인 공격으로부터 훨씬 안전하지만, 사용 시 약간의 번거로움이 있을 수 있습니다.",
+        quiz: {
+          question: "하드월렛의 주요 장점은?",
+          options: ["사용 편의성", "오프라인 보안", "빠른 거래", "무료 사용"],
+          correctAnswer: 1,
+          explanation: "하드월렛은 프라이빗 키를 오프라인에 보관하여 최고 수준의 보안을 제공합니다.",
         },
+      },
+      {
+        id: "1-5",
+        question: "ENS 도메인이란? 어떻게 구매하나요?",
+        answer:
+          "ENS(Ethereum Name Service) 도메인은 복잡한 이더리움 주소를 'mywallet.eth'처럼 읽기 쉬운 이름으로 바꿔주는 서비스입니다. ENS 공식 웹사이트나 관련 마켓플레이스에서 원하는 이름을 검색하고 이더리움을 지불하여 등록(구매)할 수 있습니다.",
       },
     ],
   },
   {
-    category: "2. 🪙 암호화폐 기초 (Crypto Basics)",
+    category: "2. 🔗 Blockchain Basics (블록체인 기초)",
     items: [
       {
         id: "2-1",
-        question: "암호화폐란 무엇인가요?",
+        question: "블록체인이란? 중앙 서버와의 차이",
         answer:
-          "암호화폐는 암호화 기술을 사용하여 거래의 보안을 유지하고, 새로운 화폐 발행을 통제하는 디지털 또는 가상 화폐입니다. 중앙 은행이나 금융 기관의 통제를 받지 않고 분산된 네트워크에서 운영됩니다.\n\n**핵심 특징:**\n• **탈중앙화**: 중앙 기관의 통제 없이 P2P 네트워크에서 운영\n• **암호화 보안**: 해시 함수와 디지털 서명으로 보안 유지\n• **투명성**: 모든 거래가 블록체인에 공개적으로 기록\n• **불변성**: 한번 기록된 거래는 변경이 거의 불가능\n• **희소성**: 대부분의 암호화폐는 발행량이 제한됨",
-        links: [
-          { title: "비트코인 백서", url: "https://bitcoin.org/bitcoin.pdf" },
-          { title: "이더리움 소개", url: "https://ethereum.org/ko/what-is-ethereum/" },
-        ],
-        tips: "암호화폐 투자는 높은 변동성을 가지므로 신중하게 접근해야 합니다. 먼저 소액으로 시작하여 기술을 이해한 후 투자 규모를 늘리는 것이 좋습니다.",
+          "블록체인은 거래 내역을 '블록'이라는 단위로 기록하고, 이를 '체인'처럼 순차적으로 연결하여 분산된 네트워크 참여자들(노드)이 공동으로 관리하는 기술입니다. 중앙 서버 방식은 단일 주체가 데이터를 통제하지만, 블록체인은 탈중앙화되어 투명성과 보안성이 높습니다.",
         quiz: {
-          question: "암호화폐의 핵심 특징이 아닌 것은?",
-          options: ["탈중앙화된 네트워크", "암호화 기술 사용", "중앙은행의 통제", "블록체인 기반"],
-          correctAnswer: 2,
-          explanation:
-            "암호화폐는 중앙은행이나 금융기관의 통제를 받지 않는 탈중앙화된 시스템입니다. 중앙은행의 통제는 암호화폐의 특성이 아닙니다.",
-        },
-        practice: {
-          title: "첫 번째 암호화폐 지갑 만들기",
-          steps: [
-            "1. 메타마스크 공식 사이트(metamask.io) 방문",
-            "2. 브라우저 확장 프로그램 설치",
-            "3. '지갑 생성' 선택",
-            "4. 강력한 비밀번호 설정",
-            "5. 시드 구문(12개 단어) 안전하게 백업",
-            "6. 시드 구문 확인 테스트 완료",
-          ],
-          warning: "⚠️ 시드 구문은 절대 온라인에 저장하지 마세요. 종이에 적어서 안전한 곳에 보관하세요.",
+          question: "블록체인의 핵심 특징은?",
+          options: ["중앙 집중식 관리", "분산된 네트워크", "단일 서버 의존", "개인 소유"],
+          correctAnswer: 1,
+          explanation: "블록체인은 여러 노드가 분산되어 네트워크를 구성하고 관리하는 것이 핵심입니다.",
         },
       },
       {
         id: "2-2",
-        question: "블록체인이란 무엇인가요?",
+        question: "EVM이란 무엇이며 왜 중요할까요?",
         answer:
-          "블록체인은 거래 기록을 분산된 공개 장부에 기록하는 기술입니다. 각 블록은 이전 블록의 해시값을 포함하여 연결되어 있어, 데이터의 위변조가 어렵습니다. 이러한 특성 덕분에 높은 보안성과 투명성을 제공합니다.",
-        links: [
-          { title: "블록체인 작동 방식", url: "https://www.investopedia.com/terms/b/blockchain.asp" },
-          { title: "분산 원장 기술(DLT)", url: "https://www.ibm.com/kr-ko/topics/distributed-ledger-technology" },
-        ],
-        tips: "블록체인은 다양한 산업 분야에서 혁신적인 변화를 가져올 수 있습니다.",
-        quiz: {
-          question: "블록체인의 핵심 특성이 아닌 것은?",
-          options: ["분산 원장 기술", "데이터 불변성", "중앙 기관의 통제", "암호화 기술 사용"],
-          correctAnswer: 2,
-          explanation:
-            "블록체인은 중앙 기관의 통제 없이 분산된 네트워크에서 운영되는 것이 핵심 특성입니다. 중앙 기관의 통제는 블록체인의 특성이 아닙니다.",
-        },
-        practice: {
-          title: "블록체인 탐색기로 트랜잭션 추적하기",
-          description: "Etherscan을 사용하여 실제 이더리움 트랜잭션을 조회하고 분석하는 방법을 배워보세요.",
-          steps: [
-            {
-              title: "Etherscan.io 접속하기",
-              description: "브라우저에서 https://etherscan.io 에 접속합니다. 이더리움 메인넷의 공식 블록 탐색기입니다.",
-            },
-            {
-              title: "검색창에 트랜잭션 해시 입력",
-              description: "상단 검색창에 트랜잭션 해시(0x로 시작하는 긴 문자열)를 입력하고 검색합니다.",
-            },
-            {
-              title: "From/To 주소 확인하기",
-              description: "트랜잭션 세부 정보에서 보낸 사람(From)과 받는 사람(To) 주소를 확인합니다.",
-            },
-            {
-              title: "가스비와 블록 번호 확인",
-              description:
-                "Gas Used, Gas Price, Block Number 등의 정보를 확인하여 트랜잭션 비용과 처리 상태를 파악합니다.",
-            },
-            {
-              title: "Input Data 섹션에서 스마트 컨트랙트 호출 내용 확인",
-              description:
-                "스마트 컨트랙트와 상호작용한 트랜잭션의 경우, Input Data에서 호출된 함수와 매개변수를 확인할 수 있습니다.",
-            },
-            {
-              title: "Event Logs에서 이벤트 발생 내역 확인",
-              description:
-                "Logs 탭에서 트랜잭션 실행 중 발생한 이벤트들을 확인하여 실제로 어떤 일이 일어났는지 파악합니다.",
-            },
-          ],
-          warning: "⚠️ 피싱 사이트 주의! 항상 공식 URL(etherscan.io)을 확인하세요.",
-          links: [
-            { title: "Etherscan 공식 사이트", url: "https://etherscan.io/" },
-            { title: "Etherscan 사용법 가이드", url: "https://info.etherscan.com/" },
-          ],
-        },
+          "EVM(Ethereum Virtual Machine)은 이더리움 블록체인 위에서 스마트 컨트랙트 코드를 실행하는 가상 환경입니다. 개발자들이 다양한 DApp을 만들 수 있는 기반을 제공하며, 많은 다른 블록체인들이 EVM 호환성을 채택하여 이더리움 생태계와 연결될 수 있게 합니다.",
       },
       {
         id: "2-3",
-        question: "지갑(Wallet) 종류와 사용법",
+        question: "Proof of Work (PoW)의 원리와 장단점",
         answer:
-          "암호화폐 지갑은 개인 키를 보관하고 암호화폐를 안전하게 관리할 수 있는 도구입니다. 소프트웨어 지갑(데스크톱, 모바일, 웹)과 하드웨어 지갑(콜드 월렛)이 있으며, 사용 목적과 보안 요구 사항에 따라 적절한 지갑을 선택해야 합니다.",
-        links: [
-          { title: "메타마스크 사용법", url: "https://metamask.io/download/" },
-          {
-            title: "콜드 월렛 비교",
-            url: "https://www.coindesk.com/tech/2021/03/29/hot-wallets-vs-cold-wallets-whats-the-difference/",
-          },
-        ],
-        tips: "개인 키는 절대 타인에게 공유하지 마세요. 분실 시 자산을 잃을 수 있습니다.",
+          "PoW(작업 증명)는 복잡한 수학 문제를 해결한 노드에게 새로운 블록을 생성하고 보상을 받을 권한을 주는 합의 알고리즘입니다. 보안성이 높지만, 에너지 소모가 크고 처리 속도가 느린 단점이 있습니다. (예: 비트코인)",
         quiz: {
-          question: "암호화폐 지갑에 대한 설명으로 옳지 않은 것은?",
-          options: [
-            "하드웨어 지갑은 프라이빗 키를 오프라인에 저장한다",
-            "핫월렛은 인터넷에 연결된 지갑이다",
-            "지갑 주소는 프라이빗 키로부터 생성된다",
-            "시드 구문은 타인과 공유해도 안전하다",
+          question: "PoW의 단점으로 올바른 것은?",
+          options: ["높은 보안성", "빠른 처리속도", "높은 에너지 소모", "낮은 수수료"],
+          correctAnswer: 2,
+          explanation: "PoW는 복잡한 연산을 통해 보안을 확보하지만, 그만큼 많은 에너지를 소모합니다.",
+        },
+      },
+      {
+        id: "2-4",
+        question: "Proof of Stake (PoS)의 구조와 이점",
+        answer:
+          "PoS(지분 증명)는 해당 암호화폐를 많이 보유하고 예치(스테이킹)한 노드에게 블록 생성 권한을 더 많이 부여하는 방식입니다. PoW보다 에너지 효율적이고 처리 속도가 빠를 수 있으며, 네트워크 참여에 대한 인센티브를 제공합니다. (예: 이더리움 2.0)",
+      },
+      {
+        id: "2-5",
+        question: "가스비(Gas Fee)는 어떻게 결정되며, 절약할 수 있는 팁이 있나요?",
+        answer:
+          "가스비는 네트워크 혼잡도(수요와 공급)에 따라 결정됩니다. EIP-1559는 기본 수수료(Base Fee)와 우선 수수료(Priority Fee)로 가스비를 예측 가능하게 만듭니다. 네트워크가 덜 혼잡한 시간에 거래하거나, 레이어 2 솔루션을 사용하면 가스비를 절약할 수 있습니다.",
+        practice: {
+          title: "가스비 절약 전략",
+          steps: [
+            "1. 가스 트래커 사이트에서 현재 가스비 확인",
+            "2. 네트워크 혼잡도가 낮은 시간대 선택 (주말, 새벽)",
+            "3. 가스 한도를 적절히 설정 (너무 높지 않게)",
+            "4. 레이어 2 솔루션 (Arbitrum, Optimism) 활용",
+            "5. 배치 거래 기능이 있는 DApp 사용",
+            "6. 불필요한 토큰 승인(Approval) 최소화",
           ],
-          correctAnswer: 3,
-          explanation:
-            "시드 구문은 절대 타인과 공유해서는 안 됩니다. 시드 구문을 알고 있는 사람은 지갑의 모든 자산에 접근할 수 있습니다.",
+          warning: "⚠️ 가스 한도를 너무 낮게 설정하면 거래가 실패할 수 있습니다.",
         },
       },
     ],
   },
   {
-    category: "3. 💰 암호화폐 거래 (Crypto Trading)",
+    category: "3. 🪙 Token & NFT (토큰 & NFT)",
     items: [
       {
         id: "3-1",
-        question: "거래소(Exchange) 선택 시 고려 사항",
+        question: "ERC-20, ERC-721, ERC-1155의 차이",
         answer:
-          "거래량, 보안, 수수료, 지원하는 암호화폐 종류, 사용자 인터페이스, 고객 지원 등 다양한 요소를 고려해야 합니다. 신뢰할 수 있는 거래소를 선택하고, 보안 설정을 강화하는 것이 중요합니다.",
-        links: [
-          { title: "바이낸스", url: "https://www.binance.com/ko" },
-          { title: "코인베이스", url: "https://www.coinbase.com/" },
-        ],
-        tips: "분산 거래소(DEX)도 고려해 보세요. 중앙화된 거래소와 다른 장단점이 있습니다.",
-        practice: {
-          title: "거래소 보안 설정 체크리스트",
-          description: "암호화폐 거래소 계정의 보안을 최대한 강화하는 방법을 단계별로 설정해보세요.",
-          steps: [
-            {
-              title: "2FA(이중 인증) 설정하기",
-              description:
-                "Google Authenticator나 Authy 앱을 사용하여 2단계 인증을 활성화합니다. SMS보다 앱 기반 인증이 더 안전합니다.",
-            },
-            {
-              title: "출금 화이트리스트 설정",
-              description: "신뢰할 수 있는 지갑 주소만 화이트리스트에 등록하여 해킹 시에도 자산을 보호할 수 있습니다.",
-            },
-            {
-              title: "API 키 권한 최소화",
-              description: "API를 사용할 경우 거래 권한은 제외하고 조회 권한만 부여하여 위험을 최소화합니다.",
-            },
-            {
-              title: "로그인 알림 설정",
-              description: "새로운 기기나 IP에서 로그인할 때 이메일이나 SMS로 알림을 받도록 설정합니다.",
-            },
-            {
-              title: "안티피싱 코드 설정",
-              description:
-                "거래소에서 보내는 공식 이메일에 포함될 개인 코드를 설정하여 가짜 이메일을 구별할 수 있습니다.",
-            },
-            {
-              title: "정기적인 보안 감사 로그 확인",
-              description: "계정 활동 로그를 정기적으로 확인하여 의심스러운 활동이 없는지 모니터링합니다.",
-            },
-          ],
-          warning: "⚠️ 거래소에 장기간 큰 금액을 보관하지 마세요. Not your keys, not your coins!",
-          links: [
-            { title: "바이낸스 보안 가이드", url: "https://academy.binance.com/en/articles/binance-account-security" },
-            { title: "코인베이스 보안 설정", url: "https://help.coinbase.com/en/coinbase/privacy-and-security" },
-          ],
+          "ERC-20은 대체 가능한 토큰(Fungible Token, FT)의 표준으로, 각 토큰이 동일한 가치를 지닙니다 (예: 암호화폐). ERC-721은 대체 불가능한 토큰(Non-Fungible Token, NFT)의 표준으로, 각 토큰이 고유한 가치와 정보를 가집니다 (예: 디지털 아트). ERC-1155는 FT와 NFT를 모두 한 컨트랙트에서 관리할 수 있는 다중 토큰 표준입니다.",
+        quiz: {
+          question: "ERC-721 토큰의 특징은?",
+          options: ["대체 가능", "동일한 가치", "고유한 식별자", "무제한 발행"],
+          correctAnswer: 2,
+          explanation: "ERC-721(NFT)은 각각 고유한 식별자를 가져 서로 다른 가치와 속성을 지닙니다.",
         },
       },
       {
         id: "3-2",
-        question: "시장 분석 기초: 차트 보는 법",
+        question: "NFT는 왜 JPEG가 아닌가요?",
         answer:
-          "캔들 차트, 이동평균선, 거래량 지표 등을 활용하여 시장의 추세를 파악할 수 있습니다. 기술적 분석 외에도, 프로젝트의 기본적 가치(백서, 팀, 로드맵)를 분석하는 것이 중요합니다.",
-        links: [
-          { title: "캔들 차트 설명", url: "https://www.investopedia.com/trading/candlestick-charting/" },
-          { title: "TradingView", url: "https://www.tradingview.com/" },
-        ],
-        tips: "과거의 데이터가 미래를 보장하지 않습니다. 항상 리스크 관리를 염두에 두세요.",
-        quiz: {
-          question: "캔들 차트에서 '도지(Doji)' 패턴은 무엇을 의미하는가?",
-          options: ["강한 상승 추세", "강한 하락 추세", "시장의 불확실성과 방향성 부재", "거래량의 급격한 증가"],
-          correctAnswer: 2,
-          explanation:
-            "도지(Doji) 패턴은 시가와 종가가 거의 같은 캔들로, 시장 참여자들 사이의 균형과 불확실성을 나타내며 추세 전환의 신호가 될 수 있습니다.",
-        },
+          "JPEG는 이미지 파일 형식일 뿐이고, NFT는 해당 이미지(또는 다른 디지털 자산)의 소유권과 진위성을 블록체인에 기록한 '디지털 증서'입니다. NFT는 이미지 자체라기보다는, 그 이미지에 대한 고유한 권리를 나타내는 토큰입니다.",
       },
       {
         id: "3-3",
-        question: "주문(Order) 종류: 지정가, 시장가",
+        question: "NFT의 메타데이터는 어디에 저장되나요?",
         answer:
-          "지정가는 원하는 가격에 주문을 내는 방식이고, 시장가는 현재 시장 가격으로 즉시 거래하는 방식입니다. 상황에 따라 적절한 주문 방식을 선택하여 거래 효율성을 높일 수 있습니다.",
-        links: [
-          { title: "주문 방식 설명", url: "https://www.binance.com/en/support/faq/360020390472" },
-          { title: "슬리피지(Slippage)", url: "https://academy.binance.com/en/articles/slippage-in-crypto-trading" },
-        ],
-        tips: "시장 변동성이 큰 경우, 지정가 주문이 체결되지 않을 수 있습니다.",
+          "NFT의 메타데이터(이름, 설명, 이미지 링크 등)는 온체인(블록체인 직접 저장, 비용 높음) 또는 오프체인(IPFS, Arweave 같은 분산 스토리지 또는 중앙 서버, 비용 낮음)에 저장될 수 있습니다. 대부분의 경우 이미지 파일 자체는 오프체인에 저장하고, 그 링크를 온체인에 기록합니다.",
+      },
+      {
+        id: "3-4",
+        question: "Soulbound Token (SBT)이란?",
+        answer:
+          "SBT(소울바운드 토큰)는 특정 개인의 신원, 업적, 자격 등을 나타내는 양도 불가능한 NFT입니다. 한번 발행되면 다른 지갑으로 전송할 수 없어, 개인의 고유한 정체성이나 평판을 증명하는 데 사용될 수 있습니다.",
         quiz: {
-          question: "시장 변동성이 높을 때 어떤 주문 방식이 슬리피지(slippage) 위험이 더 큰가?",
-          options: [
-            "지정가 주문(Limit Order)",
-            "시장가 주문(Market Order)",
-            "스탑 주문(Stop Order)",
-            "OCO 주문(One Cancels the Other)",
-          ],
+          question: "SBT의 핵심 특징은?",
+          options: ["자유로운 거래", "양도 불가능", "높은 가격", "익명성"],
           correctAnswer: 1,
-          explanation:
-            "시장가 주문은 현재 시장에서 즉시 체결되므로, 변동성이 높을 때 예상 가격과 실제 체결 가격 간의 차이(슬리피지)가 크게 발생할 수 있습니다. 반면 지정가 주문은 지정한 가격 이상으로만 체결됩니다.",
+          explanation: "SBT는 개인의 신원이나 업적을 나타내므로 다른 사람에게 양도할 수 없습니다.",
         },
       },
     ],
   },
   {
-    category: "4. 🔐 보안 (Security)",
+    category: "4. 🌉 Bridge & Multichain (브릿지 & 멀티체인)",
     items: [
       {
         id: "4-1",
-        question: "2FA(Two-Factor Authentication) 설정",
+        question: "블록체인 간 자산 이동이 가능한 이유는?",
         answer:
-          "2FA는 계정 보안을 강화하는 추가적인 인증 단계입니다. 비밀번호 외에, 휴대폰 인증 코드나 OTP(One-Time Password)를 사용하여 로그인 보안을 강화할 수 있습니다.",
-        links: [
-          { title: "Google Authenticator", url: "https://support.google.com/accounts/answer/185839?hl=ko" },
-          { title: "Authy", url: "https://authy.com/" },
-        ],
-        tips: "2FA를 활성화하면 해킹 시도를 크게 줄일 수 있습니다.",
-        practice: {
-          title: "Google Authenticator로 2FA 설정하기",
-          description:
-            "Google Authenticator 앱을 사용하여 암호화폐 거래소나 지갑에 2단계 인증을 설정하는 방법을 배워보세요.",
-          steps: [
-            {
-              title: "Google Authenticator 앱 다운로드",
-              description: "스마트폰의 앱스토어에서 'Google Authenticator' 앱을 다운로드하고 설치합니다.",
-            },
-            {
-              title: "거래소/지갑의 보안 설정 메뉴 접속",
-              description: "사용 중인 거래소나 지갑 서비스의 계정 설정에서 보안 또는 2FA 설정 메뉴를 찾습니다.",
-            },
-            {
-              title: "2FA 활성화 선택",
-              description: "'2단계 인증 활성화' 또는 'Enable 2FA' 버튼을 클릭합니다.",
-            },
-            {
-              title: "QR 코드 스캔 또는 수동 키 입력",
-              description:
-                "Google Authenticator 앱에서 '+' 버튼을 누르고 QR 코드를 스캔하거나 수동으로 키를 입력합니다.",
-            },
-            {
-              title: "6자리 인증 코드 입력하여 확인",
-              description: "앱에서 생성된 6자리 숫자 코드를 웹사이트에 입력하여 설정을 완료합니다.",
-            },
-            {
-              title: "백업 코드 안전한 곳에 저장",
-              description:
-                "제공되는 백업 코드들을 종이에 적어 안전한 곳에 보관합니다. 휴대폰 분실 시 복구에 필요합니다.",
-            },
-          ],
-          warning: "⚠️ 휴대폰 분실에 대비해 백업 코드를 반드시 오프라인에 보관하세요.",
-          links: [
-            { title: "Google Authenticator 다운로드", url: "https://support.google.com/accounts/answer/1066447" },
-            { title: "2FA 보안 가이드", url: "https://authy.com/what-is-2fa/" },
-          ],
-        },
+          "블록체인 브릿지는 서로 다른 블록체인 네트워크 간에 토큰이나 데이터를 전송할 수 있도록 연결하는 기술입니다. 일반적으로 한 체인에서 자산을 락업(Lock)하고 다른 체인에서 그에 상응하는 래핑된(Wrapped) 자산을 발행하거나, 유동성 풀을 통해 교환하는 방식으로 작동합니다.",
       },
       {
         id: "4-2",
-        question: "피싱(Phishing) 공격 예방",
+        question: "브릿지 해킹은 왜 자주 발생하나요?",
         answer:
-          "출처가 불분명한 링크나 이메일을 클릭하지 않고, 개인 정보를 요구하는 메시지에 응답하지 않아야 합니다. 공식 웹사이트 주소를 확인하고, 의심스러운 활동을 발견하면 즉시 거래소에 신고해야 합니다.",
-        links: [
-          {
-            title: "피싱 공격 예방 가이드",
-            url: "https://www.consumer.ftc.gov/articles/how-recognize-and-avoid-phishing-attacks",
-          },
-          { title: "보안 뉴스", url: "https://krebsonsecurity.com/" },
-        ],
-        tips: "항상 의심하고 확인하는 습관을 가지세요.",
+          "브릿지는 여러 블록체인과 상호작용하며 복잡한 스마트 컨트랙트 로직을 가지므로 공격 표면이 넓습니다. 스마트 컨트랙트 취약점, 프라이빗 키 관리 미흡, 검증 로직 오류 등으로 인해 대규모 자금이 예치된 브릿지가 해커의 주요 타겟이 되곤 합니다.",
         quiz: {
-          question: "피싱 공격을 식별하는 방법으로 적절하지 않은 것은?",
-          options: [
-            "이메일이나 메시지의 발신자 주소 확인",
-            "웹사이트 URL 철자 확인",
-            "HTTPS 보안 연결 확인",
-            "긴급하게 행동을 촉구하는 메시지 신뢰",
-          ],
-          correctAnswer: 3,
-          explanation:
-            "긴급하게 행동을 촉구하는 메시지는 피싱 공격의 전형적인 특징입니다. 이러한 메시지는 사용자가 신중하게 생각할 시간을 주지 않고 즉각적인 행동을 유도하여 실수하게 만듭니다.",
+          question: "브릿지 사용 시 주의사항이 아닌 것은?",
+          options: ["신뢰할 수 있는 브릿지 선택", "소액으로 테스트", "모든 자산을 한 번에 이동", "권한 관리"],
+          correctAnswer: 2,
+          explanation: "위험을 분산하기 위해 한 번에 모든 자산을 이동하지 않는 것이 좋습니다.",
         },
       },
       {
         id: "4-3",
-        question: "콜드 월렛(Cold Wallet) 사용",
+        question: "LayerZero vs Wormhole vs Axelar 비교",
         answer:
-          "콜드 월렛은 인터넷에 연결되지 않은 하드웨어 지갑으로, 암호화폐를 오프라인 상태로 보관하여 해킹 위험을 줄일 수 있습니다. 장기 투자자에게 적합합니다.",
-        links: [
-          { title: "Ledger", url: "https://www.ledger.com/" },
-          { title: "Trezor", url: "https://trezor.io/" },
-        ],
-        tips: "콜드 월렛의 복구 구문(Seed Phrase)을 안전하게 보관하세요.",
-        quiz: {
-          question: "콜드 월렛(Cold Wallet)의 주요 장점은?",
-          options: ["거래 속도가 빠르다", "사용이 매우 편리하다", "해킹 위험이 낮다", "수수료가 저렴하다"],
-          correctAnswer: 2,
-          explanation:
-            "콜드 월렛은 인터넷에 연결되지 않은 오프라인 상태로 프라이빗 키를 보관하기 때문에 해킹 위험이 크게 낮아집니다. 이것이 콜드 월렛의 주요 장점입니다.",
+          "LayerZero는 경량 클라이언트와 릴레이어를 통해 범용 메시지 전달 프로토콜을 제공합니다. Wormhole은 가디언 네트워크를 통해 메시지를 검증하고 전달합니다. Axelar는 자체 블록체인과 검증자 네트워크를 통해 크로스체인 통신을 지원합니다. 각기 다른 아키텍처와 보안 모델을 가지고 있습니다.",
+      },
+      {
+        id: "4-4",
+        question: "체인별 RPC 추가 방법 정리",
+        answer:
+          "메타마스크와 같은 지갑에 새로운 블록체인 네트워크를 추가하려면 해당 체인의 네트워크 이름, RPC URL, 체인 ID, 통화 기호, 블록 탐색기 URL 정보가 필요합니다. Chainlist.org 같은 웹사이트에서 원하는 체인을 검색하여 자동으로 추가하거나, 수동으로 입력할 수 있습니다.",
+        practice: {
+          title: "새로운 네트워크 추가하기",
+          steps: [
+            "1. Chainlist.org 웹사이트 방문",
+            "2. 추가하고 싶은 네트워크 검색",
+            "3. 'Add to MetaMask' 버튼 클릭",
+            "4. 메타마스크에서 네트워크 추가 승인",
+            "5. 또는 메타마스크에서 수동으로 네트워크 정보 입력",
+            "6. 네트워크 전환 후 정상 작동 확인",
+          ],
         },
       },
     ],
   },
   {
-    category: "5. 💡 DeFi (Decentralized Finance)",
+    category: "5. 💸 DeFi 101 (디파이 기초)",
     items: [
       {
         id: "5-1",
         question: "DeFi란 무엇인가요?",
         answer:
-          "DeFi는 블록체인 기술을 기반으로 구축된 탈중앙화 금융 시스템입니다. 은행과 같은 중개 기관 없이 암호화폐를 통해 대출, 예금, 거래 등의 금융 서비스를 제공합니다.",
-        links: [
-          { title: "DeFi 설명", url: "https://ethereum.org/ko/defi/" },
-          { title: "DeFi Pulse", url: "https://defipulse.com/" },
-        ],
-        tips: "DeFi는 높은 수익률을 제공하지만, 스마트 컨트랙트 버그, 해킹 등의 위험도 존재합니다.",
-        practice: {
-          title: "Uniswap에서 첫 스왑 해보기",
-          description: "가장 인기 있는 탈중앙화 거래소인 Uniswap에서 토큰 스왑을 직접 경험해보세요.",
-          steps: [
-            {
-              title: "app.uniswap.org 접속",
-              description: "브라우저에서 Uniswap 공식 웹사이트에 접속합니다. 반드시 공식 URL인지 확인하세요.",
-            },
-            {
-              title: "지갑 연결 (Connect Wallet)",
-              description: "우측 상단의 'Connect Wallet' 버튼을 클릭하고 메타마스크를 선택하여 지갑을 연결합니다.",
-            },
-            {
-              title: "스왑할 토큰 쌍 선택",
-              description: "교환하고 싶은 토큰을 선택합니다. 예를 들어 ETH를 USDC로 교환할 수 있습니다.",
-            },
-            {
-              title: "금액 입력 및 예상 수령액 확인",
-              description: "교환할 토큰의 양을 입력하면 받을 수 있는 토큰의 양이 자동으로 계산됩니다.",
-            },
-            {
-              title: "슬리피지 설정 확인 (기본 0.5%)",
-              description: "설정 아이콘을 클릭하여 슬리피지 허용 범위를 확인합니다. 일반적으로 0.5-1%가 적당합니다.",
-            },
-            {
-              title: "첫 거래 시 토큰 승인(Approve) 후 스왑 실행",
-              description: "처음 거래하는 토큰의 경우 먼저 'Approve' 트랜잭션을 실행한 후 'Swap' 버튼을 클릭합니다.",
-            },
-          ],
-          warning: "⚠️ 가스비가 높을 때는 거래를 미루는 것이 좋습니다. 항상 슬리피지 설정을 확인하세요.",
-          links: [
-            { title: "Uniswap 공식 사이트", url: "https://app.uniswap.org/" },
-            { title: "Uniswap 사용법 가이드", url: "https://docs.uniswap.org/" },
-          ],
+          "DeFi(Decentralized Finance, 탈중앙화 금융)는 은행이나 증권사 같은 중앙 중개기관 없이, 블록체인과 스마트 컨트랙트를 기반으로 금융 서비스를 제공하는 시스템입니다. 예금, 대출, 거래, 투자 등 다양한 금융 활동을 P2P 방식으로 투명하고 개방적으로 할 수 있습니다.",
+        quiz: {
+          question: "DeFi의 핵심 특징은?",
+          options: ["은행 중개 필요", "중앙화된 관리", "스마트 컨트랙트 기반", "정부 규제"],
+          correctAnswer: 2,
+          explanation: "DeFi는 스마트 컨트랙트를 기반으로 중개자 없이 금융 서비스를 제공합니다.",
         },
       },
       {
         id: "5-2",
-        question: "DEX (Decentralized Exchange) 사용법",
+        question: "AMM이란? (Uniswap 작동 원리)",
         answer:
-          "DEX는 중앙 기관 없이 사용자들이 직접 암호화폐를 거래할 수 있는 플랫폼입니다. Uniswap, SushiSwap 등이 대표적이며, 개인 지갑을 연결하여 거래할 수 있습니다.",
-        links: [
-          { title: "Uniswap", url: "https://uniswap.org/" },
-          { title: "SushiSwap", url: "https://www.sushi.com/" },
-        ],
-        tips: "DEX 사용 시, 슬리피지 설정과 가스비를 고려해야 합니다.",
-        quiz: {
-          question: "DEX(탈중앙화 거래소)의 특징이 아닌 것은?",
-          options: [
-            "사용자가 자신의 자산에 대한 통제권을 유지한다",
-            "중앙 기관 없이 P2P 방식으로 거래한다",
-            "KYC(고객 확인) 절차가 항상 필요하다",
-            "스마트 컨트랙트를 통해 거래가 실행된다",
-          ],
-          correctAnswer: 2,
-          explanation:
-            "DEX는 일반적으로 KYC 절차를 요구하지 않는 것이 특징입니다. 이는 중앙화 거래소(CEX)와의 주요 차이점 중 하나입니다.",
-        },
+          "AMM(Automated Market Maker, 자동화된 시장 조성자)은 전통적인 오더북 방식 대신 수학적 공식을 사용하여 유동성 풀 내에서 토큰 가격을 결정하고 자동으로 거래를 체결하는 탈중앙화 거래소(DEX)의 핵심 메커니즘입니다. 유니스왑은 대표적인 AMM 기반 DEX입니다.",
       },
       {
         id: "5-3",
-        question: "유동성 공급(Liquidity Providing)",
+        question: "impermanent loss란?",
         answer:
-          "유동성 공급은 DEX에 암호화폐 쌍을 예치하여 거래를 활성화하는 데 기여하고, 그 대가로 수수료를 받는 것입니다. 높은 수익을 얻을 수 있지만, Impermanent Loss(비영구적 손실) 위험이 있습니다.",
-        links: [
-          { title: "Impermanent Loss 설명", url: "https://academy.binance.com/en/articles/impermanent-loss-explained" },
-          { title: "유동성 공급 가이드", url: "https://www.gemini.com/learn/what-is-liquidity-pool" },
-        ],
-        tips: "유동성 공급 전, Impermanent Loss에 대해 충분히 이해해야 합니다.",
+          "비영구적 손실(Impermanent Loss)은 AMM 유동성 풀에 자산을 예치했을 때, 예치한 토큰들의 가격 변동으로 인해 단순히 토큰을 보유하고 있었을 경우보다 자산 가치가 낮아지는 현상을 의미합니다. 가격이 원래 비율로 돌아오면 손실이 사라지므로 '비영구적'이라고 불리지만, 실제 손실로 이어질 수 있습니다.",
         quiz: {
-          question: "유동성 공급(LP)에서 '비영구적 손실(Impermanent Loss)'이 발생하는 상황은?",
-          options: [
-            "풀에 예치한 두 토큰의 가격 비율이 변하지 않을 때",
-            "풀에 예치한 두 토큰의 가격 비율이 변할 때",
-            "거래량이 매우 적을 때",
-            "LP 토큰의 가치가 상승할 때",
-          ],
+          question: "Impermanent Loss가 발생하는 경우는?",
+          options: ["토큰 가격이 동일하게 변동", "한 토큰만 가격 상승", "거래 수수료 증가", "유동성 증가"],
           correctAnswer: 1,
-          explanation:
-            "비영구적 손실은 유동성 풀에 예치한 두 토큰의 가격 비율이 예치 시점과 비교해 변화할 때 발생합니다. 이로 인해 단순히 토큰을 보유했을 때보다 자산 가치가 낮아질 수 있습니다.",
+          explanation: "유동성 풀에 예치한 두 토큰의 가격 비율이 변할 때 비영구적 손실이 발생합니다.",
         },
+      },
+      {
+        id: "5-4",
+        question: "스테이킹 vs 파밍 vs 예치 차이",
+        answer:
+          "스테이킹(Staking)은 주로 PoS 블록체인에서 네트워크 보안에 기여하고 블록 검증에 참여하기 위해 암호화폐를 예치하고 보상을 받는 행위입니다. 파밍(Yield Farming)은 DeFi 프로토콜에 유동성을 공급하거나 특정 활동을 통해 여러 종류의 토큰 보상을 얻으려는 적극적인 투자 전략입니다. 예치(Depositing)는 대출 프로토콜 등에 자산을 맡기고 이자를 받는 일반적인 행위를 의미할 수 있습니다.",
+      },
+      {
+        id: "5-5",
+        question: "오라클(Oracle)이란 무엇이며, DeFi에서 왜 필수적인가요?",
+        answer:
+          "오라클은 블록체인 외부의 실제 세계 데이터(예: 암호화폐 가격, 날씨 정보)를 스마트 컨트랙트가 사용할 수 있도록 블록체인 내부로 가져오는 서비스입니다. DeFi 프로토콜은 대출, 파생상품 등에서 정확한 자산 가격 정보가 필요하므로 오라클은 매우 중요합니다. Chainlink, Pyth, Band Protocol 등이 대표적인 오라클 프로젝트입니다.",
       },
     ],
   },
   {
-    category: "6. 🖼️ NFT (Non-Fungible Token)",
+    category: "6. 🧠 ZK & Layer 2 (영지식 증명 & 레이어 2)",
     items: [
       {
         id: "6-1",
-        question: "NFT란 무엇인가요?",
+        question: "Rollup이란? 왜 필요한가요?",
         answer:
-          "NFT는 대체 불가능한 토큰으로, 디지털 자산의 소유권을 증명하는 데 사용됩니다. 이미지, 비디오, 음악, 게임 아이템 등 다양한 형태의 디지털 콘텐츠를 NFT로 발행할 수 있습니다.",
-        links: [
-          { title: "NFT 설명", url: "https://ethereum.org/ko/nft/" },
-          { title: "OpenSea", url: "https://opensea.io/" },
-        ],
-        tips: "NFT 투자는 높은 위험을 수반하므로 신중하게 접근해야 합니다.",
-        practice: {
-          title: "OpenSea에서 NFT 구매하기",
-          description: "세계 최대 NFT 마켓플레이스인 OpenSea에서 안전하게 NFT를 구매하는 방법을 배워보세요.",
-          steps: [
-            {
-              title: "OpenSea.io 접속 및 지갑 연결",
-              description:
-                "OpenSea 공식 웹사이트에 접속하고 우측 상단의 지갑 아이콘을 클릭하여 메타마스크를 연결합니다.",
-            },
-            {
-              title: "관심 있는 컬렉션 검색",
-              description: "검색창에 원하는 NFT 컬렉션 이름을 입력하거나 카테고리별로 탐색합니다.",
-            },
-            {
-              title: "컬렉션 인증 마크 확인",
-              description: "컬렉션 이름 옆의 파란색 체크 마크를 확인하여 공식 컬렉션인지 검증합니다.",
-            },
-            {
-              title: "개별 NFT의 거래 내역 확인",
-              description:
-                "NFT 상세 페이지에서 Price History와 Activity를 확인하여 가격 변동과 거래 내역을 파악합니다.",
-            },
-            {
-              title: "Buy Now 또는 Make Offer 선택",
-              description: "즉시 구매하려면 'Buy Now', 가격 제안을 하려면 'Make Offer'를 선택합니다.",
-            },
-            {
-              title: "가스비 포함 총 비용 확인 후 구매",
-              description: "NFT 가격과 가스비를 포함한 총 비용을 확인하고 메타마스크에서 트랜잭션을 승인합니다.",
-            },
-          ],
-          warning: "⚠️ 가짜 컬렉션에 주의하세요. 항상 공식 링크와 인증 마크를 확인하세요.",
-          links: [
-            { title: "OpenSea 공식 사이트", url: "https://opensea.io/" },
-            { title: "OpenSea 안전 가이드", url: "https://support.opensea.io/hc/en-us/articles/4404027708051" },
-          ],
+          "롤업은 이더리움과 같은 레이어 1(L1) 블록체인의 확장성 문제를 해결하기 위한 레이어 2(L2) 솔루션입니다. 여러 거래를 L2에서 처리하고, 그 결과(또는 증명)만을 L1에 기록하여 L1의 부담을 줄이고 거래 처리 속도를 높이며 수수료를 낮춥니다.",
+        quiz: {
+          question: "롤업의 주요 목적은?",
+          options: ["보안 강화", "확장성 개선", "탈중앙화 증대", "익명성 보장"],
+          correctAnswer: 1,
+          explanation: "롤업은 주로 블록체인의 확장성(처리 속도, 수수료) 문제를 해결하기 위해 개발되었습니다.",
         },
       },
       {
         id: "6-2",
-        question: "NFT 구매 및 판매 방법",
+        question: "Optimistic Rollup vs ZK Rollup",
         answer:
-          "OpenSea, Rarible 등의 NFT 마켓플레이스에서 NFT를 구매하거나 판매할 수 있습니다. 메타마스크와 같은 암호화폐 지갑을 연결하여 거래를 진행합니다.",
-        links: [
-          { title: "Rarible", url: "https://rarible.com/" },
-          { title: "NFT 마켓플레이스 비교", url: "https://www.creativebloq.com/features/nft-marketplaces" },
-        ],
-        tips: "NFT 구매 전, 프로젝트의 신뢰성과 커뮤니티를 확인하는 것이 중요합니다.",
-        quiz: {
-          question: "NFT 마켓플레이스에서 '가스 전쟁(Gas War)'이 발생하는 상황은?",
-          options: [
-            "NFT 가격이 급락할 때",
-            "인기 있는 NFT 컬렉션이 처음 출시될 때",
-            "NFT 마켓플레이스가 해킹당했을 때",
-            "NFT 로열티가 없을 때",
-          ],
-          correctAnswer: 1,
-          explanation:
-            "가스 전쟁은 인기 있는 NFT 컬렉션이 처음 출시될 때 많은 사람들이 동시에 민팅하려고 경쟁하면서 가스 가격을 높여 빠르게 트랜잭션을 처리받으려는 현상입니다.",
-        },
+          "옵티미스틱 롤업은 L2 거래가 기본적으로 유효하다고 가정하고, 사기 증명(fraud proof)을 통해 오류를 잡아냅니다. 구현이 상대적으로 쉽지만, 출금 시 분쟁 해결 기간이 필요합니다. ZK 롤업은 영지식 증명(validity proof)을 사용하여 L2 거래의 유효성을 L1에서 즉시 검증합니다. 더 빠르고 안전하지만, 기술이 복잡합니다.",
       },
       {
         id: "6-3",
-        question: "NFT 활용 사례",
+        question: "zkSync Era, StarkNet, Scroll 비교",
         answer:
-          "디지털 아트, 게임 아이템, 멤버십 카드, 부동산 등 다양한 분야에서 NFT가 활용되고 있습니다. 특히, 메타버스와 결합하여 새로운 디지털 경제를 구축하는 데 기여하고 있습니다.",
-        links: [
-          { title: "NFT 게임", url: "https://playtoearn.net/" },
-          {
-            title: "메타버스 NFT",
-            url: "https://www.forbes.com/sites/cathyhackl/2021/04/04/nfts-and-the-metaverse-how-non-fungible-tokens-will-drive-the-future-of-digital-economies/?sh=6c0425a31953",
-          },
-        ],
-        tips: "NFT는 단순한 투기 자산을 넘어, 다양한 가능성을 가진 기술입니다.",
+          "이들은 모두 ZK 롤업 기술을 사용하는 대표적인 L2 솔루션입니다. zkSync Era는 EVM 호환성을 강조하며 Solidity 개발자들이 쉽게 이전할 수 있도록 합니다. StarkNet은 자체 프로그래밍 언어인 Cairo를 사용하여 더 높은 성능과 유연성을 추구합니다. Scroll은 EVM과 바이트코드 수준에서 최대한의 호환성을 목표로 합니다.",
+      },
+      {
+        id: "6-4",
+        question: "영지식증명(ZKP)의 기본 개념",
+        answer:
+          "영지식 증명은 어떤 정보를 직접 공개하지 않으면서, 그 정보를 알고 있다는 사실을 상대방에게 증명할 수 있는 암호학적 기술입니다. 프라이버시 보호와 데이터 검증에 활용됩니다.",
         quiz: {
-          question: "NFT의 활용 사례로 적절하지 않은 것은?",
-          options: ["디지털 아트 소유권 증명", "게임 내 아이템 거래", "익명 결제 시스템", "이벤트 티켓 및 멤버십"],
-          correctAnswer: 2,
-          explanation:
-            "익명 결제 시스템은 일반적으로 NFT의 주요 활용 사례가 아닙니다. NFT는 고유성과 소유권 증명에 중점을 두며, 익명 결제는 다른 암호화폐나 프라이버시 코인의 영역입니다.",
+          question: "영지식 증명의 핵심은?",
+          options: ["정보 완전 공개", "정보 숨기면서 증명", "빠른 처리", "낮은 비용"],
+          correctAnswer: 1,
+          explanation: "영지식 증명은 비밀 정보를 공개하지 않으면서도 그것을 알고 있음을 증명하는 기술입니다.",
         },
       },
     ],
   },
   {
-    category: "7. 🌐 DAO (Decentralized Autonomous Organization)",
+    category: "7. 🚨 Safety & Scams (보안 & 사기)",
     items: [
       {
         id: "7-1",
-        question: "DAO란 무엇인가요?",
+        question: "피싱 링크 구별법",
         answer:
-          "DAO는 블록체인 기반의 탈중앙화된 자율 조직입니다. 스마트 컨트랙트에 의해 운영되며, 구성원들의 투표를 통해 의사 결정을 진행합니다. 투명하고 민주적인 조직 운영이 가능합니다.",
-        links: [
-          { title: "DAO 설명", url: "https://ethereum.org/ko/dao/" },
-          { title: "DAOhaus", url: "https://daohaus.club/" },
-        ],
-        tips: "DAO 참여 전, 조직의 목표와 운영 방식에 대해 충분히 이해해야 합니다.",
+          "공식 웹사이트 주소와 철자가 정확히 일치하는지 확인하고, HTTPS 보안 연결인지 확인합니다. 출처가 불분명한 링크나 이메일, DM은 클릭하지 않고, 단축 URL은 원래 주소를 확인하기 전까지 주의합니다. 갑작스러운 경고나 긴급한 요청을 하는 메시지는 의심해야 합니다.",
+        quiz: {
+          question: "피싱 사이트의 특징이 아닌 것은?",
+          options: ["철자 오류", "긴급한 요청", "HTTPS 보안 연결", "의심스러운 URL"],
+          correctAnswer: 2,
+          explanation:
+            "HTTPS는 보안 연결을 의미하지만, 피싱 사이트도 HTTPS를 사용할 수 있으므로 URL 자체를 확인해야 합니다.",
+        },
         practice: {
-          title: "Snapshot에서 DAO 투표 참여하기",
-          description: "Snapshot 플랫폼을 통해 실제 DAO 거버넌스 투표에 참여하는 방법을 경험해보세요.",
+          title: "피싱 방지 체크리스트",
           steps: [
-            {
-              title: "snapshot.org 접속",
-              description: "브라우저에서 https://snapshot.org 에 접속합니다. 가장 인기 있는 DAO 투표 플랫폼입니다.",
-            },
-            {
-              title: "참여하고 싶은 DAO 검색",
-              description: "검색창에 관심 있는 DAO 이름을 입력하거나 인기 있는 DAO 목록에서 선택합니다.",
-            },
-            {
-              title: "지갑 연결 및 투표권 확인",
-              description:
-                "우측 상단의 'Connect wallet' 버튼을 클릭하여 지갑을 연결하고 투표권(토큰 보유량)을 확인합니다.",
-            },
-            {
-              title: "활성 제안(Active Proposals) 확인",
-              description: "현재 진행 중인 투표 제안들을 확인하고 관심 있는 제안을 클릭합니다.",
-            },
-            {
-              title: "제안 내용 숙독 후 투표",
-              description: "제안의 세부 내용, 찬반 논리, 커뮤니티 토론을 충분히 검토한 후 투표합니다.",
-            },
-            {
-              title: "투표 결과 및 실행 상황 추적",
-              description: "투표 종료 후 결과를 확인하고, 가결된 제안의 실행 상황을 지속적으로 모니터링합니다.",
-            },
+            "1. URL 주소 정확성 확인 (철자, 도메인)",
+            "2. 공식 채널을 통한 정보 확인",
+            "3. 급하다는 메시지에 즉시 반응하지 않기",
+            "4. 지갑 연결 전 사이트 신뢰성 검증",
+            "5. 북마크를 통한 공식 사이트 접속",
+            "6. 커뮤니티에서 의심스러운 링크 신고",
           ],
-          warning: "⚠️ 투표 전 제안의 세부 내용과 영향을 충분히 이해하세요.",
-          links: [
-            { title: "Snapshot 공식 사이트", url: "https://snapshot.org/" },
-            { title: "DAO 거버넌스 가이드", url: "https://ethereum.org/en/dao/" },
-          ],
+          warning: "⚠️ 의심스러운 링크는 절대 클릭하지 말고, 공식 채널을 통해 확인하세요.",
         },
       },
       {
         id: "7-2",
-        question: "DAO 참여 방법",
+        question: "지갑 권한 관리 (Revoke)",
         answer:
-          "DAO의 멤버십 토큰을 구매하거나, DAO에 기여하여 멤버가 될 수 있습니다. Snapshot과 같은 플랫폼을 통해 투표에 참여하고, DAO의 의사 결정에 영향을 미칠 수 있습니다.",
-        links: [
-          { title: "Snapshot", url: "https://snapshot.org/" },
-          { title: "DAO 멤버십", url: "https://consensys.net/blog/blockchain/how-to-join-a-dao/" },
-        ],
-        tips: "DAO는 새로운 형태의 조직 운영 방식이므로, 적극적으로 참여하고 배우는 자세가 중요합니다.",
-        quiz: {
-          question: "DAO 거버넌스 참여에 대한 설명으로 옳은 것은?",
-          options: [
-            "모든 DAO는 1인 1표의 투표 방식을 사용한다",
-            "DAO 투표는 항상 온체인에서 이루어진다",
-            "거버넌스 토큰 보유량에 따라 투표 영향력이 달라질 수 있다",
-            "DAO 제안은 개발팀만 할 수 있다",
-          ],
-          correctAnswer: 2,
-          explanation:
-            "많은 DAO에서는 거버넌스 토큰 보유량에 비례하여 투표 영향력이 결정됩니다. 이는 더 많은 지분을 가진 참여자가 더 큰 의사결정 권한을 갖는 방식입니다.",
-        },
+          "DApp 사용 시 스마트 컨트랙트에 특정 토큰에 대한 지출 한도(allowance)를 부여하게 됩니다. 사용하지 않는 DApp이나 의심스러운 컨트랙트에 부여된 권한은 Revoke.cash와 같은 도구를 사용하여 정기적으로 확인하고 철회하여 자산을 보호해야 합니다.",
       },
       {
         id: "7-3",
-        question: "DAO 활용 사례",
+        question: "Sybil 공격이란?",
         answer:
-          "투자, 자선, 소셜 네트워킹 등 다양한 분야에서 DAO가 활용되고 있습니다. 특히, 프로젝트 자금 관리 및 커뮤니티 운영에 효과적입니다.",
-        links: [
-          {
-            title: "DAO 사례",
-            url: "https://builtin.com/blockchain/decentralized-autonomous-organization-dao-examples",
-          },
-          {
-            title: "자선 DAO",
-            url: "https://www.coindesk.com/layer2/2022/12/16/crypto-winter-didnt-kill-giving-daos/",
-          },
-        ],
-        tips: "DAO는 조직 운영의 투명성과 효율성을 높이는 데 기여할 수 있습니다.",
+          "시빌 공격은 한 명의 공격자가 다수의 가짜 신원(계정)을 생성하여 네트워크나 시스템에 부당한 영향력을 행사하려는 공격입니다. 거버넌스 투표 조작, 에어드랍 부정 수령 등에 악용될 수 있습니다.",
+      },
+      {
+        id: "7-4",
+        question: "rug pull이란?",
+        answer:
+          "러그풀은 암호화폐 프로젝트 개발팀이 투자금을 모은 뒤 갑자기 프로젝트를 중단하고 투자금을 가지고 사라지는 사기 행위입니다. 유동성 풀에서 유동성을 제거하거나, 토큰을 대량 매도하는 방식으로 이루어집니다.",
         quiz: {
-          question: "다음 중 DAO의 일반적인 활용 사례가 아닌 것은?",
-          options: ["투자 펀드 관리", "오픈소스 프로젝트 거버넌스", "중앙화된 기업 운영", "자선 기금 분배"],
+          question: "러그풀을 방지하는 방법은?",
+          options: ["익명 팀 프로젝트 선호", "감사 보고서 무시", "팀 신원 확인", "높은 수익률만 추구"],
           correctAnswer: 2,
-          explanation:
-            "중앙화된 기업 운영은 DAO의 탈중앙화 철학과 상반됩니다. DAO는 주로 탈중앙화된 의사결정과 투명한 운영을 위해 사용됩니다.",
+          explanation: "팀의 신원이 공개되고 검증된 프로젝트를 선택하는 것이 러그풀 위험을 줄이는 방법입니다.",
         },
       },
     ],
   },
   {
-    category: "8. ⛓️ Layer 2 Scaling Solutions",
+    category: "8. 🛠 Tools & Services (도구 & 서비스)",
     items: [
       {
         id: "8-1",
-        question: "Layer 2란 무엇인가요?",
+        question: "Debank, Zapper, Zerion 비교",
         answer:
-          "Layer 2는 메인 블록체인(Layer 1)의 확장성 문제를 해결하기 위해 구축된 솔루션입니다. 각 블록은 이전 블록의 해시값을 포함하여 연결되어 있어, 데이터의 위변조가 어렵습니다. 이러한 특성 덕분에 높은 보안성과 투명성을 제공합니다.",
-        links: [
-          { title: "Layer 2 설명", url: "https://ethereum.org/ko/layer-2/" },
-          { title: "L2BEAT", url: "https://l2beat.com/" },
-        ],
-        tips: "Layer 2 솔루션은 이더리움 네트워크의 확장성을 크게 향상시킬 수 있습니다.",
-        practice: {
-          title: "이더리움에서 Arbitrum으로 브릿지하기",
-          description: "Layer 2 솔루션인 Arbitrum을 사용하여 이더리움 메인넷에서 자산을 브릿지하는 방법을 배워보세요.",
-          steps: [
-            {
-              title: "bridge.arbitrum.io 접속",
-              description: "Arbitrum 공식 브릿지 웹사이트에 접속합니다. 반드시 공식 URL인지 확인하세요.",
-            },
-            {
-              title: "메타마스크 연결",
-              description:
-                "'Connect Wallet' 버튼을 클릭하여 메타마스크를 연결합니다. 이더리움 메인넷에 연결되어 있는지 확인하세요.",
-            },
-            {
-              title: "브릿지할 ETH/토큰 금액 입력",
-              description:
-                "Arbitrum으로 전송할 ETH 또는 토큰의 양을 입력합니다. 가스비를 고려하여 적절한 양을 설정하세요.",
-            },
-            {
-              title: "예상 도착 시간 확인 (약 10분)",
-              description: "브릿지 완료까지 걸리는 시간을 확인합니다. 일반적으로 10-15분 정도 소요됩니다.",
-            },
-            {
-              title: "트랜잭션 승인 및 전송",
-              description: "'Deposit' 버튼을 클릭하고 메타마스크에서 트랜잭션을 승인합니다.",
-            },
-            {
-              title: "Arbitrum 네트워크로 전환하여 잔액 확인",
-              description: "메타마스크에서 Arbitrum 네트워크로 전환하고 브릿지된 자산이 도착했는지 확인합니다.",
-            },
-          ],
-          warning: "⚠️ 브릿지 시 소량으로 먼저 테스트하세요. 공식 브릿지만 사용하세요.",
-          links: [
-            { title: "Arbitrum 공식 브릿지", url: "https://bridge.arbitrum.io/" },
-            { title: "Arbitrum 사용법 가이드", url: "https://docs.arbitrum.io/" },
-          ],
-        },
+          "이들은 모두 사용자의 여러 지갑과 다양한 DeFi 프로토콜에 분산된 자산을 한 곳에서 추적하고 관리할 수 있는 포트폴리오 대시보드 서비스입니다. 지원하는 체인, 프로토콜, 제공 기능(스왑, 브릿지 등)에서 약간의 차이가 있으므로 사용 편의성과 필요 기능에 따라 선택할 수 있습니다.",
       },
       {
         id: "8-2",
-        question: "Optimistic Rollups vs ZK-Rollups",
+        question: "Etherscan으로 트랜잭션 조회하는 법",
         answer:
-          "Optimistic Rollups는 트랜잭션이 유효하다고 가정하고, 문제가 발견될 경우에만 검증을 수행합니다. ZK-Rollups는 영지식 증명(Zero-Knowledge Proof)을 사용하여 트랜잭션의 유효성을 검증합니다. 각각 장단점이 있으며, 사용 사례에 따라 적합한 솔루션을 선택해야 합니다.",
-        links: [
-          {
-            title: "Optimistic Rollups 설명",
-            url: "https://ethereum.org/en/developers/docs/scaling/optimistic-rollups/",
-          },
-          { title: "ZK-Rollups 설명", url: "https://ethereum.org/en/developers/docs/scaling/zk-rollups/" },
-        ],
-        tips: "ZK-Rollups는 Optimistic Rollups보다 높은 보안성을 제공하지만, 더 복잡한 기술을 사용합니다.",
-        quiz: {
-          question: "Optimistic Rollup과 ZK-Rollup의 차이점으로 옳은 것은?",
-          options: [
-            "ZK-Rollup은 사기 증명(fraud proof)을 사용한다",
-            "Optimistic Rollup은 출금 시 대기 시간이 없다",
-            "ZK-Rollup은 영지식 증명(zero-knowledge proof)을 사용한다",
-            "Optimistic Rollup은 EVM 호환성이 낮다",
+          "Etherscan(이더리움 블록 탐색기)에서 트랜잭션 해시(TxID), 지갑 주소, 컨트랙트 주소 등을 검색하여 해당 거래의 상세 정보(보낸 사람, 받는 사람, 금액, 가스비, 상태 등)를 확인할 수 있습니다. 토큰 전송 내역, 스마트 컨트랙트 호출 정보 등도 볼 수 있습니다.",
+        practice: {
+          title: "Etherscan 활용하기",
+          steps: [
+            "1. Etherscan.io 웹사이트 접속",
+            "2. 검색창에 트랜잭션 해시 또는 주소 입력",
+            "3. 거래 상세 정보 확인 (상태, 가스비, 시간 등)",
+            "4. 토큰 전송 내역 확인 (Tokens Transferred 섹션)",
+            "5. 스마트 컨트랙트 상호작용 확인",
+            "6. 필요시 거래 영수증 다운로드",
           ],
-          correctAnswer: 2,
-          explanation:
-            "ZK-Rollup은 영지식 증명(zero-knowledge proof)을 사용하여 트랜잭션의 유효성을 증명합니다. 반면 Optimistic Rollup은 사기 증명(fraud proof)을 사용하며, 출금 시 이의 제기 기간이 필요합니다.",
         },
       },
       {
         id: "8-3",
-        question: "주요 Layer 2 프로젝트",
+        question: "Token Allowance Checker란?",
         answer:
-          "Arbitrum, Optimism, zkSync, StarkNet 등이 대표적인 Layer 2 프로젝트입니다. 각 프로젝트는 고유한 기술적 특징과 생태계를 가지고 있습니다.",
-        links: [
-          { title: "Arbitrum", url: "https://arbitrum.io/" },
-          { title: "Optimism", url: "https://www.optimism.io/" },
-        ],
-        tips: "Layer 2 프로젝트를 사용하기 전에, 해당 프로젝트의 보안성과 탈중앙화 수준을 확인하는 것이 중요합니다.",
-        quiz: {
-          question: "다음 중 옵티미스틱 롤업(Optimistic Rollup) 기술을 사용하는 Layer 2 프로젝트는?",
-          options: ["zkSync", "StarkNet", "Arbitrum", "Scroll"],
-          correctAnswer: 2,
-          explanation:
-            "Arbitrum은 옵티미스틱 롤업 기술을 사용하는 대표적인 Layer 2 프로젝트입니다. zkSync, StarkNet, Scroll은 모두 ZK 롤업 기술을 사용합니다.",
-        },
+          "토큰 권한 검사기(예: Revoke.cash, Etherscan의 Token Approvals)는 특정 지갑 주소가 어떤 스마트 컨트랙트에 얼마만큼의 토큰 지출 권한(allowance)을 부여했는지 확인하고, 필요 없는 권한을 철회(revoke)할 수 있게 도와주는 도구입니다. 보안 관리에 필수적입니다.",
+      },
+      {
+        id: "8-4",
+        question: "Snapshot 투표 절차",
+        answer:
+          "Snapshot은 오프체인 가스리스 거버넌스 투표 플랫폼입니다. 프로젝트의 Snapshot 페이지에 지갑을 연결하고, 현재 진행 중인 제안(Proposal)을 확인한 후, 자신의 투표권(보통 해당 프로젝트의 거버넌스 토큰 보유량에 비례)을 사용하여 찬성, 반대 등의 의견을 투표합니다.",
       },
     ],
   },
   {
-    category: "9. ✍️ 스마트 컨트랙트 개발 (Smart Contract Development)",
+    category: "9. 🧱 DAO & Governance (DAO & 거버넌스)",
     items: [
       {
         id: "9-1",
-        question: "Solidity 개발 환경 설정",
+        question: "DAO란 무엇인가요?",
         answer:
-          "Remix IDE, Truffle, Hardhat 등을 사용하여 Solidity 스마트 컨트랙트를 개발할 수 있습니다. 각 개발 환경은 고유한 장단점을 가지고 있으며, 사용자의 숙련도와 프로젝트의 요구 사항에 따라 적절한 환경을 선택해야 합니다.",
-        links: [
-          { title: "Remix IDE", url: "https://remix.ethereum.org/" },
-          { title: "Truffle", url: "https://trufflesuite.com/" },
-        ],
-        tips: "Remix IDE는 간단한 컨트랙트 개발 및 테스트에 적합하며, Truffle과 Hardhat은 복잡한 프로젝트 관리에 유용합니다.",
-        practice: {
-          title: "Remix IDE에서 첫 스마트 컨트랙트 배포하기",
-          description:
-            "웹 브라우저에서 Remix IDE를 사용하여 간단한 스마트 컨트랙트를 작성하고 테스트넷에 배포해보세요.",
-          steps: [
-            {
-              title: "remix.ethereum.org 접속",
-              description: "브라우저에서 Remix IDE 공식 웹사이트에 접속합니다. 별도 설치 없이 바로 사용할 수 있습니다.",
-            },
-            {
-              title: "새 파일 생성 (HelloWorld.sol)",
-              description:
-                "File Explorer에서 'contracts' 폴더를 우클릭하고 'New File'을 선택하여 'HelloWorld.sol' 파일을 생성합니다.",
-            },
-            {
-              title: "간단한 컨트랙트 코드 작성",
-              description: "기본적인 Solidity 컨트랙트 코드를 작성합니다. 예: 문자열을 저장하고 반환하는 함수",
-            },
-            {
-              title: "Solidity 컴파일러에서 컴파일",
-              description:
-                "좌측 메뉴에서 'Solidity Compiler' 탭을 클릭하고 'Compile HelloWorld.sol' 버튼을 눌러 컴파일합니다.",
-            },
-            {
-              title: "Deploy & Run 탭에서 환경 선택",
-              description:
-                "'Deploy & Run Transactions' 탭에서 Environment를 'Injected Provider - MetaMask'로 설정하고 테스트넷을 선택합니다.",
-            },
-            {
-              title: "테스트넷에 배포 및 함수 테스트",
-              description: "'Deploy' 버튼을 클릭하여 컨트랙트를 배포하고, 배포된 컨트랙트의 함수들을 테스트해봅니다.",
-            },
-          ],
-          warning: "⚠️ 메인넷 배포 전 반드시 테스트넷에서 충분히 테스트하세요.",
-          links: [
-            { title: "Remix IDE", url: "https://remix.ethereum.org/" },
-            { title: "Solidity 문서", url: "https://docs.soliditylang.org/" },
-          ],
+          "DAO(Decentralized Autonomous Organization, 탈중앙화 자율 조직)는 중앙 권위체 없이, 스마트 컨트랙트에 의해 정의된 규칙에 따라 구성원들이 공동으로 의사결정을 내리고 운영하는 조직입니다. 투명성과 커뮤니티 참여를 강조합니다.",
+        quiz: {
+          question: "DAO의 핵심 특징은?",
+          options: ["중앙 집중식 관리", "탈중앙화된 의사결정", "CEO 중심 운영", "비공개 투표"],
+          correctAnswer: 1,
+          explanation: "DAO는 중앙 권위체 없이 구성원들이 공동으로 의사결정을 내리는 탈중앙화된 조직입니다.",
         },
       },
       {
         id: "9-2",
-        question: "ERC-20 토큰 컨트랙트 작성",
+        question: "거버넌스 토큰의 역할",
         answer:
-          "ERC-20은 대체 가능한 토큰을 위한 표준 인터페이스입니다. OpenZeppelin Contracts 라이브러리를 사용하여 ERC-20 토큰 컨트랙트를 쉽게 작성할 수 있습니다.",
-        links: [
-          { title: "ERC-20 설명", url: "https://ethereum.org/ko/developers/docs/standards/tokens/erc-20/" },
-          { title: "OpenZeppelin Contracts", url: "https://docs.openzeppelin.com/contracts/4.x/" },
-        ],
-        tips: "OpenZeppelin 라이브러리를 사용하면 보안 감사를 거친 코드를 활용할 수 있어 안전합니다.",
-        quiz: {
-          question: "ERC-20 토큰 표준에 필수적인 함수가 아닌 것은?",
-          options: ["transfer", "approve", "mint", "balanceOf"],
-          correctAnswer: 2,
-          explanation:
-            "mint 함수는 ERC-20 표준에 정의된 필수 함수가 아닙니다. 이는 토큰 발행 로직으로, 구현 방식은 개발자가 자유롭게 결정할 수 있습니다. transfer, approve, balanceOf는 ERC-20 표준에 정의된 필수 함수입니다.",
-        },
+          "거버넌스 토큰은 DAO의 의사결정에 참여할 수 있는 권한(투표권)을 부여하는 암호화폐입니다. 토큰 보유자들은 프로토콜의 변경, 자금 사용, 새로운 기능 추가 등에 대한 제안을 하고 투표할 수 있습니다.",
+      },
+      {
+        id: "9-3",
+        question: "온체인 vs 오프체인 거버넌스",
+        answer:
+          "온체인 거버넌스는 모든 제안과 투표 결과가 블록체인에 직접 기록되고 실행되어 투명하고 강제력이 있지만, 가스비가 발생하고 유연성이 떨어질 수 있습니다. 오프체인 거버넌스(예: Snapshot)는 가스비 없이 투표할 수 있어 참여가 쉽지만, 투표 결과를 실제 실행에 옮기려면 별도의 과정이 필요할 수 있습니다.",
+      },
+      {
+        id: "9-4",
+        question: "위임 투표(Delegation) 문화란?",
+        answer:
+          "위임 투표는 거버넌스 토큰 보유자가 자신의 투표권을 다른 신뢰할 수 있는 사람이나 그룹(대표자)에게 위임하여 대신 행사하도록 하는 것입니다. 모든 사안에 직접 참여하기 어려운 토큰 보유자들의 참여를 독려하고, 전문성을 가진 대표자들이 더 나은 결정을 내릴 수 있도록 돕는 문화입니다.",
       },
     ],
   },
   {
-    category: "10. 🧠 Web3 심화 개념 (Web3 Advanced Concepts)",
+    category: "10. 📈 Airdrops & Missions (에어드랍 & 미션)",
     items: [
       {
         id: "10-1",
-        question: "탈중앙화란 무엇인가요?",
+        question: "에어드랍은 왜 존재하나요?",
         answer:
-          "탈중앙화는 단일 개인이나 기관이 시스템 전체를 통제하지 않고, 권한과 책임이 여러 참여자에게 분산되어 있는 상태를 의미합니다. Web3에서는 데이터 소유권, 의사결정, 네트워크 운영 등에서 중앙 집중적인 통제로부터 벗어나는 것을 목표로 합니다.",
-        links: [
-          { title: "탈중앙화 설명", url: "https://ethereum.org/ko/developers/docs/consensus-mechanisms/" },
-          { title: "Web3 철학", url: "https://ethereum.org/ko/web3/" },
-        ],
-        tips: "완전한 탈중앙화는 이상적인 목표이지만, 현실에서는 다양한 수준의 탈중앙화가 존재합니다.",
+          "에어드랍은 프로젝트 초기에 사용자를 확보하고 커뮤니티를 구축하며, 토큰을 분산시키고, 프로젝트를 홍보하기 위한 마케팅 전략으로 사용됩니다. 또한, 특정 활동에 대한 보상이나 거버넌스 참여를 독려하기 위해서도 진행됩니다.",
         quiz: {
-          question: "탈중앙화 시스템의 특징이 아닌 것은?",
-          options: [
-            "단일 실패 지점이 없다",
-            "검열 저항성이 있다",
-            "의사결정이 분산되어 있다",
-            "항상 중앙화된 시스템보다 효율적이다",
-          ],
-          correctAnswer: 3,
-          explanation:
-            "탈중앙화 시스템은 일반적으로 중앙화된 시스템보다 효율성이 낮을 수 있습니다. 합의 메커니즘과 데이터 복제 등의 과정이 필요하기 때문입니다. 그러나 이러한 효율성 저하는 보안, 투명성, 검열 저항성 등의 이점을 위한 트레이드오프로 볼 수 있습니다.",
+          question: "에어드랍의 주요 목적은?",
+          options: ["수익 창출", "사용자 확보 및 홍보", "토큰 가격 상승", "개발자 보상"],
+          correctAnswer: 1,
+          explanation: "에어드랍은 주로 초기 사용자를 확보하고 프로젝트를 홍보하기 위한 마케팅 전략입니다.",
         },
       },
       {
         id: "10-2",
-        question: "토크노믹스 기초: 발행량, 소각, 인플레이션",
+        question: "Sybil 방지 기법 정리",
         answer:
-          "토크노믹스는 토큰(Token)과 경제학(Economics)의 합성어로, 토큰의 설계, 분배, 공급 및 수요 관리 등 경제적 모델을 의미합니다. 총 발행량은 토큰의 희소성을 결정하고, 소각은 공급량을 줄여 가치를 높이려는 시도이며, 인플레이션은 지속적인 토큰 발행으로 가치가 하락하는 현상을 나타냅니다.",
-        links: [
-          {
-            title: "토크노믹스 설계",
-            url: "https://medium.com/coinmonks/token-economics-101-a-beginners-guide-to-tokenomics-2e8d13cb1fe3",
-          },
-          { title: "토큰 소각 메커니즘", url: "https://academy.binance.com/en/articles/what-is-token-burning" },
-        ],
-        tips: "지속 가능한 토크노믹스 설계는 프로젝트의 장기적인 성공에 중요한 요소입니다.",
-        quiz: {
-          question: "토큰 소각(burning)의 주요 목적은?",
-          options: [
-            "네트워크 수수료 증가",
-            "토큰 공급량 감소를 통한 가치 상승 유도",
-            "거버넌스 참여 증가",
-            "스테이킹 보상 증가",
-          ],
-          correctAnswer: 1,
-          explanation:
-            "토큰 소각은 유통 중인 토큰의 일부를 영구적으로 제거하여 공급량을 줄이는 과정입니다. 이는 희소성을 증가시켜 토큰 가치 상승을 유도하는 것이 주요 목적입니다. 또한 일부 프로젝트에서는 수수료의 일부를 소각하여 디플레이션 모델을 구현하기도 합니다.",
-        },
+          "프로젝트들은 에어드랍이나 거버넌스에서 시빌 공격(한 사람이 여러 계정 사용)을 방지하기 위해 다양한 기법을 사용합니다. 예를 들어, 지갑 활동 내역(거래 횟수, 기간, 사용 DApp 종류), 특정 NFT 보유 여부, 소셜 미디어 계정 연동, KYC, Gitcoin Passport 같은 신원 증명 플랫폼 활용 등이 있습니다.",
       },
       {
         id: "10-3",
-        question: "모듈형 블록체인이란? (Celestia, Fuel 등)",
+        question: "트윗, 브릿지, NFT 민팅이 중요한 이유",
         answer:
-          "모듈형 블록체인은 블록체인의 핵심 기능(실행, 합의, 데이터 가용성, 결제)을 각각 독립적인 모듈(계층)로 분리하여, 각 기능을 전문화하고 최적화하려는 아키텍처입니다. 이를 통해 확장성, 유연성, 주권 등을 향상시킬 수 있습니다. Celestia(데이터 가용성), Fuel(실행) 등이 대표적입니다.",
-        links: [
-          {
-            title: "모듈형 블록체인 설명",
-            url: "https://celestia.org/learn/basics-of-modular-blockchains/introduction/",
-          },
-          { title: "Celestia", url: "https://celestia.org/" },
-        ],
-        tips: "모듈형 접근 방식은 각 계층이 독립적으로 최적화될 수 있어 확장성 문제 해결에 효과적입니다.",
-        quiz: {
-          question: "모듈형 블록체인 아키텍처의 주요 이점은?",
-          options: [
-            "모든 트랜잭션이 하나의 체인에서 처리됨",
-            "각 계층이 독립적으로 최적화될 수 있음",
-            "항상 완전한 탈중앙화를 보장함",
-            "스마트 컨트랙트가 필요 없음",
-          ],
-          correctAnswer: 1,
-          explanation:
-            "모듈형 블록체인의 주요 이점은 실행, 합의, 데이터 가용성 등의 계층을 분리하여 각 계층이 독립적으로 최적화될 수 있다는 점입니다. 이를 통해 특정 용도에 맞게 각 계층을 조합하여 확장성, 보안성, 탈중앙화 등의 특성을 조절할 수 있습니다.",
-        },
+          "에어드랍 조건으로 프로젝트 관련 트윗(홍보), 다른 체인에서 자금 유치(브릿지 사용), 생태계 참여 증명(NFT 민팅) 등을 요구하는 경우가 많습니다. 이는 프로젝트의 인지도를 높이고, 실제 사용자를 유치하며, 커뮤니티 활성화에 기여하기 때문입니다.",
       },
       {
         id: "10-4",
-        question: "Privacy Chain: Aleo, Aztec, Iron Fish",
+        question: "포인트 시스템(Points System) 기반 에어드랍의 특징과 효과적인 포인트 파밍 전략은?",
         answer:
-          "프라이버시 체인은 거래 내역이나 사용자 신원을 기본적으로 비공개로 처리하여 익명성과 프라이버시를 강화한 블록체인입니다. 영지식 증명 등의 암호학 기술을 활용하여 거래의 유효성은 검증하면서도 세부 내용은 숨깁니다. Aleo, Aztec, Iron Fish 등이 이러한 프라이버시 기능을 제공하는 프로젝트입니다.",
-        links: [
-          { title: "Aleo", url: "https://aleo.org/" },
-          { title: "Aztec", url: "https://aztec.network/" },
-        ],
-        tips: "프라이버시 체인은 금융 거래나 개인 정보가 포함된 애플리케이션에 적합합니다.",
-        quiz: {
-          question: "프라이버시 체인에서 주로 사용되는 암호학 기술은?",
-          options: [
-            "영지식 증명(Zero-Knowledge Proofs)",
-            "작업 증명(Proof of Work)",
-            "지분 증명(Proof of Stake)",
-            "권한 증명(Proof of Authority)",
+          "최근 많은 프로젝트들이 사용자의 활동(예: 거래량, 예치 기간, 특정 기능 사용)에 따라 포인트를 부여하고, 이 포인트를 기준으로 향후 에어드랍을 진행하는 방식을 사용합니다. 효과적인 파밍을 위해서는 꾸준한 활동, 다양한 기능 사용, 가능한 많은 거래량 발생 등이 필요하지만, 가스비와 시간 투자를 고려해야 합니다.",
+        practice: {
+          title: "에어드랍 준비 전략",
+          steps: [
+            "1. 유망한 프로젝트 리서치 및 선별",
+            "2. 테스트넷 참여 (초기 사용자 혜택)",
+            "3. 메인넷 출시 후 초기 활동 참여",
+            "4. 다양한 기능 사용 (스왑, 브릿지, 스테이킹 등)",
+            "5. 커뮤니티 참여 (디스코드, 트위터 등)",
+            "6. 꾸준한 활동 유지 (일회성 X)",
+            "7. 포인트 시스템 확인 및 최적화",
           ],
-          correctAnswer: 0,
-          explanation:
-            "프라이버시 체인은 주로 영지식 증명(Zero-Knowledge Proofs) 기술을 사용합니다. 이 기술은 특정 정보를 공개하지 않고도 그 정보가 유효하다는 것을 증명할 수 있게 해줍니다. 예를 들어, 트랜잭션의 금액이나 참여자를 공개하지 않고도 트랜잭션이 유효하다는 것을 증명할 수 있습니다.",
-        },
-      },
-      {
-        id: "10-5",
-        question: "Web3 ID: DID, SBT, VC",
-        answer:
-          "Web3 ID는 사용자가 자신의 디지털 신원을 스스로 통제하고 관리할 수 있도록 하는 개념입니다. DID(Decentralized Identifiers)는 탈중앙화된 식별자이고, SBT(Soulbound Tokens)는 양도 불가능한 신원 증명 토큰이며, VC(Verifiable Credentials)는 검증 가능한 자격 증명(예: 졸업장, 면허증)을 디지털 형태로 표현한 것입니다.",
-        links: [
-          { title: "DID 설명", url: "https://www.w3.org/TR/did-core/" },
-          { title: "SBT 소개", url: "https://vitalik.ca/general/2022/01/26/soulbound.html" },
-        ],
-        tips: "Web3 ID는 개인 정보 보호와 자기 주권 신원(Self-Sovereign Identity)을 가능하게 합니다.",
-        quiz: {
-          question: "Soulbound Token(SBT)의 주요 특징은?",
-          options: [
-            "다른 지갑으로 전송 가능",
-            "NFT와 동일한 표준 사용",
-            "양도 불가능(non-transferable)",
-            "항상 금전적 가치를 가짐",
-          ],
-          correctAnswer: 2,
-          explanation:
-            "Soulbound Token(SBT)의 주요 특징은 양도 불가능(non-transferable)하다는 점입니다. 이는 특정 지갑이나 사용자에게 영구적으로 연결되어 있어 다른 사람에게 전송할 수 없습니다. 이러한 특성 때문에 학위, 자격증, 멤버십 등 개인의 신원이나 성취와 관련된 정보를 나타내는 데 적합합니다.",
+          warning: "⚠️ 에어드랍은 확정된 것이 아니므로, 과도한 투자는 피하고 분산 전략을 사용하세요.",
         },
       },
     ],
   },
   {
-    category: "11. 💻 Web3 개발 (Web3 Development)",
+    category: "11. 👨‍💻 Dev for Non-Dev (비개발자를 위한 개발 지식)",
     items: [
       {
         id: "11-1",
-        question: "Web3.js vs Ethers.js",
+        question: "스마트컨트랙트란?",
         answer:
-          "Web3.js와 Ethers.js는 JavaScript 애플리케이션에서 이더리움 블록체인과 상호작용하기 위한 라이브러리입니다. Web3.js는 오래된 라이브러리로 많은 레퍼런스가 있고, Ethers.js는 더 현대적이고 가벼우며 타입스크립트 지원이 우수합니다.",
-        links: [
-          { title: "Web3.js 문서", url: "https://web3js.readthedocs.io/" },
-          { title: "Ethers.js 문서", url: "https://docs.ethers.io/" },
-        ],
-        tips: "최근에는 Ethers.js가 더 많이 사용되는 추세이지만, 프로젝트 요구사항에 따라 선택하세요.",
+          "스마트 컨트랙트는 특정 조건이 충족되면 사전에 프로그래밍된 계약 내용이 자동으로 실행되는 디지털 계약입니다. 블록체인 위에서 작동하며, 중개자 없이 투명하고 신뢰할 수 있는 계약 이행을 가능하게 합니다.",
         quiz: {
-          question: "Ethers.js의 장점이 아닌 것은?",
-          options: ["더 가벼운 번들 크기", "더 나은 타입스크립트 지원", "ENS 네임 지원", "더 많은 레퍼런스와 예제"],
-          correctAnswer: 3,
-          explanation:
-            "Web3.js가 더 오래된 라이브러리이기 때문에 더 많은 레퍼런스와 예제가 있습니다. Ethers.js는 더 가벼운 번들 크기, 더 나은 타입스크립트 지원, ENS 네임 지원 등의 장점이 있지만, 상대적으로 레퍼런스가 적을 수 있습니다.",
+          question: "스마트 컨트랙트의 특징은?",
+          options: ["수동 실행", "중개자 필요", "자동 실행", "종이 계약"],
+          correctAnswer: 2,
+          explanation: "스마트 컨트랙트는 조건이 충족되면 자동으로 실행되는 것이 핵심 특징입니다.",
         },
       },
       {
@@ -1099,201 +587,183 @@ export const web3Data = [
         question: "Solidity vs Vyper",
         answer:
           "Solidity는 이더리움 스마트 컨트랙트 개발에 가장 널리 사용되는 객체 지향 프로그래밍 언어로, C++, 파이썬, 자바스크립트와 유사한 문법을 가집니다. Vyper는 파이썬과 유사한 문법을 가지며, 보안성과 코드 가독성을 강조하여 더 간결하고 안전한 계약 작성을 목표로 합니다.",
-        links: [
-          { title: "Solidity 문서", url: "https://docs.soliditylang.org/" },
-          { title: "Vyper 문서", url: "https://vyper.readthedocs.io/" },
-        ],
-        tips: "Solidity는 더 많은 기능과 커뮤니티 지원을 제공하지만, Vyper는 보안에 중점을 둔 프로젝트에 적합할 수 있습니다.",
-        quiz: {
-          question: "Vyper가 Solidity와 비교하여 가지는 특징은?",
-          options: ["재진입 공격에 더 취약함", "상속과 오버로딩 지원", "무한 루프 방지 설계", "더 복잡한 문법 구조"],
-          correctAnswer: 2,
-          explanation:
-            "Vyper는 보안을 강화하기 위해 무한 루프를 방지하는 설계를 채택했습니다. 이를 위해 재귀 호출이나 무한 루프를 만들 수 있는 기능을 제한합니다. 또한 Vyper는 상속, 오버로딩, 재귀 등의 복잡한 기능을 의도적으로 제거하여 코드 감사를 더 쉽게 만들었습니다.",
-        },
+      },
+      {
+        id: "11-3",
+        question: "테스트넷에서 실습하는 법",
+        answer:
+          "테스트넷은 실제 자산을 사용하지 않고 블록체인 개발 및 DApp 테스트를 할 수 있는 실험용 네트워크입니다. 메타마스크 등 지갑에서 테스트넷(예: Sepolia, Goerli)으로 네트워크를 전환하고, 해당 테스트넷의 수도꼭지(Faucet)에서 테스트용 코인을 받아 스마트 컨트랙트 배포나 DApp 기능을 시험해볼 수 있습니다.",
+      },
+      {
+        id: "11-4",
+        question: "GitHub 오픈소스 보는 법",
+        answer:
+          "GitHub는 많은 Web3 프로젝트들이 소스 코드를 공개하고 협업하는 플랫폼입니다. 프로젝트의 GitHub 저장소(Repository)에서 코드를 직접 보거나, 이슈(Issue) 탭에서 버그나 개선 사항 논의를, 풀 리퀘스트(Pull Request) 탭에서 코드 변경 제안 및 리뷰 과정을 확인할 수 있습니다.",
       },
     ],
   },
   {
-    category: "12. 🌍 Web3 생태계 & 커뮤니티 (Web3 Ecosystems & Communities)",
+    category: "12. 🧠 Web3 심화 개념 (Web3 Advanced Concepts)",
     items: [
       {
         id: "12-1",
-        question: "주요 레이어1 생태계 비교",
+        question: "탈중앙화란 무엇인가요?",
         answer:
-          "이더리움은 가장 큰 생태계와 개발자 커뮤니티를 가졌지만 확장성 문제가 있습니다. 솔라나는 높은 처리 속도를 자랑하지만 때때로 네트워크 안정성 문제가 발생합니다. 코스모스와 폴카닷은 상호운용 가능한 블록체인 네트워크 구축을 목표로 합니다. 각 생태계는 기술적 특징, 주요 DApp, 커뮤니티 분위기 등이 다릅니다.",
-        links: [
-          { title: "이더리움", url: "https://ethereum.org" },
-          { title: "솔라나", url: "https://solana.com" },
-          { title: "코스모스", url: "https://cosmos.network" },
-        ],
-        tips: "각 생태계의 특성을 이해하고 목적에 맞는 체인을 선택하세요.",
+          "탈중앙화는 단일 개인이나 기관이 시스템 전체를 통제하지 않고, 권한과 책임이 여러 참여자에게 분산되어 있는 상태를 의미합니다. Web3에서는 데이터 소유권, 의사결정, 네트워크 운영 등에서 중앙 집중적인 통제로부터 벗어나는 것을 목표로 합니다.",
       },
       {
         id: "12-2",
-        question: "Web3 커뮤니티 참여 방법",
+        question: "토크노믹스 기초: 발행량, 소각, 인플레이션",
         answer:
-          "트위터, 디스코드, 텔레그램, 레딧 등에서 관심 있는 분야의 프로젝트나 인플루언서를 팔로우하고 관련 커뮤니티 채널에 참여할 수 있습니다. 각 커뮤니티는 고유한 문화와 소통 방식을 가지며, 정보 공유, 토론, 이벤트 참여 등을 통해 활동할 수 있습니다.",
-        links: [
-          { title: "Web3 커뮤니티 가이드", url: "https://ethereum.org/en/community/" },
-          { title: "Discord 서버 목록", url: "https://ethereum.org/en/community/online/" },
-        ],
-        tips: "커뮤니티 규칙을 잘 읽고 존중하며, 건설적인 기여를 하려고 노력하세요.",
+          "토크노믹스는 토큰(Token)과 경제학(Economics)의 합성어로, 토큰의 설계, 분배, 공급 및 수요 관리 등 경제적 모델을 의미합니다. 총 발행량은 토큰의 희소성을 결정하고, 소각은 공급량을 줄여 가치를 높이려는 시도이며, 인플레이션은 지속적인 토큰 발행으로 가치가 하락하는 현상을 나타냅니다.",
+      },
+      {
+        id: "12-3",
+        question: "MEV란?",
+        answer:
+          "MEV(Maximal Extractable Value, 이전에는 Miner Extractable Value)는 블록 생산자(채굴자 또는 검증자)가 블록 내 트랜잭션의 순서, 포함 여부 등을 조작하여 얻을 수 있는 최대 이익을 의미합니다. 차익 거래, 청산 기회 선점 등으로 발생하며, 사용자에게 불리한 가격(슬리피지)을 유발할 수 있습니다.",
+      },
+      {
+        id: "12-4",
+        question: "DePIN, RWA, SocialFi 소개",
+        answer:
+          "DePIN(Decentralized Physical Infrastructure Networks)은 블록체인과 토큰 인센티브를 활용하여 실제 물리적 인프라(예: 무선 네트워크, 저장 공간, 에너지망)를 분산된 방식으로 구축하고 운영하는 분야입니다. RWA(Real World Asset)는 부동산, 미술품, 채권 등 현실 세계 자산을 토큰화하여 블록체인 상에서 거래하거나 담보로 활용하는 것입니다. SocialFi는 소셜 미디어와 DeFi를 결합하여 콘텐츠 제작, 커뮤니티 활동 등에 대한 경제적 보상을 제공하는 분야입니다.",
       },
     ],
   },
   {
-    category: "13. 💼 Web3 커리어 & 스킬 (Web3 Careers & Skills)",
+    category: "13. 🌍 Web3 Ecosystems & Communities (Web3 생태계 & 커뮤니티)",
     items: [
       {
         id: "13-1",
-        question: "Web3 분야의 다양한 직업군",
+        question: "주요 레이어1 생태계 비교 분석",
         answer:
-          "Web3 분야는 기술 직군(개발, 연구, 보안) 외에도 제품 기획, 디자인, 데이터 분석, 콘텐츠 제작, 커뮤니티 관리, 마케팅, 사업 개발 등 다양한 비기술 직군의 역할이 중요하며 수요가 증가하고 있습니다.",
-        links: [
-          { title: "Web3 Career", url: "https://web3.career" },
-          { title: "CryptoJobs", url: "https://crypto.jobs" },
-        ],
-        tips: "Web3 지식과 기존 전문 분야를 결합하면 경쟁력을 높일 수 있습니다.",
+          "이더리움은 가장 큰 생태계와 개발자 커뮤니티를 가졌지만 확장성 문제가 있습니다. 솔라나는 높은 처리 속도를 자랑하지만 때때로 네트워크 안정성 문제가 발생합니다. 코스모스와 폴카닷은 상호운용 가능한 블록체인 네트워크 구축을 목표로 합니다. 아발란체는 서브넷을 통한 맞춤형 블록체인을 지원합니다. BNB 체인은 낮은 수수료와 빠른 속도를 제공합니다. 앱토스와 수이는 Move 언어 기반의 새로운 L1입니다.",
       },
       {
         id: "13-2",
-        question: "Web3 학습 자료",
+        question: "주요 레이어2 생태계 비교 분석",
         answer:
-          "ConsenSys Academy, Encode Club, CryptoZombies, Udemy, Coursera 등에서 Web3 개발 및 관련 지식 온라인 코스를 찾을 수 있습니다. 다양한 부트캠프 프로그램도 있으며, 특정 기술 스택에 대한 자격증보다는 실제 프로젝트 경험이나 포트폴리오가 더 중요하게 여겨지는 경우가 많습니다.",
-        links: [
-          { title: "ConsenSys Academy", url: "https://consensys.net/academy/" },
-          { title: "CryptoZombies", url: "https://cryptozombies.io" },
-        ],
-        tips: "이론 학습과 함께 실제 프로젝트를 만들어보는 것이 중요합니다.",
+          "Arbitrum과 Optimism은 옵티미스틱 롤업으로 EVM 호환성이 높고 많은 DApp이 있습니다. zkSync, Starknet, Scroll, Polygon zkEVM은 ZK 롤업 기술을 사용하여 보안성과 효율성을 추구하며, EVM 호환성 수준이나 자체 개발 환경에서 차이가 있습니다. 이들 L2는 이더리움 확장성 해결의 핵심으로 빠르게 성장하고 있습니다.",
+      },
+      {
+        id: "13-3",
+        question: "특정 관심사별 Web3 커뮤니티 참여 방법",
+        answer:
+          "트위터, 디스코드, 텔레그램, 레딧 등에서 관심 있는 분야의 프로젝트나 인플루언서를 팔로우하고 관련 커뮤니티 채널에 참여할 수 있습니다. 각 커뮤니티는 고유한 문화와 소통 방식을 가지며, 정보 공유, 토론, 이벤트 참여 등을 통해 활동할 수 있습니다.",
       },
     ],
   },
   {
-    category: "14. 📜 규제, 윤리 & 사회 (Regulation, Ethics & Society)",
+    category: "14. 💼 Web3 Careers & Skills (Web3 커리어 & 스킬)",
     items: [
       {
         id: "14-1",
-        question: "주요 국가별 Web3 규제 동향",
+        question: "Web3 분야의 다양한 직업군 소개",
         answer:
-          "미국은 SEC와 CFTC 간의 관할권 문제, 증권성 판단 등으로 규제 불확실성이 존재합니다. 유럽연합은 MiCA(Markets in Crypto-Assets) 법안을 통해 포괄적인 규제 프레임워크를 마련하고 있습니다. 한국은 특정금융정보법을 중심으로 자금세탁방지에 초점을 맞추고 있으며, 투자자 보호 및 산업 육성을 위한 법제화 논의가 진행 중입니다.",
-        links: [
-          {
-            title: "MiCA 규제",
-            url: "https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica",
-          },
-          { title: "한국 규제 현황", url: "https://www.fsc.go.kr" },
-        ],
-        tips: "규제는 빠르게 변화하므로 최신 정보를 지속적으로 확인하세요.",
+          "Web3 분야는 기술 직군(개발, 연구, 보안) 외에도 제품 기획, 디자인, 데이터 분석, 콘텐츠 제작, 커뮤니티 관리, 마케팅, 사업 개발 등 다양한 비기술 직군의 역할이 중요하며 수요가 증가하고 있습니다.",
       },
       {
         id: "14-2",
-        question: "Web3 기술의 윤리적 고려사항",
+        question: "Web3 분야에서 각광받는 핵심 스킬과 지식은?",
         answer:
-          "블록체인의 투명성은 프라이버시 침해로 이어질 수 있고, 탈중앙화는 불법 활동에 악용될 소지도 있습니다. AI와 결합된 알고리즘은 편향성을 가질 수 있으며, PoW 방식의 에너지 소비는 환경 문제를 야기합니다. 이러한 윤리적 문제에 대한 고민과 기술적/사회적 해결 노력이 필요합니다.",
-        links: [
-          { title: "블록체인 윤리", url: "https://ethereum.org/en/energy-consumption/" },
-          { title: "지속가능성", url: "https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/" },
-        ],
-        tips: "기술 발전과 함께 윤리적 책임도 고려해야 합니다.",
+          "기술 스킬로는 특정 블록체인 기술 이해, 스마트 컨트랙트 개발 능력(Solidity 등), 암호학 기초, 보안 지식 등이 중요합니다. 소프트 스킬로는 문제 해결 능력, 학습 능력, 커뮤니케이션 능력, 커뮤니티 참여 및 협업 능력, 탈중앙화에 대한 이해 등이 요구됩니다.",
+      },
+      {
+        id: "14-3",
+        question: "Web3 프로젝트에 기여하는 방법",
+        answer:
+          "GitHub에서 오픈소스 프로젝트에 코드 기여, 문서 번역, 버그 리포트 등을 할 수 있습니다. DAO에 참여하여 거버넌스 제안을 하거나 특정 업무를 맡아 기여할 수도 있습니다. 프로젝트의 버그 바운티 프로그램에 참여하여 취약점을 찾고 보상을 받거나, 그랜트 프로그램을 통해 아이디어를 실현할 자금을 지원받을 수도 있습니다.",
       },
     ],
   },
   {
-    category: "15. 💡 Web3의 미래 & 신흥 트렌드 (Future of Web3 & Emerging Trends)",
+    category: "15. 📜 Regulation, Ethics & Society (규제, 윤리 & 사회)",
     items: [
       {
         id: "15-1",
-        question: "AI와 Web3의 융합",
+        question: "주요 국가별 암호화폐 및 Web3 규제 동향 심층 분석",
         answer:
-          "AI 모델 학습 및 운영을 탈중앙화하거나(DeAI), AI 에이전트가 블록체인과 상호작용하며 자율적으로 작업을 수행하고, DAO 운영에 AI를 활용하며, 사용자가 자신의 데이터를 AI 학습에 제공하고 통제하며 보상받는(데이터 주권) 등 다양한 융합 가능성이 탐색되고 있습니다.",
-        links: [
-          { title: "AI와 블록체인", url: "https://ethereum.org/en/developers/docs/" },
-          { title: "탈중앙화 AI", url: "https://blog.oceanprotocol.com" },
-        ],
-        tips: "AI와 Web3의 융합은 아직 초기 단계이지만 큰 잠재력을 가지고 있습니다.",
+          "미국은 SEC와 CFTC 간의 관할권 문제, 증권성 판단 등으로 규제 불확실성이 존재합니다. 유럽연합은 MiCA(Markets in Crypto-Assets) 법안을 통해 포괄적인 규제 프레임워크를 마련하고 있습니다. 한국은 특정금융정보법을 중심으로 자금세탁방지에 초점을 맞추고 있으며, 투자자 보호 및 산업 육성을 위한 법제화 논의가 진행 중입니다. 각국의 규제는 빠르게 변화하고 있습니다.",
+        quiz: {
+          question: "MiCA는 어느 지역의 규제 프레임워크인가요?",
+          options: ["미국", "유럽연합", "한국", "일본"],
+          correctAnswer: 1,
+          explanation: "MiCA(Markets in Crypto-Assets)는 유럽연합의 포괄적인 암호화폐 규제 법안입니다.",
+        },
       },
       {
         id: "15-2",
-        question: "Web3 대중 채택을 위한 과제",
+        question: "증권성 토큰(Security Token) 판단 기준",
         answer:
-          "복잡한 사용자 경험(UX)을 개선하고, 더 많은 사용자를 수용할 수 있는 확장성을 확보하며, 명확하고 합리적인 규제 환경을 조성하고, Web3 기술에 대한 대중의 이해도를 높이는 교육이 확대되어야 대중 채택이 이루어질 수 있습니다. 점진적으로 개선될 것으로 전망됩니다.",
-        links: [
-          { title: "Web3 UX", url: "https://ethereum.org/en/developers/docs/intro-to-ether/" },
-          { title: "확장성 솔루션", url: "https://ethereum.org/en/developers/docs/scaling/" },
-        ],
-        tips: "기술적 완성도와 함께 사용자 친화적인 인터페이스가 중요합니다.",
+          "미국에서는 특정 토큰이 투자 계약에 해당하는지 판단하기 위해 Howey Test(자금 투자, 공동 사업, 수익 기대, 타인의 노력 의존)를 주로 사용합니다. 이 기준에 따라 일부 토큰이 증권으로 분류될 수 있으며, 이는 해당 토큰의 발행 및 거래에 증권법 규제를 받게 만듭니다. 국가별로 증권성 판단 기준과 법적 해석은 다를 수 있습니다.",
       },
       {
         id: "15-3",
-        question: "메타버스와 Web3 기술의 결합",
+        question: "Web3 기술의 윤리적 고려사항",
         answer:
-          "Web3 기술(NFT, 암호화폐)은 메타버스 내 디지털 자산(아바타, 아이템, 토지)의 진정한 소유권을 사용자에게 부여하고, 서로 다른 메타버스 간 자산 이동 및 상호작용(상호운용성)을 가능하게 하며, 특정 기업이 통제하지 않는 개방형 메타버스 구축의 기반이 될 수 있습니다.",
-        links: [
-          { title: "메타버스와 NFT", url: "https://ethereum.org/en/nft/" },
-          { title: "디지털 소유권", url: "https://ethereum.org/en/developers/docs/standards/tokens/erc-721/" },
-        ],
-        tips: "메타버스의 성공은 기술적 구현뿐만 아니라 사용자 경험과 콘텐츠에 달려 있습니다.",
+          "블록체인의 투명성은 프라이버시 침해로 이어질 수 있고, 탈중앙화는 불법 활동에 악용될 소지도 있습니다. AI와 결합된 알고리즘은 편향성을 가질 수 있으며, PoW 방식의 에너지 소비는 환경 문제를 야기합니다. 이러한 윤리적 문제에 대한 고민과 기술적/사회적 해결 노력이 필요합니다.",
+      },
+      {
+        id: "15-4",
+        question: "Web3와 지속가능성",
+        answer:
+          "PoS, PoA 등 에너지 효율적인 합의 알고리즘으로 전환하거나, 탄소 배출권을 토큰화하여 거래하는 등 환경 문제를 해결하려는 노력이 있습니다. 또한, 블록체인 기술을 활용하여 기부금 추적의 투명성을 높이거나, 사회적 약자를 지원하는 등 사회적 책임을 다하려는 프로젝트들도 등장하고 있습니다.",
       },
     ],
   },
   {
-    category: "16. 🌐 대체 블록체인 생태계 (Alternative Blockchain Ecosystems)",
+    category: "16. 💡 Future of Web3 & Emerging Trends (Web3의 미래 & 신흥 트렌드)",
     items: [
       {
         id: "16-1",
-        question: "Avalanche (AVAX) 생태계 소개",
+        question: "AI와 Web3의 융합",
         answer:
-          "Avalanche는 높은 처리량과 낮은 지연시간을 제공하는 블록체인 플랫폼으로, 서브넷(Subnet) 기능을 통해 맞춤형 블록체인을 구축할 수 있습니다. 이더리움과 호환되면서도 더 빠른 트랜잭션 처리가 가능하며, DeFi, NFT, 게임 등 다양한 분야에서 활용되고 있습니다.",
-        links: [
-          { title: "Avalanche 공식 사이트", url: "https://www.avax.network/" },
-          { title: "Avalanche 개발자 문서", url: "https://docs.avax.network/" },
-        ],
-        tips: "Avalanche의 서브넷 기능은 특정 용도에 최적화된 블록체인을 만들 수 있게 해줍니다.",
+          "AI 모델 학습 및 운영을 탈중앙화하거나(DeAI), AI 에이전트가 블록체인과 상호작용하며 자율적으로 작업을 수행하고, DAO 운영에 AI를 활용하며, 사용자가 자신의 데이터를 AI 학습에 제공하고 통제하며 보상받는(데이터 주권) 등 다양한 융합 가능성이 탐색되고 있습니다.",
+        quiz: {
+          question: "DeAI의 의미는?",
+          options: ["AI 제거", "탈중앙화 AI", "AI 개발", "AI 투자"],
+          correctAnswer: 1,
+          explanation: "DeAI는 Decentralized AI의 줄임말로, AI 모델의 학습과 운영을 탈중앙화하는 개념입니다.",
+        },
       },
       {
         id: "16-2",
-        question: "Solana (SOL) 생태계 소개",
+        question: "탈중앙화 소셜 미디어(DeSo)의 발전 방향과 과제",
         answer:
-          "Solana는 Proof of History(PoH) 합의 메커니즘을 사용하여 초당 수만 건의 트랜잭션을 처리할 수 있는 고성능 블록체인입니다. 낮은 수수료와 빠른 처리 속도로 DeFi, NFT, Web3 애플리케이션 개발에 인기가 높으며, Rust 프로그래밍 언어를 사용합니다.",
-        links: [
-          { title: "Solana 공식 사이트", url: "https://solana.com/" },
-          { title: "Solana 개발자 문서", url: "https://docs.solana.com/" },
-        ],
-        tips: "Solana는 높은 성능을 제공하지만, 네트워크 안정성에 대한 우려가 있으므로 주의깊게 모니터링해야 합니다.",
+          "DeSo는 사용자가 자신의 콘텐츠와 소셜 그래프(팔로워 관계 등)를 직접 소유하고, 검열 저항성을 가지며, 활동에 대한 경제적 보상을 받을 수 있는 소셜 미디어 플랫폼을 목표로 합니다. Lens Protocol, Farcaster 등이 대표적이며, 사용자 경험 개선과 대중화, 지속 가능한 토크노믹스 설계 등이 과제입니다.",
       },
       {
         id: "16-3",
-        question: "Aptos 생태계 소개",
+        question: "메타버스와 Web3 기술의 결합",
         answer:
-          "Aptos는 Meta(구 Facebook)의 Diem 프로젝트에서 파생된 블록체인으로, Move 프로그래밍 언어를 사용합니다. 병렬 실행 엔진과 모듈형 아키텍처를 통해 높은 확장성과 안전성을 제공하며, 사용자 친화적인 Web3 경험을 목표로 합니다.",
-        links: [
-          { title: "Aptos 공식 사이트", url: "https://aptoslabs.com/" },
-          { title: "Aptos 개발자 문서", url: "https://aptos.dev/" },
-        ],
-        tips: "Aptos의 Move 언어는 리소스 중심의 프로그래밍 모델로 보안성을 강화합니다.",
+          "Web3 기술(NFT, 암호화폐)은 메타버스 내 디지털 자산(아바타, 아이템, 토지)의 진정한 소유권을 사용자에게 부여하고, 서로 다른 메타버스 간 자산 이동 및 상호작용(상호운용성)을 가능하게 하며, 특정 기업이 통제하지 않는 개방형 메타버스 구축의 기반이 될 수 있습니다.",
       },
       {
         id: "16-4",
-        question: "Sui 생태계 소개",
+        question: "Web3 기술의 대중 채택을 위한 주요 과제와 전망",
         answer:
-          "Sui는 Aptos와 마찬가지로 Move 언어를 사용하는 블록체인이지만, 객체 중심의 데이터 모델과 독특한 합의 메커니즘을 채택했습니다. 단순한 트랜잭션에 대해서는 합의 없이 즉시 처리가 가능하여 매우 빠른 속도를 자랑합니다.",
-        links: [
-          { title: "Sui 공식 사이트", url: "https://sui.io/" },
-          { title: "Sui 개발자 문서", url: "https://docs.sui.io/" },
-        ],
-        tips: "Sui의 객체 중심 모델은 기존 블록체인과 다른 새로운 패러다임을 제시합니다.",
+          "복잡한 사용자 경험(UX)을 개선하고, 더 많은 사용자를 수용할 수 있는 확장성을 확보하며, 명확하고 합리적인 규제 환경을 조성하고, Web3 기술에 대한 대중의 이해도를 높이는 교육이 확대되어야 대중 채택이 이루어질 수 있습니다. 점진적으로 개선될 것으로 전망됩니다.",
+        practice: {
+          title: "Web3 학습 로드맵",
+          steps: [
+            "1. 기본 개념 이해 (블록체인, 암호화폐, 지갑)",
+            "2. 실습을 통한 경험 쌓기 (지갑 생성, 간단한 거래)",
+            "3. DeFi 기초 학습 및 체험 (스왑, 유동성 공급)",
+            "4. NFT와 Web3 게임 경험",
+            "5. DAO 참여 및 거버넌스 투표 경험",
+            "6. 개발 지식 습득 (관심 있는 경우)",
+            "7. 커뮤니티 참여 및 네트워킹",
+            "8. 지속적인 학습과 트렌드 팔로우",
+          ],
+          warning: "⚠️ 항상 소액으로 시작하고, 이해하지 못하는 것에는 투자하지 마세요.",
+        },
       },
       {
         id: "16-5",
-        question: "NEAR Protocol (NEAR) 생태계 소개",
+        question: "게임파이(GameFi)의 진화",
         answer:
-          "NEAR는 샤딩 기술을 통해 확장성을 해결하고, 개발자와 사용자 모두에게 친화적인 경험을 제공하는 블록체인입니다. 인간이 읽을 수 있는 계정 이름, 점진적 보안 모델, 그리고 Rust와 AssemblyScript를 지원하여 Web2 개발자들의 진입 장벽을 낮췄습니다.",
-        links: [
-          { title: "NEAR 공식 사이트", url: "https://near.org/" },
-          { title: "NEAR 개발자 문서", url: "https://docs.near.org/" },
-        ],
-        tips: "NEAR의 샤딩 기술인 'Nightshade'는 네트워크가 성장함에 따라 자동으로 확장됩니다.",
+          "초기 P2E(Play-to-Earn) 모델은 토큰 인플레이션 문제 등으로 지속 가능성에 한계를 보였습니다. 최근에는 게임 자체의 재미(Play-and-Earn, Play-to-Own)를 강조하고, 게임 내 경제 시스템을 정교하게 설계하며, 커뮤니티 소유권을 강화하는 등 더 지속 가능한 모델을 탐색하는 방향으로 진화하고 있습니다.",
       },
     ],
   },
