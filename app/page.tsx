@@ -5,30 +5,45 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ChevronDown, ChevronRight, Menu, MessageCircle, Sparkles, X } from "lucide-react"
-import AutocompleteSearch from "@/components/autocomplete-search"
-import SearchSuggestions from "@/components/search-suggestions"
-import QuizComponent from "@/components/quiz-component"
-import PracticeComponent from "@/components/practice-component"
-import { texts } from "@/data/texts"
-import { searchKeywords, popularSearches } from "@/data/search-data"
-import { initialData } from "@/data/data"
+import { QuizComponent } from "@/components/quiz-component"
+import { PracticeComponent } from "@/components/practice-component"
+import { SearchSuggestions } from "@/components/search-suggestions"
+import { AutocompleteSearch } from "@/components/autocomplete-search"
+import { texts } from "@/app/data/texts"
+import { searchKeywords, popularSearches } from "@/app/data/search-data"
+import { web3Data } from "@/app/data/web3-data"
 
 export default function Home() {
   const [showApp, setShowApp] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState(0)
+  const [selectedCategory, setSelectedCategory] = useState(-1)
   const [expandedItems, setExpandedItems] = useState(new Set())
-  const [currentData, setCurrentData] = useState(initialData.ko)
-  const [showWelcome, setShowWelcome] = useState(true)
+  const [isClient, setIsClient] = useState(false)
 
+  // Ensure client-side rendering for interactive elements
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowWelcome(false)
-    }, 2000)
-
-    return () => clearTimeout(timer)
+    setIsClient(true)
   }, [])
+
+  const currentData = web3Data
+
+  const filteredItems = searchTerm
+    ? currentData.flatMap((category) =>
+        category.items
+          .filter(
+            (item) =>
+              item.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              item.answer.toLowerCase().includes(searchTerm.toLowerCase()),
+          )
+          .map((item) => ({
+            ...item,
+            categoryName: category.category,
+          })),
+      )
+    : selectedCategory >= 0
+      ? currentData[selectedCategory]?.items || []
+      : []
 
   const handleSearchSubmit = (term: string) => {
     setSearchTerm(term)
@@ -51,15 +66,27 @@ export default function Home() {
     setExpandedItems(newExpandedItems)
   }
 
-  const filteredItems = searchTerm
-    ? currentData
-        .flatMap((category) => category.items)
-        .filter((item) => item.question.toLowerCase().includes(searchTerm.toLowerCase()))
-    : currentData[selectedCategory]?.items || []
+  const showWelcome = selectedCategory === -1 && !searchTerm.trim()
+
+  // Prevent hydration mismatch by not rendering interactive elements until client-side
+  if (!isClient) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse">
+              <MessageCircle className="w-8 h-8 text-white" />
+            </div>
+            <p className="text-white text-lg">Loading HeyChain...</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Header */}
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      {/* App Header */}
       <header className="border-b border-purple-500/20 bg-gray-900/50 backdrop-blur-sm sticky top-0 z-30">
         <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between">
@@ -71,7 +98,7 @@ export default function Home() {
                 <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-400 to-pink-400 rounded-xl flex items-center justify-center">
                   <MessageCircle className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <div className="hidden sm:block">
+                <div>
                   <h1 className="text-lg sm:text-2xl font-bold text-white">HeyChain 101</h1>
                   <p className="text-xs sm:text-sm text-gray-400">{texts.subtitle}</p>
                 </div>
@@ -97,7 +124,7 @@ export default function Home() {
         <aside
           className={`
     fixed inset-y-0 left-0 z-50 w-full sm:w-80 bg-gradient-to-b from-gray-900/98 to-gray-800/98 backdrop-blur-sm border-r border-purple-500/20 
-    transform transition-all duration-300 ease-in-out
+    transform transition-all duration-300 ease-in-out pt-16
     md:relative md:translate-x-0 md:z-auto md:w-80 md:bg-gradient-to-b md:from-gray-900/95 md:to-gray-800/95
     ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
   `}
@@ -167,6 +194,11 @@ export default function Home() {
             </nav>
           </div>
         </aside>
+
+        {/* Overlay for mobile */}
+        {sidebarOpen && (
+          <div className="fixed inset-0 bg-black/50 z-40 md:hidden" onClick={() => setSidebarOpen(false)} />
+        )}
 
         {/* Main Content */}
         <main className="flex-1 overflow-y-auto">
