@@ -46,7 +46,8 @@ export const web3Data = [
           "메타마스크는 브라우저 확장 프로그램 및 모바일 앱 형태의 암호화폐 지갑으로, 주로 이더리움 및 EVM 호환 블록체인과 상호작용하는 데 사용됩니다. 공식 웹사이트에서 다운로드하여 설치하고, 안내에 따라 새 지갑을 생성하거나 기존 지갑을 복구할 수 있습니다.",
         links: [
           { title: "메타마스크 공식 사이트", url: "https://metamask.io/" },
-          { title: "메타마스크 설치 가이드", url: "https://metamask.io/download/" },
+          { title: "메타마스크 다운로드", url: "https://metamask.io/download/" },
+          { title: "메타마스크 한국어 지원", url: "https://support.metamask.io/hc/ko" },
         ],
         tips: "메타마스크 설치 시 공식 웹사이트를 통해 다운로드하고, 시드 구문은 안전하게 오프라인으로 보관하세요.",
         quiz: {
@@ -107,8 +108,8 @@ export const web3Data = [
         answer:
           "프라이빗 키는 특정 계정의 자산에 접근할 수 있는 비밀번호와 같은 고유한 암호 코드입니다. 시드 구문(또는 복구 구문)은 이 프라이빗 키들을 생성하고 지갑 전체를 복구하는 데 사용되는 12~24개의 단어 조합입니다.",
         links: [
-          { title: "프라이빗 키 설명", url: "https://ethereum.org/ko/developers/docs/accounts/" },
-          { title: "시드 구문 안전하게 보관하기", url: "https://support.ledger.com/hc/en-us/articles/360005514233" },
+          { title: "이더리움 계정 구조", url: "https://ethereum.org/ko/developers/docs/accounts/" },
+          { title: "Ledger 하드웨어 지갑", url: "https://www.ledger.com/ko" },
         ],
         tips: "프라이빗 키와 시드 구문은 절대 타인과 공유하지 마세요. 이는 디지털 자산의 열쇠와 같습니다.",
         quiz: {
@@ -130,8 +131,8 @@ export const web3Data = [
         answer:
           "지갑 주소는 공개키로부터 파생되며, 암호화폐를 주고받는 데 사용되는 고유 식별자입니다. 하나의 시드 구문으로 이론상 거의 무한대에 가까운 지갑 주소를 생성할 수 있습니다.",
         links: [
-          { title: "이더리움 주소 형식", url: "https://ethereum.org/ko/developers/docs/accounts/#account-creation" },
-          { title: "HD 지갑 설명", url: "https://learnmeabitcoin.com/technical/hd-wallets" },
+          { title: "이더리움 주소 형식", url: "https://ethereum.org/ko/developers/docs/accounts/" },
+          { title: "HD 지갑 설명", url: "https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki" },
         ],
         tips: "여러 개의 지갑 주소를 사용하면 프라이버시를 강화하고 자산을 용도별로 구분할 수 있습니다.",
         practice: {
@@ -214,8 +215,8 @@ export const web3Data = [
         answer:
           "블록체인은 거래 기록을 분산된 공개 장부에 기록하는 기술입니다. 각 블록은 이전 블록의 해시값을 포함하여 연결되어 있어, 데이터의 위변조가 어렵습니다. 이러한 특성 덕분에 높은 보안성과 투명성을 제공합니다.",
         links: [
-          { title: "블록체인 작동 방식", url: "https://www.investopedia.com/terms/b/blockchain.asp" },
-          { title: "분산 원장 기술(DLT)", url: "https://www.ibm.com/kr-ko/topics/distributed-ledger-technology" },
+          { title: "블록체인 기초 가이드", url: "https://ethereum.org/ko/developers/docs/intro-to-ethereum/" },
+          { title: "분산 원장 기술", url: "https://www.ibm.com/kr-ko/topics/what-is-blockchain" },
         ],
         tips: "블록체인은 다양한 산업 분야에서 혁신적인 변화를 가져올 수 있습니다.",
         quiz: {
@@ -223,7 +224,7 @@ export const web3Data = [
           options: ["분산 원장 기술", "데이터 불변성", "중앙 기관의 통제", "암호화 기술 사용"],
           correctAnswer: 2,
           explanation:
-            "블록체인은 중앙 기관의 통제 없이 분산된 네트워크에서 운영되는 것이 핵심 특성입니다. 중앙 기관의 통제는 블록체인의 특성이 아닙니다.",
+            "블록체인은 중앙 기관의 통제 없이 분산된 네트워크에서 운영되는 것이 핵심 특성입니다. 중앙 기관의 통제는 블록체인의 특성이 아닙.",
         },
         practice: {
           title: "블록체인 탐색기로 트랜잭션 추적하기",
@@ -301,8 +302,8 @@ export const web3Data = [
         answer:
           "거래량, 보안, 수수료, 지원하는 암호화폐 종류, 사용자 인터페이스, 고객 지원 등 다양한 요소를 고려해야 합니다. 신뢰할 수 있는 거래소를 선택하고, 보안 설정을 강화하는 것이 중요합니다.",
         links: [
-          { title: "바이낸스", url: "https://www.binance.com/ko" },
-          { title: "코인베이스", url: "https://www.coinbase.com/" },
+          { title: "업비트", url: "https://upbit.com/" },
+          { title: "빗썸", url: "https://www.bithumb.com/" },
         ],
         tips: "분산 거래소(DEX)도 고려해 보세요. 중앙화된 거래소와 다른 장단점이 있습니다.",
         practice: {
@@ -349,8 +350,8 @@ export const web3Data = [
         answer:
           "캔들 차트, 이동평균선, 거래량 지표 등을 활용하여 시장의 추세를 파악할 수 있습니다. 기술적 분석 외에도, 프로젝트의 기본적 가치(백서, 팀, 로드맵)를 분석하는 것이 중요합니다.",
         links: [
-          { title: "캔들 차트 설명", url: "https://www.investopedia.com/trading/candlestick-charting/" },
-          { title: "TradingView", url: "https://www.tradingview.com/" },
+          { title: "트레이딩뷰", url: "https://kr.tradingview.com/" },
+          { title: "코인마켓캡", url: "https://coinmarketcap.com/ko/" },
         ],
         tips: "과거의 데이터가 미래를 보장하지 않습니다. 항상 리스크 관리를 염두에 두세요.",
         quiz: {
@@ -395,8 +396,8 @@ export const web3Data = [
         answer:
           "2FA는 계정 보안을 강화하는 추가적인 인증 단계입니다. 비밀번호 외에, 휴대폰 인증 코드나 OTP(One-Time Password)를 사용하여 로그인 보안을 강화할 수 있습니다.",
         links: [
-          { title: "Google Authenticator", url: "https://support.google.com/accounts/answer/185839?hl=ko" },
-          { title: "Authy", url: "https://authy.com/" },
+          { title: "Google Authenticator", url: "https://support.google.com/accounts/answer/1066447?hl=ko" },
+          { title: "Authy 앱", url: "https://authy.com/download/" },
         ],
         tips: "2FA를 활성화하면 해킹 시도를 크게 줄일 수 있습니다.",
         practice: {
@@ -444,11 +445,11 @@ export const web3Data = [
         answer:
           "출처가 불분명한 링크나 이메일을 클릭하지 않고, 개인 정보를 요구하는 메시지에 응답하지 않아야 합니다. 공식 웹사이트 주소를 확인하고, 의심스러운 활동을 발견하면 즉시 거래소에 신고해야 합니다.",
         links: [
+          { title: "피싱 방지 가이드", url: "https://support.metamask.io/hc/ko/articles/360015489591" },
           {
-            title: "피싱 공격 예방 가이드",
-            url: "https://www.consumer.ftc.gov/articles/how-recognize-and-avoid-phishing-attacks",
+            title: "암호화폐 보안 가이드",
+            url: "https://academy.binance.com/ko/articles/how-to-secure-your-cryptocurrency",
           },
-          { title: "보안 뉴스", url: "https://krebsonsecurity.com/" },
         ],
         tips: "항상 의심하고 확인하는 습관을 가지세요.",
         quiz: {
@@ -470,8 +471,8 @@ export const web3Data = [
         answer:
           "콜드 월렛은 인터넷에 연결되지 않은 하드웨어 지갑으로, 암호화폐를 오프라인 상태로 보관하여 해킹 위험을 줄일 수 있습니다. 장기 투자자에게 적합합니다.",
         links: [
-          { title: "Ledger", url: "https://www.ledger.com/" },
-          { title: "Trezor", url: "https://trezor.io/" },
+          { title: "Ledger 공식 사이트", url: "https://www.ledger.com/ko" },
+          { title: "Trezor 공식 사이트", url: "https://trezor.io/" },
         ],
         tips: "콜드 월렛의 복구 구문(Seed Phrase)을 안전하게 보관하세요.",
         quiz: {
@@ -493,8 +494,8 @@ export const web3Data = [
         answer:
           "DeFi는 블록체인 기술을 기반으로 구축된 탈중앙화 금융 시스템입니다. 은행과 같은 중개 기관 없이 암호화폐를 통해 대출, 예금, 거래 등의 금융 서비스를 제공합니다.",
         links: [
-          { title: "DeFi 설명", url: "https://ethereum.org/ko/defi/" },
-          { title: "DeFi Pulse", url: "https://defipulse.com/" },
+          { title: "DeFi 소개", url: "https://ethereum.org/ko/defi/" },
+          { title: "DeFiLlama", url: "https://defillama.com/" },
         ],
         tips: "DeFi는 높은 수익률을 제공하지만, 스마트 컨트랙트 버그, 해킹 등의 위험도 존재합니다.",
         practice: {
@@ -539,8 +540,8 @@ export const web3Data = [
         answer:
           "DEX는 중앙 기관 없이 사용자들이 직접 암호화폐를 거래할 수 있는 플랫폼입니다. Uniswap, SushiSwap 등이 대표적이며, 개인 지갑을 연결하여 거래할 수 있습니다.",
         links: [
-          { title: "Uniswap", url: "https://uniswap.org/" },
-          { title: "SushiSwap", url: "https://www.sushi.com/" },
+          { title: "Uniswap", url: "https://app.uniswap.org/" },
+          { title: "PancakeSwap", url: "https://pancakeswap.finance/" },
         ],
         tips: "DEX 사용 시, 슬리피지 설정과 가스비를 고려해야 합니다.",
         quiz: {
@@ -562,8 +563,8 @@ export const web3Data = [
         answer:
           "유동성 공급은 DEX에 암호화폐 쌍을 예치하여 거래를 활성화하는 데 기여하고, 그 대가로 수수료를 받는 것입니다. 높은 수익을 얻을 수 있지만, Impermanent Loss(비영구적 손실) 위험이 있습니다.",
         links: [
-          { title: "Impermanent Loss 설명", url: "https://academy.binance.com/en/articles/impermanent-loss-explained" },
-          { title: "유동성 공급 가이드", url: "https://www.gemini.com/learn/what-is-liquidity-pool" },
+          { title: "Uniswap 유동성 가이드", url: "https://docs.uniswap.org/concepts/protocol/concentrated-liquidity" },
+          { title: "비영구적 손실 설명", url: "https://academy.binance.com/ko/articles/impermanent-loss-explained" },
         ],
         tips: "유동성 공급 전, Impermanent Loss에 대해 충분히 이해해야 합니다.",
         quiz: {
@@ -590,7 +591,7 @@ export const web3Data = [
         answer:
           "NFT는 대체 불가능한 토큰으로, 디지털 자산의 소유권을 증명하는 데 사용됩니다. 이미지, 비디오, 음악, 게임 아이템 등 다양한 형태의 디지털 콘텐츠를 NFT로 발행할 수 있습니다.",
         links: [
-          { title: "NFT 설명", url: "https://ethereum.org/ko/nft/" },
+          { title: "NFT 소개", url: "https://ethereum.org/ko/nft/" },
           { title: "OpenSea", url: "https://opensea.io/" },
         ],
         tips: "NFT 투자는 높은 위험을 수반하므로 신중하게 접근해야 합니다.",
@@ -638,8 +639,8 @@ export const web3Data = [
         answer:
           "OpenSea, Rarible 등의 NFT 마켓플레이스에서 NFT를 구매하거나 판매할 수 있습니다. 메타마스크와 같은 암호화폐 지갑을 연결하여 거래를 진행합니다.",
         links: [
+          { title: "OpenSea", url: "https://opensea.io/" },
           { title: "Rarible", url: "https://rarible.com/" },
-          { title: "NFT 마켓플레이스 비교", url: "https://www.creativebloq.com/features/nft-marketplaces" },
         ],
         tips: "NFT 구매 전, 프로젝트의 신뢰성과 커뮤니티를 확인하는 것이 중요합니다.",
         quiz: {
@@ -687,8 +688,8 @@ export const web3Data = [
         answer:
           "DAO는 블록체인 기반의 탈중앙화된 자율 조직입니다. 스마트 컨트랙트에 의해 운영되며, 구성원들의 투표를 통해 의사 결정을 진행합니다. 투명하고 민주적인 조직 운영이 가능합니다.",
         links: [
-          { title: "DAO 설명", url: "https://ethereum.org/ko/dao/" },
-          { title: "DAOhaus", url: "https://daohaus.club/" },
+          { title: "DAO 소개", url: "https://ethereum.org/ko/dao/" },
+          { title: "Snapshot", url: "https://snapshot.org/" },
         ],
         tips: "DAO 참여 전, 조직의 목표와 운영 방식에 대해 충분히 이해해야 합니다.",
         practice: {
@@ -884,7 +885,7 @@ export const web3Data = [
           "Remix IDE, Truffle, Hardhat 등을 사용하여 Solidity 스마트 컨트랙트를 개발할 수 있습니다. 각 개발 환경은 고유한 장단점을 가지고 있으며, 사용자의 숙련도와 프로젝트의 요구 사항에 따라 적절한 환경을 선택해야 합니다.",
         links: [
           { title: "Remix IDE", url: "https://remix.ethereum.org/" },
-          { title: "Truffle", url: "https://trufflesuite.com/" },
+          { title: "Solidity 문서", url: "https://docs.soliditylang.org/ko/latest/" },
         ],
         tips: "Remix IDE는 간단한 컨트랙트 개발 및 테스트에 적합하며, Truffle과 Hardhat은 복잡한 프로젝트 관리에 유용합니다.",
         practice: {
@@ -1082,8 +1083,8 @@ export const web3Data = [
         answer:
           "Web3.js와 Ethers.js는 JavaScript 애플리케이션에서 이더리움 블록체인과 상호작용하기 위한 라이브러리입니다. Web3.js는 오래된 라이브러리로 많은 레퍼런스가 있고, Ethers.js는 더 현대적이고 가벼우며 타입스크립트 지원이 우수합니다.",
         links: [
+          { title: "Ethers.js 문서", url: "https://docs.ethers.org/" },
           { title: "Web3.js 문서", url: "https://web3js.readthedocs.io/" },
-          { title: "Ethers.js 문서", url: "https://docs.ethers.io/" },
         ],
         tips: "최근에는 Ethers.js가 더 많이 사용되는 추세이지만, 프로젝트 요구사항에 따라 선택하세요.",
         quiz: {
