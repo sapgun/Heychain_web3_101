@@ -246,6 +246,32 @@ export default function Home() {
               </div>
 
               <div className="flex items-center space-x-4 flex-shrink-0">
+                {/* X(Twitter) 소셜 버튼 */}
+                <a
+                  href="https://x.com/caro7370"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-colors group"
+                >
+                  <svg
+                    className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                  <span className="text-sm text-gray-400 group-hover:text-white transition-colors hidden sm:inline">
+                    Follow
+                  </span>
+                </a>
+
+                {/* Powered by SAPGUN */}
+                <div className="hidden md:flex items-center space-x-2 text-xs text-gray-500">
+                  <span>Powered by</span>
+                  <span className="font-semibold text-gray-400">SAPGUN</span>
+                </div>
+
                 <HeaderGuideButton />
                 <Button variant="ghost" size="sm" className="lg:hidden text-white" onClick={() => setSidebarOpen(true)}>
                   <Menu className="w-5 h-5" />
