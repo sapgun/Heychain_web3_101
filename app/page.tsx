@@ -215,10 +215,25 @@ export default function Home() {
 
           {/* 추천 키워드 */}
           <div className="mb-6">
-            <h3 className="text-white font-medium mb-3 flex items-center">
-              <span className="text-blue-400 mr-2">#</span>
-              추천 키워드
-            </h3>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-white font-medium flex items-center">
+                <span className="text-blue-400 mr-2">#</span>
+                추천 키워드
+              </h3>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-xs text-blue-400 hover:text-blue-300 hover:bg-blue-500/10"
+                onClick={() => {
+                  // 랜덤 키워드 선택
+                  const randomIndex = Math.floor(Math.random() * searchKeywords.ko.length)
+                  const randomKeyword = searchKeywords.ko[randomIndex]
+                  handleKeywordClick(randomKeyword)
+                }}
+              >
+                🎲 랜덤
+              </Button>
+            </div>
             <div className="flex flex-wrap gap-2">
               {searchKeywords.ko.slice(0, 8).map((keyword) => (
                 <Badge

@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Calendar, Bookmark, Share2, Clock } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 interface NewsItem {
   id: string
@@ -26,6 +26,14 @@ interface NewsDetailModalProps {
 
 export default function NewsDetailModal({ isOpen, onClose, newsItem }: NewsDetailModalProps) {
   const [isBookmarked, setIsBookmarked] = useState(false)
+
+  useEffect(() => {
+    if (newsItem) {
+      // 북마크 상태 확인
+      const bookmarks = JSON.parse(localStorage.getItem("news-bookmarks") || "[]")
+      setIsBookmarked(bookmarks.includes(newsItem.id))
+    }
+  }, [newsItem])
 
   if (!newsItem) return null
 
@@ -129,6 +137,10 @@ export default function NewsDetailModal({ isOpen, onClose, newsItem }: NewsDetai
                 src={newsItem.imageUrl || "/placeholder.svg"}
                 alt={newsItem.title}
                 className="w-full h-48 object-cover"
+                onError={(e) => {
+                  // 이미지 로드 실패 시 플레이스홀더로 대체
+                  e.currentTarget.src = `/placeholder.svg?height=200&width=400&query=${encodeURIComponent(newsItem.title)}`
+                }}
               />
             </div>
           )}
