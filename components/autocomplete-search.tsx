@@ -1,96 +1,82 @@
 "use client"
 
-import type React from "react"
-
-import { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect, type KeyboardEvent } from "react"
 import { Search } from "lucide-react"
-import { Input } from "@/components/ui/input"
 
 interface AutocompleteSearchProps {
-  searchTerm: string
-  onSearchChange: (value: string) => void
-  onSearchSubmit: (value: string) => void
-  language: "ko" | "en"
+  suggestions: string[]
+  onSearchSubmit: (searchTerm: string) => void
+  language: string
 }
 
-export function AutocompleteSearch({ searchTerm, onSearchChange, onSearchSubmit, language }: AutocompleteSearchProps) {
+const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({ suggestions, onSearchSubmit, language }) => {
+  const [searchTerm, setSearchTerm] = useState("")
   const [showSuggestions, setShowSuggestions] = useState(false)
+  const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const suggestions = [
-    "메타마스크 설정",
-    "DeFi 프로토콜",
-    "NFT 민팅",
-    "스마트 컨트랙트",
-    "가스비 최적화",
-    "브릿지 사용법",
-    "스테이킹 방법",
-    "DAO 참여",
-  ]
+  useEffect(() => {
+    if (searchTerm) {
+      setFilteredSuggestions(
+        suggestions.filter((suggestion) => suggestion.toLowerCase().includes(searchTerm.toLowerCase())),
+      )
+    } else {
+      setFilteredSuggestions([])
+    }
+    setSelectedIndex(-1) // Reset selected index when search term changes
+  }, [searchTerm, suggestions])
 
-  const filteredSuggestions = suggestions.filter((suggestion) =>
-    suggestion.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+  const onSearchChange = (value: string) => {
+    setSearchTerm(value)
+  }
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowDown") {
-      e.preventDefault()
-      setSelectedIndex((prev) => (prev < filteredSuggestions.length - 1 ? prev + 1 : prev))
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault()
-      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1))
-    } else if (e.key === "Enter") {
-      e.preventDefault()
-      if (selectedIndex >= 0) {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault()
+      setSelectedIndex((prevIndex) => Math.min(prevIndex + 1, filteredSuggestions.length - 1))
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault()
+      setSelectedIndex((prevIndex) => Math.max(prevIndex - 1, 0))
+    } else if (event.key === "Enter" && showSuggestions) {
+      event.preventDefault()
+      if (selectedIndex !== -1) {
         onSearchSubmit(filteredSuggestions[selectedIndex])
-        setShowSuggestions(false)
-      } else {
-        onSearchSubmit(searchTerm)
-        setShowSuggestions(false)
+      } else if (searchTerm) {
+        onSearchSubmit(searchTerm) // Submit the current search term if no suggestion is selected
       }
-    } else if (e.key === "Escape") {
       setShowSuggestions(false)
-      setSelectedIndex(-1)
+    } else if (event.key === "Escape") {
+      setShowSuggestions(false)
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    onSearchSubmit(searchTerm)
-    setShowSuggestions(false)
-  }
-
-  useEffect(() => {
-    setSelectedIndex(-1)
-  }, [searchTerm])
-
   return (
-    <div className="relative">
-      <form onSubmit={handleSubmit} className="relative group">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 group-focus-within:text-purple-400 transition-colors" />
-        <Input
-          ref={inputRef}
-          type="text"
-          placeholder={language === "ko" ? "질문 검색..." : "Search questions..."}
-          value={searchTerm}
-          onChange={(e) => {
-            onSearchChange(e.target.value)
-            setShowSuggestions(true)
-          }}
-          onFocus={() => setShowSuggestions(true)}
-          onBlur={() => {
-            // 약간의 지연을 두어 클릭 이벤트가 처리되도록 함
-            setTimeout(() => setShowSuggestions(false), 200)
-          }}
-          onKeyDown={handleKeyDown}
-          className="pl-10 bg-gray-700/50 border-purple-500/30 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-all"
-        />
-      </form>
+    <div className="relative w-full">
+      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <Search className="w-5 h-5 text-gray-400" />
+      </div>
+      <Input
+        ref={inputRef}
+        type="text"
+        placeholder={language === "ko" ? "질문 검색..." : "Search questions..."}
+        value={searchTerm}
+        onChange={(e) => {
+          onSearchChange(e.target.value)
+          setShowSuggestions(true)
+        }}
+        onFocus={() => setShowSuggestions(true)}
+        onBlur={() => {
+          // 약간의 지연을 두어 클릭 이벤트가 처리되도록 함
+          setTimeout(() => setShowSuggestions(false), 200)
+        }}
+        onKeyDown={handleKeyDown}
+        className="pl-10 h-10 sm:h-auto bg-gray-700/50 border-purple-500/30 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-all touch-manipulation"
+      />
 
       {/* 자동완성 드롭다운 */}
       {showSuggestions && searchTerm && filteredSuggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-gray-800/95 backdrop-blur-sm border border-purple-500/30 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-1 bg-gray-800/95 backdrop-blur-sm border border-purple-500/30 rounded-lg shadow-lg z-50 max-h-48 sm:max-h-60 overflow-y-auto">
           {filteredSuggestions.map((suggestion, index) => (
             <button
               key={suggestion}
@@ -98,31 +84,18 @@ export function AutocompleteSearch({ searchTerm, onSearchChange, onSearchSubmit,
                 onSearchSubmit(suggestion)
                 setShowSuggestions(false)
               }}
-              className={`w-full text-left px-4 py-3 text-sm transition-colors ${
+              className={`w-full text-left px-3 sm:px-4 py-3 sm:py-3 text-sm transition-colors touch-manipulation min-h-[44px] ${
                 index === selectedIndex
                   ? "bg-purple-500/20 text-purple-300"
-                  : "text-gray-300 hover:bg-purple-500/10 hover:text-white"
+                  : "text-gray-300 hover:bg-purple-500/10 hover:text-white active:bg-purple-500/20"
               }`}
             >
               <div className="flex items-center">
-                <Search className="w-3 h-3 mr-2 text-gray-500" />
-                {suggestion}
+                <Search className="w-3 h-3 mr-2 text-gray-500 flex-shrink-0" />
+                <span className="truncate">{suggestion}</span>
               </div>
             </button>
           ))}
-        </div>
-      )}
-
-      {/* 키보드 네비게이션 힌트 (데스크톱에서만 표시) */}
-      {showSuggestions && searchTerm && (
-        <div className="hidden md:block absolute top-full left-0 right-0 mt-1 z-40">
-          <div className="bg-gray-900/90 backdrop-blur-sm border border-purple-500/20 rounded-b-lg px-3 py-2">
-            <div className="flex items-center justify-between text-xs text-gray-400">
-              <span>↑↓ 탐색</span>
-              <span>Enter 선택</span>
-              <span>Esc 닫기</span>
-            </div>
-          </div>
         </div>
       )}
     </div>
@@ -130,3 +103,9 @@ export function AutocompleteSearch({ searchTerm, onSearchChange, onSearchSubmit,
 }
 
 export default AutocompleteSearch
+
+const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>((props, ref) => {
+  return <input {...props} ref={ref} />
+})
+
+Input.displayName = "Input"

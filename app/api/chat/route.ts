@@ -1,5 +1,6 @@
 import { streamText } from "ai"
 import { openai } from "@ai-sdk/openai"
+import { analyticsStore, categorizeQuestion } from "@/lib/analytics"
 
 export async function POST(req: Request) {
   console.log("=== Chat API Called ===")
@@ -8,7 +9,6 @@ export async function POST(req: Request) {
     // 환경 변수 확인
     const apiKey = process.env.OPENAI_API_KEY
     console.log("API Key exists:", !!apiKey)
-    console.log("API Key prefix:", apiKey?.substring(0, 7))
 
     if (!apiKey) {
       console.error("❌ OpenAI API key not found")
@@ -27,12 +27,16 @@ export async function POST(req: Request) {
     }
 
     console.log("✅ Messages received:", messages.length)
-    console.log("Latest message:", messages[messages.length - 1])
+
+    // 분석을 위한 데이터 수집
+    const startTime = Date.now()
+    const userMessage = messages[messages.length - 1]?.content || ""
+    const sessionId = req.headers.get("x-session-id") || "anonymous"
 
     // OpenAI API 호출
     console.log("🤖 Calling OpenAI API...")
 
-    const result = await streamText({
+    const result = streamText({
       model: openai("gpt-4o"),
       system: `당신은 HeyChain의 Web3 전문 AI 어시스턴트입니다.
 
@@ -51,17 +55,34 @@ export async function POST(req: Request) {
 - 투자 조언은 하지 않음 (일반적인 정보만 제공)
 - 불확실한 정보는 추측하지 않음`,
       messages,
+      onFinish: async (result) => {
+        // 분석 데이터 저장
+        const endTime = Date.now()
+        const responseTime = endTime - startTime
+        const category = categorizeQuestion(userMessage)
+
+        analyticsStore.logChat({
+          question: userMessage,
+          responseTime,
+          sessionId,
+          category,
+          tokenUsage: result.usage
+            ? {
+                prompt: result.usage.promptTokens,
+                completion: result.usage.completionTokens,
+                total: result.usage.totalTokens,
+              }
+            : undefined,
+        })
+      },
     })
 
     console.log("✅ OpenAI API call successful")
-    return result.toAIStreamResponse()
+
+    // toDataStreamResponse 메서드 사용
+    return result.toDataStreamResponse()
   } catch (error) {
     console.error("❌ Chat API Error:", error)
-    console.error("Error details:", {
-      name: error instanceof Error ? error.name : "Unknown",
-      message: error instanceof Error ? error.message : "Unknown error",
-      stack: error instanceof Error ? error.stack : undefined,
-    })
 
     return Response.json(
       {
