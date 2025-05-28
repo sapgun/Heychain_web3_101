@@ -81,12 +81,21 @@ export default function HeyChainApp() {
     return results
   }, [searchTerm, selectedCategory, currentData])
 
+  // toggleExpanded 함수를 찾아 스크롤 기능을 추가합니다.
   const toggleExpanded = (id: string) => {
     const newExpanded = new Set(expandedItems)
     if (newExpanded.has(id)) {
       newExpanded.delete(id)
     } else {
       newExpanded.add(id)
+
+      // 약간의 지연 후 해당 요소로 스크롤 (DOM이 업데이트된 후)
+      setTimeout(() => {
+        const element = document.getElementById(`item-${id}`)
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" })
+        }
+      }, 100)
     }
     setExpandedItems(newExpanded)
   }
@@ -95,6 +104,12 @@ export default function HeyChainApp() {
     setSelectedCategory(index)
     setSearchTerm("")
     setSidebarOpen(false)
+
+    // 페이지 상단으로 스크롤
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // 부드러운 스크롤 효과
+    })
   }
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -315,6 +330,12 @@ export default function HeyChainApp() {
     if (value.trim()) {
       setSearchTerm(value)
       setSelectedCategory(-1) // 카테고리 선택 초기화
+
+      // 페이지 상단으로 스크롤
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // 부드러운 스크롤 효과
+      })
     }
   }
 
@@ -523,6 +544,7 @@ export default function HeyChainApp() {
                       return (
                         <Card
                           key={item.id}
+                          id={`item-${item.id}`}
                           className="bg-gray-800/50 border-purple-500/20 overflow-hidden hover:border-purple-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10"
                         >
                           <button
